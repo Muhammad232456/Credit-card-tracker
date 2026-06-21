@@ -77,7 +77,7 @@ export default function App() {
           <PointsTracker data={data} update={update} onViewTransfers={viewTransfers} />
         )}
         {activeTab === 'optimize' && (
-          <SpendOptimizer data={data} update={update} />
+          <SpendOptimizer data={data} update={update} onNavigate={navigate} />
         )}
         {activeTab === 'transfers' && (
           <TransferMap

@@ -146,11 +146,12 @@ export default function Dashboard({ data, onNavigate }: Props) {
           <div>
             <p className="text-slate-400 text-xs uppercase tracking-wide">Points Value</p>
             <p className="font-mono font-bold text-xl mt-1">${totalPoints.toLocaleString('en-CA', { maximumFractionDigits: 0 })}</p>
+            <p className="text-slate-500 text-xs">in loyalty programs</p>
           </div>
           <div>
-            <p className="text-slate-400 text-xs uppercase tracking-wide">Fee Recovery</p>
+            <p className="text-slate-400 text-xs uppercase tracking-wide">Benefit Recovery</p>
             <p className="font-mono font-bold text-xl mt-1">{overallRecovery}%</p>
-            <p className="text-slate-500 text-xs">${totalRecovered.toFixed(0)} / ${totalFees.toFixed(0)}</p>
+            <p className="text-slate-500 text-xs">${totalRecovered.toFixed(0)} recovered of ${totalFees.toFixed(0)} in fees</p>
           </div>
           <div>
             <p className="text-slate-400 text-xs uppercase tracking-wide">Active Cards</p>

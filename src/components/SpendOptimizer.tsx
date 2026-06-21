@@ -7,6 +7,7 @@ import { SPEND_CATS, bestRateForCat, formatRate } from '../utils';
 interface Props {
   data: UserData;
   update: (updater: (prev: UserData) => UserData) => void;
+  onNavigate: (tab: string) => void;
 }
 
 const DEFAULT_SPEND: MonthlySpendProfile = {
@@ -24,7 +25,7 @@ const ISSUER_COLORS: Record<string, string> = {
   Walmart: 'bg-blue-800', Simplii: 'bg-pink-700', ATB: 'bg-amber-700',
 };
 
-export default function SpendOptimizer({ data, update }: Props) {
+export default function SpendOptimizer({ data, update, onNavigate }: Props) {
   const saved = data.settings.monthlySpend ?? {};
   const [spend, setSpend] = useState<MonthlySpendProfile>({ ...DEFAULT_SPEND, ...saved });
 
@@ -139,9 +140,16 @@ export default function SpendOptimizer({ data, update }: Props) {
       </div>
 
       {!hasCards && (
-        <div className="text-center py-8 text-gray-400">
-          <p className="text-3xl mb-2">💳</p>
-          <p className="text-sm">Add cards first to see optimization results.</p>
+        <div className="text-center py-10 text-gray-400">
+          <p className="text-4xl mb-3">💳</p>
+          <p className="text-base font-medium text-gray-600">No cards added yet</p>
+          <p className="text-sm mt-1 mb-4">Add your cards first, then come back to see which card earns the most for each spending category.</p>
+          <button
+            onClick={() => onNavigate('cards')}
+            className="bg-slate-800 text-white px-5 py-2.5 rounded-xl text-sm font-medium hover:bg-slate-700 transition-colors"
+          >
+            Add Your First Card →
+          </button>
         </div>
       )}
 

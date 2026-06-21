@@ -178,7 +178,8 @@ export default function CardList({ data, update }: Props) {
             {template.benefits.length > 0 ? (
               <>
                 <p className="text-sm text-gray-600">
-                  <span className="font-semibold text-emerald-600">${totalValue.toFixed(0)}</span> value recovered
+                  <span className="font-semibold text-emerald-600">${totalValue.toFixed(0)}</span>
+                  <span className="text-gray-400"> of ${template.annualFee.toFixed(0)} fee recovered</span>
                 </p>
                 <div className="flex items-center gap-2 mt-1.5">
                   <div className="w-24 bg-gray-200 rounded-full h-1.5">
