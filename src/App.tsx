@@ -6,20 +6,23 @@ import TransferMap from './components/TransferMap';
 import CardList from './components/CardList';
 import Settings from './components/Settings';
 import SpendOptimizer from './components/SpendOptimizer';
+import RedemptionEvaluator from './components/RedemptionEvaluator';
 
-type Tab = 'dashboard' | 'cards' | 'points' | 'optimize' | 'transfers' | 'settings';
+type Tab = 'dashboard' | 'cards' | 'points' | 'optimize' | 'redeem' | 'transfers' | 'settings';
 
 const TABS: { id: Tab; label: string; icon: string }[] = [
   { id: 'dashboard', label: 'Dashboard', icon: '📊' },
-  { id: 'cards', label: 'Cards', icon: '💳' },
-  { id: 'points', label: 'Points', icon: '✈️' },
-  { id: 'optimize', label: 'Optimize', icon: '🎯' },
-  { id: 'settings', label: 'Settings', icon: '⚙️' },
+  { id: 'cards',     label: 'Cards',     icon: '💳' },
+  { id: 'points',    label: 'Points',    icon: '✈️' },
+  { id: 'optimize',  label: 'Optimize',  icon: '🎯' },
+  { id: 'redeem',    label: 'Redeem',    icon: '🧮' },
+  { id: 'settings',  label: 'Settings',  icon: '⚙️' },
 ];
 
 export default function App() {
   const [activeTab, setActiveTab] = useState<Tab>('dashboard');
   const [transferFocus, setTransferFocus] = useState<string | undefined>(undefined);
+  const [redeemProgramId, setRedeemProgramId] = useState<string | undefined>(undefined);
   const { data, update, exportData, importData, resetYear, clearAll } = useStorage();
 
   function navigate(tab: string) {
@@ -31,6 +34,11 @@ export default function App() {
     setActiveTab('transfers');
   }
 
+  function openEvaluator(programId?: string) {
+    setRedeemProgramId(programId);
+    setActiveTab('redeem');
+  }
+
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col">
       <header className="bg-slate-900 text-white px-4 py-3 flex items-center justify-between sticky top-0 z-10">
@@ -39,7 +47,7 @@ export default function App() {
           <span className="font-semibold text-sm hidden sm:block">CA Card Tracker</span>
         </div>
         <nav className="flex gap-1">
-          {TABS.slice(0, 4).map(tab => (
+          {TABS.filter(t => t.id !== 'settings').map(tab => (
             <button
               key={tab.id}
               onClick={() => setActiveTab(tab.id)}
@@ -74,7 +82,14 @@ export default function App() {
           <CardList data={data} update={update} />
         )}
         {activeTab === 'points' && (
-          <PointsTracker data={data} update={update} onViewTransfers={viewTransfers} />
+          <PointsTracker data={data} update={update} onViewTransfers={viewTransfers} onEvaluate={openEvaluator} />
+        )}
+        {activeTab === 'redeem' && (
+          <RedemptionEvaluator
+            initialProgramId={redeemProgramId}
+            key={redeemProgramId}
+            onBack={() => setActiveTab('points')}
+          />
         )}
         {activeTab === 'optimize' && (
           <SpendOptimizer data={data} update={update} onNavigate={navigate} />
@@ -100,7 +115,7 @@ export default function App() {
       </main>
 
       <nav className="sm:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 flex z-10">
-        {TABS.map(tab => (
+        {TABS.filter(t => t.id !== 'settings').map(tab => (
           <button
             key={tab.id}
             onClick={() => setActiveTab(tab.id)}

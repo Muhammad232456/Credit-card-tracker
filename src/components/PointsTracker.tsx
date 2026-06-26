@@ -1,12 +1,12 @@
 import { useState } from 'react';
 import { POINTS_PROGRAMS } from '../data/programs';
 import type { UserData, PointsBalance } from '../types';
-import RedemptionEvaluator from './RedemptionEvaluator';
 
 interface Props {
   data: UserData;
   update: (updater: (prev: UserData) => UserData) => void;
   onViewTransfers: (programId: string) => void;
+  onEvaluate: (programId?: string) => void;
 }
 
 const PROGRAM_COLORS: Record<string, string> = {
@@ -22,11 +22,9 @@ function cppRatingDot(cpp: number, defaultCpp: number, excellentCpp?: number): s
   return '🔴';
 }
 
-export default function PointsTracker({ data, update, onViewTransfers }: Props) {
+export default function PointsTracker({ data, update, onViewTransfers, onEvaluate }: Props) {
   const [editingId, setEditingId] = useState<string | null>(null);
   const [addingProgram, setAddingProgram] = useState(false);
-  const [showEvaluator, setShowEvaluator] = useState(false);
-  const [evaluatorProgramId, setEvaluatorProgramId] = useState<string | undefined>(undefined);
 
   const trackedIds = new Set(data.pointsBalances.map(b => b.programId));
   const untrackedPrograms = POINTS_PROGRAMS.filter(p => !trackedIds.has(p.id));
@@ -80,26 +78,12 @@ export default function PointsTracker({ data, update, onViewTransfers }: Props) 
     }));
   }
 
-  function openEvaluator(programId?: string) {
-    setEvaluatorProgramId(programId);
-    setShowEvaluator(true);
-  }
-
   const totalValue = data.pointsBalances.reduce((sum, b) => {
     const cpp = getCpp(b.programId);
     return sum + (b.balance * cpp) / 100;
   }, 0);
 
   const trackedPrograms = POINTS_PROGRAMS.filter(p => trackedIds.has(p.id));
-
-  if (showEvaluator) {
-    return (
-      <RedemptionEvaluator
-        initialProgramId={evaluatorProgramId}
-        onBack={() => setShowEvaluator(false)}
-      />
-    );
-  }
 
   return (
     <div className="space-y-6">
@@ -112,7 +96,7 @@ export default function PointsTracker({ data, update, onViewTransfers }: Props) 
           Based on default cpp valuations. Adjust per-program below.
         </p>
         <button
-          onClick={() => openEvaluator()}
+          onClick={() => onEvaluate()}
           className="mt-4 bg-white/10 hover:bg-white/20 text-white text-sm font-medium px-4 py-2 rounded-xl transition-colors"
         >
           🧮 Evaluate a Redemption →
@@ -211,7 +195,7 @@ export default function PointsTracker({ data, update, onViewTransfers }: Props) 
                 )}
                 {(program.type === 'airline' || program.type === 'hotel' || program.type === 'transferable') && (
                   <button
-                    onClick={() => openEvaluator(program.id)}
+                    onClick={() => onEvaluate(program.id)}
                     className="text-xs text-violet-600 hover:text-violet-800 font-medium"
                   >
                     🧮 Evaluate Redemption →

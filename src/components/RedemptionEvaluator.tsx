@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { POINTS_PROGRAMS } from '../data/programs';
 
 interface Props {
-  onBack: () => void;
+  onBack?: () => void;
   initialProgramId?: string;
 }
 
@@ -77,9 +77,11 @@ export default function RedemptionEvaluator({ onBack, initialProgramId }: Props)
 
   return (
     <div className="space-y-0">
-      <button onClick={onBack} className="text-sm text-gray-500 hover:text-gray-700 mb-4 flex items-center gap-1">
-        ← Back to Points
-      </button>
+      {onBack && (
+        <button onClick={onBack} className="text-sm text-gray-500 hover:text-gray-700 mb-4 flex items-center gap-1">
+          ← Back to Points
+        </button>
+      )}
 
       <div className="bg-slate-800 rounded-2xl p-6 text-white mb-4">
         <h2 className="text-lg font-semibold">Redemption Evaluator</h2>
