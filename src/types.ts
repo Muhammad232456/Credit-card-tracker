@@ -89,7 +89,8 @@ export interface PointsProgram {
   name: string;
   type: "airline" | "hotel" | "transferable" | "bank";
   alliance?: "star" | "oneworld" | "skyteam" | null;
-  defaultCpp: number;
+  defaultCpp: number;      // benchmark CPP — minimum to aim for
+  excellentCpp?: number;   // threshold for an "excellent" redemption
   isTransferable: boolean;
   note?: string;
 }

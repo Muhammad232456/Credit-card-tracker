@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { POINTS_PROGRAMS } from '../data/programs';
 import type { UserData, PointsBalance } from '../types';
+import RedemptionEvaluator from './RedemptionEvaluator';
 
 interface Props {
   data: UserData;
@@ -15,9 +16,17 @@ const PROGRAM_COLORS: Record<string, string> = {
   bank: 'bg-gray-100 text-gray-700',
 };
 
+function cppRatingDot(cpp: number, defaultCpp: number, excellentCpp?: number): string {
+  if (excellentCpp && cpp >= excellentCpp) return '🟢';
+  if (cpp > defaultCpp) return '🟡';
+  return '🔴';
+}
+
 export default function PointsTracker({ data, update, onViewTransfers }: Props) {
   const [editingId, setEditingId] = useState<string | null>(null);
   const [addingProgram, setAddingProgram] = useState(false);
+  const [showEvaluator, setShowEvaluator] = useState(false);
+  const [evaluatorProgramId, setEvaluatorProgramId] = useState<string | undefined>(undefined);
 
   const trackedIds = new Set(data.pointsBalances.map(b => b.programId));
   const untrackedPrograms = POINTS_PROGRAMS.filter(p => !trackedIds.has(p.id));
@@ -37,11 +46,7 @@ export default function PointsTracker({ data, update, onViewTransfers }: Props) 
       ...prev,
       pointsBalances: [
         ...prev.pointsBalances,
-        {
-          programId,
-          balance: 0,
-          lastUpdated: new Date().toISOString(),
-        },
+        { programId, balance: 0, lastUpdated: new Date().toISOString() },
       ],
     }));
     setAddingProgram(false);
@@ -75,12 +80,26 @@ export default function PointsTracker({ data, update, onViewTransfers }: Props) 
     }));
   }
 
+  function openEvaluator(programId?: string) {
+    setEvaluatorProgramId(programId);
+    setShowEvaluator(true);
+  }
+
   const totalValue = data.pointsBalances.reduce((sum, b) => {
     const cpp = getCpp(b.programId);
     return sum + (b.balance * cpp) / 100;
   }, 0);
 
   const trackedPrograms = POINTS_PROGRAMS.filter(p => trackedIds.has(p.id));
+
+  if (showEvaluator) {
+    return (
+      <RedemptionEvaluator
+        initialProgramId={evaluatorProgramId}
+        onBack={() => setShowEvaluator(false)}
+      />
+    );
+  }
 
   return (
     <div className="space-y-6">
@@ -92,6 +111,12 @@ export default function PointsTracker({ data, update, onViewTransfers }: Props) 
         <p className="text-slate-400 text-xs mt-2">
           Based on default cpp valuations. Adjust per-program below.
         </p>
+        <button
+          onClick={() => openEvaluator()}
+          className="mt-4 bg-white/10 hover:bg-white/20 text-white text-sm font-medium px-4 py-2 rounded-xl transition-colors"
+        >
+          🧮 Evaluate a Redemption →
+        </button>
       </div>
 
       {trackedPrograms.length === 0 && (
@@ -107,6 +132,8 @@ export default function PointsTracker({ data, update, onViewTransfers }: Props) 
           const cpp = getCpp(program.id);
           const value = bal ? (bal.balance * cpp) / 100 : 0;
           const isEditing = editingId === program.id;
+          const hasRating = program.type === 'airline' || program.type === 'hotel' || program.type === 'transferable';
+          const dot = hasRating ? cppRatingDot(cpp, program.defaultCpp, program.excellentCpp) : null;
 
           return (
             <div key={program.id} className="bg-white border border-gray-200 rounded-xl p-4">
@@ -151,7 +178,8 @@ export default function PointsTracker({ data, update, onViewTransfers }: Props) 
                     ≈ ${value.toLocaleString('en-CA', { minimumFractionDigits: 0, maximumFractionDigits: 0 })} CAD
                   </p>
 
-                  <div className="flex items-center gap-1">
+                  <div className="flex items-center gap-1.5">
+                    {dot && <span title={`Benchmark: ${program.defaultCpp}¢${program.excellentCpp ? ` · Excellent: ${program.excellentCpp}¢` : ''}`}>{dot}</span>}
                     <span className="text-xs text-gray-500">cpp:</span>
                     <input
                       type="number"
@@ -163,6 +191,12 @@ export default function PointsTracker({ data, update, onViewTransfers }: Props) 
                     />
                     <span className="text-xs text-gray-500">¢</span>
                   </div>
+                  {hasRating && (
+                    <p className="text-xs text-gray-400 text-right">
+                      benchmark {program.defaultCpp}¢
+                      {program.excellentCpp ? ` · excellent ${program.excellentCpp}¢` : ''}
+                    </p>
+                  )}
                 </div>
               </div>
 
@@ -172,7 +206,15 @@ export default function PointsTracker({ data, update, onViewTransfers }: Props) 
                     onClick={() => onViewTransfers(program.id)}
                     className="text-xs text-blue-600 hover:text-blue-800 font-medium"
                   >
-                    View Transfer Partners →
+                    Transfer Partners →
+                  </button>
+                )}
+                {(program.type === 'airline' || program.type === 'hotel' || program.type === 'transferable') && (
+                  <button
+                    onClick={() => openEvaluator(program.id)}
+                    className="text-xs text-violet-600 hover:text-violet-800 font-medium"
+                  >
+                    🧮 Evaluate Redemption →
                   </button>
                 )}
                 <button
