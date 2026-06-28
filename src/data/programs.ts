@@ -109,7 +109,6 @@ export const POINTS_PROGRAMS: PointsProgram[] = [
   { id: "td-rewards",         name: "TD Rewards",                       type: "bank",                               defaultCpp: 0.7,                    isTransferable: false },
   { id: "bmo-rewards",        name: "BMO Rewards",                      type: "bank",                               defaultCpp: 0.7,                    isTransferable: false },
   { id: "nbc-rewards",        name: "National Bank à la carte Rewards", type: "bank",                               defaultCpp: 1.0,                    isTransferable: false },
-  { id: "hsbc-rewards",       name: "HSBC Rewards",                     type: "bank",                               defaultCpp: 1.0,                    isTransferable: false },
   { id: "air-miles",          name: "Air Miles",                        type: "bank",                               defaultCpp: 10,                     isTransferable: false, note: "Dream reward value ~10¢/mile" },
   { id: "pc-optimum",         name: "PC Optimum",                       type: "bank",                               defaultCpp: 0.1,                    isTransferable: false, note: "10,000 pts = $10" },
   { id: "mbna-rewards",       name: "MBNA Rewards",                     type: "bank",                               defaultCpp: 1.0,                    isTransferable: false },

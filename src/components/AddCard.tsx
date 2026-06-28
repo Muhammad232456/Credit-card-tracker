@@ -9,7 +9,7 @@ interface Props {
 }
 
 const ISSUERS: Issuer[] = [
-  "Amex", "TD", "CIBC", "RBC", "Scotiabank", "BMO", "National Bank", "HSBC",
+  "Amex", "TD", "CIBC", "RBC", "Scotiabank", "BMO", "National Bank",
   "Neo", "MBNA", "Canadian Tire", "PC Financial", "Rogers", "Tangerine",
   "Brim", "Desjardins", "Home Trust", "Meridian", "Capital One", "Walmart",
   "Simplii", "ATB",
@@ -23,7 +23,6 @@ const ISSUER_COLORS: Record<string, string> = {
   Scotiabank: 'bg-red-600 text-white',
   BMO: 'bg-blue-600 text-white',
   'National Bank': 'bg-red-800 text-white',
-  HSBC: 'bg-red-900 text-white',
   Neo: 'bg-purple-700 text-white',
   MBNA: 'bg-gray-700 text-white',
   'Canadian Tire': 'bg-red-500 text-white',

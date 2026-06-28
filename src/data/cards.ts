@@ -935,49 +935,6 @@ export const CARD_TEMPLATES: CardTemplate[] = [
     ],
   },
 
-  // HSBC
-  {
-    id: "hsbc-world-elite",
-    name: "HSBC World Elite Mastercard",
-    issuer: "HSBC",
-    network: "Mastercard",
-    annualFee: 149,
-    lastVerified: "2026-06-01",
-    benefits: [
-      {
-        id: "hsbc-we-travel",
-        name: "Annual Travel Enhancement Credit",
-        value: 100,
-        frequency: "annual",
-        resetDate: "cardmember-year",
-        category: "travel-credit",
-      },
-      {
-        id: "hsbc-we-lounge",
-        name: "Priority Pass Lounge Visits",
-        value: 32,
-        frequency: "per-use",
-        maxUses: 6,
-        resetDate: "cardmember-year",
-        category: "lounge",
-      },
-      {
-        id: "hsbc-we-nofx",
-        name: "No Foreign Transaction Fee Savings",
-        value: 0,
-        frequency: "annual",
-        resetDate: "calendar-year",
-        category: "fx-savings",
-        note: "Input your annual FX spend to calculate estimated savings (~2.5%)",
-      },
-    ],
-    earningRates: [
-      { category: "Travel", multiplier: 6, unit: "points", programId: "hsbc-rewards", note: "6 HSBC Rewards points per $1" },
-      { category: "Dining & Entertainment", multiplier: 4, unit: "points", programId: "hsbc-rewards" },
-      { category: "Everything Else", multiplier: 2, unit: "points", programId: "hsbc-rewards" },
-    ],
-  },
-
   // ─── AMEX (additional) ───────────────────────────────────────────────────
   {
     id: "amex-simply-cash",
@@ -2354,7 +2311,6 @@ export const CARD_INCOME_REQS: Record<string, number> = {
   "scotia-passport-infinite-privilege": 150000,
   // $80k personal — World Elite Mastercard / comparable
   "nbc-world-elite":                    80000,
-  "hsbc-world-elite":                   80000,
   "bmo-viporter":                       80000,
   "bmo-ascend-world-elite":             80000,
   "bmo-air-miles-world-elite":          80000,
@@ -2434,8 +2390,6 @@ export const CARD_APPLY_URLS: Record<string, string> = {
   // NATIONAL BANK
   "nbc-world-elite":     "https://www.nbc.ca/personal/credit-cards/world-elite-mastercard.html",
   "nbc-mastercard-world":"https://www.nbc.ca/personal/credit-cards/mastercard-world.html",
-  // HSBC
-  "hsbc-world-elite": "https://www.hsbc.ca/credit-cards/products/world-elite/",
   // ROGERS
   "rogers-world-elite": "https://www.rogers.com/credit-card",
   "fido-mastercard":    "https://www.fido.ca/credit-card",

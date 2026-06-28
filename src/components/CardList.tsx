@@ -18,7 +18,6 @@ const ISSUER_COLORS: Record<string, string> = {
   Scotiabank: 'bg-red-600',
   BMO: 'bg-blue-600',
   'National Bank': 'bg-red-800',
-  HSBC: 'bg-red-900',
   Neo: 'bg-purple-700',
   MBNA: 'bg-gray-700',
   'Canadian Tire': 'bg-red-500',

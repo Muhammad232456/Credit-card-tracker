@@ -1,5 +1,5 @@
 export type Issuer =
-  | "Amex" | "TD" | "CIBC" | "RBC" | "Scotiabank" | "BMO" | "National Bank" | "HSBC" | "Neo" | "MBNA"
+  | "Amex" | "TD" | "CIBC" | "RBC" | "Scotiabank" | "BMO" | "National Bank" | "Neo" | "MBNA"
   | "Canadian Tire" | "PC Financial" | "Rogers" | "Tangerine" | "Brim"
   | "Desjardins" | "Home Trust" | "Meridian" | "Capital One" | "Walmart"
   | "Simplii" | "ATB";
