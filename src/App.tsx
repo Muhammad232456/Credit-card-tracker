@@ -7,8 +7,10 @@ import CardList from './components/CardList';
 import Settings from './components/Settings';
 import SpendOptimizer from './components/SpendOptimizer';
 import RedemptionEvaluator from './components/RedemptionEvaluator';
+import OnboardingQuiz from './components/OnboardingQuiz';
+import CardComparison from './components/CardComparison';
 
-type Tab = 'dashboard' | 'cards' | 'points' | 'optimize' | 'redeem' | 'transfers' | 'settings';
+type Tab = 'dashboard' | 'cards' | 'points' | 'optimize' | 'redeem' | 'transfers' | 'settings' | 'compare';
 
 const TABS: { id: Tab; label: string; icon: string }[] = [
   { id: 'dashboard', label: 'Dashboard', icon: '📊' },
@@ -37,6 +39,26 @@ export default function App() {
   function openEvaluator(programId?: string) {
     setRedeemProgramId(programId);
     setActiveTab('redeem');
+  }
+
+  const showOnboarding = !data.settings.onboardingComplete && data.cards.length === 0;
+
+  function completeOnboarding(goal: 'cashback' | 'travel' | 'both') {
+    update(prev => ({ ...prev, settings: { ...prev.settings, onboardingComplete: true, goal } }));
+  }
+
+  function skipOnboarding() {
+    update(prev => ({ ...prev, settings: { ...prev.settings, onboardingComplete: true } }));
+  }
+
+  if (showOnboarding) {
+    return (
+      <div className="min-h-screen bg-gray-50">
+        <div className="max-w-lg mx-auto px-4 py-8">
+          <OnboardingQuiz onComplete={completeOnboarding} onSkip={skipOnboarding} />
+        </div>
+      </div>
+    );
   }
 
   return (
@@ -79,7 +101,10 @@ export default function App() {
           <Dashboard data={data} onNavigate={navigate} />
         )}
         {activeTab === 'cards' && (
-          <CardList data={data} update={update} />
+          <CardList data={data} update={update} onCompare={() => setActiveTab('compare')} />
+        )}
+        {activeTab === 'compare' && (
+          <CardComparison onBack={() => setActiveTab('cards')} />
         )}
         {activeTab === 'points' && (
           <PointsTracker data={data} update={update} onViewTransfers={viewTransfers} onEvaluate={openEvaluator} />

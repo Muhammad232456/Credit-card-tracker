@@ -1,7 +1,8 @@
 import { getCardById } from '../data/cards';
 import { POINTS_PROGRAMS } from '../data/programs';
-import type { UserData } from '../types';
-import { effectiveBenefitValue, nextCalendarReset, nextCardmemberReset } from '../utils';
+import type { UserData, MonthlySpendProfile } from '../types';
+import { effectiveBenefitValue, nextCalendarReset, nextCardmemberReset, SPEND_CATS, bestRateForCat } from '../utils';
+import GlossaryTerm from './GlossaryTerm';
 
 interface Props {
   data: UserData;
@@ -49,6 +50,22 @@ export default function Dashboard({ data, onNavigate }: Props) {
 
   const totalCreditLimit = activeCards.reduce((sum, uc) => sum + (uc.creditLimit ?? 0), 0);
   const overallRecovery = totalFees > 0 ? Math.round((totalRecovered / totalFees) * 100) : 0;
+
+  // Estimated annual earn across all active cards (best card per category × spend profile)
+  const monthlySpend = settings.monthlySpend ?? {};
+  const portfolioEarn = SPEND_CATS.reduce((sum, cat) => {
+    const monthly = (monthlySpend[cat.id as keyof MonthlySpendProfile] ?? 0) as number;
+    if (!monthly) return sum;
+    let bestCpd = 0;
+    for (const uc of activeCards) {
+      const t = getCardById(uc.cardId);
+      if (!t?.earningRates?.length) continue;
+      const { cpd } = bestRateForCat(t.earningRates, cat.keywords, POINTS_PROGRAMS);
+      if (cpd > bestCpd) bestCpd = cpd;
+    }
+    return sum + bestCpd * monthly * 12;
+  }, 0);
+  const hasSpendProfile = Object.values(monthlySpend).some(v => (v ?? 0) > 0);
 
   // Upcoming renewals
   const upcomingRenewals = activeCards
@@ -154,7 +171,9 @@ export default function Dashboard({ data, onNavigate }: Props) {
             <p className="text-slate-500 text-xs">in loyalty programs</p>
           </div>
           <div>
-            <p className="text-slate-400 text-xs uppercase tracking-wide">Benefit Recovery</p>
+            <p className="text-slate-400 text-xs uppercase tracking-wide">
+              <GlossaryTerm term="Benefit Recovery">Benefit Recovery</GlossaryTerm>
+            </p>
             <p className="font-mono font-bold text-xl mt-1">{overallRecovery}%</p>
             <p className="text-slate-500 text-xs">${totalRecovered.toFixed(0)} recovered of ${totalFees.toFixed(0)} in fees</p>
           </div>
@@ -176,6 +195,15 @@ export default function Dashboard({ data, onNavigate }: Props) {
               <p className="font-mono text-slate-500 text-sm mt-1">—</p>
             )}
           </div>
+          {hasSpendProfile && (
+            <div className="col-span-2 sm:col-span-4 border-t border-white/10 pt-4 mt-2">
+              <p className="text-slate-400 text-xs uppercase tracking-wide">Est. Annual Earn</p>
+              <div className="flex items-baseline gap-2 mt-1">
+                <p className="font-mono font-bold text-2xl text-emerald-400">${Math.round(portfolioEarn).toLocaleString()}</p>
+                <p className="text-slate-400 text-xs">using the best card per category</p>
+              </div>
+            </div>
+          )}
         </div>
       </div>
 

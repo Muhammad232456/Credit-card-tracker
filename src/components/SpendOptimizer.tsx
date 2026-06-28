@@ -3,6 +3,8 @@ import { CARD_TEMPLATES, getCardById, getApplyUrl } from '../data/cards';
 import { POINTS_PROGRAMS } from '../data/programs';
 import type { UserData, MonthlySpendProfile } from '../types';
 import { SPEND_CATS, bestRateForCat, formatRate } from '../utils';
+import FxCalculator from './FxCalculator';
+import GlossaryTerm from './GlossaryTerm';
 
 interface Props {
   data: UserData;
@@ -348,7 +350,7 @@ export default function SpendOptimizer({ data, update, onNavigate }: Props) {
               <div className="px-4 py-3 bg-amber-50 border-b border-amber-200">
                 <h3 className="font-semibold text-gray-800 text-sm">Cards Worth Getting</h3>
                 <p className="text-xs text-gray-500 mt-0.5">
-                  Based on your spend — how much more you'd earn above your current best card
+                  Based on your spend — incremental <GlossaryTerm term="Earn Rate">earn</GlossaryTerm> above your current best card per category
                 </p>
               </div>
               <div className="divide-y divide-gray-100">
@@ -427,8 +429,10 @@ export default function SpendOptimizer({ data, update, onNavigate }: Props) {
         </>
       )}
 
+      <FxCalculator data={data} />
+
       <p className="text-xs text-gray-400 text-center pb-2">
-        Points values use default program benchmarks. Set your personal CPP in the Points tab to personalize results.
+        Points values use default <GlossaryTerm term="CPP">CPP</GlossaryTerm> benchmarks. Set your personal CPP in the Points tab to personalize results.
       </p>
     </div>
   );

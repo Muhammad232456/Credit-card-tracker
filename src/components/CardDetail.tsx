@@ -224,6 +224,27 @@ export default function CardDetail({
                 Set a spend profile in the Optimize tab to include estimated earn.
               </p>
             )}
+            {/* Verdict */}
+            {template.annualFee > 0 && (estimatedEarn !== null || totalBenefitValue > 0) && (
+              <div className={`mt-2 pt-3 border-t border-gray-100 rounded-lg px-3 py-2 ${
+                netValue >= 50 ? 'bg-emerald-50' : netValue >= -50 ? 'bg-amber-50' : 'bg-red-50'
+              }`}>
+                <p className={`text-xs font-semibold ${
+                  netValue >= 50 ? 'text-emerald-800' : netValue >= -50 ? 'text-amber-800' : 'text-red-800'
+                }`}>
+                  {netValue >= 50
+                    ? `✓ Worth keeping — earns $${Math.round(netValue)} more than it costs`
+                    : netValue >= -50
+                    ? `≈ Breaking even — use your benefits to push it positive`
+                    : `⚠ Not justifying the fee — consider downgrading or cancelling`}
+                </p>
+                {netValue < -50 && (
+                  <p className="text-xs text-red-700 mt-1">
+                    This card costs ~${Math.round(Math.abs(netValue))} more than it earns you. Use the Compare Cards tool to find a better fit.
+                  </p>
+                )}
+              </div>
+            )}
           </div>
         )}
       </div>

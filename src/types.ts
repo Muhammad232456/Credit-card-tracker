@@ -173,6 +173,10 @@ export interface UserSettings {
   annualFxSpend?: number;
   /** Monthly spend profile for the spend optimizer */
   monthlySpend?: Partial<MonthlySpendProfile>;
+  /** User's primary card goal set during onboarding */
+  goal?: 'cashback' | 'travel' | 'both';
+  /** True once the user has completed or skipped onboarding */
+  onboardingComplete?: boolean;
 }
 
 export interface UserData {

@@ -8,6 +8,7 @@ import CardDetail from './CardDetail';
 interface Props {
   data: UserData;
   update: (updater: (prev: UserData) => UserData) => void;
+  onCompare?: () => void;
 }
 
 const ISSUER_COLORS: Record<string, string> = {
@@ -58,7 +59,7 @@ function getEffectiveRenewal(userCard: UserCard, feeFreq: 'monthly' | 'annual' =
   return null;
 }
 
-export default function CardList({ data, update }: Props) {
+export default function CardList({ data, update, onCompare }: Props) {
   const [addingCard, setAddingCard] = useState(false);
   const [selectedCardId, setSelectedCardId] = useState<string | null>(null);
   const [showInactive, setShowInactive] = useState(false);
@@ -247,12 +248,22 @@ export default function CardList({ data, update }: Props) {
         {activeCards.map(c => renderCardRow(c, false))}
       </div>
 
-      <button
-        onClick={() => setAddingCard(true)}
-        className="w-full py-3 border-2 border-dashed border-gray-300 rounded-xl text-gray-500 hover:border-blue-400 hover:text-blue-600 transition-colors text-sm font-medium"
-      >
-        + Add Another Card
-      </button>
+      <div className="flex gap-2">
+        <button
+          onClick={() => setAddingCard(true)}
+          className="flex-1 py-3 border-2 border-dashed border-gray-300 rounded-xl text-gray-500 hover:border-blue-400 hover:text-blue-600 transition-colors text-sm font-medium"
+        >
+          + Add Another Card
+        </button>
+        {onCompare && (
+          <button
+            onClick={onCompare}
+            className="px-4 py-3 border-2 border-dashed border-gray-300 rounded-xl text-gray-500 hover:border-slate-500 hover:text-slate-700 transition-colors text-sm font-medium"
+          >
+            ⚖️ Compare
+          </button>
+        )}
+      </div>
 
       {/* Inactive cards */}
       {inactiveCards.length > 0 && (
