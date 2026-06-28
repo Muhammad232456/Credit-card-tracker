@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { getCardById } from '../data/cards';
+import { CARD_TEMPLATES, getCardById, getApplyUrl } from '../data/cards';
 import { POINTS_PROGRAMS } from '../data/programs';
 import type { UserData, MonthlySpendProfile } from '../types';
 import { SPEND_CATS, bestRateForCat, formatRate } from '../utils';
@@ -25,6 +25,25 @@ const ISSUER_COLORS: Record<string, string> = {
   Walmart: 'bg-blue-800', Simplii: 'bg-pink-700', ATB: 'bg-amber-700',
 };
 
+interface BestOption {
+  card: string;
+  issuer: string;
+  rate: string;
+  cpd: number;
+}
+
+interface Recommendation {
+  cardId: string;
+  name: string;
+  issuer: string;
+  annualFee: number;
+  firstYearFree: boolean;
+  incremental: number;
+  netValue: number;
+  topCat: string;
+  applyUrl: string | undefined;
+}
+
 export default function SpendOptimizer({ data, update, onNavigate }: Props) {
   const saved = data.settings.monthlySpend ?? {};
   const [spend, setSpend] = useState<MonthlySpendProfile>({ ...DEFAULT_SPEND, ...saved });
@@ -45,42 +64,46 @@ export default function SpendOptimizer({ data, update, onNavigate }: Props) {
   const hasSpend = totalMonthly > 0;
   const hasCards = activeCards.length > 0;
 
-  // Compute best card per category
+  // ── Best points & cash per category ───────────────────────────────────────
   const results = SPEND_CATS.map(cat => {
-    let bestCard = '';
-    let bestCpd = 0;
-    let bestRateStr = '';
-    let bestIssuer = '';
-    let annualVal = 0;
+    let bestPoints: BestOption | null = null;
+    let bestCash: BestOption | null = null;
 
     for (const uc of activeCards) {
       const t = getCardById(uc.cardId);
       if (!t?.earningRates?.length) continue;
-      const { rate, cpd } = bestRateForCat(t.earningRates, cat.keywords, POINTS_PROGRAMS);
-      if (!rate) continue;
-      if (cpd > bestCpd) {
-        bestCpd = cpd;
-        bestCard = t.name;
-        bestIssuer = t.issuer;
-        bestRateStr = formatRate(rate, cpd);
-        annualVal = spend[cat.id as keyof MonthlySpendProfile] * 12 * cpd;
+
+      const pointsRates = t.earningRates.filter(r => r.unit === 'points');
+      if (pointsRates.length) {
+        const { rate, cpd } = bestRateForCat(pointsRates, cat.keywords, POINTS_PROGRAMS);
+        if (rate && cpd > (bestPoints?.cpd ?? 0)) {
+          bestPoints = { card: t.name, issuer: t.issuer, rate: formatRate(rate, cpd), cpd };
+        }
+      }
+
+      const cashRates = t.earningRates.filter(r => r.unit === 'percent');
+      if (cashRates.length) {
+        const { rate, cpd } = bestRateForCat(cashRates, cat.keywords, POINTS_PROGRAMS);
+        if (rate && cpd > (bestCash?.cpd ?? 0)) {
+          bestCash = { card: t.name, issuer: t.issuer, rate: formatRate(rate, cpd), cpd };
+        }
       }
     }
 
+    const bestCpd = Math.max(bestPoints?.cpd ?? 0, bestCash?.cpd ?? 0);
     return {
       cat,
-      bestCard,
-      bestIssuer,
-      bestRateStr,
-      cpd: bestCpd,
-      annualVal,
+      bestPoints,
+      bestCash,
+      bestCpd,
+      annualVal: spend[cat.id as keyof MonthlySpendProfile] * 12 * bestCpd,
       monthly: spend[cat.id as keyof MonthlySpendProfile],
     };
   });
 
   const totalAnnual = results.reduce((s, r) => s + r.annualVal, 0);
 
-  // "All on one card" comparison — best single card for total spend
+  // ── "One card for everything" ranking ─────────────────────────────────────
   const cardTotals: { id: string; name: string; issuer: string; total: number }[] = [];
   for (const uc of activeCards) {
     const t = getCardById(uc.cardId);
@@ -96,9 +119,54 @@ export default function SpendOptimizer({ data, update, onNavigate }: Props) {
   }
   cardTotals.sort((a, b) => b.total - a.total);
   const bestSingle = cardTotals[0];
-
-  // Per-card breakdown: for each card, sum earn across all categories
   const cardBreakdown = cardTotals.slice(0, 5);
+
+  // ── Card recommendations ───────────────────────────────────────────────────
+  const heldIds = new Set(activeCards.map(c => c.cardId));
+
+  // Current best CPD per category across all held cards
+  const currentBestCpd: Record<string, number> = {};
+  for (const cat of SPEND_CATS) {
+    currentBestCpd[cat.id] = 0;
+    for (const uc of activeCards) {
+      const t = getCardById(uc.cardId);
+      if (!t?.earningRates?.length) continue;
+      const { cpd } = bestRateForCat(t.earningRates, cat.keywords, POINTS_PROGRAMS);
+      if (cpd > currentBestCpd[cat.id]) currentBestCpd[cat.id] = cpd;
+    }
+  }
+
+  const recommendations: Recommendation[] = CARD_TEMPLATES
+    .filter(t => !heldIds.has(t.id) && t.earningRates?.length)
+    .map(t => {
+      let incremental = 0;
+      let topCat = '';
+      let topCatGain = 0;
+
+      for (const cat of SPEND_CATS) {
+        const monthly = spend[cat.id as keyof MonthlySpendProfile];
+        if (!monthly) continue;
+        const { cpd } = bestRateForCat(t.earningRates!, cat.keywords, POINTS_PROGRAMS);
+        const gain = Math.max(0, cpd - currentBestCpd[cat.id]) * monthly * 12;
+        incremental += gain;
+        if (gain > topCatGain) { topCatGain = gain; topCat = cat.label; }
+      }
+
+      return {
+        cardId: t.id,
+        name: t.name,
+        issuer: t.issuer,
+        annualFee: t.annualFee,
+        firstYearFree: t.firstYearFeeWaived ?? false,
+        incremental,
+        netValue: incremental - t.annualFee,
+        topCat,
+        applyUrl: getApplyUrl(t.id),
+      };
+    })
+    .filter(r => r.incremental > 5)
+    .sort((a, b) => b.netValue - a.netValue)
+    .slice(0, 5);
 
   return (
     <div className="space-y-6">
@@ -162,39 +230,71 @@ export default function SpendOptimizer({ data, update, onNavigate }: Props) {
 
       {hasCards && hasSpend && (
         <>
-          {/* Results table */}
+          {/* Results */}
           <div className="bg-white border border-gray-200 rounded-xl overflow-hidden">
-            <div className="px-4 py-3 bg-gray-50 border-b border-gray-200">
+            <div className="px-4 py-3 bg-gray-50 border-b border-gray-200 flex items-center justify-between">
               <h3 className="font-semibold text-gray-800 text-sm">Optimization Results</h3>
+              <div className="flex items-center gap-3 text-xs text-gray-500">
+                <span className="flex items-center gap-1"><span>🎯</span> Best points</span>
+                <span className="flex items-center gap-1"><span>💵</span> Best cash back</span>
+              </div>
             </div>
             <div className="divide-y divide-gray-100">
-              {results.filter(r => r.monthly > 0).map(r => (
-                <div key={r.cat.id} className="px-4 py-3 flex items-center gap-3">
-                  <span className="text-base w-6 shrink-0 text-center">{r.cat.icon}</span>
-                  <div className="flex-1 min-w-0">
-                    <p className="text-xs text-gray-500">{r.cat.label}</p>
-                    {r.bestCard ? (
-                      <div className="flex items-center gap-1.5 mt-0.5">
-                        <span className={`text-xs px-1.5 py-0.5 rounded-full text-white font-medium ${ISSUER_COLORS[r.bestIssuer] ?? 'bg-slate-700'}`}>
-                          {r.bestIssuer}
+              {results.filter(r => r.monthly > 0).map(r => {
+                const showBoth = r.bestPoints && r.bestCash && r.bestPoints.card !== r.bestCash.card;
+                const onlyOne = r.bestPoints ?? r.bestCash;
+
+                return (
+                  <div key={r.cat.id} className="px-4 py-3">
+                    <div className="flex items-center justify-between mb-2">
+                      <div className="flex items-center gap-2">
+                        <span className="text-base">{r.cat.icon}</span>
+                        <span className="text-xs text-gray-500">{r.cat.label}</span>
+                      </div>
+                      <div className="text-right">
+                        <span className="font-mono font-bold text-emerald-700 text-sm">
+                          ${r.annualVal > 0 ? r.annualVal.toFixed(0) : '—'}
                         </span>
-                        <span className="text-sm font-medium text-gray-800 truncate">{r.bestCard}</span>
+                        <span className="text-xs text-gray-400">/yr</span>
+                      </div>
+                    </div>
+
+                    {showBoth ? (
+                      <div className="space-y-1.5">
+                        <div className="flex items-center gap-2">
+                          <span className="text-xs w-4 shrink-0">🎯</span>
+                          <span className={`text-xs px-1.5 py-0.5 rounded-full text-white font-medium shrink-0 ${ISSUER_COLORS[r.bestPoints!.issuer] ?? 'bg-slate-700'}`}>
+                            {r.bestPoints!.issuer}
+                          </span>
+                          <span className="text-sm font-medium text-gray-800 truncate">{r.bestPoints!.card}</span>
+                          <span className="text-xs text-blue-600 font-mono ml-auto shrink-0">{r.bestPoints!.rate}</span>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <span className="text-xs w-4 shrink-0">💵</span>
+                          <span className={`text-xs px-1.5 py-0.5 rounded-full text-white font-medium shrink-0 ${ISSUER_COLORS[r.bestCash!.issuer] ?? 'bg-slate-700'}`}>
+                            {r.bestCash!.issuer}
+                          </span>
+                          <span className="text-sm font-medium text-gray-800 truncate">{r.bestCash!.card}</span>
+                          <span className="text-xs text-emerald-600 font-mono ml-auto shrink-0">{r.bestCash!.rate}</span>
+                        </div>
+                      </div>
+                    ) : onlyOne ? (
+                      <div className="flex items-center gap-2">
+                        <span className="text-xs w-4 shrink-0">{r.bestPoints ? '🎯' : '💵'}</span>
+                        <span className={`text-xs px-1.5 py-0.5 rounded-full text-white font-medium shrink-0 ${ISSUER_COLORS[onlyOne.issuer] ?? 'bg-slate-700'}`}>
+                          {onlyOne.issuer}
+                        </span>
+                        <span className="text-sm font-medium text-gray-800 truncate">{onlyOne.card}</span>
+                        <span className={`text-xs font-mono ml-auto shrink-0 ${r.bestPoints ? 'text-blue-600' : 'text-emerald-600'}`}>
+                          {onlyOne.rate}
+                        </span>
                       </div>
                     ) : (
-                      <p className="text-sm text-gray-400 mt-0.5">No card match</p>
-                    )}
-                    {r.bestRateStr && (
-                      <p className="text-xs text-blue-600 font-mono mt-0.5">{r.bestRateStr}</p>
+                      <p className="text-sm text-gray-400">No card match</p>
                     )}
                   </div>
-                  <div className="text-right shrink-0">
-                    <p className="font-mono font-bold text-emerald-700 text-sm">
-                      ${r.annualVal > 0 ? r.annualVal.toFixed(0) : '—'}
-                    </p>
-                    <p className="text-xs text-gray-400">/yr</p>
-                  </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
             <div className="px-4 py-3 bg-emerald-50 border-t border-emerald-200 flex justify-between items-center">
               <span className="text-sm font-semibold text-gray-800">Total estimated annual earn</span>
@@ -202,7 +302,7 @@ export default function SpendOptimizer({ data, update, onNavigate }: Props) {
             </div>
           </div>
 
-          {/* Card ranking */}
+          {/* "One card" ranking */}
           {cardBreakdown.length > 0 && (
             <div className="bg-white border border-gray-200 rounded-xl overflow-hidden">
               <div className="px-4 py-3 bg-gray-50 border-b border-gray-200">
@@ -234,11 +334,93 @@ export default function SpendOptimizer({ data, update, onNavigate }: Props) {
               )}
             </div>
           )}
+
+          {/* Cards Worth Getting */}
+          {recommendations.length > 0 && (
+            <div className="bg-white border border-gray-200 rounded-xl overflow-hidden">
+              <div className="px-4 py-3 bg-amber-50 border-b border-amber-200">
+                <h3 className="font-semibold text-gray-800 text-sm">Cards Worth Getting</h3>
+                <p className="text-xs text-gray-500 mt-0.5">
+                  Based on your spend — how much more you'd earn above your current best card
+                </p>
+              </div>
+              <div className="divide-y divide-gray-100">
+                {recommendations.map((rec, i) => (
+                  <div key={rec.cardId} className="p-4">
+                    <div className="flex items-start justify-between gap-3">
+                      <div className="flex-1 min-w-0">
+                        {/* Rank + issuer + name */}
+                        <div className="flex items-center gap-2 flex-wrap">
+                          <span className="text-xs font-bold text-amber-600">#{i + 1}</span>
+                          <span className={`text-xs px-1.5 py-0.5 rounded-full text-white font-medium ${ISSUER_COLORS[rec.issuer] ?? 'bg-slate-700'}`}>
+                            {rec.issuer}
+                          </span>
+                          <span className="text-sm font-semibold text-gray-900 truncate">{rec.name}</span>
+                        </div>
+
+                        {/* Fee + top category */}
+                        <div className="flex items-center gap-3 mt-1.5 flex-wrap">
+                          <span className="text-xs text-gray-500">
+                            {rec.annualFee === 0
+                              ? 'No annual fee'
+                              : rec.firstYearFree
+                              ? `$${rec.annualFee}/yr · 1st year free`
+                              : `$${rec.annualFee}/yr`}
+                          </span>
+                          {rec.topCat && (
+                            <span className="text-xs text-blue-600">
+                              Best for: <span className="font-medium">{rec.topCat}</span>
+                            </span>
+                          )}
+                        </div>
+                      </div>
+
+                      {/* Earn numbers */}
+                      <div className="text-right shrink-0">
+                        <p className="text-xs text-gray-400">extra earn/yr</p>
+                        <p className="font-mono font-bold text-base text-gray-900">
+                          +${rec.incremental.toFixed(0)}
+                        </p>
+                        <p className={`text-xs font-semibold mt-0.5 ${rec.netValue >= 0 ? 'text-emerald-600' : 'text-amber-600'}`}>
+                          {rec.netValue >= 0
+                            ? `+$${rec.netValue.toFixed(0)} after fee`
+                            : `-$${Math.abs(rec.netValue).toFixed(0)} after fee`}
+                        </p>
+                      </div>
+                    </div>
+
+                    {/* Apply button */}
+                    <div className="mt-3">
+                      {rec.applyUrl ? (
+                        <a
+                          href={rec.applyUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-1.5 bg-slate-800 hover:bg-slate-700 text-white text-xs font-semibold px-4 py-2 rounded-lg transition-colors"
+                        >
+                          Apply Now →
+                        </a>
+                      ) : (
+                        <span className="inline-flex items-center gap-1.5 bg-gray-100 text-gray-500 text-xs font-semibold px-4 py-2 rounded-lg">
+                          Search online to apply
+                        </span>
+                      )}
+                    </div>
+                  </div>
+                ))}
+              </div>
+              <div className="px-4 py-3 bg-gray-50 border-t border-gray-200">
+                <p className="text-xs text-gray-400">
+                  Extra earn is calculated vs your current best card per category. Net value subtracts the annual fee from year 1. Actual value depends on how you redeem points.
+                </p>
+              </div>
+            </div>
+          )}
         </>
       )}
 
       <p className="text-xs text-gray-400 text-center pb-2">
-        Estimates based on card earning rates and points program valuations. Actual value varies.
+        Points values use default program benchmarks. Set your personal CPP in the Points tab to personalize results.
       </p>
     </div>
   );

@@ -27,7 +27,7 @@ export const CARD_TEMPLATES: CardTemplate[] = [
       { name: "Supplementary Cobalt Card", fee: 0, perks: ["Same earn rates as primary cardholder"] },
     ],
     earningRates: [
-      { category: "Dining & Drinks", multiplier: 5, unit: "points", programId: "amex-mr" },
+      { category: "Dining, Drinks & Grocery Stores", multiplier: 5, unit: "points", programId: "amex-mr" },
       { category: "Streaming Services", multiplier: 3, unit: "points", programId: "amex-mr" },
       { category: "Travel & Transit", multiplier: 2, unit: "points", programId: "amex-mr" },
       { category: "Everything Else", multiplier: 1, unit: "points", programId: "amex-mr" },
@@ -801,6 +801,11 @@ export const CARD_TEMPLATES: CardTemplate[] = [
         resetDate: "cardmember-year",
         category: "data",
       },
+    ],
+    earningRates: [
+      { category: "Scene+ Purchases (Cineplex, etc.)", multiplier: 3, unit: "points", programId: "scene-plus" },
+      { category: "Dining & Groceries", multiplier: 2, unit: "points", programId: "scene-plus" },
+      { category: "Everything Else", multiplier: 1.5, unit: "points", programId: "scene-plus" },
     ],
   },
 
@@ -2379,3 +2384,74 @@ export const CARD_INCOME_REQS: Record<string, number> = {
   "meridian-cash-back-infinite":        60000,
   "meridian-travel-infinite":           60000,
 };
+
+/**
+ * Direct application URLs — replace with affiliate tracking links to monetize.
+ * Affiliate programs: Amex CA, Ratehub, GreedyRates, bank direct programs.
+ */
+export const CARD_APPLY_URLS: Record<string, string> = {
+  // AMEX
+  "amex-cobalt":                "https://www.americanexpress.com/en-ca/credit-cards/cobalt-card/",
+  "amex-gold":                  "https://www.americanexpress.com/en-ca/credit-cards/gold-rewards-card/",
+  "amex-platinum":              "https://www.americanexpress.com/en-ca/credit-cards/platinum-card/",
+  "amex-aeroplan":              "https://www.americanexpress.com/en-ca/credit-cards/aeroplan-card/",
+  "amex-aeroplan-reserve":      "https://www.americanexpress.com/en-ca/credit-cards/aeroplan-reserve-card/",
+  "amex-simply-cash":           "https://www.americanexpress.com/en-ca/credit-cards/simply-cash-card/",
+  "amex-simply-cash-preferred": "https://www.americanexpress.com/en-ca/credit-cards/simply-cash-preferred-card/",
+  "amex-business-gold":         "https://www.americanexpress.com/en-ca/credit-cards/business/gold-rewards-card/",
+  "amex-business-platinum":     "https://www.americanexpress.com/en-ca/credit-cards/business/platinum-card/",
+  "marriott-amex":              "https://www.americanexpress.com/en-ca/credit-cards/marriott-bonvoy-card/",
+  // TD
+  "td-aeroplan-infinite":           "https://www.td.com/ca/en/personal-banking/products/credit-cards/aeroplan/infinite-card/",
+  "td-aeroplan-infinite-privilege": "https://www.td.com/ca/en/personal-banking/products/credit-cards/aeroplan/infinite-privilege-card/",
+  "td-first-class":                 "https://www.td.com/ca/en/personal-banking/products/credit-cards/travel/first-class-travel-visa-infinite/",
+  "td-cashback-infinite":           "https://www.td.com/ca/en/personal-banking/products/credit-cards/cash-back/cash-back-visa-infinite/",
+  "td-platinum-travel":             "https://www.td.com/ca/en/personal-banking/products/credit-cards/travel/platinum-travel-visa/",
+  // CIBC
+  "cibc-aeroplan-infinite":           "https://www.cibc.com/en/personal-banking/credit-cards/travel-credit-cards/aeroplan-visa-infinite-card.html",
+  "cibc-aeroplan-infinite-privilege": "https://www.cibc.com/en/personal-banking/credit-cards/travel-credit-cards/aeroplan-visa-infinite-privilege-card.html",
+  "cibc-aventura-gold":               "https://www.cibc.com/en/personal-banking/credit-cards/travel-credit-cards/aventura-gold-visa-infinite-card.html",
+  "cibc-aventura-privilege":          "https://www.cibc.com/en/personal-banking/credit-cards/travel-credit-cards/aventura-visa-infinite-privilege-card.html",
+  // RBC
+  "rbc-avion-infinite":           "https://www.rbcroyalbank.com/en-ca/my-money/products/credit-cards/avion-visa-infinite/",
+  "rbc-avion-infinite-privilege": "https://www.rbcroyalbank.com/en-ca/my-money/products/credit-cards/avion-visa-infinite-privilege/",
+  "rbc-ion-plus":                 "https://www.rbcroyalbank.com/en-ca/my-money/products/credit-cards/ion-plus-visa/",
+  "rbc-westjet-world-elite":      "https://www.rbcroyalbank.com/en-ca/my-money/products/credit-cards/westjet-world-elite-mastercard/",
+  "rbc-cashback-mastercard":      "https://www.rbcroyalbank.com/en-ca/my-money/products/credit-cards/cash-back-mastercard/",
+  "rbc-british-airways":          "https://www.rbcroyalbank.com/en-ca/my-money/products/credit-cards/british-airways-visa-infinite/",
+  // SCOTIABANK
+  "scotia-passport-infinite-plus":      "https://www.scotiabank.com/ca/en/personal/credit-cards/visa/passport-visa-infinite-plus-card.html",
+  "scotia-passport-infinite-privilege": "https://www.scotiabank.com/ca/en/personal/credit-cards/visa/passport-visa-infinite-privilege-card.html",
+  "scotia-gold-amex":                   "https://www.scotiabank.com/ca/en/personal/credit-cards/american-express/gold-american-express-card.html",
+  "scotia-momentum-infinite":           "https://www.scotiabank.com/ca/en/personal/credit-cards/visa/momentum-visa-infinite-card.html",
+  // BMO
+  "bmo-eclipse-vip":          "https://www.bmo.com/en-ca/main/personal/credit-cards/bmo-eclipse-visa-infinite-privilege-card/",
+  "bmo-ascend-world-elite":   "https://www.bmo.com/en-ca/main/personal/credit-cards/bmo-ascend-world-elite-mastercard/",
+  "bmo-cashback-world-elite": "https://www.bmo.com/en-ca/main/personal/credit-cards/bmo-cashback-world-elite-mastercard/",
+  "bmo-viporter":             "https://www.bmo.com/en-ca/main/personal/credit-cards/bmo-viporter-world-elite-mastercard/",
+  "bmo-air-miles-world-elite":"https://www.bmo.com/en-ca/main/personal/credit-cards/bmo-air-miles-world-elite-mastercard/",
+  // NATIONAL BANK
+  "nbc-world-elite":     "https://www.nbc.ca/personal/credit-cards/world-elite-mastercard.html",
+  "nbc-mastercard-world":"https://www.nbc.ca/personal/credit-cards/mastercard-world.html",
+  // HSBC
+  "hsbc-world-elite": "https://www.hsbc.ca/credit-cards/products/world-elite/",
+  // ROGERS
+  "rogers-world-elite": "https://www.rogers.com/credit-card",
+  "fido-mastercard":    "https://www.fido.ca/credit-card",
+  // MBNA
+  "mbna-rewards-world-elite": "https://www.mbna.ca/en/credit-cards/rewards/mbna-rewards-world-elite-mastercard.html",
+  "mbna-alaska-world-elite":  "https://www.mbna.ca/en/credit-cards/travel/mbna-alaska-airlines-world-elite-mastercard.html",
+  // SIMPLII
+  "simplii-cash-back": "https://www.simplii.com/en/credit-cards/no-fee-cashback-visa.html",
+  // DESJARDINS
+  "desjardins-odyssey-world-elite": "https://www.desjardins.com/en/personal/accounts-services/credit-cards/odyssey-world-elite.html",
+  // NEO
+  "neo-world-elite": "https://www.neo.ca/credit",
+  // MERIDIAN
+  "meridian-cash-back-infinite": "https://www.meridiancu.ca/personal/banking/credit-cards/visa-infinite-cashback",
+  "meridian-travel-infinite":    "https://www.meridiancu.ca/personal/banking/credit-cards/visa-infinite-travel-rewards",
+};
+
+export function getApplyUrl(cardId: string): string | undefined {
+  return CARD_APPLY_URLS[cardId];
+}

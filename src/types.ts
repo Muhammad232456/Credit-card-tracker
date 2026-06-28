@@ -82,6 +82,8 @@ export interface CardTemplate {
   supplementaryCardOptions?: SupplementaryCardOption[];
   earningRates?: EarningRate[];
   insurance?: InsuranceCoverage[];
+  /** Direct application URL — swap for affiliate link to monetize */
+  applyUrl?: string;
 }
 
 export interface PointsProgram {
