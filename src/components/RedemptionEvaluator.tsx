@@ -136,6 +136,11 @@ export default function RedemptionEvaluator({ onBack, initialProgramId }: Props)
           {selected?.note && (
             <p className="text-xs text-blue-600 mt-1">{selected.note}</p>
           )}
+          {selected?.sweetSpots && (
+            <p className="text-xs text-amber-700 bg-amber-50 rounded-lg px-2.5 py-1.5 mt-1.5">
+              💡 {selected.sweetSpots}
+            </p>
+          )}
         </div>
 
         <div className="grid grid-cols-2 gap-3">

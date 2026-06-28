@@ -92,7 +92,8 @@ export interface PointsProgram {
   defaultCpp: number;      // benchmark CPP — minimum to aim for
   excellentCpp?: number;   // threshold for an "excellent" redemption
   isTransferable: boolean;
-  note?: string;
+  note?: string;           // general program note (transfer info, caveats)
+  sweetSpots?: string;     // redemption tips shown in the evaluator
 }
 
 export interface TransferPartner {
