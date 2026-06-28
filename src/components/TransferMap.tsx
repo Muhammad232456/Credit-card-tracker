@@ -1,13 +1,8 @@
 import { useState } from 'react';
 import { TRANSFER_PARTNERS } from '../data/transfers';
 import { POINTS_PROGRAMS } from '../data/programs';
-import { fetchTransferBonuses } from '../api/bonusChecker';
-import { getCachedBonus, buildCacheEntry } from '../hooks/useBonusCache';
-import type { UserData, TransferBonusResult } from '../types';
 
 interface Props {
-  data: UserData;
-  update: (updater: (prev: UserData) => UserData) => void;
   focusProgram?: string;
 }
 
@@ -22,51 +17,13 @@ const ISSUER_COLORS: Record<string, string> = {
   'rbc-avion': 'border-blue-500 bg-blue-50',
 };
 
-export default function TransferMap({ data, update, focusProgram }: Props) {
+export default function TransferMap({ focusProgram }: Props) {
   const [activeSource, setActiveSource] = useState<string>(focusProgram ?? 'amex-mr');
-  const [checking, setChecking] = useState(false);
-  const [error, setError] = useState<string | null>(null);
-  const [apiKeyInput, setApiKeyInput] = useState('');
-  const [showApiInput, setShowApiInput] = useState(false);
 
   const sourceProgram = POINTS_PROGRAMS.find(p => p.id === activeSource);
   const partners = TRANSFER_PARTNERS.filter(tp =>
     tp.transfersFrom.some(r => r.sourceProgram === activeSource)
   );
-
-  const cached = getCachedBonus(data, 'transfer', activeSource);
-  const bonuses: TransferBonusResult[] = cached ? (cached.data as TransferBonusResult[]) : [];
-
-  function getBonusForPartner(partnerName: string): TransferBonusResult | undefined {
-    return bonuses.find(b =>
-      b.partner_name.toLowerCase().includes(partnerName.toLowerCase()) ||
-      partnerName.toLowerCase().includes(b.partner_name.toLowerCase())
-    );
-  }
-
-  async function checkBonuses() {
-    setError(null);
-    setChecking(true);
-    try {
-      const results = await fetchTransferBonuses(activeSource as 'amex-mr' | 'rbc-avion');
-      const entry = buildCacheEntry('transfer', activeSource, results);
-      update(prev => ({
-        ...prev,
-        bonusCache: [
-          ...prev.bonusCache.filter(b => !(b.type === 'transfer' && b.key === activeSource)),
-          entry,
-        ],
-      }));
-    } catch (e) {
-      if ((e as Error).message.includes('VITE_ANTHROPIC_API_KEY')) {
-        setShowApiInput(true);
-      } else {
-        setError((e as Error).message);
-      }
-    } finally {
-      setChecking(false);
-    }
-  }
 
   const overlap = ['avios', 'asia-miles'];
 
@@ -112,7 +69,6 @@ export default function TransferMap({ data, update, focusProgram }: Props) {
       <div className="grid gap-3">
         {partners.map(partner => {
           const route = partner.transfersFrom.find(r => r.sourceProgram === activeSource)!;
-          const bonus = getBonusForPartner(partner.name);
           const isExpiring = route.expiryDate && new Date(route.expiryDate) <= new Date(Date.now() + 60 * 24 * 60 * 60 * 1000);
           const isOverlap = overlap.includes(partner.id);
 
@@ -120,17 +76,12 @@ export default function TransferMap({ data, update, focusProgram }: Props) {
             <div
               key={partner.id}
               className={`bg-white border rounded-xl p-4 relative ${
-                isExpiring ? 'border-red-300 bg-red-50' : bonus ? 'border-amber-300 bg-amber-50' : 'border-gray-200'
+                isExpiring ? 'border-red-300 bg-red-50' : 'border-gray-200'
               }`}
             >
               {isExpiring && (
                 <div className="absolute top-3 right-3 bg-red-600 text-white text-xs px-2 py-0.5 rounded-full font-bold">
                   ENDING {route.expiryDate}
-                </div>
-              )}
-              {bonus && bonus.bonus_percentage && (
-                <div className="absolute top-3 right-3 bg-amber-500 text-white text-xs px-2 py-0.5 rounded-full font-bold">
-                  +{bonus.bonus_percentage}% BONUS
                 </div>
               )}
               {isOverlap && (
@@ -151,12 +102,6 @@ export default function TransferMap({ data, update, focusProgram }: Props) {
                     <span className="text-xs text-gray-500 capitalize">{partner.type}</span>
                   </div>
                   <p className="text-xs text-gray-500 mt-1">{route.notes}</p>
-                  {bonus && (
-                    <p className="text-xs text-amber-700 mt-1 font-medium">
-                      {bonus.details}
-                      {bonus.expiry_date && ` · Expires ${bonus.expiry_date}`}
-                    </p>
-                  )}
                 </div>
                 <div className="text-right shrink-0">
                   <p className="font-mono font-bold text-lg text-gray-900">
@@ -180,65 +125,6 @@ export default function TransferMap({ data, update, focusProgram }: Props) {
         </div>
       )}
 
-      <div className="bg-white border border-gray-200 rounded-xl p-4">
-        <div className="flex items-center justify-between">
-          <div>
-            <p className="font-medium text-gray-800">Transfer Bonus Check</p>
-            {cached && (
-              <p className="text-xs text-gray-500">
-                Last checked: {new Date(cached.checkedAt).toLocaleDateString('en-CA')}
-                {' · '}Expires: {new Date(cached.expiresAt).toLocaleDateString('en-CA')}
-              </p>
-            )}
-          </div>
-          <button
-            onClick={checkBonuses}
-            disabled={checking}
-            className="bg-slate-800 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-slate-700 disabled:opacity-50 transition-colors"
-          >
-            {checking ? 'Checking...' : 'Check for Bonuses'}
-          </button>
-        </div>
-
-        {showApiInput && (
-          <div className="mt-4 space-y-2">
-            <p className="text-sm text-gray-600">Enter your Anthropic API key to enable live bonus checking:</p>
-            <div className="flex gap-2">
-              <input
-                type="password"
-                value={apiKeyInput}
-                onChange={e => setApiKeyInput(e.target.value)}
-                placeholder="sk-ant-..."
-                className="flex-1 border border-gray-300 rounded-lg px-3 py-2 text-sm font-mono"
-              />
-              <button
-                onClick={() => {
-                  localStorage.setItem('anthropic-api-key-temp', apiKeyInput);
-                  setShowApiInput(false);
-                  setApiKeyInput('');
-                }}
-                className="bg-blue-600 text-white px-3 py-2 rounded-lg text-sm"
-              >
-                Save & Retry
-              </button>
-            </div>
-            <p className="text-xs text-gray-500">Key stored locally in your browser only. Or set VITE_ANTHROPIC_API_KEY in .env</p>
-          </div>
-        )}
-
-        {error && (
-          <p className="mt-3 text-sm text-red-600">{error}</p>
-        )}
-
-        {bonuses.length > 0 && (
-          <p className="mt-3 text-sm text-emerald-600 font-medium">
-            ✓ {bonuses.length} active bonus{bonuses.length !== 1 ? 'es' : ''} found above
-          </p>
-        )}
-        {cached && bonuses.length === 0 && (
-          <p className="mt-3 text-sm text-gray-500">No active bonuses found as of last check.</p>
-        )}
-      </div>
     </div>
   );
 }

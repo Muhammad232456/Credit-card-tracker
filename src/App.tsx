@@ -96,8 +96,6 @@ export default function App() {
         )}
         {activeTab === 'transfers' && (
           <TransferMap
-            data={data}
-            update={update}
             focusProgram={transferFocus}
             key={transferFocus}
           />
