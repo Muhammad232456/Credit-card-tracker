@@ -7,6 +7,7 @@ import GlossaryTerm from './GlossaryTerm';
 interface Props {
   data: UserData;
   onNavigate: (tab: string, cardId?: string) => void;
+  onStartQuiz?: () => void;
 }
 
 function calcNextRenewal(openedDate: string, feeFrequency: 'monthly' | 'annual' = 'annual'): string {
@@ -23,7 +24,7 @@ function calcNextRenewal(openedDate: string, feeFrequency: 'monthly' | 'annual' 
   return next.toISOString().split('T')[0];
 }
 
-export default function Dashboard({ data, onNavigate }: Props) {
+export default function Dashboard({ data, onNavigate, onStartQuiz }: Props) {
   const activeCards = data.cards.filter(c => (c.status ?? 'active') === 'active');
   const settings = data.settings;
 
@@ -155,6 +156,17 @@ export default function Dashboard({ data, onNavigate }: Props) {
             Track Points First →
           </button>
         </div>
+        {onStartQuiz && (
+          <div className="text-center">
+            <p className="text-xs text-gray-400 mb-2">Not sure which cards to get?</p>
+            <button
+              onClick={onStartQuiz}
+              className="text-sm text-blue-600 hover:text-blue-700 font-medium underline underline-offset-2"
+            >
+              Get personalized card recommendations →
+            </button>
+          </div>
+        )}
       </div>
     );
   }

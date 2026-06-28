@@ -41,24 +41,11 @@ export default function App() {
     setActiveTab('redeem');
   }
 
-  const showOnboarding = !data.settings.onboardingComplete && data.cards.length === 0;
+  const [showQuiz, setShowQuiz] = useState(false);
 
   function completeOnboarding(goal: 'cashback' | 'travel' | 'both') {
     update(prev => ({ ...prev, settings: { ...prev.settings, onboardingComplete: true, goal } }));
-  }
-
-  function skipOnboarding() {
-    update(prev => ({ ...prev, settings: { ...prev.settings, onboardingComplete: true } }));
-  }
-
-  if (showOnboarding) {
-    return (
-      <div className="min-h-screen bg-gray-50">
-        <div className="max-w-lg mx-auto px-4 py-8">
-          <OnboardingQuiz onComplete={completeOnboarding} onSkip={skipOnboarding} />
-        </div>
-      </div>
-    );
+    setShowQuiz(false);
   }
 
   return (
@@ -96,9 +83,18 @@ export default function App() {
         </nav>
       </header>
 
+      {/* Quiz modal — opt-in, never auto-shown */}
+      {showQuiz && (
+        <div className="fixed inset-0 z-50 bg-black/50 flex items-center justify-center p-4">
+          <div className="bg-white rounded-2xl w-full max-w-lg shadow-2xl">
+            <OnboardingQuiz onComplete={completeOnboarding} onSkip={() => setShowQuiz(false)} />
+          </div>
+        </div>
+      )}
+
       <main className="flex-1 max-w-2xl mx-auto w-full px-4 py-6 pb-24 sm:pb-6">
         {activeTab === 'dashboard' && (
-          <Dashboard data={data} onNavigate={navigate} />
+          <Dashboard data={data} onNavigate={navigate} onStartQuiz={() => setShowQuiz(true)} />
         )}
         {activeTab === 'cards' && (
           <CardList data={data} update={update} onCompare={() => setActiveTab('compare')} />
