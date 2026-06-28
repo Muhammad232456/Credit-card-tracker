@@ -65,9 +65,14 @@ export default function Dashboard({ data, onNavigate }: Props) {
     .sort((a, b) => a.days - b.days)
     .slice(0, 3);
 
-  // Welcome bonus progress
+  // Welcome bonus progress — show cards with an incomplete spend tier
   const welcomeBonusCards = activeCards
-    .filter(uc => uc.welcomeBonus && uc.welcomeBonus.spendSoFar < uc.welcomeBonus.spendTarget)
+    .filter(uc => {
+      const wb = uc.welcomeBonus;
+      if (!wb) return false;
+      const spendTier = wb.tiers.find(t => t.type === 'spend');
+      return spendTier && !spendTier.earned && (spendTier.spendRequired ?? 0) > 0 && wb.spendSoFar < (spendTier.spendRequired ?? 0);
+    })
     .map(uc => ({ uc, template: getCardById(uc.cardId) }))
     .filter(x => x.template);
 
@@ -209,8 +214,10 @@ export default function Dashboard({ data, onNavigate }: Props) {
           <div className="space-y-3">
             {welcomeBonusCards.map(({ uc, template }) => {
               const wb = uc.welcomeBonus!;
-              const pct = Math.min(100, Math.round((wb.spendSoFar / wb.spendTarget) * 100));
-              const remaining = wb.spendTarget - wb.spendSoFar;
+              const spendTier = wb.tiers.find(t => t.type === 'spend')!;
+              const spendTarget = spendTier.spendRequired ?? 0;
+              const pct = spendTarget > 0 ? Math.min(100, Math.round((wb.spendSoFar / spendTarget) * 100)) : 0;
+              const remaining = spendTarget - wb.spendSoFar;
               const deadlineDays = wb.deadline
                 ? Math.ceil((new Date(wb.deadline).getTime() - Date.now()) / (1000 * 60 * 60 * 24))
                 : null;
@@ -218,13 +225,13 @@ export default function Dashboard({ data, onNavigate }: Props) {
                 <button key={uc.cardId} onClick={() => onNavigate('cards', uc.cardId)} className="w-full text-left">
                   <div className="flex items-center justify-between text-sm mb-1">
                     <span className="font-medium text-gray-800 truncate flex-1 mr-2">{template!.name}</span>
-                    <span className="text-xs text-gray-500 shrink-0">${wb.spendSoFar.toLocaleString()} / ${wb.spendTarget.toLocaleString()}</span>
+                    <span className="text-xs text-gray-500 shrink-0">${wb.spendSoFar.toLocaleString()} / ${spendTarget.toLocaleString()}</span>
                   </div>
                   <div className="bg-gray-200 rounded-full h-2 mb-1">
                     <div className={`h-2 rounded-full transition-all ${pct >= 100 ? 'bg-emerald-500' : 'bg-blue-500'}`} style={{ width: `${pct}%` }} />
                   </div>
                   <div className="flex items-center justify-between text-xs text-gray-500">
-                    <span className="text-blue-600 font-medium">{wb.bonusDescription}</span>
+                    <span className="text-blue-600 font-medium">{spendTier.label}</span>
                     <span className={deadlineDays !== null && deadlineDays < 30 ? 'text-red-600 font-medium' : ''}>
                       {pct < 100 && `$${remaining.toLocaleString()} to go`}
                       {deadlineDays !== null && ` · ${deadlineDays}d left`}

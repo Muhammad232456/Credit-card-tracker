@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { POINTS_PROGRAMS } from '../data/programs';
-import type { CardTemplate, UserCard, UserSettings, UserSupplementaryCard } from '../types';
+import type { CardTemplate, UserCard, UserSettings, UserSupplementaryCard, WelcomeBonusTier } from '../types';
 import {
   effectiveBenefitValue, cardAge,
   SPEND_CATS, bestRateForCat, rateToCpd,
@@ -62,6 +62,12 @@ export default function CardDetail({
   const [showCardMeta, setShowCardMeta] = useState(false);
   const [newSupHolder, setNewSupHolder] = useState('');
   const [newSupOption, setNewSupOption] = useState(0);
+  // Welcome bonus tier builder state
+  const [draftTiers, setDraftTiers] = useState<WelcomeBonusTier[]>([]);
+  const [tierType, setTierType] = useState<WelcomeBonusTier['type']>('approval');
+  const [tierLabel, setTierLabel] = useState('');
+  const [tierSpend, setTierSpend] = useState('');
+  const [bonusDeadline, setBonusDeadline] = useState('');
 
   const headerBg = ISSUER_COLORS[template.issuer] ?? 'bg-slate-800';
   const feeFreq = template.feeFrequency ?? 'annual';
@@ -138,11 +144,20 @@ export default function CardDetail({
               )}
             </div>
             <h2 className="text-xl font-bold mt-1">{template.name}</h2>
-            <p className="text-sm opacity-80 mt-1 font-mono">
-              {feeFreq === 'monthly'
-                ? `$${(template.annualFee / 12).toFixed(2)}/month ($${template.annualFee.toFixed(2)}/yr)`
-                : `$${template.annualFee.toFixed(2)}/yr`}
-            </p>
+            <div className="flex items-center gap-3 mt-1 flex-wrap">
+              <p className="text-sm opacity-80 font-mono">
+                {feeFreq === 'monthly'
+                  ? `$${(template.annualFee / 12).toFixed(2)}/month ($${template.annualFee.toFixed(2)}/yr)`
+                  : `$${template.annualFee.toFixed(2)}/yr`}
+              </p>
+              {template.supplementaryCardOptions && template.supplementaryCardOptions.length > 0 && (
+                <p className="text-xs opacity-60 bg-white/10 px-2 py-0.5 rounded-full">
+                  +{template.supplementaryCardOptions[0].fee === 0
+                    ? 'Free'
+                    : `$${template.supplementaryCardOptions[0].fee}/yr`} supp.
+                </p>
+              )}
+            </div>
             <div className="flex items-center gap-3 mt-1 flex-wrap">
               {userCard.creditLimit && (
                 <p className="text-xs opacity-60 font-mono">Limit: ${userCard.creditLimit.toLocaleString()}</p>
@@ -363,86 +378,200 @@ export default function CardDetail({
         <p className="text-sm font-semibold text-gray-700 mb-3">🎯 Welcome Bonus Tracker</p>
         {userCard.welcomeBonus ? (() => {
           const wb = userCard.welcomeBonus!;
-          const pct = Math.min(100, Math.round((wb.spendSoFar / wb.spendTarget) * 100));
-          const remaining = Math.max(0, wb.spendTarget - wb.spendSoFar);
+          const spendTier = wb.tiers.find(t => t.type === 'spend');
           const deadlineDays = wb.deadline
             ? Math.ceil((new Date(wb.deadline).getTime() - Date.now()) / (1000 * 60 * 60 * 24))
             : null;
           return (
             <div className="space-y-3">
-              <div>
-                <div className="flex justify-between text-sm mb-1">
-                  <span className="font-medium text-blue-700">{wb.bonusDescription}</span>
-                  <span className="font-mono text-gray-600">{pct}%</span>
+              {/* Tier list */}
+              {wb.tiers.map((tier, i) => {
+                const isSpend = tier.type === 'spend';
+                const spendTarget = tier.spendRequired ?? 0;
+                const pct = isSpend && spendTarget > 0
+                  ? Math.min(100, Math.round((wb.spendSoFar / spendTarget) * 100))
+                  : 0;
+                const remaining = isSpend ? Math.max(0, spendTarget - wb.spendSoFar) : 0;
+                return (
+                  <div key={i} className={`rounded-lg p-3 border ${tier.earned ? 'bg-emerald-50 border-emerald-200' : 'bg-gray-50 border-gray-200'}`}>
+                    <div className="flex items-start gap-3">
+                      <button
+                        onClick={() => {
+                          const updated = wb.tiers.map((t, j) => j === i ? { ...t, earned: !t.earned } : t);
+                          onUpdateCard({ welcomeBonus: { ...wb, tiers: updated } });
+                        }}
+                        className={`mt-0.5 w-5 h-5 rounded-full border-2 flex items-center justify-center shrink-0 transition-colors ${
+                          tier.earned ? 'bg-emerald-500 border-emerald-500 text-white' : 'border-gray-400'
+                        }`}
+                      >
+                        {tier.earned && <span className="text-xs leading-none">✓</span>}
+                      </button>
+                      <div className="flex-1 min-w-0">
+                        <p className={`text-sm font-medium ${tier.earned ? 'text-emerald-700' : 'text-gray-800'}`}>
+                          {tier.label}
+                        </p>
+                        <p className="text-xs text-gray-500 capitalize mt-0.5">{tier.type === 'approval' ? 'On approval' : tier.type === 'spend' ? `Spend $${spendTarget.toLocaleString()}` : 'Anniversary bonus'}</p>
+                        {isSpend && !tier.earned && spendTarget > 0 && (
+                          <div className="mt-2 space-y-1">
+                            <div className="bg-gray-200 rounded-full h-2">
+                              <div className={`h-2 rounded-full transition-all ${pct >= 100 ? 'bg-emerald-500' : 'bg-blue-500'}`} style={{ width: `${pct}%` }} />
+                            </div>
+                            <div className="flex justify-between text-xs text-gray-500">
+                              <span>${wb.spendSoFar.toLocaleString()} spent</span>
+                              <span className="font-medium">${remaining.toLocaleString()} to go</span>
+                            </div>
+                          </div>
+                        )}
+                      </div>
+                      <button
+                        onClick={() => onUpdateCard({ welcomeBonus: { ...wb, tiers: wb.tiers.filter((_, j) => j !== i) } })}
+                        className="text-gray-300 hover:text-red-400 text-xs shrink-0"
+                      >✕</button>
+                    </div>
+                  </div>
+                );
+              })}
+
+              {/* Spend + deadline inputs */}
+              {spendTier && (
+                <div className="grid grid-cols-2 gap-2 pt-1 border-t border-gray-100">
+                  <div>
+                    <label className="text-xs text-gray-500">Spent So Far ($)</label>
+                    <input
+                      type="number"
+                      value={wb.spendSoFar}
+                      onChange={e => onUpdateCard({ welcomeBonus: { ...wb, spendSoFar: Number(e.target.value) || 0 } })}
+                      className="w-full mt-1 border border-gray-300 rounded-lg px-3 py-2 text-sm font-mono"
+                    />
+                  </div>
+                  <div>
+                    <label className="text-xs text-gray-500">Spend Deadline</label>
+                    <input
+                      type="date"
+                      value={wb.deadline ?? ''}
+                      onChange={e => onUpdateCard({ welcomeBonus: { ...wb, deadline: e.target.value || undefined } })}
+                      className="w-full mt-1 border border-gray-300 rounded-lg px-3 py-2 text-sm"
+                    />
+                  </div>
                 </div>
-                <div className="bg-gray-200 rounded-full h-3">
-                  <div className={`h-3 rounded-full transition-all ${pct >= 100 ? 'bg-emerald-500' : 'bg-blue-500'}`} style={{ width: `${pct}%` }} />
-                </div>
-                <div className="flex justify-between text-xs text-gray-500 mt-1">
-                  <span>${wb.spendSoFar.toLocaleString()} spent</span>
-                  <span>${wb.spendTarget.toLocaleString()} required</span>
-                </div>
-              </div>
-              {pct < 100 && (
-                <p className="text-sm text-gray-600">
-                  <span className="font-mono font-bold text-blue-700">${remaining.toLocaleString()}</span> still needed
-                  {deadlineDays !== null && (
-                    <span className={`ml-2 font-medium ${deadlineDays < 30 ? 'text-red-600' : 'text-amber-600'}`}>
-                      · {deadlineDays} days left
-                    </span>
-                  )}
+              )}
+              {deadlineDays !== null && (
+                <p className={`text-xs font-medium ${deadlineDays < 30 ? 'text-red-600' : 'text-amber-600'}`}>
+                  ⏱ {deadlineDays} days until spend deadline
                 </p>
               )}
-              {pct >= 100 && <p className="text-sm text-emerald-600 font-medium">✅ Minimum spend met!</p>}
-              <div className="grid grid-cols-2 gap-2 pt-1 border-t border-gray-100">
-                <div>
-                  <label className="text-xs text-gray-500">Spent So Far ($)</label>
-                  <input
-                    type="number"
-                    value={wb.spendSoFar}
-                    onChange={e => onUpdateCard({ welcomeBonus: { ...wb, spendSoFar: Number(e.target.value) || 0 } })}
-                    className="w-full mt-1 border border-gray-300 rounded-lg px-3 py-2 text-sm font-mono"
-                  />
+
+              {/* Add another tier inline */}
+              <details className="group">
+                <summary className="text-xs text-blue-600 cursor-pointer hover:text-blue-800 font-medium list-none">+ Add another tier</summary>
+                <div className="mt-2 space-y-2">
+                  <select
+                    value={tierType}
+                    onChange={e => setTierType(e.target.value as WelcomeBonusTier['type'])}
+                    className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm"
+                  >
+                    <option value="approval">On approval</option>
+                    <option value="spend">Spend bonus</option>
+                    <option value="anniversary">Anniversary bonus</option>
+                  </select>
+                  <input type="text" placeholder="e.g. 20,000 Avion Points" value={tierLabel}
+                    onChange={e => setTierLabel(e.target.value)}
+                    className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm" />
+                  {tierType === 'spend' && (
+                    <input type="number" placeholder="Min spend required ($)" value={tierSpend}
+                      onChange={e => setTierSpend(e.target.value)}
+                      className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm font-mono" />
+                  )}
+                  <button
+                    onClick={() => {
+                      if (!tierLabel.trim()) return;
+                      const newTier: WelcomeBonusTier = {
+                        label: tierLabel.trim(), type: tierType,
+                        spendRequired: tierType === 'spend' ? Number(tierSpend) || 0 : undefined,
+                        earned: false,
+                      };
+                      onUpdateCard({ welcomeBonus: { ...wb, tiers: [...wb.tiers, newTier] } });
+                      setTierLabel(''); setTierSpend('');
+                    }}
+                    disabled={!tierLabel.trim()}
+                    className="w-full py-1.5 bg-blue-600 text-white rounded-lg text-sm font-medium hover:bg-blue-700 disabled:opacity-40"
+                  >Add Tier</button>
                 </div>
-                <div>
-                  <label className="text-xs text-gray-500">Deadline</label>
-                  <input
-                    type="date"
-                    value={wb.deadline ?? ''}
-                    onChange={e => onUpdateCard({ welcomeBonus: { ...wb, deadline: e.target.value || undefined } })}
-                    className="w-full mt-1 border border-gray-300 rounded-lg px-3 py-2 text-sm"
-                  />
-                </div>
-              </div>
+              </details>
+
               <button onClick={() => onUpdateCard({ welcomeBonus: undefined })} className="text-xs text-red-400 hover:text-red-600">
                 Remove bonus tracker
               </button>
             </div>
           );
         })() : (
-          <div className="space-y-2">
-            <p className="text-xs text-gray-500">Track your minimum spend to earn the welcome bonus.</p>
-            <div className="grid grid-cols-2 gap-2">
-              <div>
-                <label className="text-xs text-gray-500">Bonus Description</label>
-                <input id="wb-desc" type="text" placeholder="e.g. 60,000 Aeroplan pts" className="w-full mt-1 border border-gray-300 rounded-lg px-3 py-2 text-sm" />
-              </div>
-              <div>
-                <label className="text-xs text-gray-500">Min Spend Required ($)</label>
-                <input id="wb-target" type="number" placeholder="e.g. 3000" className="w-full mt-1 border border-gray-300 rounded-lg px-3 py-2 text-sm" />
-              </div>
+          /* Setup: build tiers before saving */
+          <div className="space-y-3">
+            <p className="text-xs text-gray-500">Add each component of the welcome bonus, then save.</p>
+            <div className="space-y-2">
+              <select
+                value={tierType}
+                onChange={e => setTierType(e.target.value as WelcomeBonusTier['type'])}
+                className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm"
+              >
+                <option value="approval">On approval (no spend needed)</option>
+                <option value="spend">Spend bonus (requires min spend)</option>
+                <option value="anniversary">Anniversary bonus (once per year)</option>
+              </select>
+              <input
+                type="text"
+                placeholder={tierType === 'approval' ? 'e.g. 35,000 Avion Points' : tierType === 'spend' ? 'e.g. 20,000 Avion Points' : 'e.g. 15,000 Avion Points'}
+                value={tierLabel}
+                onChange={e => setTierLabel(e.target.value)}
+                className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm"
+              />
+              {tierType === 'spend' && (
+                <div className="grid grid-cols-2 gap-2">
+                  <input type="number" placeholder="Min spend ($)" value={tierSpend}
+                    onChange={e => setTierSpend(e.target.value)}
+                    className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm font-mono" />
+                  <input type="date" value={bonusDeadline}
+                    onChange={e => setBonusDeadline(e.target.value)}
+                    className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm" />
+                </div>
+              )}
+              <button
+                onClick={() => {
+                  if (!tierLabel.trim()) return;
+                  const t: WelcomeBonusTier = {
+                    label: tierLabel.trim(), type: tierType,
+                    spendRequired: tierType === 'spend' ? Number(tierSpend) || 0 : undefined,
+                    earned: false,
+                  };
+                  setDraftTiers(prev => [...prev, t]);
+                  setTierLabel(''); setTierSpend('');
+                  setTierType('approval');
+                }}
+                disabled={!tierLabel.trim()}
+                className="w-full py-2 border border-blue-300 text-blue-700 rounded-lg text-sm font-medium hover:bg-blue-50 disabled:opacity-40"
+              >+ Add This Tier</button>
             </div>
-            <button
-              onClick={() => {
-                const desc = (document.getElementById('wb-desc') as HTMLInputElement)?.value?.trim();
-                const target = Number((document.getElementById('wb-target') as HTMLInputElement)?.value);
-                if (!desc || !target) return;
-                onUpdateCard({ welcomeBonus: { bonusDescription: desc, spendTarget: target, spendSoFar: 0 } });
-              }}
-              className="w-full py-2 bg-blue-600 text-white rounded-lg text-sm font-medium hover:bg-blue-700"
-            >
-              Set Up Bonus Tracker
-            </button>
+
+            {/* Preview of drafted tiers */}
+            {draftTiers.length > 0 && (
+              <div className="space-y-1">
+                {draftTiers.map((t, i) => (
+                  <div key={i} className="flex items-center gap-2 bg-gray-50 rounded-lg px-3 py-2 text-sm">
+                    <span className="text-gray-400">○</span>
+                    <span className="flex-1 text-gray-700">{t.label}</span>
+                    <span className="text-xs text-gray-400 capitalize">{t.type === 'approval' ? 'on approval' : t.type === 'spend' ? `spend $${t.spendRequired?.toLocaleString()}` : 'anniversary'}</span>
+                    <button onClick={() => setDraftTiers(prev => prev.filter((_, j) => j !== i))} className="text-gray-300 hover:text-red-400 text-xs">✕</button>
+                  </div>
+                ))}
+                <button
+                  onClick={() => {
+                    onUpdateCard({ welcomeBonus: { tiers: draftTiers, spendSoFar: 0, deadline: bonusDeadline || undefined } });
+                    setDraftTiers([]); setBonusDeadline('');
+                  }}
+                  className="w-full py-2 bg-blue-600 text-white rounded-lg text-sm font-medium hover:bg-blue-700"
+                >Start Tracking ({draftTiers.length} tier{draftTiers.length !== 1 ? 's' : ''})</button>
+              </div>
+            )}
           </div>
         )}
       </div>

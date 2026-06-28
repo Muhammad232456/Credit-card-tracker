@@ -112,15 +112,17 @@ export interface TransferRoute {
   expiryDate?: string;
 }
 
+export interface WelcomeBonusTier {
+  label: string;                              // e.g. "35,000 Avion Points"
+  type: 'approval' | 'spend' | 'anniversary'; // drives display logic
+  spendRequired?: number;                     // only for type='spend'
+  earned: boolean;
+}
+
 export interface WelcomeBonusProgress {
-  /** Description of the bonus, e.g. "60,000 Aeroplan points" */
-  bonusDescription: string;
-  /** Minimum spend required in CAD */
-  spendTarget: number;
-  /** How much the user has spent so far (manually updated) */
-  spendSoFar: number;
-  /** Date the spend window closes */
-  deadline?: string;
+  tiers: WelcomeBonusTier[];
+  spendSoFar: number;   // running total for the spend tier
+  deadline?: string;    // deadline for the spend window
 }
 
 export interface UserCard {
