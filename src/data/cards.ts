@@ -1613,8 +1613,8 @@ export const CARD_TEMPLATES: CardTemplate[] = [
     lastVerified: "2026-06-01",
     benefits: [],
     earningRates: [
-      { category: "Air Miles Partners", multiplier: 2, unit: "points", programId: "air-miles", note: "2× Air Miles at partner stores" },
-      { category: "Everything Else", multiplier: 1, unit: "points", programId: "air-miles", note: "1 Air Mile per $25 spent" },
+      { category: "Air Miles Partners", multiplier: 0.08, unit: "points", programId: "air-miles", note: "2 Air Miles per $25 at partner stores" },
+      { category: "Everything Else", multiplier: 0.04, unit: "points", programId: "air-miles", note: "1 Air Mile per $25 spent" },
     ],
   },
   {
@@ -1681,9 +1681,9 @@ export const CARD_TEMPLATES: CardTemplate[] = [
       },
     ],
     earningRates: [
-      { category: "Air Miles Partners", multiplier: 3, unit: "points", programId: "air-miles", note: "3× Air Miles at partner stores" },
-      { category: "Grocery & Drug Stores", multiplier: 2, unit: "points", programId: "air-miles" },
-      { category: "Everything Else", multiplier: 1, unit: "points", programId: "air-miles", note: "1 Air Mile per $10 spent" },
+      { category: "Air Miles Partners", multiplier: 0.3, unit: "points", programId: "air-miles", note: "3 Air Miles per $10 at partner stores" },
+      { category: "Grocery & Drug Stores", multiplier: 0.2, unit: "points", programId: "air-miles", note: "2 Air Miles per $10" },
+      { category: "Everything Else", multiplier: 0.1, unit: "points", programId: "air-miles", note: "1 Air Mile per $10 spent" },
     ],
   },
   {
