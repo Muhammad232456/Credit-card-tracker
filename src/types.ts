@@ -1,5 +1,5 @@
 export type Issuer =
-  | "Amex" | "TD" | "CIBC" | "RBC" | "Scotiabank" | "BMO" | "National Bank" | "Neo" | "MBNA"
+  | "Amex" | "TD" | "CIBC" | "RBC" | "Scotiabank" | "BMO" | "National Bank" | "HSBC" | "Neo" | "MBNA"
   | "Canadian Tire" | "PC Financial" | "Rogers" | "Tangerine" | "Brim"
   | "Desjardins" | "Home Trust" | "Meridian" | "Capital One" | "Walmart"
   | "Simplii" | "ATB";
@@ -84,6 +84,8 @@ export interface CardTemplate {
   insurance?: InsuranceCoverage[];
   /** Direct application URL — swap for affiliate link to monetize */
   applyUrl?: string;
+  /** Card is discontinued / no longer available to new applicants */
+  discontinued?: boolean;
 }
 
 export interface PointsProgram {

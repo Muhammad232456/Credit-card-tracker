@@ -18,7 +18,7 @@ const DEFAULT_SPEND: MonthlySpendProfile = {
 const ISSUER_COLORS: Record<string, string> = {
   Amex: 'bg-blue-900', TD: 'bg-green-700', CIBC: 'bg-red-700', RBC: 'bg-blue-700',
   Scotiabank: 'bg-red-600', BMO: 'bg-blue-600', 'National Bank': 'bg-red-800',
-  Neo: 'bg-purple-700', MBNA: 'bg-gray-700',
+  HSBC: 'bg-red-900', Neo: 'bg-purple-700', MBNA: 'bg-gray-700',
   'Canadian Tire': 'bg-red-500', 'PC Financial': 'bg-orange-600', Rogers: 'bg-red-600',
   Tangerine: 'bg-orange-500', Brim: 'bg-indigo-600', Desjardins: 'bg-green-800',
   'Home Trust': 'bg-teal-700', Meridian: 'bg-cyan-700', 'Capital One': 'bg-red-700',
@@ -138,7 +138,7 @@ export default function SpendOptimizer({ data, update, onNavigate }: Props) {
   }
 
   const recommendations: Recommendation[] = CARD_TEMPLATES
-    .filter(t => !heldIds.has(t.id) && t.earningRates?.length)
+    .filter(t => !heldIds.has(t.id) && t.earningRates?.length && !t.discontinued)
     .map(t => {
       let incremental = 0;
       let topCat = '';

@@ -935,6 +935,50 @@ export const CARD_TEMPLATES: CardTemplate[] = [
     ],
   },
 
+  // ─── HSBC (discontinued — kept for existing cardholders) ─────────────────
+  {
+    id: "hsbc-world-elite",
+    name: "HSBC World Elite Mastercard",
+    issuer: "HSBC",
+    network: "Mastercard",
+    annualFee: 149,
+    discontinued: true,
+    lastVerified: "2026-06-01",
+    benefits: [
+      {
+        id: "hsbc-we-travel",
+        name: "Annual Travel Enhancement Credit",
+        value: 100,
+        frequency: "annual",
+        resetDate: "cardmember-year",
+        category: "travel-credit",
+      },
+      {
+        id: "hsbc-we-lounge",
+        name: "Priority Pass Lounge Visits",
+        value: 32,
+        frequency: "per-use",
+        maxUses: 6,
+        resetDate: "cardmember-year",
+        category: "lounge",
+      },
+      {
+        id: "hsbc-we-nofx",
+        name: "No Foreign Transaction Fee Savings",
+        value: 0,
+        frequency: "annual",
+        resetDate: "calendar-year",
+        category: "fx-savings",
+        note: "Input your annual FX spend to calculate estimated savings (~2.5%)",
+      },
+    ],
+    earningRates: [
+      { category: "Travel", multiplier: 6, unit: "points", programId: "hsbc-rewards" },
+      { category: "Dining & Entertainment", multiplier: 4, unit: "points", programId: "hsbc-rewards" },
+      { category: "Everything Else", multiplier: 2, unit: "points", programId: "hsbc-rewards" },
+    ],
+  },
+
   // ─── AMEX (additional) ───────────────────────────────────────────────────
   {
     id: "amex-simply-cash",
