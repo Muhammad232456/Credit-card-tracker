@@ -21,6 +21,7 @@ export default function RedemptionEvaluator({ onBack, initialProgramId }: Props)
   const [programId, setProgramId] = useState(initialProgramId ?? '');
   const [cashPrice, setCashPrice] = useState('');
   const [points, setPoints] = useState('');
+  const [taxes, setTaxes] = useState('');
 
   const programs = POINTS_PROGRAMS.filter(p =>
     tab === 'airline'
@@ -32,8 +33,13 @@ export default function RedemptionEvaluator({ onBack, initialProgramId }: Props)
 
   const cash = parseFloat(cashPrice) || 0;
   const pts = parseInt(points.replace(/,/g, '')) || 0;
+  const taxAmt = parseFloat(taxes) || 0;
 
-  const cpp = cash > 0 && pts > 0 ? (cash / pts) * 100 : null;
+  // Effective value of the redemption = what you'd otherwise have to pay cash
+  // CPP is based on net savings (cash price minus taxes you still pay)
+  const netSavings = cash > 0 && taxAmt >= 0 ? cash - taxAmt : cash;
+  const cpp = netSavings > 0 && pts > 0 ? (netSavings / pts) * 100 : null;
+  const hasTaxes = taxAmt > 0;
 
   type Rating = 'excellent' | 'good' | 'poor';
   let rating: Rating | null = null;
@@ -86,7 +92,7 @@ export default function RedemptionEvaluator({ onBack, initialProgramId }: Props)
       <div className="bg-slate-800 rounded-2xl p-6 text-white mb-4">
         <h2 className="text-lg font-semibold">Redemption Evaluator</h2>
         <p className="text-slate-400 text-sm mt-1">
-          Is your redemption worth it? Enter the cash price and points required to see your CPP rating.
+          Compare using points vs paying cash — taxes included.
         </p>
       </div>
 
@@ -143,10 +149,11 @@ export default function RedemptionEvaluator({ onBack, initialProgramId }: Props)
           )}
         </div>
 
+        {/* Cash price + points */}
         <div className="grid grid-cols-2 gap-3">
           <div>
             <label className="text-xs font-medium text-gray-600 uppercase tracking-wide">
-              {tab === 'airline' ? 'Cash Price of Flight (CAD)' : 'Cash Price of Stay (CAD)'}
+              {tab === 'airline' ? 'Full Cash Price (CAD)' : 'Full Cash Price (CAD)'}
             </label>
             <div className="relative mt-1.5">
               <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-sm">$</span>
@@ -174,6 +181,29 @@ export default function RedemptionEvaluator({ onBack, initialProgramId }: Props)
           </div>
         </div>
 
+        {/* Taxes field */}
+        <div>
+          <label className="text-xs font-medium text-gray-600 uppercase tracking-wide">
+            Taxes &amp; Fees Out of Pocket (CAD)
+            <span className="ml-1 font-normal text-gray-400 normal-case">(optional)</span>
+          </label>
+          <div className="relative mt-1.5">
+            <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-sm">$</span>
+            <input
+              type="number"
+              min="0"
+              step="0.01"
+              placeholder="e.g. 120.00"
+              value={taxes}
+              onChange={e => setTaxes(e.target.value)}
+              className="w-full border border-gray-300 rounded-lg pl-7 pr-3 py-2.5 text-sm font-mono"
+            />
+          </div>
+          <p className="text-xs text-gray-400 mt-1">
+            Carrier-imposed fees, airport taxes, surcharges you must pay even when redeeming points.
+          </p>
+        </div>
+
         {selected && (
           <div className="flex items-center gap-4 text-xs text-gray-500 pt-1 border-t border-gray-100">
             <span>Benchmark: <strong className="text-gray-700">{selected.defaultCpp}¢/pt</strong></span>
@@ -184,7 +214,56 @@ export default function RedemptionEvaluator({ onBack, initialProgramId }: Props)
         )}
       </div>
 
-      {/* Result */}
+      {/* Cash vs Points comparison */}
+      {cash > 0 && pts > 0 && (
+        <div className="mt-4 bg-white border border-gray-200 rounded-xl overflow-hidden">
+          <div className="px-4 py-3 bg-gray-50 border-b border-gray-200">
+            <p className="text-xs font-semibold text-gray-500 uppercase tracking-wide">Cash vs Points Comparison</p>
+          </div>
+          <div className="divide-y divide-gray-100">
+            {/* Option A: Pay cash */}
+            <div className="flex items-center justify-between px-4 py-3">
+              <div>
+                <p className="text-sm font-semibold text-gray-800">Option A — Pay cash</p>
+                <p className="text-xs text-gray-500 mt-0.5">No points used, full price</p>
+              </div>
+              <p className="font-mono font-bold text-lg text-gray-900">${cash.toFixed(2)}</p>
+            </div>
+            {/* Option B: Use points */}
+            <div className="flex items-center justify-between px-4 py-3">
+              <div>
+                <p className="text-sm font-semibold text-gray-800">Option B — Use points</p>
+                <p className="text-xs text-gray-500 mt-0.5">
+                  {pts.toLocaleString()} pts
+                  {hasTaxes ? ` + $${taxAmt.toFixed(2)} taxes/fees` : ' (no taxes entered)'}
+                </p>
+              </div>
+              <div className="text-right">
+                <p className="font-mono font-bold text-lg text-gray-900">
+                  {hasTaxes ? `$${taxAmt.toFixed(2)}` : '$0'}
+                </p>
+                <p className="text-xs text-gray-400">out of pocket</p>
+              </div>
+            </div>
+            {/* Net savings */}
+            <div className={`flex items-center justify-between px-4 py-3 ${netSavings > 0 ? 'bg-emerald-50' : 'bg-red-50'}`}>
+              <div>
+                <p className="text-sm font-semibold text-gray-800">You save by using points</p>
+                <p className="text-xs text-gray-500 mt-0.5">
+                  {hasTaxes
+                    ? `$${cash.toFixed(2)} − $${taxAmt.toFixed(2)} taxes`
+                    : `Full cash price avoided`}
+                </p>
+              </div>
+              <p className={`font-mono font-bold text-lg ${netSavings > 0 ? 'text-emerald-700' : 'text-red-700'}`}>
+                ${netSavings.toFixed(2)}
+              </p>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* CPP Result */}
       {cpp !== null && selected && rating && (
         <div className={`mt-4 border rounded-xl p-5 ${ratingBg}`}>
           <div className="flex items-center justify-between">
@@ -192,6 +271,9 @@ export default function RedemptionEvaluator({ onBack, initialProgramId }: Props)
               <p className={`text-2xl font-bold font-mono ${ratingColor}`}>
                 {cpp.toFixed(2)}¢<span className="text-base font-normal"> per point</span>
               </p>
+              {hasTaxes && (
+                <p className="text-xs text-gray-500 mt-0.5">effective CPP after taxes</p>
+              )}
               <p className={`text-lg font-bold mt-0.5 ${ratingColor}`}>{ratingLabel}</p>
             </div>
             <div className="text-right">
@@ -237,7 +319,7 @@ export default function RedemptionEvaluator({ onBack, initialProgramId }: Props)
           </div>
         </div>
         <p className="text-xs text-gray-400 mt-3 pt-3 border-t border-gray-100">
-          Benchmarks sourced from Prince of Travel, RewardExpert & points community data (2024–25).
+          CPP is calculated on net savings (cash price minus taxes). Benchmarks from Prince of Travel, RewardExpert & points community data (2024–25).
         </p>
       </div>
     </div>
