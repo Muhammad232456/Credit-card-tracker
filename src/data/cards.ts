@@ -2429,6 +2429,7 @@ export const CARD_APPLY_URLS: Record<string, string> = {
   "bmo-ascend-world-elite":   "https://www.bmo.com/en-ca/main/personal/credit-cards/bmo-ascend-world-elite-mastercard/",
   "bmo-cashback-world-elite": "https://www.bmo.com/en-ca/main/personal/credit-cards/bmo-cashback-world-elite-mastercard/",
   "bmo-viporter":             "https://www.bmo.com/en-ca/main/personal/credit-cards/bmo-viporter-world-elite-mastercard/",
+  "bmo-air-miles-mastercard": "https://www.bmo.com/en-ca/main/personal/credit-cards/bmo-air-miles-mastercard/",
   "bmo-air-miles-world-elite":"https://www.bmo.com/en-ca/main/personal/credit-cards/bmo-air-miles-world-elite-mastercard/",
   // NATIONAL BANK
   "nbc-world-elite":     "https://www.nbc.ca/personal/credit-cards/world-elite-mastercard.html",

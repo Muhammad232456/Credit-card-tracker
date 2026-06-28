@@ -41,6 +41,7 @@ interface Recommendation {
   incremental: number;
   netValue: number;
   topCat: string;
+  topCatRate: string;
   applyUrl: string | undefined;
 }
 
@@ -141,15 +142,20 @@ export default function SpendOptimizer({ data, update, onNavigate }: Props) {
     .map(t => {
       let incremental = 0;
       let topCat = '';
+      let topCatRate = '';
       let topCatGain = 0;
 
       for (const cat of SPEND_CATS) {
         const monthly = spend[cat.id as keyof MonthlySpendProfile];
         if (!monthly) continue;
-        const { cpd } = bestRateForCat(t.earningRates!, cat.keywords, POINTS_PROGRAMS);
+        const { rate, cpd } = bestRateForCat(t.earningRates!, cat.keywords, POINTS_PROGRAMS);
         const gain = Math.max(0, cpd - currentBestCpd[cat.id]) * monthly * 12;
         incremental += gain;
-        if (gain > topCatGain) { topCatGain = gain; topCat = cat.label; }
+        if (gain > topCatGain) {
+          topCatGain = gain;
+          topCat = cat.label;
+          topCatRate = rate ? formatRate(rate, cpd) : '';
+        }
       }
 
       return {
@@ -161,6 +167,7 @@ export default function SpendOptimizer({ data, update, onNavigate }: Props) {
         incremental,
         netValue: incremental - t.annualFee,
         topCat,
+        topCatRate,
         applyUrl: getApplyUrl(t.id),
       };
     })
@@ -358,21 +365,22 @@ export default function SpendOptimizer({ data, update, onNavigate }: Props) {
                           <span className="text-sm font-semibold text-gray-900 truncate">{rec.name}</span>
                         </div>
 
-                        {/* Fee + top category */}
-                        <div className="flex items-center gap-3 mt-1.5 flex-wrap">
-                          <span className="text-xs text-gray-500">
-                            {rec.annualFee === 0
-                              ? 'No annual fee'
-                              : rec.firstYearFree
-                              ? `$${rec.annualFee}/yr · 1st year free`
-                              : `$${rec.annualFee}/yr`}
-                          </span>
-                          {rec.topCat && (
-                            <span className="text-xs text-blue-600">
-                              Best for: <span className="font-medium">{rec.topCat}</span>
-                            </span>
-                          )}
-                        </div>
+                        {/* Fee */}
+                        <p className="text-xs text-gray-500 mt-1">
+                          {rec.annualFee === 0
+                            ? 'No annual fee'
+                            : rec.firstYearFree
+                            ? `$${rec.annualFee}/yr · 1st year free`
+                            : `$${rec.annualFee}/yr`}
+                        </p>
+                        {/* Why this card */}
+                        {rec.topCat && (
+                          <p className="text-xs text-blue-700 bg-blue-50 rounded-md px-2 py-1 mt-1.5 inline-block">
+                            {rec.topCatRate && <span className="font-semibold">{rec.topCatRate}</span>}
+                            {rec.topCatRate && ' · '}
+                            {rec.topCat}
+                          </p>
+                        )}
                       </div>
 
                       {/* Earn numbers */}
