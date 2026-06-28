@@ -1271,9 +1271,9 @@ export const CARD_TEMPLATES: CardTemplate[] = [
       },
     ],
     earningRates: [
-      { category: "Travel", multiplier: 2, unit: "points", programId: "rbc-avion", note: "Aventura points (≈1¢/pt)" },
-      { category: "Dining, Groceries & Gas", multiplier: 1.5, unit: "points", programId: "rbc-avion" },
-      { category: "Everything Else", multiplier: 1, unit: "points", programId: "rbc-avion" },
+      { category: "Travel", multiplier: 2, unit: "points", programId: "cibc-aventura" },
+      { category: "Dining, Groceries & Gas", multiplier: 1.5, unit: "points", programId: "cibc-aventura" },
+      { category: "Everything Else", multiplier: 1, unit: "points", programId: "cibc-aventura" },
     ],
   },
   {
@@ -1314,9 +1314,9 @@ export const CARD_TEMPLATES: CardTemplate[] = [
       },
     ],
     earningRates: [
-      { category: "Travel", multiplier: 3, unit: "points", programId: "rbc-avion", note: "Aventura points (≈1¢/pt)" },
-      { category: "Dining & Groceries", multiplier: 2, unit: "points", programId: "rbc-avion" },
-      { category: "Everything Else", multiplier: 1, unit: "points", programId: "rbc-avion" },
+      { category: "Travel", multiplier: 3, unit: "points", programId: "cibc-aventura" },
+      { category: "Dining & Groceries", multiplier: 2, unit: "points", programId: "cibc-aventura" },
+      { category: "Everything Else", multiplier: 1, unit: "points", programId: "cibc-aventura" },
     ],
   },
 

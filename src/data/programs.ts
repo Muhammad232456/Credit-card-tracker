@@ -102,6 +102,8 @@ export const POINTS_PROGRAMS: PointsProgram[] = [
     note: "4 airline partners (Elite tier only)",
     sweetSpots: "Transfer at 1:1 to British Airways Avios or Cathay Asia Miles for best value. Overlaps with Amex MR on these two — save your MR for exclusive partners like Aeroplan." },
 
+  { id: "cibc-aventura",     name: "CIBC Aventura Rewards",            type: "bank",                               defaultCpp: 1.0,                    isTransferable: false, note: "Redeem via CIBC Rewards Centre for travel (1¢/pt)" },
+
   // ── BANK ──────────────────────────────────────────────────────────────────
   { id: "scene-plus",         name: "Scene+",                           type: "bank",                               defaultCpp: 1.0,                    isTransferable: false, note: "Redeem via Scene+ Travel (Expedia)" },
   { id: "td-rewards",         name: "TD Rewards",                       type: "bank",                               defaultCpp: 0.7,                    isTransferable: false },
