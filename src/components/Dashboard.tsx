@@ -284,6 +284,84 @@ export default function Dashboard({ data, onNavigate, onStartQuiz }: Props) {
         </div>
       )}
 
+      {/* Lounge Access */}
+      {(() => {
+        const loungeEntries = activeCards.flatMap(uc => {
+          const t = getCardById(uc.cardId);
+          if (!t) return [];
+          return t.benefits
+            .filter(b => b.category === 'lounge')
+            .map(b => {
+              const used = uc.benefitUsage[b.id] ?? 0;
+              const total = b.maxUses ?? null;
+              const remaining = total !== null ? Math.max(0, total - used) : null;
+              const isPaid = b.note?.includes('NOT complimentary') || b.note?.includes('cost');
+              return { cardId: uc.cardId, cardName: t.name, b, used, total, remaining, isPaid };
+            });
+        });
+        if (loungeEntries.length === 0) return null;
+
+        // Sort: free visits with remaining > 0 first, then unlimited, then paid, then exhausted
+        loungeEntries.sort((a, b) => {
+          const score = (e: typeof a) =>
+            e.isPaid ? 1 : e.remaining === null ? 2 : e.remaining > 0 ? 3 : 0;
+          return score(b) - score(a);
+        });
+
+        return (
+          <div className="bg-white border border-gray-200 rounded-xl p-4">
+            <h3 className="font-semibold text-gray-800 mb-3 flex items-center gap-2">
+              🛋️ Lounge Access
+              <span className="text-xs font-normal text-gray-500">
+                {loungeEntries.filter(e => !e.isPaid && (e.remaining === null || e.remaining > 0)).length} active
+              </span>
+            </h3>
+            <div className="space-y-2">
+              {loungeEntries.map(({ cardId, cardName, b, used, total, remaining, isPaid }) => {
+                const exhausted = remaining !== null && remaining <= 0;
+                return (
+                  <button
+                    key={b.id}
+                    onClick={() => onNavigate('cards', cardId)}
+                    className={`w-full text-left flex items-start justify-between gap-3 p-3 rounded-lg border transition-colors hover:bg-gray-50 ${
+                      exhausted ? 'border-gray-100 opacity-50' : isPaid ? 'border-amber-100 bg-amber-50/40' : 'border-gray-200'
+                    }`}
+                  >
+                    <div className="flex-1 min-w-0">
+                      <p className="text-sm font-medium text-gray-800 truncate">{b.name}</p>
+                      <p className="text-xs text-gray-500 mt-0.5 truncate">{cardName}</p>
+                      {b.expiryWarning && (
+                        <p className="text-xs text-amber-600 mt-1 leading-snug">{b.expiryWarning}</p>
+                      )}
+                      {isPaid && b.note && (
+                        <p className="text-xs text-amber-700 mt-1">{b.note}</p>
+                      )}
+                      {!isPaid && b.note && !b.expiryWarning && (
+                        <p className="text-xs text-gray-400 mt-0.5">{b.note}</p>
+                      )}
+                    </div>
+                    <div className="shrink-0 text-right">
+                      {isPaid ? (
+                        <span className="text-xs font-medium text-amber-700 bg-amber-100 px-2 py-1 rounded-full">Paid</span>
+                      ) : total === null ? (
+                        <span className="text-xs font-medium text-emerald-700 bg-emerald-50 px-2 py-1 rounded-full">Unlimited</span>
+                      ) : exhausted ? (
+                        <span className="text-xs font-medium text-gray-400 bg-gray-100 px-2 py-1 rounded-full">Used up</span>
+                      ) : (
+                        <div className="text-right">
+                          <p className="text-lg font-bold text-emerald-700 font-mono leading-none">{remaining}</p>
+                          <p className="text-xs text-gray-400 mt-0.5">{used}/{total} used</p>
+                        </div>
+                      )}
+                    </div>
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+        );
+      })()}
+
       {/* Upcoming renewals */}
       {upcomingRenewals.length > 0 && (
         <div className="bg-white border border-gray-200 rounded-xl p-4">
