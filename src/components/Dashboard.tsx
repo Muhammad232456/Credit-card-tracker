@@ -299,7 +299,12 @@ export default function Dashboard({ data, onNavigate, onStartQuiz }: Props) {
               return { cardId: uc.cardId, cardName: t.name, b, used, total, remaining, isPaid };
             });
         });
-        if (loungeEntries.length === 0) return null;
+        if (loungeEntries.length === 0) return (
+          <div className="bg-white border border-gray-200 rounded-xl p-4">
+            <h3 className="font-semibold text-gray-800 mb-2 flex items-center gap-2">🛋️ Lounge Access</h3>
+            <p className="text-sm text-gray-400">None of your current cards include lounge access.</p>
+          </div>
+        );
 
         // Sort: free visits with remaining > 0 first, then unlimited, then paid, then exhausted
         loungeEntries.sort((a, b) => {
