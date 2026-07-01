@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { CARD_TEMPLATES, getApplyUrl } from '../data/cards';
 import { POINTS_PROGRAMS } from '../data/programs';
 import { SPEND_CATS, bestRateForCat, formatRate } from '../utils';
+import { trackApplyClick } from '../analytics';
 
 interface Props {
   onBack: () => void;
@@ -173,6 +174,7 @@ export default function CardComparison({ onBack }: Props) {
                   href={url}
                   target="_blank"
                   rel="noopener noreferrer"
+                  onClick={() => trackApplyClick(t.id, t.name, t.issuer, 'comparison')}
                   className="bg-slate-800 text-white text-xs text-center py-2.5 rounded-xl font-semibold hover:bg-slate-700 transition-colors block"
                 >
                   Apply — {t.issuer} →

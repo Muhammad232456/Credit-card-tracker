@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { CARD_TEMPLATES, getApplyUrl } from '../data/cards';
 import type { UserData } from '../types';
+import { trackApplyClick } from '../analytics';
 
 const FX_RATE = 0.025;
 
@@ -144,6 +145,7 @@ export default function FxCalculator({ data }: Props) {
                             href={getApplyUrl(t.id)}
                             target="_blank"
                             rel="noopener noreferrer"
+                            onClick={() => trackApplyClick(t.id, t.name, t.issuer, 'fx_calculator')}
                             className="text-xs bg-slate-800 text-white px-3 py-1.5 rounded-lg font-medium hover:bg-slate-700 transition-colors"
                           >
                             Apply →

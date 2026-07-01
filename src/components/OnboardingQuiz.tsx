@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { getApplyUrl } from '../data/cards';
+import { trackApplyClick } from '../analytics';
 
 type Goal = 'cashback' | 'travel' | 'both';
 type SpendRange = 'low' | 'medium' | 'high';
@@ -86,6 +87,7 @@ export default function OnboardingQuiz({ onComplete, onSkip }: Props) {
                     href={getApplyUrl(rec.id)}
                     target="_blank"
                     rel="noopener noreferrer"
+                    onClick={() => trackApplyClick(rec.id, rec.name, rec.issuer, 'quiz')}
                     className="shrink-0 bg-slate-800 text-white text-xs px-3 py-2 rounded-lg font-medium hover:bg-slate-700 transition-colors"
                   >
                     Apply →

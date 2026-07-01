@@ -5,6 +5,7 @@ import type { UserData, MonthlySpendProfile } from '../types';
 import { SPEND_CATS, bestRateForCat, formatRate } from '../utils';
 import FxCalculator from './FxCalculator';
 import GlossaryTerm from './GlossaryTerm';
+import { trackApplyClick } from '../analytics';
 
 interface Props {
   data: UserData;
@@ -406,6 +407,7 @@ export default function SpendOptimizer({ data, update, onNavigate }: Props) {
                           href={rec.applyUrl}
                           target="_blank"
                           rel="noopener noreferrer"
+                          onClick={() => trackApplyClick(rec.cardId, rec.name, rec.issuer, 'optimizer')}
                           className="inline-flex items-center gap-1.5 bg-slate-800 hover:bg-slate-700 text-white text-xs font-semibold px-4 py-2 rounded-lg transition-colors"
                         >
                           Apply Now →

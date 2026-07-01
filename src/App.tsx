@@ -9,6 +9,8 @@ import SpendOptimizer from './components/SpendOptimizer';
 import RedemptionEvaluator from './components/RedemptionEvaluator';
 import OnboardingQuiz from './components/OnboardingQuiz';
 import CardComparison from './components/CardComparison';
+import { Analytics } from '@vercel/analytics/react';
+import { trackTabView, trackEvent } from './analytics';
 
 type Tab = 'dashboard' | 'cards' | 'points' | 'optimize' | 'redeem' | 'transfers' | 'settings' | 'compare';
 
@@ -29,6 +31,7 @@ export default function App() {
 
   function navigate(tab: string) {
     setActiveTab(tab as Tab);
+    trackTabView(tab);
   }
 
   function viewTransfers(programId: string) {
@@ -45,6 +48,7 @@ export default function App() {
 
   function completeOnboarding(goal: 'cashback' | 'travel' | 'both') {
     update(prev => ({ ...prev, settings: { ...prev.settings, onboardingComplete: true, goal } }));
+    trackEvent('quiz_complete', { goal });
     setShowQuiz(false);
   }
 
@@ -59,7 +63,7 @@ export default function App() {
           {TABS.filter(t => t.id !== 'settings').map(tab => (
             <button
               key={tab.id}
-              onClick={() => setActiveTab(tab.id)}
+              onClick={() => { setActiveTab(tab.id); trackTabView(tab.id); }}
               className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-colors ${
                 activeTab === tab.id
                   ? 'bg-white text-slate-900'
@@ -133,11 +137,13 @@ export default function App() {
         )}
       </main>
 
+      <Analytics />
+
       <nav className="sm:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 flex z-10">
         {TABS.filter(t => t.id !== 'settings').map(tab => (
           <button
             key={tab.id}
-            onClick={() => setActiveTab(tab.id)}
+            onClick={() => { setActiveTab(tab.id); trackTabView(tab.id); }}
             className={`flex-1 py-3 flex flex-col items-center gap-0.5 text-xs font-medium transition-colors ${
               activeTab === tab.id ? 'text-slate-900' : 'text-gray-400'
             }`}
