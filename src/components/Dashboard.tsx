@@ -3,6 +3,7 @@ import { POINTS_PROGRAMS } from '../data/programs';
 import type { UserData, MonthlySpendProfile } from '../types';
 import { effectiveBenefitValue, nextCalendarReset, nextCardmemberReset, SPEND_CATS, bestRateForCat } from '../utils';
 import GlossaryTerm from './GlossaryTerm';
+import FeedbackWidget from './FeedbackWidget';
 
 interface Props {
   data: UserData;
@@ -468,6 +469,8 @@ export default function Dashboard({ data, onNavigate, onStartQuiz }: Props) {
           })}
         </div>
       )}
+
+      <FeedbackWidget />
     </div>
   );
 }
