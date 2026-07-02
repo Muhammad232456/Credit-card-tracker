@@ -128,9 +128,12 @@ export default function CardDetail({
 
   return (
     <div className="space-y-0">
-      <button onClick={onBack} className="text-sm text-gray-500 hover:text-gray-700 mb-4 flex items-center gap-1">
-        ← Back to cards
-      </button>
+      <div className="flex items-center justify-between mb-4">
+        <button onClick={onBack} className="text-sm text-gray-500 hover:text-gray-700 flex items-center gap-1">
+          ← Back to cards
+        </button>
+        <span className="text-xs text-gray-400">Changes save automatically</span>
+      </div>
 
       {/* Card header */}
       <div className={`${headerBg} rounded-2xl p-6 text-white ${!isActive ? 'opacity-60' : ''}`}>
