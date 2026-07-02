@@ -63,6 +63,7 @@ export default function CardList({ data, update, onCompare }: Props) {
   const [addingCard, setAddingCard] = useState(false);
   const [selectedCardId, setSelectedCardId] = useState<string | null>(null);
   const [showInactive, setShowInactive] = useState(false);
+  const [toast, setToast] = useState<string | null>(null);
 
   function addCard(cardId: string) {
     update(prev => ({
@@ -71,6 +72,9 @@ export default function CardList({ data, update, onCompare }: Props) {
     }));
     setAddingCard(false);
     setSelectedCardId(cardId);
+    const name = getCardById(cardId)?.name ?? 'Card';
+    setToast(`${name} added ✓`);
+    setTimeout(() => setToast(null), 3000);
   }
 
   function removeCard(cardId: string) {
@@ -242,7 +246,12 @@ export default function CardList({ data, update, onCompare }: Props) {
   }
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-4 relative">
+      {toast && (
+        <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 bg-emerald-700 text-white text-sm font-medium px-5 py-3 rounded-full shadow-lg pointer-events-none">
+          {toast}
+        </div>
+      )}
       {/* Active cards */}
       <div className="space-y-3">
         {activeCards.map(c => renderCardRow(c, false))}

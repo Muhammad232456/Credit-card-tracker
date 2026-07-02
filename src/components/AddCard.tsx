@@ -43,6 +43,7 @@ const ISSUER_COLORS: Record<string, string> = {
 export default function AddCard({ existingCardIds, onAdd, onCancel }: Props) {
   const [selectedIssuer, setSelectedIssuer] = useState<Issuer | null>(null);
   const [search, setSearch] = useState('');
+  const [pendingId, setPendingId] = useState<string | null>(null);
 
   const available = CARD_TEMPLATES.filter(c => !existingCardIds.includes(c.id));
 
@@ -106,8 +107,12 @@ export default function AddCard({ existingCardIds, onAdd, onCancel }: Props) {
           {filtered.map(card => (
             <button
               key={card.id}
-              onClick={() => onAdd(card.id)}
-              className="w-full text-left bg-white border border-gray-200 rounded-xl p-4 hover:border-blue-400 hover:bg-blue-50 transition-all"
+              onClick={() => setPendingId(card.id === pendingId ? null : card.id)}
+              className={`w-full text-left border rounded-xl p-4 transition-all ${
+                card.id === pendingId
+                  ? 'border-blue-500 bg-blue-50 ring-2 ring-blue-200'
+                  : 'bg-white border-gray-200 hover:border-blue-400 hover:bg-blue-50'
+              }`}
             >
               <div className="flex items-start justify-between gap-4">
                 <div>
@@ -143,6 +148,23 @@ export default function AddCard({ existingCardIds, onAdd, onCancel }: Props) {
           ))}
         </div>
       )}
+
+      {pendingId && (() => {
+        const card = CARD_TEMPLATES.find(c => c.id === pendingId)!;
+        return (
+          <div className="sticky bottom-0 bg-white border-t border-gray-200 rounded-b-xl px-4 py-3 flex items-center justify-between gap-3 shadow-lg">
+            <p className="text-sm text-gray-700 truncate">
+              <span className="font-semibold">{card.name}</span>
+            </p>
+            <button
+              onClick={() => onAdd(pendingId)}
+              className="shrink-0 bg-blue-600 text-white px-5 py-2 rounded-lg text-sm font-semibold hover:bg-blue-700 transition-colors"
+            >
+              Add Card
+            </button>
+          </div>
+        );
+      })()}
     </div>
   );
 }
