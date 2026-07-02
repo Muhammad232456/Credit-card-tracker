@@ -463,7 +463,8 @@ export default function CardDetail({
                     <label className="text-xs text-gray-500">Spent So Far ($)</label>
                     <input
                       type="number"
-                      value={wb.spendSoFar}
+                      value={wb.spendSoFar || ''}
+                      placeholder="e.g. 500"
                       onChange={e => onUpdateCard({ welcomeBonus: { ...wb, spendSoFar: Number(e.target.value) || 0 } })}
                       className="w-full mt-1 border border-gray-300 rounded-lg px-3 py-2 text-sm font-mono"
                     />
