@@ -379,7 +379,7 @@ export default function CardDetail({
               onChange={e => onUpdateCard({ paymentDueDays: e.target.value ? Number(e.target.value) : undefined })}
               className="w-full mt-1 border border-gray-300 rounded-lg px-3 py-2 text-sm"
             />
-            <p className="text-xs text-gray-400 mt-1">How many days after your statement closes until payment is due. Usually 21–25 days. Found on your statement or card agreement.</p>
+            <p className="text-xs text-gray-400 mt-1">How many days after your statement closes until payment is due. Usually 21–25 days. Found on your statement or card agreement. If you have autopay enabled, this is when money is deducted from your bank account.</p>
           </div>
         </div>
         {userCard.statementDay && userCard.paymentDueDays && (
