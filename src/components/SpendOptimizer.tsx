@@ -433,6 +433,10 @@ export default function SpendOptimizer({ data, update, onNavigate }: Props) {
 
       <FxCalculator data={data} />
 
+      <div className="bg-amber-50 border border-amber-200 rounded-xl p-3 text-xs text-amber-800 space-y-1">
+        <p className="font-semibold">⚠ Estimates may not reflect real-world earning</p>
+        <p>Spend categories assume your card is accepted at every merchant. In practice, some stores restrict card networks — for example, Costco only accepts Mastercard, and some merchants don't accept Amex. Your actual earn may be lower if part of your spend is at merchants that don't accept your card.</p>
+      </div>
       <p className="text-xs text-gray-400 text-center pb-2">
         Points values use default <GlossaryTerm term="CPP">CPP</GlossaryTerm> benchmarks. Set your personal CPP in the Points tab to personalize results.
       </p>
