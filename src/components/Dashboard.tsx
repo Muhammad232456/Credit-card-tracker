@@ -272,7 +272,7 @@ export default function Dashboard({ data, onNavigate, onStartQuiz }: Props) {
                     <div className={`h-2 rounded-full transition-all ${pct >= 100 ? 'bg-emerald-500' : 'bg-blue-500'}`} style={{ width: `${pct}%` }} />
                   </div>
                   <div className="flex items-center justify-between text-xs text-gray-500">
-                    <span className="text-blue-600 font-medium">{spendTier.label}</span>
+                    <span className="text-blue-600 font-medium">{spendTier.label.replace(/\b(\d{4,})\b/g, n => Number(n).toLocaleString())}</span>
                     <span className={deadlineDays !== null && deadlineDays < 30 ? 'text-red-600 font-medium' : ''}>
                       {pct < 100 && `$${remaining.toLocaleString()} to go`}
                       {deadlineDays !== null && ` · ${deadlineDays}d left`}
