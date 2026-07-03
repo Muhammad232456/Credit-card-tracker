@@ -55,10 +55,13 @@ export default function App() {
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col">
       <header className="bg-slate-900 text-white px-4 py-3 flex items-center justify-between sticky top-0 z-10">
-        <div className="flex items-center gap-2">
+        <button
+          onClick={() => navigate('dashboard')}
+          className="flex items-center gap-2 hover:opacity-80 transition-opacity"
+        >
           <span className="text-xl">🍁</span>
           <span className="font-semibold text-sm hidden sm:block">CA Card Tracker</span>
-        </div>
+        </button>
         <nav className="flex gap-1">
           {TABS.filter(t => t.id !== 'settings').map(tab => (
             <button
@@ -128,7 +131,6 @@ export default function App() {
         {activeTab === 'settings' && (
           <Settings
             data={data}
-            update={update}
             exportData={exportData}
             importData={importData}
             resetYear={resetYear}

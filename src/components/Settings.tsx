@@ -3,14 +3,13 @@ import type { UserData } from '../types';
 
 interface Props {
   data: UserData;
-  update: (updater: (prev: UserData) => UserData) => void;
   exportData: () => void;
   importData: (json: string) => void;
   resetYear: () => void;
   clearAll: () => void;
 }
 
-export default function Settings({ data, update, exportData, importData, resetYear, clearAll }: Props) {
+export default function Settings({ data, exportData, importData, resetYear, clearAll }: Props) {
   const fileRef = useRef<HTMLInputElement>(null);
   const [confirmClear, setConfirmClear] = useState(false);
   const [confirmReset, setConfirmReset] = useState(false);
@@ -38,40 +37,6 @@ export default function Settings({ data, update, exportData, importData, resetYe
         <p className="text-slate-400 text-sm mt-1">
           Your data is stored locally in this browser. Export to back it up or share across devices.
         </p>
-      </div>
-
-      {/* Preferences */}
-      <div className="bg-white border border-gray-200 rounded-xl divide-y divide-gray-100">
-        <div className="p-4">
-          <h3 className="font-semibold text-gray-800 mb-1">Preferences</h3>
-          <p className="text-xs text-gray-500 mb-3">
-            Used to calculate FX savings benefit value on cards with no-foreign-transaction-fee.
-          </p>
-          <label className="text-sm font-medium text-gray-700 block mb-1">
-            Annual Foreign Currency Spend (CAD)
-          </label>
-          <div className="relative max-w-xs">
-            <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-sm">$</span>
-            <input
-              type="number"
-              min="0"
-              placeholder="e.g. 5000"
-              value={data.settings.annualFxSpend ?? ''}
-              onChange={e => update(prev => ({
-                ...prev,
-                settings: { ...prev.settings, annualFxSpend: e.target.value ? Number(e.target.value) : undefined },
-              }))}
-              className="w-full border border-gray-300 rounded-lg pl-7 pr-3 py-2 text-sm font-mono"
-            />
-          </div>
-          {data.settings.annualFxSpend ? (
-            <p className="text-xs text-emerald-600 mt-2">
-              ≈ ${(data.settings.annualFxSpend * 0.025).toFixed(0)}/yr saved by no-FX-fee cards
-            </p>
-          ) : (
-            <p className="text-xs text-gray-400 mt-2">FX savings will show as $0 until set.</p>
-          )}
-        </div>
       </div>
 
       <div className="bg-white border border-gray-200 rounded-xl divide-y divide-gray-100">
