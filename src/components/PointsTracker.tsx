@@ -152,10 +152,14 @@ export default function PointsTracker({ data, update, onViewTransfers, onEvaluat
                   ) : (
                     <button
                       onClick={() => setEditingId(program.id)}
-                      className="font-mono text-xl font-bold text-gray-900 hover:text-blue-600 transition-colors text-right"
+                      className={`text-right transition-colors ${
+                        (bal?.balance ?? 0) === 0
+                          ? 'text-xs text-blue-500 hover:text-blue-700 border border-dashed border-blue-300 rounded-lg px-2 py-1'
+                          : 'font-mono text-xl font-bold text-gray-900 hover:text-blue-600'
+                      }`}
                       title="Click to edit"
                     >
-                      {(bal?.balance ?? 0).toLocaleString('en-CA')}
+                      {(bal?.balance ?? 0) === 0 ? '+ Enter points' : (bal!.balance).toLocaleString('en-CA')}
                     </button>
                   )}
                   <p className="font-mono text-sm text-emerald-600 font-semibold">
