@@ -283,13 +283,52 @@ export default function CardDetail({
         </div>
 
         {renewal && renewalDays !== null && (
-          <p className={`text-xs font-medium px-3 py-1.5 rounded-lg inline-block ${
-            renewalDays < 30 ? 'bg-red-50 text-red-700' : renewalDays < 60 ? 'bg-amber-50 text-amber-700' : 'bg-green-50 text-green-700'
-          }`}>
-            {renewalDays > 0
-              ? `Renews in ${renewalDays} days (${renewal})`
-              : `Renewal was ${Math.abs(renewalDays)} days ago`}
-          </p>
+          <div className="flex flex-wrap items-center gap-2">
+            <p className={`text-xs font-medium px-3 py-1.5 rounded-lg inline-block ${
+              renewalDays < 30 ? 'bg-red-50 text-red-700' : renewalDays < 60 ? 'bg-amber-50 text-amber-700' : 'bg-green-50 text-green-700'
+            }`}>
+              {renewalDays > 0
+                ? `Renews in ${renewalDays} days (${renewal})`
+                : `Renewal was ${Math.abs(renewalDays)} days ago`}
+            </p>
+            {renewalDays > 0 && (() => {
+              const title = encodeURIComponent(`${template.name} — Annual Fee Renewal`);
+              const details = encodeURIComponent(`Review whether to keep or cancel your ${template.name} (annual fee: $${template.annualFee}).`);
+              const date = renewal.replace(/-/g, '');
+              const gcalUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${title}&dates=${date}/${date}&details=${details}`;
+              const icsContent = [
+                'BEGIN:VCALENDAR',
+                'VERSION:2.0',
+                'BEGIN:VEVENT',
+                `DTSTART;VALUE=DATE:${date}`,
+                `DTEND;VALUE=DATE:${date}`,
+                `SUMMARY:${template.name} — Annual Fee Renewal`,
+                `DESCRIPTION:Review whether to keep or cancel your ${template.name} (annual fee: $${template.annualFee}).`,
+                'END:VEVENT',
+                'END:VCALENDAR',
+              ].join('\r\n');
+              const icsUrl = `data:text/calendar;charset=utf-8,${encodeURIComponent(icsContent)}`;
+              return (
+                <>
+                  <a
+                    href={gcalUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-xs px-2.5 py-1.5 rounded-lg border border-gray-300 text-gray-600 hover:border-gray-400 hover:text-gray-800 transition-colors"
+                  >
+                    📅 Google Calendar
+                  </a>
+                  <a
+                    href={icsUrl}
+                    download={`${template.name}-renewal.ics`}
+                    className="text-xs px-2.5 py-1.5 rounded-lg border border-gray-300 text-gray-600 hover:border-gray-400 hover:text-gray-800 transition-colors"
+                  >
+                    📅 Apple / Outlook
+                  </a>
+                </>
+              );
+            })()}
+          </div>
         )}
 
         <div className="grid grid-cols-2 gap-3">
