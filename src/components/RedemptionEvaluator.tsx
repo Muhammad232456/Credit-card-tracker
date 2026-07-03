@@ -71,9 +71,9 @@ export default function RedemptionEvaluator({ onBack, initialProgramId }: Props)
     : null;
 
   const ratingDescriptions: Record<Rating, string> = {
-    excellent: `Outstanding value — well above the ${selected?.name ?? ''} benchmark. Book it!`,
-    good: `Solid redemption above the benchmark. Worth using your points.`,
-    poor: `Low value — at or below benchmark. Consider paying cash and saving your points for a better redemption.`,
+    excellent: `🚀 Use your points — outstanding value, one of the best uses of these points.`,
+    good: `✓ Use your points — solid value above benchmark.`,
+    poor: `💡 Pay cash instead — save your points for a better redemption.`,
   };
 
   function switchTab(t: 'airline' | 'hotel') {
@@ -245,20 +245,22 @@ export default function RedemptionEvaluator({ onBack, initialProgramId }: Props)
                 <p className="text-xs text-gray-400">out of pocket</p>
               </div>
             </div>
-            {/* Net savings */}
-            <div className={`flex items-center justify-between px-4 py-3 ${netSavings > 0 ? 'bg-emerald-50' : 'bg-red-50'}`}>
-              <div>
-                <p className="text-sm font-semibold text-gray-800">You save by using points</p>
-                <p className="text-xs text-gray-500 mt-0.5">
-                  {hasTaxes
-                    ? `$${cash.toFixed(2)} − $${taxAmt.toFixed(2)} taxes`
-                    : `Full cash price avoided`}
+            {/* Benchmark verdict */}
+            {cashVsBenchmark !== null && (
+              <div className={`flex items-center justify-between px-4 py-3 ${cashVsBenchmark >= 0 ? 'bg-emerald-50' : 'bg-red-50'}`}>
+                <div>
+                  <p className="text-sm font-semibold text-gray-800">
+                    {cashVsBenchmark >= 0 ? 'Extra value vs. best redemption' : 'Value lost vs. best redemption'}
+                  </p>
+                  <p className="text-xs text-gray-500 mt-0.5">
+                    {pts.toLocaleString()} pts at {selected?.defaultCpp}¢ benchmark = ${((pts * (selected?.defaultCpp ?? 0)) / 100).toFixed(0)}
+                  </p>
+                </div>
+                <p className={`font-mono font-bold text-lg ${cashVsBenchmark >= 0 ? 'text-emerald-700' : 'text-red-700'}`}>
+                  {cashVsBenchmark >= 0 ? '+' : ''}${cashVsBenchmark.toFixed(0)}
                 </p>
               </div>
-              <p className={`font-mono font-bold text-lg ${netSavings > 0 ? 'text-emerald-700' : 'text-red-700'}`}>
-                ${netSavings.toFixed(2)}
-              </p>
-            </div>
+            )}
           </div>
         </div>
       )}
@@ -266,29 +268,18 @@ export default function RedemptionEvaluator({ onBack, initialProgramId }: Props)
       {/* CPP Result */}
       {cpp !== null && selected && rating && (
         <div className={`mt-4 border rounded-xl p-5 ${ratingBg}`}>
-          <div className="flex items-center justify-between">
-            <div>
-              <p className={`text-2xl font-bold font-mono ${ratingColor}`}>
-                {cpp.toFixed(2)}¢<span className="text-base font-normal"> per point</span>
-              </p>
-              {hasTaxes && (
-                <p className="text-xs text-gray-500 mt-0.5">effective CPP after taxes</p>
-              )}
-              <p className={`text-lg font-bold mt-0.5 ${ratingColor}`}>{ratingLabel}</p>
-            </div>
-            <div className="text-right">
-              <p className="text-xs text-gray-500">vs. {selected.defaultCpp}¢ benchmark</p>
-              {cashVsBenchmark !== null && (
-                <p className={`font-mono font-bold text-base mt-0.5 ${cashVsBenchmark >= 0 ? 'text-emerald-700' : 'text-red-700'}`}>
-                  {cashVsBenchmark >= 0 ? '+' : ''}${cashVsBenchmark.toFixed(0)} CAD
-                </p>
-              )}
-              <p className="text-xs text-gray-400 mt-0.5">vs. redeeming at benchmark</p>
-            </div>
-          </div>
-          <p className="text-sm text-gray-600 mt-3 pt-3 border-t border-black/5">
+          <p className={`text-base font-bold mb-3 ${ratingColor}`}>
             {ratingDescriptions[rating]}
           </p>
+          <div className="flex items-center gap-4 pt-3 border-t border-black/5">
+            <p className={`text-2xl font-bold font-mono ${ratingColor}`}>
+              {cpp.toFixed(2)}¢<span className="text-base font-normal"> per point</span>
+            </p>
+            <p className={`text-lg font-bold ${ratingColor}`}>{ratingLabel}</p>
+          </div>
+          {hasTaxes && (
+            <p className="text-xs text-gray-500 mt-1">effective CPP after taxes</p>
+          )}
         </div>
       )}
 
