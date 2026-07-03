@@ -471,7 +471,7 @@ export default function CardDetail({
                       </button>
                       <div className="flex-1 min-w-0">
                         <p className={`text-sm font-medium ${tier.earned ? 'text-emerald-700' : 'text-gray-800'}`}>
-                          {tier.label}
+                          {tier.label.replace(/\b(\d{4,})\b/g, n => Number(n).toLocaleString())}
                         </p>
                         <p className="text-xs text-gray-500 capitalize mt-0.5">{tier.type === 'approval' ? 'On approval' : tier.type === 'spend' ? `Spend $${spendTarget.toLocaleString()}` : 'Anniversary bonus'}</p>
                         {isSpend && !tier.earned && spendTarget > 0 && (
@@ -480,8 +480,8 @@ export default function CardDetail({
                               <div className={`h-2 rounded-full transition-all ${pct >= 100 ? 'bg-emerald-500' : 'bg-blue-500'}`} style={{ width: `${pct}%` }} />
                             </div>
                             <div className="flex justify-between text-xs text-gray-500">
-                              <span>${wb.spendSoFar.toLocaleString()} spent</span>
-                              <span className="font-medium">${remaining.toLocaleString()} to go</span>
+                              <span>${Number(wb.spendSoFar).toLocaleString()} spent</span>
+                              <span className="font-medium">${remaining.toLocaleString()} to go{deadlineDays !== null ? ` · ${deadlineDays}d left` : ''}</span>
                             </div>
                           </div>
                         )}
