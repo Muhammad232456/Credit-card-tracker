@@ -682,8 +682,6 @@ export default function CardDetail({
           const earnedValue = benefit.frequency === 'annual'
             ? (used > 0 ? effectiveVal : 0)
             : used * effectiveVal;
-          const isAutoFx = benefit.category === 'fx-savings' && benefit.value === 0 && !!settings.annualFxSpend;
-
           return (
             <div key={benefit.id} className="bg-white border border-gray-200 rounded-xl p-4">
               <div className="flex items-start gap-3">
@@ -693,9 +691,6 @@ export default function CardDetail({
                     <div>
                       <p className="font-medium text-gray-900 text-sm">{benefit.name}</p>
                       {benefit.note && <p className="text-xs text-gray-500 mt-0.5">{benefit.note}</p>}
-                      {isAutoFx && (
-                        <p className="text-xs text-blue-500 mt-0.5">Auto-calculated from ${settings.annualFxSpend!.toLocaleString()} annual FX spend</p>
-                      )}
                       {benefit.condition && <p className="text-xs text-amber-600 mt-0.5">⚠ {benefit.condition}</p>}
                       {benefit.expiryWarning && <p className="text-xs text-red-600 mt-0.5 font-medium">⚠ {benefit.expiryWarning}</p>}
                     </div>

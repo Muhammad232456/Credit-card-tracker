@@ -66,11 +66,7 @@ export function formatRate(rate: EarningRate, cpd: number): string {
   return `${rate.multiplier}× (≈${cpdStr}¢/$)`;
 }
 
-/** Effective benefit value — auto-calculates FX savings when annualFxSpend is set */
-export function effectiveBenefitValue(benefit: BenefitTemplate, settings: UserSettings): number {
-  if (benefit.category === 'fx-savings' && benefit.value === 0 && settings.annualFxSpend) {
-    return Math.round(settings.annualFxSpend * 0.025);
-  }
+export function effectiveBenefitValue(benefit: BenefitTemplate, _settings: UserSettings): number {
   return benefit.value;
 }
 

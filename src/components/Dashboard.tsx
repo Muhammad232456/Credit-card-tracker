@@ -417,11 +417,6 @@ export default function Dashboard({ data, onNavigate, onStartQuiz }: Props) {
               );
             })}
           </div>
-          {settings.annualFxSpend ? (
-            <p className="text-xs text-blue-600 mt-3 pt-3 border-t border-gray-100">
-              FX savings on ${settings.annualFxSpend.toLocaleString()} annual FX spend
-            </p>
-          ) : null}
         </div>
 
         {/* Points summary */}

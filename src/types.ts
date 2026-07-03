@@ -169,9 +169,7 @@ export interface BonusCache {
 export interface UserSettings {
   displayCurrency: "CAD";
   showValueEstimates: boolean;
-  /** Annual foreign currency spend in CAD — used to calculate FX fee savings */
-  annualFxSpend?: number;
-  /** Monthly spend profile for the spend optimizer */
+/** Monthly spend profile for the spend optimizer */
   monthlySpend?: Partial<MonthlySpendProfile>;
   /** User's primary card goal set during onboarding */
   goal?: 'cashback' | 'travel' | 'both';

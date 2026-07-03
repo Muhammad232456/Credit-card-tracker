@@ -431,7 +431,7 @@ export default function SpendOptimizer({ data, update, onNavigate }: Props) {
         </>
       )}
 
-      <FxCalculator data={data} update={update} />
+      <FxCalculator data={data} />
 
       <p className="text-xs text-gray-400 text-center pb-2">
         Points values use default <GlossaryTerm term="CPP">CPP</GlossaryTerm> benchmarks. Set your personal CPP in the Points tab to personalize results.

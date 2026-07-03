@@ -18,10 +18,9 @@ const CURRENCIES = [
 
 interface Props {
   data: UserData;
-  update: (updater: (prev: UserData) => UserData) => void;
 }
 
-export default function FxCalculator({ data, update }: Props) {
+export default function FxCalculator({ data }: Props) {
   const [open, setOpen] = useState(false);
   const [budgetCAD, setBudgetCAD] = useState('');
   const [currency, setCurrency] = useState('USD');
@@ -160,29 +159,7 @@ export default function FxCalculator({ data, update }: Props) {
                 </div>
               )}
 
-              <div className="border-t border-gray-100 pt-3">
-                <label className="text-xs font-medium text-gray-500">Annual Foreign Spend (CAD) — used to value no-FX cards across the app</label>
-                <div className="relative mt-1.5 max-w-xs">
-                  <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-sm">$</span>
-                  <input
-                    type="number"
-                    min="0"
-                    placeholder="e.g. 5000"
-                    value={data.settings.annualFxSpend ?? ''}
-                    onChange={e => update(prev => ({
-                      ...prev,
-                      settings: { ...prev.settings, annualFxSpend: e.target.value ? Number(e.target.value) : undefined },
-                    }))}
-                    className="w-full border border-gray-300 rounded-lg pl-7 pr-3 py-2 text-sm font-mono focus:outline-none focus:ring-2 focus:ring-slate-400"
-                  />
-                </div>
-                {data.settings.annualFxSpend ? (
-                  <p className="text-xs text-emerald-600 mt-1">≈ ${(data.settings.annualFxSpend * 0.025).toFixed(0)}/yr saved by no-FX-fee cards</p>
-                ) : (
-                  <p className="text-xs text-gray-400 mt-1">FX savings on cards will show as $0 until set.</p>
-                )}
-              </div>
-              <p className="text-xs text-gray-400">
+<p className="text-xs text-gray-400">
                 Based on the standard 2.5% foreign transaction fee charged by most Canadian cards on non-CAD purchases.
               </p>
             </div>
