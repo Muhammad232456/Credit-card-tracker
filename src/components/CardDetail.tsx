@@ -881,7 +881,7 @@ export default function CardDetail({
           </button>
           <p className="text-xs text-gray-400">Verified: {template.lastVerified}</p>
         </div>
-        <p className="text-xs text-gray-400 text-center">Changes save automatically</p>
+        <p className="text-sm text-gray-500 text-center font-medium">✓ Changes save automatically</p>
       </div>
     </div>
   );
