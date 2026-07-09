@@ -9,10 +9,12 @@ import SpendOptimizer from './components/SpendOptimizer';
 import RedemptionEvaluator from './components/RedemptionEvaluator';
 import OnboardingQuiz from './components/OnboardingQuiz';
 import CardComparison from './components/CardComparison';
+import PrivacyPolicy from './components/PrivacyPolicy';
+import AffiliateDisclosure from './components/AffiliateDisclosure';
 import { Analytics } from '@vercel/analytics/react';
 import { trackTabView, trackEvent } from './analytics';
 
-type Tab = 'dashboard' | 'cards' | 'points' | 'optimize' | 'redeem' | 'transfers' | 'settings' | 'compare';
+type Tab = 'dashboard' | 'cards' | 'points' | 'optimize' | 'redeem' | 'transfers' | 'settings' | 'compare' | 'privacy' | 'affiliate';
 
 const TABS: { id: Tab; label: string; icon: string }[] = [
   { id: 'dashboard', label: 'Dashboard', icon: '📊' },
@@ -137,7 +139,20 @@ export default function App() {
             clearAll={clearAll}
           />
         )}
+        {activeTab === 'privacy' && (
+          <PrivacyPolicy onBack={() => navigate('settings')} />
+        )}
+        {activeTab === 'affiliate' && (
+          <AffiliateDisclosure onBack={() => navigate('settings')} />
+        )}
       </main>
+
+      <footer className="hidden sm:block text-center text-xs text-gray-400 py-4 border-t border-gray-100 bg-gray-50">
+        <span>© 2026 CA Card Tracker · </span>
+        <button onClick={() => navigate('privacy')} className="underline hover:text-gray-600">Privacy Policy</button>
+        <span> · </span>
+        <button onClick={() => navigate('affiliate')} className="underline hover:text-gray-600">Affiliate Disclosure</button>
+      </footer>
 
       <Analytics />
 
