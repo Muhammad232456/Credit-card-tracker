@@ -11,6 +11,7 @@ import OnboardingQuiz from './components/OnboardingQuiz';
 import CardComparison from './components/CardComparison';
 import PrivacyPolicy from './components/PrivacyPolicy';
 import AffiliateDisclosure from './components/AffiliateDisclosure';
+import InstallBanner from './components/InstallBanner';
 import { Analytics } from '@vercel/analytics/react';
 import { trackTabView, trackEvent } from './analytics';
 
@@ -154,6 +155,7 @@ export default function App() {
         <button onClick={() => navigate('affiliate')} className="underline hover:text-gray-600">Affiliate Disclosure</button>
       </footer>
 
+      <InstallBanner />
       <Analytics />
 
       <nav className="sm:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 flex z-10">
