@@ -135,7 +135,7 @@ export default function Settings({ data, exportData, importData, resetYear, clea
       </div>
 
       <div className="text-center text-xs text-gray-400 pb-4">
-        Canadian Credit Card Tracker · Data verified June 2026 · Built with Claude Code
+        Canadian Credit Card Tracker · Data verified June 2026
       </div>
     </div>
   );

@@ -63,7 +63,7 @@ export default function AffiliateDisclosure({ onBack }: Props) {
           <h2 className="font-semibold text-gray-900 text-base mb-2">Questions?</h2>
           <p>
             If you have any questions about our affiliate relationships, please reach out via the
-            feedback form in the app (Settings → Send Feedback).
+            feedback button on the Dashboard.
           </p>
         </section>
       </div>
