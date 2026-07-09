@@ -88,11 +88,7 @@ export default function PrivacyPolicy({ onBack }: Props) {
         <section>
           <h2 className="font-semibold text-gray-900 text-base mb-2">Contact</h2>
           <p>
-            If you have any questions about this privacy policy, please reach out via the feedback form in
-            the app or email us at{' '}
-            <a href="mailto:muttaqihemani@gmail.com" className="text-blue-600 underline">
-              muttaqihemani@gmail.com
-            </a>.
+            If you have any questions about this privacy policy, please reach out via the feedback form in the app.
           </p>
         </section>
       </div>

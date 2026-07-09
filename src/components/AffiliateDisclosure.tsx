@@ -43,13 +43,9 @@ export default function AffiliateDisclosure({ onBack }: Props) {
 
         <section>
           <h2 className="font-semibold text-gray-900 text-base mb-2">Affiliate Partners</h2>
-          <p>We may work with affiliate networks including:</p>
-          <ul className="list-disc list-inside mt-2 space-y-1 text-gray-600">
-            <li>RateHub</li>
-            <li>Fintel Connect</li>
-          </ul>
-          <p className="mt-2">
-            This list may be updated as new partnerships are established.
+          <p>
+            We may work with various affiliate networks and financial institutions. Partnerships may
+            change over time as we expand the tool.
           </p>
         </section>
 
@@ -67,10 +63,7 @@ export default function AffiliateDisclosure({ onBack }: Props) {
           <h2 className="font-semibold text-gray-900 text-base mb-2">Questions?</h2>
           <p>
             If you have any questions about our affiliate relationships, please reach out via the
-            feedback form in the app or email us at{' '}
-            <a href="mailto:muttaqihemani@gmail.com" className="text-blue-600 underline">
-              muttaqihemani@gmail.com
-            </a>.
+            feedback form in the app.
           </p>
         </section>
       </div>
