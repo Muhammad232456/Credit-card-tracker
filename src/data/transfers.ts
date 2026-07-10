@@ -126,6 +126,21 @@ export const TRANSFER_PARTNERS: TransferPartner[] = [
     ],
   },
   {
+    id: "singapore-krisflyer",
+    name: "Singapore KrisFlyer",
+    type: "airline",
+    alliance: "star",
+    transfersFrom: [
+      {
+        sourceProgram: "marriott-bonvoy",
+        ratio: [3, 1],
+        minimumTransfer: 10000,
+        transferSpeed: "Days",
+        notes: "60,000 Bonvoy = 25,000 KrisFlyer (includes 5k bonus). Indirect from Amex MR: MR → Bonvoy (1:1.2) → KrisFlyer.",
+      },
+    ],
+  },
+  {
     id: "aadvantage",
     name: "American Airlines AAdvantage",
     type: "airline",
