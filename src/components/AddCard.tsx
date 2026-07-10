@@ -142,9 +142,12 @@ export default function AddCard({ existingCardIds, onAdd, onCancel }: Props) {
                   {card.annualFeeNote && !card.firstYearFeeWaived && (
                     <p className="text-xs text-gray-500">{card.annualFeeNote}</p>
                   )}
-                  {card.currentOffer && (
-                    <p className="text-xs text-amber-600 font-medium">🎁 Limited offer</p>
-                  )}
+                  {card.currentOffer && (() => {
+                    const r = card.currentOffer!.rating;
+                    const label = r === 'all-time-high' ? 'All-Time High' : r === 'elevated' ? 'Elevated Offer' : 'Standard Offer';
+                    const cls = r === 'all-time-high' ? 'text-emerald-600' : r === 'elevated' ? 'text-orange-500' : 'text-amber-600';
+                    return <p className={`text-xs font-medium ${cls}`}>🎁 {label}</p>;
+                  })()}
                 </div>
               </div>
             </button>
