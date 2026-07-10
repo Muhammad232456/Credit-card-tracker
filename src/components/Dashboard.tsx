@@ -131,6 +131,9 @@ export default function Dashboard({ data, onNavigate, onStartQuiz }: Props) {
           <p className="text-gray-500 mt-2 max-w-md mx-auto text-sm">
             Track your points balances, card benefits, renewal dates, and annual fee recovery — all in your browser.
           </p>
+          <p className="text-xs text-gray-400 mt-2">
+            🔒 No account needed — your data saves automatically on this device, completely free.
+          </p>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
           <div className="bg-white border border-gray-200 rounded-xl p-5 text-center">
