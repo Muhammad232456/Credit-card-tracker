@@ -187,30 +187,64 @@ export default function CardDetail({
       </div>
 
       {/* Current promotional offer */}
-      {template.currentOffer && (
-        <div className="mt-4 bg-amber-50 border border-amber-200 rounded-xl px-4 py-3 flex items-start gap-3">
-          <span className="text-xl">🎁</span>
-          <div className="flex-1 min-w-0">
-            <p className="text-sm font-semibold text-amber-900">Limited-Time Offer</p>
-            <p className="text-sm text-amber-800 mt-0.5">{template.currentOffer.description}</p>
-            {template.currentOffer.expiryDate && (
-              <p className="text-xs text-amber-600 mt-1">
-                Expires {new Date(template.currentOffer.expiryDate + 'T12:00:00').toLocaleDateString('en-CA', { month: 'long', day: 'numeric', year: 'numeric' })}
-              </p>
+      {template.currentOffer && (() => {
+        const ratingConfig = {
+          'standard':     { label: 'Standard Offer',  bg: 'bg-amber-50',   border: 'border-amber-200', badge: 'bg-amber-100 text-amber-700' },
+          'elevated':     { label: 'Elevated Offer',  bg: 'bg-orange-50',  border: 'border-orange-200', badge: 'bg-orange-100 text-orange-700' },
+          'all-time-high':{ label: 'All-Time High!',  bg: 'bg-emerald-50', border: 'border-emerald-300', badge: 'bg-emerald-100 text-emerald-700' },
+        };
+        const cfg = ratingConfig[template.currentOffer!.rating ?? 'standard'];
+        const allTimeHigh = template.offerHistory ? Math.max(...template.offerHistory.map(h => h.points), template.currentOffer!.points) : template.currentOffer!.points;
+        const historicalAvg = template.offerHistory && template.offerHistory.length > 0
+          ? Math.round(template.offerHistory.reduce((s, h) => s + h.points, 0) / template.offerHistory.length)
+          : null;
+        return (
+          <div className={`mt-4 ${cfg.bg} border ${cfg.border} rounded-xl overflow-hidden`}>
+            <div className="px-4 py-3 flex items-start gap-3">
+              <span className="text-xl">🎁</span>
+              <div className="flex-1 min-w-0">
+                <div className="flex items-center gap-2 flex-wrap">
+                  <p className="text-sm font-semibold text-gray-900">Current Offer</p>
+                  {template.currentOffer!.rating && (
+                    <span className={`text-xs font-bold px-2 py-0.5 rounded-full ${cfg.badge}`}>{cfg.label}</span>
+                  )}
+                </div>
+                <p className="text-sm text-gray-700 mt-0.5">{template.currentOffer!.description}</p>
+                <div className="flex items-center gap-4 mt-1.5 text-xs text-gray-500 flex-wrap">
+                  {historicalAvg && <span>Avg offer: <strong>{historicalAvg.toLocaleString()} pts</strong></span>}
+                  <span>All-time high: <strong>{allTimeHigh.toLocaleString()} pts</strong></span>
+                  {template.currentOffer!.expiryDate && (
+                    <span className="text-red-600 font-medium">Expires {new Date(template.currentOffer!.expiryDate + 'T12:00:00').toLocaleDateString('en-CA', { month: 'short', day: 'numeric', year: 'numeric' })}</span>
+                  )}
+                </div>
+              </div>
+              {template.currentOffer!.applyUrl && (
+                <a href={template.currentOffer!.applyUrl} target="_blank" rel="noopener noreferrer"
+                  className="shrink-0 bg-slate-800 hover:bg-slate-700 text-white text-xs font-semibold px-3 py-1.5 rounded-lg transition-colors">
+                  Apply →
+                </a>
+              )}
+            </div>
+            {/* Offer history */}
+            {template.offerHistory && template.offerHistory.length > 0 && (
+              <div className="border-t border-black/5 px-4 py-3">
+                <p className="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-2">Offer History</p>
+                <div className="space-y-1.5">
+                  {template.offerHistory.map((h, i) => (
+                    <div key={i} className="flex items-center justify-between text-xs text-gray-600">
+                      <span className="flex-1 mr-2">{h.description}</span>
+                      <span className="text-gray-400 shrink-0">
+                        {new Date(h.startDate + 'T12:00:00').toLocaleDateString('en-CA', { month: 'short', year: 'numeric' })}
+                        {h.endDate ? ` – ${new Date(h.endDate + 'T12:00:00').toLocaleDateString('en-CA', { month: 'short', year: 'numeric' })}` : ' – present'}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              </div>
             )}
           </div>
-          {template.currentOffer.applyUrl && (
-            <a
-              href={template.currentOffer.applyUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="shrink-0 bg-amber-600 hover:bg-amber-700 text-white text-xs font-semibold px-3 py-1.5 rounded-lg transition-colors"
-            >
-              Apply →
-            </a>
-          )}
-        </div>
-      )}
+        );
+      })()}
 
       {/* Net Annual Value */}
       <div className="bg-white border border-gray-200 rounded-xl mt-4 overflow-hidden">

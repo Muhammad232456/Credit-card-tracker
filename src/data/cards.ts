@@ -42,6 +42,16 @@ export const CARD_TEMPLATES: CardTemplate[] = [
       { type: "Purchase Protection", maxCoverage: "$1,000/item", note: "90 days" },
       { type: "Extended Warranty", note: "Up to 1 additional year" },
     ],
+    currentOffer: {
+      description: "Earn up to 15,000 MR points — 1,250 pts/month when you spend $750/month for 12 months",
+      points: 15000,
+      rating: 'standard',
+    },
+    offerHistory: [
+      { description: "Earn up to 30,000 MR points (elevated)", points: 30000, startDate: "2025-01-01", endDate: "2025-03-31" },
+      { description: "Earn up to 15,000 MR points (standard)", points: 15000, startDate: "2025-04-01", endDate: "2025-12-31" },
+      { description: "Earn up to 20,000 MR points (elevated)", points: 20000, startDate: "2024-10-01", endDate: "2024-12-31" },
+    ],
   },
   {
     id: "amex-gold",
@@ -88,6 +98,16 @@ export const CARD_TEMPLATES: CardTemplate[] = [
       { type: "Car Rental Theft & Damage" },
       { type: "Purchase Protection", maxCoverage: "$1,000/item", note: "90 days" },
       { type: "Extended Warranty", note: "Up to 1 additional year" },
+    ],
+    currentOffer: {
+      description: "Earn up to 70,000 MR points — 10,000 on approval + 5,000/month for 12 months (spend $1,000/month)",
+      points: 70000,
+      rating: 'elevated',
+    },
+    offerHistory: [
+      { description: "Earn up to 70,000 MR points (elevated)", points: 70000, startDate: "2026-01-01" },
+      { description: "Earn up to 60,000 MR points (standard)", points: 60000, startDate: "2025-01-01", endDate: "2025-12-31" },
+      { description: "Earn up to 40,000 MR points", points: 40000, startDate: "2024-01-01", endDate: "2024-12-31" },
     ],
   },
   {
@@ -202,6 +222,18 @@ export const CARD_TEMPLATES: CardTemplate[] = [
       { type: "Baggage Loss/Delay", maxCoverage: "$1,000" },
       { type: "Purchase Protection", maxCoverage: "$10,000/item", note: "90 days" },
       { type: "Extended Warranty", note: "Up to 1 additional year" },
+    ],
+    currentOffer: {
+      description: "Earn up to 170,000 MR points — 80,000 on $10,000 spend in first 3 months + 30,000 at month 13",
+      points: 170000,
+      expiryDate: "2026-07-28",
+      rating: 'all-time-high',
+    },
+    offerHistory: [
+      { description: "Earn up to 150,000 MR points", points: 150000, startDate: "2025-09-01", endDate: "2025-12-31" },
+      { description: "Earn up to 100,000 MR points (standard)", points: 100000, startDate: "2025-01-01", endDate: "2025-08-31" },
+      { description: "Earn up to 120,000 MR points (elevated)", points: 120000, startDate: "2024-09-01", endDate: "2024-12-31" },
+      { description: "Earn up to 100,000 MR points (standard)", points: 100000, startDate: "2024-01-01", endDate: "2024-08-31" },
     ],
   },
   {
@@ -437,6 +469,17 @@ export const CARD_TEMPLATES: CardTemplate[] = [
       { type: "Purchase Protection", note: "90 days" },
       { type: "Extended Warranty", note: "Up to 1 additional year" },
     ],
+    currentOffer: {
+      description: "Earn up to 45,000 Aeroplan points — 10,000 on first purchase + 15,000 on $3,000 spend in 90 days + first year free",
+      points: 45000,
+      rating: 'elevated',
+    },
+    offerHistory: [
+      { description: "Earn up to 45,000 Aeroplan points + first year free (elevated)", points: 45000, startDate: "2026-01-01" },
+      { description: "Earn up to 25,000 Aeroplan points (standard)", points: 25000, startDate: "2025-01-01", endDate: "2025-12-31" },
+      { description: "Earn up to 50,000 Aeroplan points (elevated)", points: 50000, startDate: "2024-09-01", endDate: "2024-12-31" },
+      { description: "Earn up to 25,000 Aeroplan points (standard)", points: 25000, startDate: "2024-01-01", endDate: "2024-08-31" },
+    ],
   },
   {
     id: "td-aeroplan-infinite-privilege",
@@ -549,6 +592,16 @@ export const CARD_TEMPLATES: CardTemplate[] = [
       { type: "Purchase Protection", note: "90 days" },
       { type: "Extended Warranty", note: "Up to 1 additional year" },
     ],
+    currentOffer: {
+      description: "Earn up to 50,000 Aeroplan points — 10,000 on first purchase + 20,000 on $6,000 spend in 6 months + 20,000 anniversary bonus",
+      points: 50000,
+      rating: 'elevated',
+    },
+    offerHistory: [
+      { description: "Earn up to 50,000 Aeroplan points (elevated)", points: 50000, startDate: "2026-01-01" },
+      { description: "Earn up to 30,000 Aeroplan points (standard)", points: 30000, startDate: "2025-01-01", endDate: "2025-12-31" },
+      { description: "Earn up to 60,000 Aeroplan points (elevated)", points: 60000, startDate: "2024-09-01", endDate: "2024-12-31" },
+    ],
   },
   {
     id: "cibc-aeroplan-infinite-privilege",
@@ -636,6 +689,17 @@ export const CARD_TEMPLATES: CardTemplate[] = [
       { type: "Flight Delay", maxCoverage: "$500" },
       { type: "Purchase Protection", note: "90 days" },
       { type: "Extended Warranty", note: "Up to 1 additional year" },
+    ],
+    currentOffer: {
+      description: "Earn up to 70,000 Avion points — 50,000 on approval + 20,000 on $5,000 spend in 6 months",
+      points: 70000,
+      expiryDate: "2026-07-15",
+      rating: 'all-time-high',
+    },
+    offerHistory: [
+      { description: "Earn up to 70,000 Avion points (all-time high)", points: 70000, startDate: "2026-06-01", endDate: "2026-07-15" },
+      { description: "Earn up to 35,000 Avion points (standard)", points: 35000, startDate: "2025-01-01", endDate: "2026-05-31" },
+      { description: "Earn up to 55,000 Avion points (elevated)", points: 55000, startDate: "2024-09-01", endDate: "2024-12-31" },
     ],
   },
   {
@@ -755,6 +819,17 @@ export const CARD_TEMPLATES: CardTemplate[] = [
       { type: "Flight Delay", maxCoverage: "$500" },
       { type: "Purchase Protection", note: "90 days" },
       { type: "Extended Warranty", note: "Up to 1 additional year" },
+    ],
+    currentOffer: {
+      description: "Earn up to 60,000 Scene+ points — 30,000 on $1,000 spend in first 3 months + 30,000 on $10,000 spend in 6 months",
+      points: 60000,
+      rating: 'elevated',
+    },
+    offerHistory: [
+      { description: "Earn up to 60,000 Scene+ points (elevated)", points: 60000, startDate: "2026-01-01" },
+      { description: "Earn up to 40,000 Scene+ points (standard)", points: 40000, startDate: "2025-01-01", endDate: "2025-12-31" },
+      { description: "Earn up to 75,000 Scene+ points (all-time high)", points: 75000, startDate: "2024-09-01", endDate: "2024-12-31" },
+      { description: "Earn up to 35,000 Scene+ points", points: 35000, startDate: "2024-01-01", endDate: "2024-08-31" },
     ],
   },
   {
@@ -1176,6 +1251,16 @@ export const CARD_TEMPLATES: CardTemplate[] = [
       { type: "Flight Delay", maxCoverage: "$500" },
       { type: "Purchase Protection", note: "90 days" },
       { type: "Extended Warranty", note: "Up to 1 additional year" },
+    ],
+    currentOffer: {
+      description: "Earn 165,000 TD Rewards points — worth up to $825 in travel via Expedia for TD",
+      points: 165000,
+      rating: 'all-time-high',
+    },
+    offerHistory: [
+      { description: "Earn 165,000 TD Rewards points (all-time high)", points: 165000, startDate: "2026-01-01" },
+      { description: "Earn 100,000 TD Rewards points (standard)", points: 100000, startDate: "2025-01-01", endDate: "2025-12-31" },
+      { description: "Earn 135,000 TD Rewards points (elevated)", points: 135000, startDate: "2024-09-01", endDate: "2024-12-31" },
     ],
   },
   {
