@@ -137,7 +137,7 @@ export default function CardDetail({
 
       {/* Card header */}
       <div className={`${headerBg} rounded-2xl p-6 text-white ${!isActive ? 'opacity-60' : ''}`}>
-        <div className="flex justify-between items-start">
+        <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-3">
           <div>
             <div className="flex items-center gap-2 flex-wrap">
               <p className="text-xs opacity-70 uppercase tracking-wide">{template.issuer} · {template.network}</p>
@@ -170,12 +170,12 @@ export default function CardDetail({
               )}
             </div>
           </div>
-          <div className="text-right">
+          <div className="sm:text-right">
             <p className="text-xs opacity-70">Value recovered</p>
             <p className="text-2xl font-mono font-bold">
               ${totalBenefitValue.toFixed(0)} <span className="text-sm opacity-70">/ ${template.annualFee.toFixed(0)}</span>
             </p>
-            <div className="mt-2 bg-white/20 rounded-full h-2 w-32">
+            <div className="mt-2 bg-white/20 rounded-full h-2 w-full sm:w-32">
               <div
                 className={`h-2 rounded-full transition-all ${recoveryPct >= 100 ? 'bg-emerald-400' : recoveryPct >= 50 ? 'bg-amber-400' : 'bg-red-400'}`}
                 style={{ width: `${Math.min(100, recoveryPct)}%` }}

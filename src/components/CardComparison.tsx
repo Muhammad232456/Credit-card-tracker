@@ -83,7 +83,8 @@ export default function CardComparison({ onBack }: Props) {
       )}
 
       {selected.length >= 2 && (
-        <div className="space-y-3">
+        <div className="overflow-x-auto -mx-4 px-4 pb-2">
+          <div className="space-y-3 min-w-[480px]">
           {/* Header */}
           <div className={`grid gap-2 ${cols}`}>
             {selected.map(t => (
@@ -228,6 +229,7 @@ export default function CardComparison({ onBack }: Props) {
           <p className="text-xs text-gray-400 text-center">
             Green earn rates indicate the highest for that category among the selected cards.
           </p>
+          </div>
         </div>
       )}
     </div>
