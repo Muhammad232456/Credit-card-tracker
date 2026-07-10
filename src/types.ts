@@ -86,6 +86,12 @@ export interface CardTemplate {
   applyUrl?: string;
   /** Card is discontinued / no longer available to new applicants */
   discontinued?: boolean;
+  /** Limited-time promotional offer — update manually when offers change */
+  currentOffer?: {
+    description: string;   // e.g. "Earn 60,000 Aeroplan points"
+    expiryDate?: string;   // ISO date, e.g. "2026-10-31"
+    applyUrl?: string;     // affiliate link override for this offer
+  };
 }
 
 export interface PointsProgram {

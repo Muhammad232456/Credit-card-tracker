@@ -186,6 +186,32 @@ export default function CardDetail({
         </div>
       </div>
 
+      {/* Current promotional offer */}
+      {template.currentOffer && (
+        <div className="mt-4 bg-amber-50 border border-amber-200 rounded-xl px-4 py-3 flex items-start gap-3">
+          <span className="text-xl">🎁</span>
+          <div className="flex-1 min-w-0">
+            <p className="text-sm font-semibold text-amber-900">Limited-Time Offer</p>
+            <p className="text-sm text-amber-800 mt-0.5">{template.currentOffer.description}</p>
+            {template.currentOffer.expiryDate && (
+              <p className="text-xs text-amber-600 mt-1">
+                Expires {new Date(template.currentOffer.expiryDate + 'T12:00:00').toLocaleDateString('en-CA', { month: 'long', day: 'numeric', year: 'numeric' })}
+              </p>
+            )}
+          </div>
+          {template.currentOffer.applyUrl && (
+            <a
+              href={template.currentOffer.applyUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="shrink-0 bg-amber-600 hover:bg-amber-700 text-white text-xs font-semibold px-3 py-1.5 rounded-lg transition-colors"
+            >
+              Apply →
+            </a>
+          )}
+        </div>
+      )}
+
       {/* Net Annual Value */}
       <div className="bg-white border border-gray-200 rounded-xl mt-4 overflow-hidden">
         <button

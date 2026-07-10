@@ -142,6 +142,9 @@ export default function AddCard({ existingCardIds, onAdd, onCancel }: Props) {
                   {card.annualFeeNote && !card.firstYearFeeWaived && (
                     <p className="text-xs text-gray-500">{card.annualFeeNote}</p>
                   )}
+                  {card.currentOffer && (
+                    <p className="text-xs text-amber-600 font-medium">🎁 Limited offer</p>
+                  )}
                 </div>
               </div>
             </button>
