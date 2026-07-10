@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { POINTS_PROGRAMS } from '../data/programs';
 import type { UserData, PointsBalance } from '../types';
 
@@ -25,6 +25,10 @@ function cppRatingDot(cpp: number, defaultCpp: number, excellentCpp?: number): s
 export default function PointsTracker({ data, update, onViewTransfers, onEvaluate }: Props) {
   const [editingId, setEditingId] = useState<string | null>(null);
   const [addingProgram, setAddingProgram] = useState(false);
+  const [selectedForAdd, setSelectedForAdd] = useState<string | null>(null);
+  const [addBalance, setAddBalance] = useState('');
+  const [programSearch, setProgramSearch] = useState('');
+  const addBalanceRef = useRef<HTMLInputElement>(null);
 
   const trackedIds = new Set(data.pointsBalances.map(b => b.programId));
   const untrackedPrograms = POINTS_PROGRAMS.filter(p => !trackedIds.has(p.id));
@@ -39,16 +43,30 @@ export default function PointsTracker({ data, update, onViewTransfers, onEvaluat
     return POINTS_PROGRAMS.find(p => p.id === programId)?.defaultCpp ?? 1;
   }
 
-  function addProgram(programId: string) {
+  function addProgram(programId: string, balance: number) {
     update(prev => ({
       ...prev,
       pointsBalances: [
         ...prev.pointsBalances,
-        { programId, balance: 0, lastUpdated: new Date().toISOString() },
+        { programId, balance, lastUpdated: new Date().toISOString() },
       ],
     }));
     setAddingProgram(false);
+    setSelectedForAdd(null);
+    setAddBalance('');
+    setProgramSearch('');
   }
+
+  function cancelAdd() {
+    setAddingProgram(false);
+    setSelectedForAdd(null);
+    setAddBalance('');
+    setProgramSearch('');
+  }
+
+  useEffect(() => {
+    if (selectedForAdd) addBalanceRef.current?.focus();
+  }, [selectedForAdd]);
 
   function removeProgram(programId: string) {
     update(prev => ({
@@ -219,27 +237,77 @@ export default function PointsTracker({ data, update, onViewTransfers, onEvaluat
 
       {addingProgram ? (
         <div className="bg-white border border-gray-200 rounded-xl p-4">
-          <p className="font-medium text-gray-700 mb-3">Add Program</p>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-            {untrackedPrograms.map(p => (
+          {selectedForAdd ? (() => {
+            const prog = POINTS_PROGRAMS.find(p => p.id === selectedForAdd)!;
+            return (
+              <div>
+                <p className="font-medium text-gray-700 mb-3">
+                  Adding <span className="text-gray-900">{prog.name}</span>
+                </p>
+                <div className="flex items-center gap-2">
+                  <input
+                    ref={addBalanceRef}
+                    type="number"
+                    min="0"
+                    value={addBalance}
+                    onChange={e => setAddBalance(e.target.value)}
+                    onKeyDown={e => {
+                      if (e.key === 'Enter') addProgram(selectedForAdd, parseInt(addBalance) || 0);
+                      if (e.key === 'Escape') setSelectedForAdd(null);
+                    }}
+                    placeholder="Starting balance (0)"
+                    className="flex-1 border border-gray-300 rounded-lg px-3 py-2 text-sm font-mono"
+                  />
+                  <button
+                    onClick={() => addProgram(selectedForAdd, parseInt(addBalance) || 0)}
+                    className="bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-blue-700 transition-colors"
+                  >
+                    Add
+                  </button>
+                  <button
+                    onClick={() => setSelectedForAdd(null)}
+                    className="text-sm text-gray-500 hover:text-gray-700 px-3 py-2"
+                  >
+                    Back
+                  </button>
+                </div>
+              </div>
+            );
+          })() : (
+            <div>
+              <p className="font-medium text-gray-700 mb-3">Add Program</p>
+              <input
+                type="text"
+                value={programSearch}
+                onChange={e => setProgramSearch(e.target.value)}
+                placeholder="Search programs..."
+                className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm mb-3"
+                autoFocus
+              />
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 max-h-64 overflow-y-auto">
+                {untrackedPrograms
+                  .filter(p => !programSearch || p.name.toLowerCase().includes(programSearch.toLowerCase()))
+                  .map(p => (
+                    <button
+                      key={p.id}
+                      onClick={() => { setSelectedForAdd(p.id); setAddBalance(''); }}
+                      className="text-left px-3 py-2 rounded-lg border border-gray-200 hover:border-blue-400 hover:bg-blue-50 text-sm transition-colors"
+                    >
+                      <span className="font-medium text-gray-800">{p.name}</span>
+                      <span className={`ml-2 text-xs px-1.5 py-0.5 rounded-full ${PROGRAM_COLORS[p.type]}`}>
+                        {p.type}
+                      </span>
+                    </button>
+                  ))}
+              </div>
               <button
-                key={p.id}
-                onClick={() => addProgram(p.id)}
-                className="text-left px-3 py-2 rounded-lg border border-gray-200 hover:border-blue-400 hover:bg-blue-50 text-sm transition-colors"
+                onClick={cancelAdd}
+                className="mt-3 text-sm text-gray-500 hover:text-gray-700"
               >
-                <span className="font-medium text-gray-800">{p.name}</span>
-                <span className={`ml-2 text-xs px-1.5 py-0.5 rounded-full ${PROGRAM_COLORS[p.type]}`}>
-                  {p.type}
-                </span>
+                Cancel
               </button>
-            ))}
-          </div>
-          <button
-            onClick={() => setAddingProgram(false)}
-            className="mt-3 text-sm text-gray-500 hover:text-gray-700"
-          >
-            Cancel
-          </button>
+            </div>
+          )}
         </div>
       ) : (
         untrackedPrograms.length > 0 && (
