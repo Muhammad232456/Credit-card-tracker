@@ -187,7 +187,34 @@ export default function CardDetail({
       </div>
 
       {/* Current promotional offer */}
-      {template.currentOffer && (() => {
+      {(() => {
+        if (!template.currentOffer) {
+          return (
+            <div className="mt-4 bg-gray-50 border border-gray-200 rounded-xl overflow-hidden">
+              <div className="px-4 py-3 flex items-start gap-3">
+                <div className="flex-1 min-w-0">
+                  <p className="text-sm font-semibold text-gray-900">Welcome Offer</p>
+                  <p className="text-sm text-gray-400 italic mt-0.5">No current promotional welcome offer</p>
+                </div>
+              </div>
+              {template.offerHistory && template.offerHistory.length > 0 && (
+                <div className="border-t border-black/5 px-4 py-3">
+                  <p className="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-2">Offer History</p>
+                  <div className="space-y-1.5">
+                    {template.offerHistory.map((h, i) => (
+                      <div key={i} className="flex items-center justify-between text-xs text-gray-600">
+                        <span className="flex-1 mr-2">{h.description}</span>
+                        <span className="text-gray-400 shrink-0">
+                          {h.startDate}{h.endDate ? ` – ${h.endDate}` : ''}
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </div>
+          );
+        }
         const ratingConfig = {
           'standard':     { label: 'Standard Offer',  bg: 'bg-amber-50',   border: 'border-amber-200', badge: 'bg-amber-100 text-amber-700' },
           'elevated':     { label: 'Elevated Offer',  bg: 'bg-orange-50',  border: 'border-orange-200', badge: 'bg-orange-100 text-orange-700' },

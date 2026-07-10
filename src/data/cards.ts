@@ -100,14 +100,14 @@ export const CARD_TEMPLATES: CardTemplate[] = [
       { type: "Extended Warranty", note: "Up to 1 additional year" },
     ],
     currentOffer: {
-      description: "Earn up to 70,000 MR points — 10,000 on approval + 5,000/month for 12 months (spend $1,000/month)",
-      points: 70000,
-      rating: 'elevated',
+      description: "Earn up to 60,000 MR points — 5,000 points per monthly billing period when you spend $1,000/month for 12 months",
+      points: 60000,
+      rating: 'standard',
     },
     offerHistory: [
-      { description: "Earn up to 70,000 MR points (elevated)", points: 70000, startDate: "2026-01-01" },
+      { description: "Earn up to 60,000 MR points (standard)", points: 60000, startDate: "2026-01-01" },
       { description: "Earn up to 60,000 MR points (standard)", points: 60000, startDate: "2025-01-01", endDate: "2025-12-31" },
-      { description: "Earn up to 40,000 MR points", points: 40000, startDate: "2024-01-01", endDate: "2024-12-31" },
+      { description: "Earn up to 40,000 MR points (standard)", points: 40000, startDate: "2024-01-01", endDate: "2024-12-31" },
     ],
   },
   {
@@ -453,6 +453,15 @@ export const CARD_TEMPLATES: CardTemplate[] = [
       { category: "Marriott Bonvoy Hotels", multiplier: 5, unit: "points", programId: "marriott-bonvoy" },
       { category: "Travel & Airlines", multiplier: 2, unit: "points", programId: "marriott-bonvoy" },
       { category: "Everything Else", multiplier: 1, unit: "points", programId: "marriott-bonvoy" },
+    ],
+    currentOffer: {
+      description: "Earn up to 80,000 Marriott Bonvoy points — 70,000 on $5,000 spend in 3 months + 10,000 bonus points in month 13",
+      points: 80000,
+      rating: 'elevated',
+    },
+    offerHistory: [
+      { description: "Earn up to 80,000 Bonvoy points (elevated)", points: 80000, startDate: "2026-01-01" },
+      { description: "Earn up to 50,000 Bonvoy points (standard)", points: 50000, startDate: "2025-01-01", endDate: "2025-12-31" },
     ],
   },
 
@@ -949,6 +958,16 @@ export const CARD_TEMPLATES: CardTemplate[] = [
       { category: "Dining & Groceries", multiplier: 2, unit: "points", programId: "scene-plus" },
       { category: "Everything Else", multiplier: 1.5, unit: "points", programId: "scene-plus" },
     ],
+    currentOffer: {
+      description: "Earn up to 80,000 Scene+ points — 30,000 on $1,000 spend in first 3 months + 30,000 on $12,500 spend in 6 months + 20,000 on card anniversary, expires November 1, 2026",
+      points: 80000,
+      expiryDate: "2026-11-01",
+      rating: 'elevated',
+    },
+    offerHistory: [
+      { description: "Earn up to 80,000 Scene+ points (elevated)", points: 80000, startDate: "2026-01-01", endDate: "2026-11-01" },
+      { description: "Earn up to 60,000 Scene+ points (standard)", points: 60000, startDate: "2025-01-01", endDate: "2025-12-31" },
+    ],
   },
 
   // BMO
@@ -1037,6 +1056,9 @@ export const CARD_TEMPLATES: CardTemplate[] = [
       { category: "Dining & Groceries", multiplier: 3, unit: "points", programId: "viporter" },
       { category: "Everything Else", multiplier: 1, unit: "points", programId: "viporter" },
     ],
+    offerHistory: [
+      { description: "Earn up to 20,000 VIPorter points + first year free (elevated)", points: 20000, startDate: "2025-06-01", endDate: "2026-01-31" },
+    ],
   },
 
   // NATIONAL BANK
@@ -1084,6 +1106,10 @@ export const CARD_TEMPLATES: CardTemplate[] = [
       { type: "Flight Delay", maxCoverage: "$500" },
       { type: "Purchase Protection", note: "90 days" },
       { type: "Extended Warranty", note: "Up to 1 additional year" },
+    ],
+    offerHistory: [
+      { description: "Earn up to 35,000 NBC Rewards points (elevated)", points: 35000, startDate: "2026-01-01", endDate: "2026-06-29" },
+      { description: "Earn up to 20,000 NBC Rewards points (standard)", points: 20000, startDate: "2025-01-01", endDate: "2025-12-31" },
     ],
   },
 
@@ -1143,6 +1169,14 @@ export const CARD_TEMPLATES: CardTemplate[] = [
     earningRates: [
       { category: "Everything", multiplier: 0.0125, unit: "percent", note: "1.25% cash back on all purchases" },
     ],
+    currentOffer: {
+      description: "Earn 10% cash back on your first $1,000 spent in the first 60 days (up to $100 cash back)",
+      points: 100,
+      rating: 'standard',
+    },
+    offerHistory: [
+      { description: "10% cash back on first $1,000 in 60 days (up to $100)", points: 100, startDate: "2026-01-01" },
+    ],
   },
   {
     id: "amex-simply-cash-preferred",
@@ -1155,6 +1189,14 @@ export const CARD_TEMPLATES: CardTemplate[] = [
     earningRates: [
       { category: "Groceries, Gas & Drugstores", multiplier: 0.02, unit: "percent", note: "2% cash back" },
       { category: "Everything Else", multiplier: 0.0125, unit: "percent", note: "1.25% cash back" },
+    ],
+    currentOffer: {
+      description: "Earn 10% cash back on your first $2,000 spent in the first 3 months (up to $200 cash back)",
+      points: 200,
+      rating: 'standard',
+    },
+    offerHistory: [
+      { description: "10% cash back on first $2,000 in 3 months (up to $200)", points: 200, startDate: "2026-01-01" },
     ],
   },
   {
@@ -1179,6 +1221,16 @@ export const CARD_TEMPLATES: CardTemplate[] = [
     earningRates: [
       { category: "Top 2 Spend Categories (auto)", multiplier: 3, unit: "points", programId: "amex-mr", note: "Automatically selects your highest-spend categories each month" },
       { category: "Everything Else", multiplier: 1, unit: "points", programId: "amex-mr" },
+    ],
+    currentOffer: {
+      description: "Earn up to 60,000 Membership Rewards points — limited-time elevated offer, expires July 28, 2026",
+      points: 60000,
+      expiryDate: "2026-07-28",
+      rating: 'elevated',
+    },
+    offerHistory: [
+      { description: "Earn up to 60,000 MR points (elevated)", points: 60000, startDate: "2026-01-01", endDate: "2026-07-28" },
+      { description: "Earn up to 40,000 MR points (standard)", points: 40000, startDate: "2025-01-01", endDate: "2025-12-31" },
     ],
   },
   {
@@ -1280,6 +1332,15 @@ export const CARD_TEMPLATES: CardTemplate[] = [
       { category: "Air Canada Purchases", multiplier: 1, unit: "points", programId: "aeroplan" },
       { category: "Everything Else", multiplier: 1, unit: "points", programId: "aeroplan" },
     ],
+    currentOffer: {
+      description: "Earn up to 20,000 Aeroplan points — 10,000 on first purchase + 10,000 on $1,500 spend in 90 days",
+      points: 20000,
+      rating: 'standard',
+    },
+    offerHistory: [
+      { description: "Earn up to 20,000 Aeroplan points (standard)", points: 20000, startDate: "2026-01-01" },
+      { description: "Earn up to 15,000 Aeroplan points (standard)", points: 15000, startDate: "2025-01-01", endDate: "2025-12-31" },
+    ],
   },
   {
     id: "td-platinum-travel",
@@ -1293,6 +1354,15 @@ export const CARD_TEMPLATES: CardTemplate[] = [
       { category: "Online Purchases", multiplier: 3, unit: "points", programId: "td-rewards" },
       { category: "Dining & Groceries", multiplier: 1.5, unit: "points", programId: "td-rewards" },
       { category: "Everything Else", multiplier: 1, unit: "points", programId: "td-rewards" },
+    ],
+    currentOffer: {
+      description: "Earn up to 50,000 TD Rewards points — 15,000 on first purchase + 35,000 on $3,000 spend in 180 days",
+      points: 50000,
+      rating: 'elevated',
+    },
+    offerHistory: [
+      { description: "Earn up to 50,000 TD Rewards points (elevated)", points: 50000, startDate: "2026-01-01" },
+      { description: "Earn up to 30,000 TD Rewards points (standard)", points: 30000, startDate: "2025-01-01", endDate: "2025-12-31" },
     ],
   },
   {
@@ -1364,6 +1434,16 @@ export const CARD_TEMPLATES: CardTemplate[] = [
       { category: "Gas & Recurring Payments", multiplier: 0.01, unit: "percent", note: "1% cash back" },
       { category: "Everything Else", multiplier: 0.005, unit: "percent", note: "0.5% cash back" },
     ],
+    firstYearFeeWaived: true,
+    currentOffer: {
+      description: "Earn 10% cash back on first $3,500 spent in first 3 months (up to $350 cash back) + first year annual fee waived",
+      points: 350,
+      rating: 'elevated',
+    },
+    offerHistory: [
+      { description: "10% cash back on first $3,500 in 3 months (up to $350) + first year free (elevated)", points: 350, startDate: "2026-01-01" },
+      { description: "10% cash back on first $2,000 in 3 months (up to $200) + first year free (standard)", points: 200, startDate: "2025-01-01", endDate: "2025-12-31" },
+    ],
   },
 
   // ─── CIBC (additional) ────────────────────────────────────────────────────
@@ -1377,6 +1457,15 @@ export const CARD_TEMPLATES: CardTemplate[] = [
     benefits: [],
     earningRates: [
       { category: "Everything", multiplier: 1, unit: "points", programId: "aeroplan", note: "1 Aeroplan point per $1" },
+    ],
+    currentOffer: {
+      description: "Earn up to 10,000 Aeroplan points — 10,000 on your first purchase",
+      points: 10000,
+      rating: 'standard',
+    },
+    offerHistory: [
+      { description: "Earn up to 10,000 Aeroplan points on first purchase (standard)", points: 10000, startDate: "2026-01-01" },
+      { description: "Earn up to 7,500 Aeroplan points (standard)", points: 7500, startDate: "2025-01-01", endDate: "2025-12-31" },
     ],
   },
   {
@@ -1414,6 +1503,16 @@ export const CARD_TEMPLATES: CardTemplate[] = [
     earningRates: [
       { category: "Everything", multiplier: 0.01, unit: "percent", note: "1% cash back on all purchases" },
     ],
+    firstYearFeeWaived: true,
+    currentOffer: {
+      description: "Earn 10% cash back on first $2,000 in first 4 statement periods (up to $200) + $50 PAP bonus + first year annual fee rebated",
+      points: 200,
+      rating: 'elevated',
+    },
+    offerHistory: [
+      { description: "10% cash back on first $2,000 + $50 PAP bonus + first year free (elevated)", points: 200, startDate: "2026-01-01" },
+      { description: "10% cash back on first $1,000 (up to $100) + first year free (standard)", points: 100, startDate: "2025-01-01", endDate: "2025-12-31" },
+    ],
   },
   {
     id: "cibc-aventura-gold",
@@ -1448,6 +1547,16 @@ export const CARD_TEMPLATES: CardTemplate[] = [
       { category: "Travel", multiplier: 2, unit: "points", programId: "cibc-aventura" },
       { category: "Dining, Groceries & Gas", multiplier: 1.5, unit: "points", programId: "cibc-aventura" },
       { category: "Everything Else", multiplier: 1, unit: "points", programId: "cibc-aventura" },
+    ],
+    firstYearFeeWaived: true,
+    currentOffer: {
+      description: "Earn up to 15,000 Aventura points + first year annual fee rebated",
+      points: 15000,
+      rating: 'standard',
+    },
+    offerHistory: [
+      { description: "Earn up to 15,000 Aventura points + first year free (standard)", points: 15000, startDate: "2026-01-01" },
+      { description: "Earn up to 10,000 Aventura points + first year free (standard)", points: 10000, startDate: "2025-01-01", endDate: "2025-12-31" },
     ],
   },
   {
@@ -1492,6 +1601,15 @@ export const CARD_TEMPLATES: CardTemplate[] = [
       { category: "Dining & Groceries", multiplier: 2, unit: "points", programId: "cibc-aventura" },
       { category: "Everything Else", multiplier: 1, unit: "points", programId: "cibc-aventura" },
     ],
+    currentOffer: {
+      description: "Earn up to 50,000 Aventura points — on qualifying spend in the first 4 months",
+      points: 50000,
+      rating: 'elevated',
+    },
+    offerHistory: [
+      { description: "Earn up to 50,000 Aventura points (elevated)", points: 50000, startDate: "2026-01-01" },
+      { description: "Earn up to 30,000 Aventura points (standard)", points: 30000, startDate: "2025-01-01", endDate: "2025-12-31" },
+    ],
   },
 
   // ─── RBC (additional) ─────────────────────────────────────────────────────
@@ -1504,6 +1622,16 @@ export const CARD_TEMPLATES: CardTemplate[] = [
     lastVerified: "2026-06-01",
     earningRates: [
       { category: "Everything", multiplier: 1.25, unit: "points", programId: "rbc-avion", note: "1.25× on all eligible purchases" },
+    ],
+    currentOffer: {
+      description: "Earn up to 70,000 Avion Rewards points — limited-time offer, expires July 15, 2026",
+      points: 70000,
+      expiryDate: "2026-07-15",
+      rating: 'all-time-high',
+    },
+    offerHistory: [
+      { description: "Earn up to 70,000 Avion points (all-time high)", points: 70000, startDate: "2026-06-16", endDate: "2026-07-15" },
+      { description: "Earn up to 35,000 Avion points (standard)", points: 35000, startDate: "2025-01-01", endDate: "2026-06-15" },
     ],
     benefits: [
       {
@@ -1564,6 +1692,16 @@ export const CARD_TEMPLATES: CardTemplate[] = [
       { category: "Groceries, Streaming, Dining & Transit", multiplier: 1.5, unit: "points", programId: "rbc-avion" },
       { category: "Everything Else", multiplier: 1, unit: "points", programId: "rbc-avion" },
     ],
+    currentOffer: {
+      description: "Earn up to 14,000 Avion Rewards points on qualifying purchases — offer expires November 4, 2026",
+      points: 14000,
+      expiryDate: "2026-11-04",
+      rating: 'elevated',
+    },
+    offerHistory: [
+      { description: "Earn up to 14,000 Avion points (elevated)", points: 14000, startDate: "2026-01-01", endDate: "2026-11-04" },
+      { description: "Earn up to 7,000 Avion points (standard)", points: 7000, startDate: "2025-01-01", endDate: "2025-12-31" },
+    ],
   },
   {
     id: "rbc-ion-plus",
@@ -1587,6 +1725,16 @@ export const CARD_TEMPLATES: CardTemplate[] = [
       { category: "Groceries, Streaming, Dining & Transit", multiplier: 3, unit: "points", programId: "rbc-avion" },
       { category: "Travel & Gas", multiplier: 1.5, unit: "points", programId: "rbc-avion" },
       { category: "Everything Else", multiplier: 1, unit: "points", programId: "rbc-avion" },
+    ],
+    currentOffer: {
+      description: "Earn up to 28,000 Avion Rewards points on qualifying purchases — offer expires November 4, 2026",
+      points: 28000,
+      expiryDate: "2026-11-04",
+      rating: 'elevated',
+    },
+    offerHistory: [
+      { description: "Earn up to 28,000 Avion points (elevated)", points: 28000, startDate: "2026-01-01", endDate: "2026-11-04" },
+      { description: "Earn up to 14,000 Avion points (standard)", points: 14000, startDate: "2025-01-01", endDate: "2025-12-31" },
     ],
   },
   {
@@ -1695,6 +1843,16 @@ export const CARD_TEMPLATES: CardTemplate[] = [
       { category: "Travel", multiplier: 1.5, unit: "points", programId: "avios", note: "1.5 Avios per $1" },
       { category: "Everything Else", multiplier: 1, unit: "points", programId: "avios", note: "1 Avios per $1" },
     ],
+    currentOffer: {
+      description: "Earn up to 60,000 Avios — 30,000 on approval + 30,000 on $3,000 spend in 3 months, offer expires August 4, 2026",
+      points: 60000,
+      expiryDate: "2026-08-04",
+      rating: 'elevated',
+    },
+    offerHistory: [
+      { description: "Earn up to 60,000 Avios (elevated)", points: 60000, startDate: "2026-01-01", endDate: "2026-08-04" },
+      { description: "Earn up to 35,000 Avios (standard)", points: 35000, startDate: "2025-01-01", endDate: "2025-12-31" },
+    ],
   },
 
   // ─── SCOTIABANK (additional) ──────────────────────────────────────────────
@@ -1784,6 +1942,17 @@ export const CARD_TEMPLATES: CardTemplate[] = [
       { category: "Gas & Recurring Bills", multiplier: 0.02, unit: "percent", note: "2% cash back" },
       { category: "Everything Else", multiplier: 0.01, unit: "percent", note: "1% cash back" },
     ],
+    firstYearFeeWaived: true,
+    currentOffer: {
+      description: "Earn 15% cash back on first $2,000 in eligible purchases in first 3 months (up to $300) + first year annual fee waived, expires November 1, 2026",
+      points: 300,
+      expiryDate: "2026-11-01",
+      rating: 'elevated',
+    },
+    offerHistory: [
+      { description: "15% cash back on first $2,000 in 3 months (up to $300) + first year free (elevated)", points: 300, startDate: "2026-01-01", endDate: "2026-11-01" },
+      { description: "10% cash back on first $1,000 (up to $100) + first year free (standard)", points: 100, startDate: "2025-01-01", endDate: "2025-12-31" },
+    ],
   },
 
   // ─── BMO (additional) ─────────────────────────────────────────────────────
@@ -1848,6 +2017,17 @@ export const CARD_TEMPLATES: CardTemplate[] = [
       { category: "Recurring Bills", multiplier: 2, unit: "points", programId: "bmo-rewards" },
       { category: "Everything Else", multiplier: 1, unit: "points", programId: "bmo-rewards" },
     ],
+    firstYearFeeWaived: true,
+    currentOffer: {
+      description: "Earn up to 115,000 BMO Rewards points — 60,000 on $5,000 spend in first 110 days + 40,000 on $4,000 spend in next 110 days + 15,000 additional, first year fee waived, expires October 31, 2026",
+      points: 115000,
+      expiryDate: "2026-10-31",
+      rating: 'elevated',
+    },
+    offerHistory: [
+      { description: "Earn up to 115,000 BMO Rewards points + first year free (elevated)", points: 115000, startDate: "2026-01-01", endDate: "2026-10-31" },
+      { description: "Earn up to 60,000 BMO Rewards points + first year free (standard)", points: 60000, startDate: "2025-01-01", endDate: "2025-12-31" },
+    ],
   },
   {
     id: "bmo-air-miles-world-elite",
@@ -1882,6 +2062,10 @@ export const CARD_TEMPLATES: CardTemplate[] = [
       { category: "Grocery & Drug Stores", multiplier: 0.2, unit: "points", programId: "air-miles", note: "2 Air Miles per $10" },
       { category: "Everything Else", multiplier: 0.1, unit: "points", programId: "air-miles", note: "1 Air Mile per $10 spent" },
     ],
+    offerHistory: [
+      { description: "Earn up to 3,000 Air Miles on $4,500 spend in 110 days (elevated)", points: 3000, startDate: "2026-01-01", endDate: "2026-06-01" },
+      { description: "Earn up to 2,000 Air Miles (standard)", points: 2000, startDate: "2025-01-01", endDate: "2025-12-31" },
+    ],
   },
   {
     id: "bmo-cashback-world-elite",
@@ -1898,6 +2082,15 @@ export const CARD_TEMPLATES: CardTemplate[] = [
       { category: "Streaming & Subscriptions", multiplier: 0.02, unit: "percent", note: "2% cash back" },
       { category: "Everything Else", multiplier: 0.01, unit: "percent", note: "1% cash back" },
     ],
+    currentOffer: {
+      description: "Earn up to $480 cash back in the first 12 months — up to $40 cash back per month on $2,000+ monthly spend",
+      points: 480,
+      rating: 'elevated',
+    },
+    offerHistory: [
+      { description: "Earn up to $480 cash back in first 12 months (elevated)", points: 480, startDate: "2026-01-01" },
+      { description: "Earn up to $200 cash back in first 12 months (standard)", points: 200, startDate: "2025-01-01", endDate: "2025-12-31" },
+    ],
   },
 
   // ─── NATIONAL BANK (additional) ───────────────────────────────────────────
@@ -1911,6 +2104,16 @@ export const CARD_TEMPLATES: CardTemplate[] = [
     benefits: [],
     earningRates: [
       { category: "Everything", multiplier: 1, unit: "points", programId: "nbc-rewards", note: "1 À la carte Rewards point per $1" },
+    ],
+    firstYearFeeWaived: true,
+    currentOffer: {
+      description: "Earn $70 cash back + first year annual fee refunded",
+      points: 70,
+      rating: 'standard',
+    },
+    offerHistory: [
+      { description: "$70 cash back + first year fee refunded (standard)", points: 70, startDate: "2026-01-01" },
+      { description: "$50 cash back + first year fee refunded (standard)", points: 50, startDate: "2025-01-01", endDate: "2025-12-31" },
     ],
   },
   {
@@ -2016,6 +2219,15 @@ export const CARD_TEMPLATES: CardTemplate[] = [
       { category: "Groceries, Restaurants & Digital Media", multiplier: 5, unit: "points", programId: "mbna-rewards" },
       { category: "Everything Else", multiplier: 2, unit: "points", programId: "mbna-rewards" },
     ],
+    currentOffer: {
+      description: "Earn up to 30,000 MBNA Rewards points — 20,000 on $2,000 spend in 90 days + 10,000 bonus with paperless statement enrollment",
+      points: 30000,
+      rating: 'standard',
+    },
+    offerHistory: [
+      { description: "Earn up to 30,000 MBNA Rewards points (standard)", points: 30000, startDate: "2026-01-01" },
+      { description: "Earn up to 20,000 MBNA Rewards points (standard)", points: 20000, startDate: "2025-01-01", endDate: "2025-12-31" },
+    ],
   },
   {
     id: "mbna-alaska-world-elite",
@@ -2110,6 +2322,10 @@ export const CARD_TEMPLATES: CardTemplate[] = [
       { category: "Groceries (excl. Walmart/Costco)", multiplier: 0.015, unit: "percent", note: "1.5% CT Money back" },
       { category: "Everything Else", multiplier: 0.005, unit: "percent", note: "0.5% CT Money back" },
     ],
+    offerHistory: [
+      { description: "Earn $150 CT Money welcome bonus (elevated)", points: 150, startDate: "2026-01-01", endDate: "2026-05-21" },
+      { description: "Earn $75 CT Money welcome bonus (standard)", points: 75, startDate: "2025-01-01", endDate: "2025-12-31" },
+    ],
   },
   {
     id: "triangle-mastercard",
@@ -2179,6 +2395,15 @@ export const CARD_TEMPLATES: CardTemplate[] = [
       { category: "Rogers, Fido & Shaw Bills", multiplier: 0.03, unit: "percent", note: "3% cash back on Rogers services" },
       { category: "Everything Else", multiplier: 0.015, unit: "percent", note: "1.5% cash back" },
     ],
+    currentOffer: {
+      description: "Earn $60 cash back welcome bonus",
+      points: 60,
+      rating: 'standard',
+    },
+    offerHistory: [
+      { description: "$60 cash back welcome bonus (standard)", points: 60, startDate: "2026-01-01" },
+      { description: "$25 cash back welcome bonus (standard)", points: 25, startDate: "2025-01-01", endDate: "2025-12-31" },
+    ],
   },
   {
     id: "fido-mastercard",
@@ -2206,6 +2431,16 @@ export const CARD_TEMPLATES: CardTemplate[] = [
     earningRates: [
       { category: "2 Selected Categories (e.g. Groceries, Dining, Gas)", multiplier: 0.02, unit: "percent", note: "2% cash back in up to 3 chosen categories" },
       { category: "Everything Else", multiplier: 0.005, unit: "percent", note: "0.5% cash back" },
+    ],
+    currentOffer: {
+      description: "Earn 10% cash back on first $1,000 spent in first 60 days (up to $100 cash back), expires September 30, 2026",
+      points: 100,
+      expiryDate: "2026-09-30",
+      rating: 'elevated',
+    },
+    offerHistory: [
+      { description: "10% cash back on first $1,000 in 60 days (up to $100) (elevated)", points: 100, startDate: "2026-01-01", endDate: "2026-09-30" },
+      { description: "10% cash back on first $500 in 60 days (up to $50) (standard)", points: 50, startDate: "2025-01-01", endDate: "2025-12-31" },
     ],
   },
 
@@ -2392,6 +2627,16 @@ export const CARD_TEMPLATES: CardTemplate[] = [
       { category: "Utilities & Streaming", multiplier: 0.02, unit: "percent", note: "2% cash back" },
       { category: "Everything Else", multiplier: 0.01, unit: "percent", note: "1% cash back" },
     ],
+    currentOffer: {
+      description: "Earn 10,000 bonus points in your first year — limited-time offer valid June 1–August 31, 2026",
+      points: 10000,
+      expiryDate: "2026-08-31",
+      rating: 'elevated',
+    },
+    offerHistory: [
+      { description: "10,000 bonus points in first year (elevated)", points: 10000, startDate: "2026-06-01", endDate: "2026-08-31" },
+      { description: "5,000 bonus points (standard)", points: 5000, startDate: "2025-01-01", endDate: "2025-12-31" },
+    ],
   },
   {
     id: "meridian-travel-infinite",
@@ -2415,6 +2660,15 @@ export const CARD_TEMPLATES: CardTemplate[] = [
       { category: "Travel", multiplier: 3.5, unit: "points", programId: "meridian-rewards" },
       { category: "Groceries & Dining", multiplier: 2, unit: "points", programId: "meridian-rewards" },
       { category: "Everything Else", multiplier: 1, unit: "points", programId: "meridian-rewards" },
+    ],
+    currentOffer: {
+      description: "Earn 7,000 bonus points on your first eligible purchase",
+      points: 7000,
+      rating: 'standard',
+    },
+    offerHistory: [
+      { description: "Earn 7,000 bonus points on first purchase (standard)", points: 7000, startDate: "2026-01-01" },
+      { description: "Earn 5,000 bonus points on first purchase (standard)", points: 5000, startDate: "2025-01-01", endDate: "2025-12-31" },
     ],
   },
 
@@ -2479,6 +2733,14 @@ export const CARD_TEMPLATES: CardTemplate[] = [
       { category: "Walmart.ca & In-Store (Grocery Pickup/Delivery)", multiplier: 0.0125, unit: "percent", note: "1.25% Walmart Reward Dollars" },
       { category: "Everywhere Else", multiplier: 0.01, unit: "percent", note: "1% Walmart Reward Dollars" },
     ],
+    currentOffer: {
+      description: "Earn $25 in Walmart Reward Dollars after $75 in net purchases within the first 30 days",
+      points: 25,
+      rating: 'standard',
+    },
+    offerHistory: [
+      { description: "$25 Walmart Reward Dollars after $75 spend in 30 days (standard)", points: 25, startDate: "2026-01-01" },
+    ],
   },
 
   // ─── SIMPLII FINANCIAL ────────────────────────────────────────────────────
@@ -2495,6 +2757,16 @@ export const CARD_TEMPLATES: CardTemplate[] = [
       { category: "Groceries & Drug Stores", multiplier: 0.015, unit: "percent", note: "1.5% cash back" },
       { category: "Gas & Pre-authorized Payments", multiplier: 0.015, unit: "percent", note: "1.5% cash back" },
       { category: "Everything Else", multiplier: 0.005, unit: "percent", note: "0.5% cash back" },
+    ],
+    currentOffer: {
+      description: "Earn 20% cash back on all eligible purchases in the first 3 months (up to $92.50 cash back on $500 spend), expires September 30, 2026",
+      points: 93,
+      expiryDate: "2026-09-30",
+      rating: 'elevated',
+    },
+    offerHistory: [
+      { description: "20% cash back on first $500 in 3 months (up to $92.50) (elevated)", points: 93, startDate: "2026-01-01", endDate: "2026-09-30" },
+      { description: "10% cash back on first $500 in 60 days (up to $50) (standard)", points: 50, startDate: "2025-01-01", endDate: "2025-12-31" },
     ],
   },
 
@@ -2530,6 +2802,15 @@ export const CARD_TEMPLATES: CardTemplate[] = [
       { category: "Gas, Groceries & Travel", multiplier: 3, unit: "points", programId: "atb-rewards", note: "3× ATB Rewards points" },
       { category: "Dining & Entertainment", multiplier: 1.5, unit: "points", programId: "atb-rewards" },
       { category: "Everything Else", multiplier: 1, unit: "points", programId: "atb-rewards" },
+    ],
+    currentOffer: {
+      description: "Earn 40,000 ATB Rewards points ($200 value) on your first eligible purchase",
+      points: 40000,
+      rating: 'standard',
+    },
+    offerHistory: [
+      { description: "Earn 40,000 ATB Rewards points ($200 value) on first purchase (standard)", points: 40000, startDate: "2026-01-01" },
+      { description: "Earn 25,000 ATB Rewards points on first purchase (standard)", points: 25000, startDate: "2025-01-01", endDate: "2025-12-31" },
     ],
   },
 ];
