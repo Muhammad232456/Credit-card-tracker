@@ -4,6 +4,7 @@ import type { UserCard, UserData } from '../types';
 import { effectiveBenefitValue, cardAge } from '../utils';
 import AddCard from './AddCard';
 import CardDetail from './CardDetail';
+import { trackCardAdded, trackCardRemoved, trackCardDetailViewed, trackAddCardFlowStarted, updatePersonProperties } from '../analytics';
 
 interface Props {
   data: UserData;
@@ -67,10 +68,13 @@ export default function CardList({ data, update, onCompare, isTablet }: Props) {
   const [toast, setToast] = useState<string | null>(null);
 
   function addCard(cardId: string) {
-    update(prev => ({
-      ...prev,
-      cards: [...prev.cards, { cardId, benefitUsage: {}, status: 'active' as const }],
-    }));
+    update(prev => {
+      const next = [...prev.cards, { cardId, benefitUsage: {}, status: 'active' as const }];
+      const t = getCardById(cardId);
+      if (t) trackCardAdded(cardId, t.name, t.issuer);
+      updatePersonProperties({ cards_count: next.length });
+      return { ...prev, cards: next };
+    });
     setAddingCard(false);
     setSelectedCardId(cardId);
     const name = getCardById(cardId)?.name ?? 'Card';
@@ -79,7 +83,13 @@ export default function CardList({ data, update, onCompare, isTablet }: Props) {
   }
 
   function removeCard(cardId: string) {
-    update(prev => ({ ...prev, cards: prev.cards.filter(c => c.cardId !== cardId) }));
+    const t = getCardById(cardId);
+    if (t) trackCardRemoved(cardId, t.name, t.issuer);
+    update(prev => {
+      const next = prev.cards.filter(c => c.cardId !== cardId);
+      updatePersonProperties({ cards_count: next.length });
+      return { ...prev, cards: next };
+    });
     setSelectedCardId(null);
   }
 
@@ -154,7 +164,7 @@ export default function CardList({ data, update, onCompare, isTablet }: Props) {
     return (
       <button
         key={userCard.cardId}
-        onClick={() => setSelectedCardId(userCard.cardId)}
+        onClick={() => { setSelectedCardId(userCard.cardId); trackCardDetailViewed(userCard.cardId, template.name, template.issuer); }}
         className={`w-full text-left bg-white border border-gray-200 rounded-xl overflow-hidden hover:shadow-md transition-shadow ${dimmed ? 'opacity-50' : ''}`}
       >
         <div className={`${headerBg} px-4 py-3 flex items-center justify-between`}>
@@ -260,7 +270,7 @@ export default function CardList({ data, update, onCompare, isTablet }: Props) {
 
       <div className="flex gap-2">
         <button
-          onClick={() => setAddingCard(true)}
+          onClick={() => { setAddingCard(true); trackAddCardFlowStarted(); }}
           className="flex-1 py-3 border-2 border-dashed border-gray-300 rounded-xl text-gray-500 hover:border-blue-400 hover:text-blue-600 transition-colors text-sm font-medium"
         >
           + Add Another Card

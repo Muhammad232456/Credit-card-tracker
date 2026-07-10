@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { POINTS_PROGRAMS } from '../data/programs';
 import type { CardTemplate, UserCard, UserSettings, UserSupplementaryCard, WelcomeBonusTier } from '../types';
+import { trackBenefitMarked, trackCardRemoved } from '../analytics';
 import {
   effectiveBenefitValue, cardAge,
   SPEND_CATS, bestRateForCat, rateToCpd,
@@ -836,7 +837,7 @@ export default function CardDetail({
                         <input
                           type="checkbox"
                           checked={used > 0}
-                          onChange={e => onUpdateUsage(benefit.id, e.target.checked ? 1 : 0)}
+                          onChange={e => { const c = e.target.checked ? 1 : 0; onUpdateUsage(benefit.id, c); trackBenefitMarked(template.id, benefit.id, benefit.name, c); }}
                           className="w-4 h-4 rounded accent-blue-600"
                         />
                         <span className="text-sm text-gray-600">Used this year</span>
@@ -844,13 +845,13 @@ export default function CardDetail({
                     ) : (
                       <div className="flex items-center gap-3">
                         <button
-                          onClick={() => onUpdateUsage(benefit.id, Math.max(0, used - 1))}
+                          onClick={() => { const c = Math.max(0, used - 1); onUpdateUsage(benefit.id, c); trackBenefitMarked(template.id, benefit.id, benefit.name, c); }}
                           disabled={used <= 0}
                           className="w-8 h-8 rounded-full border border-gray-300 text-gray-600 hover:bg-gray-100 disabled:opacity-30 font-bold text-lg leading-none"
                         >−</button>
                         <span className="font-mono font-bold text-lg w-12 text-center">{used}/{maxUses}</span>
                         <button
-                          onClick={() => onUpdateUsage(benefit.id, Math.min(maxUses, used + 1))}
+                          onClick={() => { const c = Math.min(maxUses, used + 1); onUpdateUsage(benefit.id, c); trackBenefitMarked(template.id, benefit.id, benefit.name, c); }}
                           disabled={used >= maxUses}
                           className="w-8 h-8 rounded-full border border-gray-300 text-gray-600 hover:bg-gray-100 disabled:opacity-30 font-bold text-lg leading-none"
                         >+</button>
@@ -963,7 +964,7 @@ export default function CardDetail({
           {isActive ? '📁 Mark as Inactive (keep history)' : '✅ Reactivate Card'}
         </button>
         <div className="flex items-center justify-between">
-          <button onClick={onRemove} className="text-sm text-red-500 hover:text-red-700 font-medium">
+          <button onClick={() => { trackCardRemoved(template.id, template.name, template.issuer); onRemove(); }} className="text-sm text-red-500 hover:text-red-700 font-medium">
             🗑 Remove card permanently
           </button>
           <p className="text-xs text-gray-400">Verified: {template.lastVerified}</p>

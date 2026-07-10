@@ -1,5 +1,6 @@
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { POINTS_PROGRAMS } from '../data/programs';
+import { trackRedemptionEvaluated } from '../analytics';
 
 interface Props {
   onBack?: () => void;
@@ -75,6 +76,18 @@ export default function RedemptionEvaluator({ onBack, initialProgramId }: Props)
     good: `✓ Use your points — solid value above benchmark.`,
     poor: `💡 Pay cash instead — save your points for a better redemption.`,
   };
+
+  const trackedRef = useRef<string | null>(null);
+  useEffect(() => {
+    if (cpp === null || rating === null || !selected) return;
+    const key = `${programId}-${cpp.toFixed(4)}-${rating}`;
+    if (trackedRef.current === key) return;
+    trackedRef.current = key;
+    const timer = setTimeout(() => {
+      trackRedemptionEvaluated(programId, cpp, rating, cash, pts);
+    }, 800);
+    return () => clearTimeout(timer);
+  }, [cpp, rating, programId, cash, pts, selected]);
 
   function switchTab(t: 'airline' | 'hotel') {
     setTab(t);

@@ -1,6 +1,7 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { TRANSFER_PARTNERS } from '../data/transfers';
 import { POINTS_PROGRAMS } from '../data/programs';
+import { trackTransferSourceViewed } from '../analytics';
 
 interface Props {
   focusProgram?: string;
@@ -19,6 +20,10 @@ const ISSUER_COLORS: Record<string, string> = {
 
 export default function TransferMap({ focusProgram }: Props) {
   const [activeSource, setActiveSource] = useState<string>(focusProgram ?? 'amex-mr');
+
+  useEffect(() => {
+    trackTransferSourceViewed(activeSource);
+  }, [activeSource]);
 
   const sourceProgram = POINTS_PROGRAMS.find(p => p.id === activeSource);
   const partners = TRANSFER_PARTNERS.filter(tp =>

@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
 import { POINTS_PROGRAMS } from '../data/programs';
 import type { UserData, PointsBalance } from '../types';
+import { trackProgramAdded, trackProgramRemoved, trackBalanceUpdated, updatePersonProperties } from '../analytics';
 
 interface Props {
   data: UserData;
@@ -44,13 +45,13 @@ export default function PointsTracker({ data, update, onViewTransfers, onEvaluat
   }
 
   function addProgram(programId: string, balance: number) {
-    update(prev => ({
-      ...prev,
-      pointsBalances: [
-        ...prev.pointsBalances,
-        { programId, balance, lastUpdated: new Date().toISOString() },
-      ],
-    }));
+    const prog = POINTS_PROGRAMS.find(p => p.id === programId);
+    update(prev => {
+      const next = [...prev.pointsBalances, { programId, balance, lastUpdated: new Date().toISOString() }];
+      if (prog) trackProgramAdded(programId, prog.name, balance);
+      updatePersonProperties({ programs_count: next.length });
+      return { ...prev, pointsBalances: next };
+    });
     setAddingProgram(false);
     setSelectedForAdd(null);
     setAddBalance('');
@@ -69,13 +70,17 @@ export default function PointsTracker({ data, update, onViewTransfers, onEvaluat
   }, [selectedForAdd]);
 
   function removeProgram(programId: string) {
-    update(prev => ({
-      ...prev,
-      pointsBalances: prev.pointsBalances.filter(b => b.programId !== programId),
-    }));
+    const prog = POINTS_PROGRAMS.find(p => p.id === programId);
+    update(prev => {
+      const next = prev.pointsBalances.filter(b => b.programId !== programId);
+      if (prog) trackProgramRemoved(programId, prog.name);
+      updatePersonProperties({ programs_count: next.length });
+      return { ...prev, pointsBalances: next };
+    });
   }
 
   function updateBalance(programId: string, balance: number) {
+    trackBalanceUpdated(programId, balance);
     update(prev => ({
       ...prev,
       pointsBalances: prev.pointsBalances.map(b =>
