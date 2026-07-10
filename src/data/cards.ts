@@ -281,6 +281,16 @@ export const CARD_TEMPLATES: CardTemplate[] = [
       { type: "Purchase Protection", note: "90 days" },
       { type: "Extended Warranty", note: "Up to 1 additional year" },
     ],
+    currentOffer: {
+      description: "Earn up to 35,000 Aeroplan points — 10,000 on first purchase + 25,000 on $3,000 spend in 3 months",
+      points: 35000,
+      rating: 'standard',
+    },
+    offerHistory: [
+      { description: "Earn up to 35,000 Aeroplan points (standard)", points: 35000, startDate: "2026-01-01" },
+      { description: "Earn up to 40,000 Aeroplan points (elevated)", points: 40000, startDate: "2024-09-01", endDate: "2024-12-31" },
+      { description: "Earn up to 30,000 Aeroplan points (standard)", points: 30000, startDate: "2024-01-01", endDate: "2024-08-31" },
+    ],
   },
   {
     id: "amex-aeroplan-reserve",
@@ -355,6 +365,18 @@ export const CARD_TEMPLATES: CardTemplate[] = [
       { type: "Flight Delay", maxCoverage: "$1,000" },
       { type: "Purchase Protection", note: "120 days" },
       { type: "Extended Warranty", note: "Up to 1 additional year" },
+    ],
+    currentOffer: {
+      description: "Earn up to 95,000 Aeroplan points — 40,000 on approval + 25,000 on $3,000 spend in 3 months + 30,000 on $12,000 spend in 12 months",
+      points: 95000,
+      expiryDate: "2026-07-28",
+      rating: 'all-time-high',
+    },
+    offerHistory: [
+      { description: "Earn up to 95,000 Aeroplan points (all-time high)", points: 95000, startDate: "2026-05-01", endDate: "2026-07-28" },
+      { description: "Earn up to 65,000 Aeroplan points (elevated)", points: 65000, startDate: "2026-01-01", endDate: "2026-04-30" },
+      { description: "Earn up to 55,000 Aeroplan points (standard)", points: 55000, startDate: "2025-01-01", endDate: "2025-12-31" },
+      { description: "Earn up to 85,000 Aeroplan points (elevated)", points: 85000, startDate: "2024-09-01", endDate: "2024-12-31" },
     ],
   },
   {
@@ -544,6 +566,16 @@ export const CARD_TEMPLATES: CardTemplate[] = [
       { type: "Purchase Protection", note: "120 days" },
       { type: "Extended Warranty", note: "Up to 2 additional years" },
     ],
+    currentOffer: {
+      description: "Earn up to 85,000 Aeroplan points — 20,000 on first purchase + 40,000 on $10,000 spend in 6 months + 25,000 on $25,000 spend in 12 months",
+      points: 85000,
+      rating: 'elevated',
+    },
+    offerHistory: [
+      { description: "Earn up to 85,000 Aeroplan points (elevated)", points: 85000, startDate: "2026-01-01" },
+      { description: "Earn up to 60,000 Aeroplan points (standard)", points: 60000, startDate: "2025-01-01", endDate: "2025-12-31" },
+      { description: "Earn up to 100,000 Aeroplan points (all-time high)", points: 100000, startDate: "2024-09-01", endDate: "2024-12-31" },
+    ],
   },
 
   // CIBC
@@ -644,6 +676,16 @@ export const CARD_TEMPLATES: CardTemplate[] = [
         resetDate: "calendar-year",
         category: "bag",
       },
+    ],
+    currentOffer: {
+      description: "Earn up to 75,000 Aeroplan points — 20,000 on first purchase + 30,000 on $7,500 spend in 6 months + 25,000 on $30,000 spend in 12 months",
+      points: 75000,
+      rating: 'elevated',
+    },
+    offerHistory: [
+      { description: "Earn up to 75,000 Aeroplan points (elevated)", points: 75000, startDate: "2026-01-01" },
+      { description: "Earn up to 60,000 Aeroplan points (standard)", points: 60000, startDate: "2025-01-01", endDate: "2025-12-31" },
+      { description: "Earn up to 115,000 Aeroplan points (all-time high)", points: 115000, startDate: "2024-09-01", endDate: "2024-12-31" },
     ],
   },
 
@@ -754,6 +796,16 @@ export const CARD_TEMPLATES: CardTemplate[] = [
       { type: "Flight Delay", maxCoverage: "$1,000" },
       { type: "Purchase Protection", note: "120 days" },
       { type: "Extended Warranty", note: "Up to 2 additional years" },
+    ],
+    currentOffer: {
+      description: "Earn up to 35,000 Avion points — 35,000 on approval",
+      points: 35000,
+      rating: 'standard',
+    },
+    offerHistory: [
+      { description: "Earn up to 35,000 Avion points (standard)", points: 35000, startDate: "2026-01-01" },
+      { description: "Earn up to 55,000 Avion points (elevated)", points: 55000, startDate: "2024-09-01", endDate: "2024-12-31" },
+      { description: "Earn up to 35,000 Avion points (standard)", points: 35000, startDate: "2024-01-01", endDate: "2024-08-31" },
     ],
   },
 
@@ -915,6 +967,16 @@ export const CARD_TEMPLATES: CardTemplate[] = [
     earningRates: [
       { category: "Dining, Groceries, Gas & Transit", multiplier: 5, unit: "points", programId: "bmo-rewards", note: "5× BMO Rewards points" },
       { category: "Everything Else", multiplier: 1, unit: "points", programId: "bmo-rewards" },
+    ],
+    currentOffer: {
+      description: "Earn up to 70,000 BMO Rewards points — 50,000 on $5,000 spend in 3 months + 20,000 on $25,000 annual spend, first year annual fee waived",
+      points: 70000,
+      rating: 'elevated',
+    },
+    offerHistory: [
+      { description: "Earn up to 70,000 BMO Rewards points + first year free (elevated)", points: 70000, startDate: "2026-01-01" },
+      { description: "Earn up to 40,000 BMO Rewards points (standard)", points: 40000, startDate: "2025-01-01", endDate: "2025-12-31" },
+      { description: "Earn up to 60,000 BMO Rewards points (elevated)", points: 60000, startDate: "2024-09-01", endDate: "2024-12-31" },
     ],
   },
   {
@@ -1153,6 +1215,16 @@ export const CARD_TEMPLATES: CardTemplate[] = [
     ],
     earningRates: [
       { category: "Everything", multiplier: 1.25, unit: "points", programId: "amex-mr", note: "1.25× on all eligible purchases" },
+    ],
+    currentOffer: {
+      description: "Earn up to 120,000 Membership Rewards points — 80,000 on $15,000 spend in 3 months + 40,000 on $60,000 spend in 12 months",
+      points: 120000,
+      rating: 'elevated',
+    },
+    offerHistory: [
+      { description: "Earn up to 120,000 MR points (elevated)", points: 120000, startDate: "2026-01-01" },
+      { description: "Earn up to 100,000 MR points (standard)", points: 100000, startDate: "2025-01-01", endDate: "2025-12-31" },
+      { description: "Earn up to 180,000 MR points (all-time high)", points: 180000, startDate: "2024-09-01", endDate: "2024-12-31" },
     ],
   },
 
@@ -1582,6 +1654,17 @@ export const CARD_TEMPLATES: CardTemplate[] = [
       { category: "WestJet Purchases", multiplier: 0.02, unit: "percent", note: "2% WestJet dollars on WestJet purchases" },
       { category: "Everything Else", multiplier: 0.015, unit: "percent", note: "1.5% WestJet dollars on all other purchases" },
     ],
+    currentOffer: {
+      description: "Earn up to $350 WestJet dollars — $250 on first purchase + $100 on $5,000 spend in 3 months",
+      points: 350,
+      expiryDate: "2026-11-04",
+      rating: 'elevated',
+    },
+    offerHistory: [
+      { description: "Earn up to $350 WestJet dollars (elevated)", points: 350, startDate: "2026-06-01", endDate: "2026-11-04" },
+      { description: "Earn up to $250 WestJet dollars (standard)", points: 250, startDate: "2025-01-01", endDate: "2026-05-31" },
+      { description: "Earn up to $450 WestJet dollars (all-time high)", points: 450, startDate: "2024-09-01", endDate: "2024-12-31" },
+    ],
   },
   {
     id: "rbc-british-airways",
@@ -1658,6 +1741,16 @@ export const CARD_TEMPLATES: CardTemplate[] = [
       { type: "Flight Delay", maxCoverage: "$500" },
       { type: "Purchase Protection", note: "90 days" },
       { type: "Extended Warranty", note: "Up to 1 additional year" },
+    ],
+    currentOffer: {
+      description: "Earn up to 30,000 Scene+ points — 15,000 on $500 spend in first 3 months + 15,000 on $10,000 spend in 12 months",
+      points: 30000,
+      rating: 'standard',
+    },
+    offerHistory: [
+      { description: "Earn up to 30,000 Scene+ points (standard)", points: 30000, startDate: "2026-01-01" },
+      { description: "Earn up to 45,000 Scene+ points (elevated)", points: 45000, startDate: "2024-09-01", endDate: "2024-12-31" },
+      { description: "Earn up to 25,000 Scene+ points (standard)", points: 25000, startDate: "2024-01-01", endDate: "2024-08-31" },
     ],
   },
   {
