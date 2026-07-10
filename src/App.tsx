@@ -102,7 +102,7 @@ export default function App() {
         </div>
       )}
 
-      <main className="flex-1 max-w-2xl mx-auto w-full px-4 py-6 pb-24 sm:pb-6">
+      <main className="flex-1 max-w-2xl mx-auto w-full px-4 py-6 pb-28 sm:pb-6" style={{ paddingBottom: 'calc(7rem + env(safe-area-inset-bottom))' }}>
         {activeTab === 'dashboard' && (
           <Dashboard data={data} onNavigate={navigate} onStartQuiz={() => setShowQuiz(true)} />
         )}
@@ -158,7 +158,7 @@ export default function App() {
       <InstallBanner />
       <Analytics />
 
-      <nav className="sm:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 flex z-10">
+      <nav className="sm:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 flex z-10 pb-[env(safe-area-inset-bottom)]">
         {TABS.filter(t => t.id !== 'settings').map(tab => (
           <button
             key={tab.id}
