@@ -116,8 +116,8 @@ export default function AddCard({ existingCardIds, onAdd, onCancel }: Props) {
                   : 'bg-white border-gray-200 hover:border-blue-400 hover:bg-blue-50'
               }`}
             >
-              <div className="flex items-start justify-between gap-4">
-                <div>
+              <div className="flex items-start justify-between gap-3 min-w-0">
+                <div className="min-w-0 flex-1">
                   <span className={`text-xs px-2 py-0.5 rounded-full font-medium mr-2 ${ISSUER_COLORS[card.issuer]}`}>
                     {card.issuer}
                   </span>
@@ -132,8 +132,8 @@ export default function AddCard({ existingCardIds, onAdd, onCancel }: Props) {
                     </p>
                   )}
                 </div>
-                <div className="text-right shrink-0">
-                  <p className="font-mono font-bold text-gray-900">
+                <div className="text-right shrink-0 max-w-[42%]">
+                  <p className="font-mono font-bold text-gray-900 text-sm">
                     {card.feeFrequency === 'monthly'
                       ? `$${(card.annualFee / 12).toFixed(2)}/mo`
                       : card.annualFee === 0 ? 'No fee' : `$${card.annualFee.toFixed(0)}/yr`}
@@ -142,7 +142,7 @@ export default function AddCard({ existingCardIds, onAdd, onCancel }: Props) {
                     <p className="text-xs text-emerald-600 font-medium">1st year free</p>
                   )}
                   {card.annualFeeNote && !card.firstYearFeeWaived && (
-                    <p className="text-xs text-gray-500">{card.annualFeeNote}</p>
+                    <p className="text-xs text-gray-500 leading-tight line-clamp-2">{card.annualFeeNote}</p>
                   )}
                   {card.currentOffer && (() => {
                     const r = card.currentOffer!.rating;
