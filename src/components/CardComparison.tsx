@@ -101,6 +101,44 @@ export default function CardComparison({ onBack }: Props) {
             ))}
           </div>
 
+          {/* Current Offers */}
+          {selected.some(t => t.currentOffer) && (
+            <div className="bg-white border border-gray-200 rounded-xl overflow-hidden">
+              <div className="px-4 py-2 bg-gray-50 border-b border-gray-100">
+                <p className="text-xs font-semibold text-gray-500 uppercase tracking-wide">Current Welcome Offer</p>
+              </div>
+              <div className={`grid divide-x divide-gray-100 ${cols}`}>
+                {selected.map(t => {
+                  const offer = t.currentOffer;
+                  if (!offer) return (
+                    <div key={t.id} className="p-3">
+                      <p className="text-xs text-gray-300 italic">No current offer</p>
+                    </div>
+                  );
+                  const ratingColors = {
+                    'standard':      { badge: 'bg-amber-100 text-amber-700',   border: 'border-amber-200' },
+                    'elevated':      { badge: 'bg-orange-100 text-orange-700',  border: 'border-orange-200' },
+                    'all-time-high': { badge: 'bg-emerald-100 text-emerald-700', border: 'border-emerald-300' },
+                  };
+                  const rc = offer.rating ? ratingColors[offer.rating] : ratingColors['standard'];
+                  return (
+                    <div key={t.id} className="p-3 space-y-1.5">
+                      {offer.rating && (
+                        <span className={`inline-block text-xs font-semibold px-2 py-0.5 rounded-full ${rc.badge}`}>
+                          {offer.rating === 'all-time-high' ? 'All-Time High' : offer.rating === 'elevated' ? 'Elevated' : 'Standard'}
+                        </span>
+                      )}
+                      <p className="text-xs text-gray-700 leading-snug">{offer.description}</p>
+                      {offer.expiryDate && (
+                        <p className="text-xs text-red-500 font-medium">Expires {offer.expiryDate}</p>
+                      )}
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          )}
+
           {/* Earn rates */}
           <div className="bg-white border border-gray-200 rounded-xl overflow-hidden">
             <div className="px-4 py-2 bg-gray-50 border-b border-gray-100">
