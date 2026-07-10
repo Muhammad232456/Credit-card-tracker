@@ -22,8 +22,8 @@ export const POINTS_PROGRAMS: PointsProgram[] = [
     sweetSpots: "Dynamic pricing makes value unpredictable. Best used for last-minute Delta flights or Virgin Atlantic Upper Class bookings." },
 
   { id: "etihad-guest",       name: "Etihad Guest",                     type: "airline",      alliance: null,       defaultCpp: 1.3, excellentCpp: 2.0, isTransferable: false,
-    note: "Amex MR transfers ending June 30, 2026",
-    sweetSpots: "Business class sweet spots on Etihad and partner awards. Transfer before June 30, 2026 — Amex MR partnership ending." },
+    note: "Amex MR transfer partnership ended June 20, 2026",
+    sweetSpots: "Business class sweet spots on Etihad and partner awards. No longer transferable from Canadian Amex MR as of June 20, 2026." },
 
   { id: "westjet-dollars",    name: "WestJet Dollars",                  type: "airline",      alliance: null,       defaultCpp: 1.0, excellentCpp: 1.2, isTransferable: false,
     sweetSpots: "Essentially cash-equivalent (1 WestJet $ = $1 CAD). Best value on WestJet Premium fares where cash prices are high." },

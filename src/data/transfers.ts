@@ -83,10 +83,10 @@ export const TRANSFER_PARTNERS: TransferPartner[] = [
     transfersFrom: [
       {
         sourceProgram: "amex-mr",
-        ratio: [1, 1],
+        ratio: [4, 3],
         minimumTransfer: 1000,
         transferSpeed: "Instant–24h",
-        notes: "Lower cpp value. Useful for domestic US",
+        notes: "1,000 MR = 750 SkyMiles. Lower value — useful for domestic US or last-minute Delta flights",
       },
     ],
   },
@@ -95,16 +95,7 @@ export const TRANSFER_PARTNERS: TransferPartner[] = [
     name: "Etihad Guest",
     type: "airline",
     alliance: null,
-    transfersFrom: [
-      {
-        sourceProgram: "amex-mr",
-        ratio: [1, 1],
-        minimumTransfer: 1000,
-        transferSpeed: "Instant–24h",
-        notes: "ENDING JUNE 30, 2026",
-        expiryDate: "2026-06-30",
-      },
-    ],
+    transfersFrom: [],
   },
   {
     id: "hilton-honors",
