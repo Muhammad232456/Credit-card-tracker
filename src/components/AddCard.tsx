@@ -40,6 +40,8 @@ const ISSUER_COLORS: Record<string, string> = {
   ATB: 'bg-amber-700 text-white',
 };
 
+const isMobile = () => window.matchMedia('(max-width: 639px)').matches;
+
 export default function AddCard({ existingCardIds, onAdd, onCancel }: Props) {
   const [selectedIssuer, setSelectedIssuer] = useState<Issuer | null>(null);
   const [search, setSearch] = useState('');
@@ -107,7 +109,7 @@ export default function AddCard({ existingCardIds, onAdd, onCancel }: Props) {
           {filtered.map(card => (
             <button
               key={card.id}
-              onClick={() => setPendingId(card.id === pendingId ? null : card.id)}
+              onClick={() => isMobile() ? onAdd(card.id) : setPendingId(card.id === pendingId ? null : card.id)}
               className={`w-full text-left border rounded-xl p-4 transition-all ${
                 card.id === pendingId
                   ? 'border-blue-500 bg-blue-50 ring-2 ring-blue-200'
