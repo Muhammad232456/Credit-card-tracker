@@ -1191,12 +1191,13 @@ export const CARD_TEMPLATES: CardTemplate[] = [
       { category: "Everything Else", multiplier: 0.0125, unit: "percent", note: "1.25% cash back" },
     ],
     currentOffer: {
-      description: "Earn 10% cash back on your first $2,000 spent in the first 3 months (up to $200 cash back)",
-      points: 200,
-      rating: 'standard',
+      description: "Earn up to $250 in bonus value — 10% cash back on first $2,000 in 3 months (up to $200) + $50 statement credit in month 13",
+      points: 250,
+      rating: 'elevated',
     },
     offerHistory: [
-      { description: "10% cash back on first $2,000 in 3 months (up to $200)", points: 200, startDate: "2026-01-01" },
+      { description: "Up to $250 bonus: $200 cashback (10%/3mo) + $50 statement credit month 13 (elevated)", points: 250, startDate: "2026-01-01" },
+      { description: "10% cash back on first $2,000 in 3 months (up to $200) (standard)", points: 200, startDate: "2025-01-01", endDate: "2025-12-31" },
     ],
   },
   {
