@@ -26,3 +26,28 @@
   .no-scrollbar::-webkit-scrollbar { display: none; }
   .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 }
+
+/* Touch devices — faster tap response, no double-tap zoom */
+@media (pointer: coarse) {
+  button, a, [role="button"] {
+    touch-action: manipulation;
+    min-height: 44px;
+  }
+}
+
+/* iPad / Android tablet — slightly larger base text */
+[data-device="ipad"],
+[data-device="android-tablet"] {
+  font-size: 15px;
+}
+
+/* iPhone — momentum scroll in scrollable containers */
+[data-device="iphone"] .overflow-y-auto,
+[data-device="iphone"] .overflow-x-auto {
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Desktop — restore pointer cursor on buttons (touch devices don't need it) */
+[data-device="desktop"] button {
+  cursor: pointer;
+}

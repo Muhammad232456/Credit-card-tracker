@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useStorage } from './hooks/useStorage';
+import { useDevice } from './hooks/useDevice';
 import Dashboard from './components/Dashboard';
 import PointsTracker from './components/PointsTracker';
 import TransferMap from './components/TransferMap';
@@ -31,6 +32,7 @@ export default function App() {
   const [transferFocus, setTransferFocus] = useState<string | undefined>(undefined);
   const [redeemProgramId, setRedeemProgramId] = useState<string | undefined>(undefined);
   const { data, update, exportData, importData, resetYear, clearAll } = useStorage();
+  const device = useDevice();
 
   function navigate(tab: string) {
     setActiveTab(tab as Tab);
@@ -56,7 +58,7 @@ export default function App() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 flex flex-col">
+    <div className="min-h-screen bg-gray-50 flex flex-col" data-device={device.deviceType}>
       <header className="bg-slate-900 text-white px-4 py-3 flex items-center justify-between sticky top-0 z-10">
         <button
           onClick={() => navigate('dashboard')}
@@ -107,7 +109,7 @@ export default function App() {
           <Dashboard data={data} onNavigate={navigate} onStartQuiz={() => setShowQuiz(true)} />
         )}
         {activeTab === 'cards' && (
-          <CardList data={data} update={update} onCompare={() => setActiveTab('compare')} />
+          <CardList data={data} update={update} onCompare={() => setActiveTab('compare')} isTablet={device.isTablet} />
         )}
         {activeTab === 'compare' && (
           <CardComparison onBack={() => setActiveTab('cards')} />

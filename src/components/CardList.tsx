@@ -9,6 +9,7 @@ interface Props {
   data: UserData;
   update: (updater: (prev: UserData) => UserData) => void;
   onCompare?: () => void;
+  isTablet?: boolean;
 }
 
 const ISSUER_COLORS: Record<string, string> = {
@@ -59,7 +60,7 @@ function getEffectiveRenewal(userCard: UserCard, feeFreq: 'monthly' | 'annual' =
   return null;
 }
 
-export default function CardList({ data, update, onCompare }: Props) {
+export default function CardList({ data, update, onCompare, isTablet }: Props) {
   const [addingCard, setAddingCard] = useState(false);
   const [selectedCardId, setSelectedCardId] = useState<string | null>(null);
   const [showInactive, setShowInactive] = useState(false);
@@ -253,7 +254,7 @@ export default function CardList({ data, update, onCompare }: Props) {
         </div>
       )}
       {/* Active cards */}
-      <div className="space-y-3">
+      <div className={isTablet ? 'grid grid-cols-2 gap-3' : 'space-y-3'}>
         {activeCards.map(c => renderCardRow(c, false))}
       </div>
 
