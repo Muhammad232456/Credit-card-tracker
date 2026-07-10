@@ -76,7 +76,7 @@ export default function AddCard({ existingCardIds, onAdd, onCancel }: Props) {
         autoFocus
       />
 
-      <div className="flex flex-wrap gap-2">
+      <div className="flex gap-2 overflow-x-auto pb-1 sm:flex-wrap sm:pb-0 no-scrollbar">
         <button
           onClick={() => setSelectedIssuer(null)}
           className={`px-3 py-1 rounded-full text-xs font-medium border transition-colors ${
@@ -158,7 +158,7 @@ export default function AddCard({ existingCardIds, onAdd, onCancel }: Props) {
       {pendingId && (() => {
         const card = CARD_TEMPLATES.find(c => c.id === pendingId)!;
         return (
-          <div className="sticky bottom-0 bg-white border-t border-gray-200 rounded-b-xl px-4 py-3 flex items-center justify-between gap-3 shadow-lg">
+          <div className="sticky bottom-16 sm:bottom-0 bg-white border-t border-gray-200 rounded-b-xl px-4 py-3 flex items-center justify-between gap-3 shadow-lg">
             <p className="text-sm text-gray-700 truncate">
               <span className="font-semibold">{card.name}</span>
             </p>
