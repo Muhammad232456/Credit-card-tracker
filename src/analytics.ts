@@ -7,7 +7,7 @@ export function initAnalytics() {
     posthog.init(KEY, {
       api_host: 'https://eu.i.posthog.com',
       person_profiles: 'identified_only',
-      capture_pageview: false, // we fire tab views manually
+      capture_pageview: true,
     });
   }
 }
