@@ -104,6 +104,17 @@ export default function CardList({ data, update, onCompare, isTablet }: Props) {
     }));
   }
 
+  function updateBenefitPlanned(cardId: string, benefitId: string, count: number) {
+    update(prev => ({
+      ...prev,
+      cards: prev.cards.map(c =>
+        c.cardId === cardId
+          ? { ...c, benefitPlanned: { ...(c.benefitPlanned ?? {}), [benefitId]: count } }
+          : c
+      ),
+    }));
+  }
+
   function updateCard(cardId: string, updates: Partial<UserCard>) {
     update(prev => ({
       ...prev,
@@ -121,6 +132,7 @@ export default function CardList({ data, update, onCompare, isTablet }: Props) {
           userCard={userCard}
           settings={data.settings}
           onUpdateUsage={(benefitId, count) => updateBenefitUsage(selectedCardId, benefitId, count)}
+          onUpdatePlanned={(benefitId, count) => updateBenefitPlanned(selectedCardId, benefitId, count)}
           onUpdateCard={updates => updateCard(selectedCardId, updates)}
           onRemove={() => removeCard(selectedCardId)}
           onBack={() => setSelectedCardId(null)}

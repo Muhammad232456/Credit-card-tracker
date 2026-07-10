@@ -12,6 +12,7 @@ interface Props {
   userCard: UserCard;
   settings: UserSettings;
   onUpdateUsage: (benefitId: string, count: number) => void;
+  onUpdatePlanned: (benefitId: string, count: number) => void;
   onUpdateCard: (updates: Partial<UserCard>) => void;
   onRemove: () => void;
   onBack: () => void;
@@ -54,7 +55,7 @@ function effectiveRenewal(userCard: UserCard, feeFreq: 'monthly' | 'annual' = 'a
 }
 
 export default function CardDetail({
-  template, userCard, settings, onUpdateUsage, onUpdateCard, onBack, onRemove,
+  template, userCard, settings, onUpdateUsage, onUpdatePlanned, onUpdateCard, onBack, onRemove,
 }: Props) {
   const [showInsurance, setShowInsurance] = useState(false);
   const [showEarning, setShowEarning] = useState(false);
@@ -145,6 +146,9 @@ export default function CardDetail({
               {!isActive && <span className="text-xs bg-white/20 px-2 py-0.5 rounded-full font-medium">INACTIVE</span>}
               {template.firstYearFeeWaived && isActive && (
                 <span className="text-xs bg-emerald-400/30 border border-emerald-300/40 px-2 py-0.5 rounded-full font-medium">1st year free</span>
+              )}
+              {template.noFxFee && (
+                <span className="text-xs bg-white/20 border border-white/30 px-2 py-0.5 rounded-full font-medium">No FX Fee</span>
               )}
             </div>
             <h2 className="text-xl font-bold mt-1">{template.name}</h2>
@@ -798,12 +802,25 @@ export default function CardDetail({
       <div className="space-y-3 mt-4">
         <h3 className="font-semibold text-gray-800">
           Benefits Checklist
-          {template.benefits.length === 0 && (
+          {template.benefits.length === 0 && !template.noFxFee && (
             <span className="ml-2 text-sm font-normal text-gray-400">— no trackable credits</span>
           )}
+          {template.benefits.length === 0 && template.noFxFee && (
+            <span className="ml-2 text-sm font-normal text-gray-400">— card feature only</span>
+          )}
         </h3>
+        {template.noFxFee && template.benefits.length === 0 && (
+          <div className="bg-white border border-gray-200 rounded-xl p-4 flex items-center gap-3">
+            <span className="text-lg">💱</span>
+            <div>
+              <p className="font-medium text-gray-900 text-sm">No Foreign Transaction Fee</p>
+              <p className="text-xs text-gray-500 mt-0.5">Card feature — no surcharge on purchases in foreign currencies</p>
+            </div>
+          </div>
+        )}
         {template.benefits.map(benefit => {
           const used = userCard.benefitUsage[benefit.id] ?? 0;
+          const planned = (userCard.benefitPlanned ?? {})[benefit.id] ?? 0;
           const maxUses = benefit.frequency === 'annual' ? 1
             : benefit.frequency === 'monthly' ? (benefit.maxUses ?? 12)
             : (benefit.maxUses ?? 1);
@@ -811,6 +828,9 @@ export default function CardDetail({
           const earnedValue = benefit.frequency === 'annual'
             ? (used > 0 ? effectiveVal : 0)
             : used * effectiveVal;
+          const plannedValue = benefit.frequency === 'annual'
+            ? (planned > 0 && used === 0 ? effectiveVal : 0)
+            : planned * effectiveVal;
           return (
             <div key={benefit.id} className="bg-white border border-gray-200 rounded-xl p-4">
               <div className="flex items-start gap-3">
@@ -827,39 +847,80 @@ export default function CardDetail({
                       {effectiveVal > 0 && (
                         <p className="text-xs text-gray-500">${effectiveVal}/use · {benefit.frequency}</p>
                       )}
-                      <p className="font-mono text-sm font-bold text-emerald-600">${earnedValue.toFixed(0)} earned</p>
+                      {earnedValue > 0 && (
+                        <p className="font-mono text-sm font-bold text-emerald-600">${earnedValue.toFixed(0)} redeemed</p>
+                      )}
+                      {plannedValue > 0 && earnedValue === 0 && (
+                        <p className="font-mono text-sm font-bold text-amber-500">${plannedValue.toFixed(0)} planned</p>
+                      )}
+                      {earnedValue === 0 && plannedValue === 0 && (
+                        <p className="font-mono text-sm text-gray-300">$0</p>
+                      )}
                     </div>
                   </div>
 
                   <div className="mt-3">
                     {benefit.frequency === 'annual' ? (
-                      <label className="flex items-center gap-2 cursor-pointer">
-                        <input
-                          type="checkbox"
-                          checked={used > 0}
-                          onChange={e => { const c = e.target.checked ? 1 : 0; onUpdateUsage(benefit.id, c); trackBenefitMarked(template.id, benefit.id, benefit.name, c); }}
-                          className="w-4 h-4 rounded accent-blue-600"
-                        />
-                        <span className="text-sm text-gray-600">Used this year</span>
-                      </label>
+                      <div className="flex gap-1.5">
+                        {[
+                          { label: 'Unredeemed', usedVal: 0, plannedVal: 0, activeClass: 'bg-gray-100 text-gray-600 border-gray-300', inactiveClass: 'bg-white text-gray-400 border-gray-200' },
+                          { label: 'Planned', usedVal: 0, plannedVal: 1, activeClass: 'bg-amber-50 text-amber-700 border-amber-300', inactiveClass: 'bg-white text-gray-400 border-gray-200' },
+                          { label: 'Redeemed', usedVal: 1, plannedVal: 0, activeClass: 'bg-emerald-50 text-emerald-700 border-emerald-300', inactiveClass: 'bg-white text-gray-400 border-gray-200' },
+                        ].map(opt => {
+                          const isSelected = used === opt.usedVal && planned === opt.plannedVal;
+                          return (
+                            <button
+                              key={opt.label}
+                              onClick={() => {
+                                onUpdateUsage(benefit.id, opt.usedVal);
+                                onUpdatePlanned(benefit.id, opt.plannedVal);
+                                if (opt.usedVal > 0) trackBenefitMarked(template.id, benefit.id, benefit.name, opt.usedVal);
+                              }}
+                              className={`flex-1 py-1.5 rounded-lg border text-xs font-medium transition-all ${isSelected ? opt.activeClass : opt.inactiveClass}`}
+                            >
+                              {opt.label}
+                            </button>
+                          );
+                        })}
+                      </div>
                     ) : (
-                      <div className="flex items-center gap-3">
-                        <button
-                          onClick={() => { const c = Math.max(0, used - 1); onUpdateUsage(benefit.id, c); trackBenefitMarked(template.id, benefit.id, benefit.name, c); }}
-                          disabled={used <= 0}
-                          className="w-8 h-8 rounded-full border border-gray-300 text-gray-600 hover:bg-gray-100 disabled:opacity-30 font-bold text-lg leading-none"
-                        >−</button>
-                        <span className="font-mono font-bold text-lg w-12 text-center">{used}/{maxUses}</span>
-                        <button
-                          onClick={() => { const c = Math.min(maxUses, used + 1); onUpdateUsage(benefit.id, c); trackBenefitMarked(template.id, benefit.id, benefit.name, c); }}
-                          disabled={used >= maxUses}
-                          className="w-8 h-8 rounded-full border border-gray-300 text-gray-600 hover:bg-gray-100 disabled:opacity-30 font-bold text-lg leading-none"
-                        >+</button>
-                        <div className="flex-1 bg-gray-200 rounded-full h-1.5">
-                          <div
-                            className={`h-1.5 rounded-full transition-all ${used >= maxUses ? 'bg-emerald-500' : 'bg-blue-500'}`}
-                            style={{ width: `${(used / maxUses) * 100}%` }}
-                          />
+                      <div className="space-y-2">
+                        <div className="flex items-center gap-3">
+                          <span className="text-xs text-gray-500 w-14 shrink-0">Redeemed</span>
+                          <button
+                            onClick={() => { const c = Math.max(0, used - 1); onUpdateUsage(benefit.id, c); trackBenefitMarked(template.id, benefit.id, benefit.name, c); }}
+                            disabled={used <= 0}
+                            className="w-7 h-7 rounded-full border border-gray-300 text-gray-600 hover:bg-gray-100 disabled:opacity-30 font-bold text-base leading-none"
+                          >−</button>
+                          <span className="font-mono font-bold text-base w-12 text-center">{used}/{maxUses}</span>
+                          <button
+                            onClick={() => { const c = Math.min(maxUses, used + 1); onUpdateUsage(benefit.id, c); trackBenefitMarked(template.id, benefit.id, benefit.name, c); }}
+                            disabled={used >= maxUses}
+                            className="w-7 h-7 rounded-full border border-gray-300 text-gray-600 hover:bg-gray-100 disabled:opacity-30 font-bold text-base leading-none"
+                          >+</button>
+                          <div className="flex-1 bg-gray-200 rounded-full h-1.5">
+                            <div
+                              className={`h-1.5 rounded-full transition-all ${used >= maxUses ? 'bg-emerald-500' : 'bg-blue-500'}`}
+                              style={{ width: `${(used / maxUses) * 100}%` }}
+                            />
+                          </div>
+                        </div>
+                        <div className="flex items-center gap-3">
+                          <span className="text-xs text-amber-600 w-14 shrink-0">Planned</span>
+                          <button
+                            onClick={() => { const c = Math.max(0, planned - 1); onUpdatePlanned(benefit.id, c); }}
+                            disabled={planned <= 0}
+                            className="w-7 h-7 rounded-full border border-amber-200 text-amber-600 hover:bg-amber-50 disabled:opacity-30 font-bold text-base leading-none"
+                          >−</button>
+                          <span className="font-mono font-bold text-base w-12 text-center text-amber-600">{planned}/{maxUses - used}</span>
+                          <button
+                            onClick={() => { const c = Math.min(maxUses - used, planned + 1); onUpdatePlanned(benefit.id, c); }}
+                            disabled={planned + used >= maxUses}
+                            className="w-7 h-7 rounded-full border border-amber-200 text-amber-600 hover:bg-amber-50 disabled:opacity-30 font-bold text-base leading-none"
+                          >+</button>
+                          {plannedValue > 0 && (
+                            <span className="text-xs text-amber-500 font-mono">${plannedValue.toFixed(0)} planned</span>
+                          )}
                         </div>
                       </div>
                     )}

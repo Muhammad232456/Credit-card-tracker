@@ -78,6 +78,8 @@ export interface CardTemplate {
   /** Minimum personal income in CAD required for eligibility */
   minIncome?: number;
   lastVerified: string;
+  /** Card has no foreign transaction fee (shown as a feature, not a trackable benefit) */
+  noFxFee?: boolean;
   benefits: BenefitTemplate[];
   supplementaryCardOptions?: SupplementaryCardOption[];
   earningRates?: EarningRate[];
@@ -162,6 +164,8 @@ export interface UserCard {
   /** ISO date of the most recent product change */
   productChangeDate?: string;
   benefitUsage: Record<string, number>;
+  /** Planned (but not yet redeemed) uses per benefit — separate from benefitUsage */
+  benefitPlanned?: Record<string, number>;
   supplementaryCards?: UserSupplementaryCard[];
   welcomeBonus?: WelcomeBonusProgress;
 }

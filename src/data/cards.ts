@@ -411,6 +411,14 @@ export const CARD_TEMPLATES: CardTemplate[] = [
       { category: "Travel & Airlines", multiplier: 2, unit: "points", programId: "marriott-bonvoy" },
       { category: "Everything Else", multiplier: 1, unit: "points", programId: "marriott-bonvoy" },
     ],
+    insurance: [
+      { type: "Car Rental Theft & Damage", note: "MSRP up to $85,000, up to 48 days" },
+      { type: "Flight Delay", maxCoverage: "$500 combined (with Baggage Delay)", note: "4-hour trigger" },
+      { type: "Baggage Loss", maxCoverage: "$500 all insured combined" },
+      { type: "Purchase Protection", note: "90 days" },
+      { type: "Extended Warranty", note: "Up to 1 additional year" },
+      { type: "Hotel Burglary Insurance", maxCoverage: "$500" },
+    ],
     currentOffer: {
       description: "Earn up to 70,000 Marriott Bonvoy points — 60,000 on $3,000 spend in 3 months + 10,000 bonus in month 13",
       points: 70000,
@@ -453,6 +461,14 @@ export const CARD_TEMPLATES: CardTemplate[] = [
       { category: "Marriott Bonvoy Hotels", multiplier: 5, unit: "points", programId: "marriott-bonvoy" },
       { category: "Travel & Airlines", multiplier: 2, unit: "points", programId: "marriott-bonvoy" },
       { category: "Everything Else", multiplier: 1, unit: "points", programId: "marriott-bonvoy" },
+    ],
+    insurance: [
+      { type: "Car Rental Theft & Damage", note: "MSRP up to $85,000, up to 48 days" },
+      { type: "Flight Delay", maxCoverage: "$500 combined (with Baggage Delay)", note: "4-hour trigger" },
+      { type: "Baggage Loss", maxCoverage: "$500 all insured combined" },
+      { type: "Purchase Protection", note: "90 days" },
+      { type: "Extended Warranty", note: "Up to 1 additional year" },
+      { type: "Hotel Burglary Insurance", maxCoverage: "$500" },
     ],
     currentOffer: {
       description: "Earn up to 80,000 Marriott Bonvoy points — 70,000 on $5,000 spend in 3 months + 10,000 bonus points in month 13",
@@ -697,6 +713,17 @@ export const CARD_TEMPLATES: CardTemplate[] = [
         category: "bag",
       },
     ],
+    insurance: [
+      { type: "Out-of-Province/Country Medical", maxDays: 31, maxCoverage: "$5,000,000", ageLimit: 65, note: "10 days if aged 65+" },
+      { type: "Trip Cancellation", maxCoverage: "$2,500/person, $10,000 combined" },
+      { type: "Trip Interruption", maxCoverage: "$5,000/person, $25,000 combined" },
+      { type: "Car Rental Theft & Damage", note: "MSRP under $100,000, up to 48 days" },
+      { type: "Flight Delay", maxCoverage: "$500 combined", note: "4-hour trigger" },
+      { type: "Baggage Delay", maxCoverage: "$500/person ($1,000 combined)", note: "6-hour trigger" },
+      { type: "Baggage Loss", maxCoverage: "$1,000/person ($2,500 combined)" },
+      { type: "Purchase Protection", note: "120 days" },
+      { type: "Extended Warranty", note: "Up to 2 additional years" },
+    ],
     currentOffer: {
       description: "Earn up to 100,000 Aeroplan points — 10,000 on $1,000 spend in 2 months + 40,000 on $5,000 spend in 4 months + 50,000 anniversary bonus on $25,000 spend in 12 months",
       points: 100000,
@@ -840,6 +867,7 @@ export const CARD_TEMPLATES: CardTemplate[] = [
     network: "Visa",
     annualFee: 150,
     lastVerified: "2026-06-01",
+    noFxFee: true,
     benefits: [
       {
         id: "scotia-pass-lounge",
@@ -849,15 +877,6 @@ export const CARD_TEMPLATES: CardTemplate[] = [
         maxUses: 6,
         resetDate: "cardmember-year",
         category: "lounge",
-      },
-      {
-        id: "scotia-pass-nofx",
-        name: "No Foreign Transaction Fee Savings",
-        value: 0,
-        frequency: "annual",
-        resetDate: "calendar-year",
-        category: "fx-savings",
-        note: "Input your annual FX spend to calculate estimated savings (~2.5%)",
       },
       {
         id: "scotia-pass-gigsky",
@@ -916,6 +935,7 @@ export const CARD_TEMPLATES: CardTemplate[] = [
     annualFee: 599,
     annualFeeNote: "$449 with Scotiabank Ultimate Package",
     lastVerified: "2026-06-01",
+    noFxFee: true,
     benefits: [
       {
         id: "scotia-pri-travel",
@@ -936,15 +956,6 @@ export const CARD_TEMPLATES: CardTemplate[] = [
         category: "lounge",
       },
       {
-        id: "scotia-pri-nofx",
-        name: "No Foreign Transaction Fee Savings",
-        value: 0,
-        frequency: "annual",
-        resetDate: "calendar-year",
-        category: "fx-savings",
-        note: "Input your annual FX spend to calculate estimated savings (~2.5%)",
-      },
-      {
         id: "scotia-pri-gigsky",
         name: "GigSky Global Data Plan",
         value: 30,
@@ -957,6 +968,17 @@ export const CARD_TEMPLATES: CardTemplate[] = [
       { category: "Scene+ Purchases (Cineplex, etc.)", multiplier: 3, unit: "points", programId: "scene-plus" },
       { category: "Dining & Groceries", multiplier: 2, unit: "points", programId: "scene-plus" },
       { category: "Everything Else", multiplier: 1.5, unit: "points", programId: "scene-plus" },
+    ],
+    insurance: [
+      { type: "Out-of-Province/Country Medical", maxDays: 31, maxCoverage: "$5,000,000", ageLimit: 65, note: "10 days if aged 65+. Effective Jan 27, 2025 (Manulife)" },
+      { type: "Trip Cancellation", maxCoverage: "$2,500/person, $10,000 combined" },
+      { type: "Trip Interruption", maxCoverage: "$5,000/person, $25,000 combined" },
+      { type: "Car Rental Theft & Damage", note: "MSRP up to $85,000, up to 48 days" },
+      { type: "Flight Delay", maxCoverage: "$1,000/person", note: "4-hour trigger" },
+      { type: "Baggage Delay", maxCoverage: "$1,000/person", note: "4-hour trigger" },
+      { type: "Baggage Loss", maxCoverage: "$2,500/person ($5,000 combined)" },
+      { type: "Purchase Protection", note: "180 days" },
+      { type: "Extended Warranty", note: "Up to 2 additional years" },
     ],
     currentOffer: {
       description: "Earn up to 80,000 Scene+ points — 30,000 on $1,000 spend in first 3 months + 30,000 on $12,500 spend in 6 months + 20,000 on card anniversary, expires November 1, 2026",
@@ -978,16 +1000,8 @@ export const CARD_TEMPLATES: CardTemplate[] = [
     network: "Visa",
     annualFee: 325,
     lastVerified: "2026-06-01",
+    noFxFee: true,
     benefits: [
-      {
-        id: "bmo-eclipse-nofx",
-        name: "No Foreign Transaction Fee Savings",
-        value: 0,
-        frequency: "annual",
-        resetDate: "calendar-year",
-        category: "fx-savings",
-        note: "Input your annual FX spend to calculate estimated savings (~2.5%)",
-      },
       {
         id: "bmo-eclipse-lounge",
         name: "Mastercard Travel Pass Membership",
@@ -1001,6 +1015,17 @@ export const CARD_TEMPLATES: CardTemplate[] = [
     earningRates: [
       { category: "Dining, Groceries, Gas & Transit", multiplier: 5, unit: "points", programId: "bmo-rewards", note: "5× BMO Rewards points" },
       { category: "Everything Else", multiplier: 1, unit: "points", programId: "bmo-rewards" },
+    ],
+    insurance: [
+      { type: "Out-of-Province/Country Medical", maxDays: 21, maxCoverage: "$5,000,000", ageLimit: 65, note: "3 days if aged 65+" },
+      { type: "Trip Cancellation", maxCoverage: "$2,500/person, $5,000 combined" },
+      { type: "Trip Interruption", maxCoverage: "$5,000/person, $25,000 combined" },
+      { type: "Car Rental Theft & Damage", note: "MSRP up to $85,000, up to 48 days" },
+      { type: "Flight Delay", maxCoverage: "$1,000/account/trip", note: "4-hour trigger" },
+      { type: "Baggage Delay", maxCoverage: "$500/person ($1,000 combined)", note: "6-hour trigger" },
+      { type: "Baggage Loss", maxCoverage: "$1,000/person ($2,500 combined)" },
+      { type: "Purchase Protection", note: "120 days" },
+      { type: "Extended Warranty", note: "Up to 2 additional years" },
     ],
     currentOffer: {
       description: "Earn up to 70,000 BMO Rewards points — 50,000 on $5,000 spend in 3 months + 20,000 on $25,000 annual spend, first year annual fee waived",
@@ -1122,6 +1147,7 @@ export const CARD_TEMPLATES: CardTemplate[] = [
     annualFee: 149,
     discontinued: true,
     lastVerified: "2026-06-01",
+    noFxFee: true,
     benefits: [
       {
         id: "hsbc-we-travel",
@@ -1139,15 +1165,6 @@ export const CARD_TEMPLATES: CardTemplate[] = [
         maxUses: 6,
         resetDate: "cardmember-year",
         category: "lounge",
-      },
-      {
-        id: "hsbc-we-nofx",
-        name: "No Foreign Transaction Fee Savings",
-        value: 0,
-        frequency: "annual",
-        resetDate: "calendar-year",
-        category: "fx-savings",
-        note: "Input your annual FX spend to calculate estimated savings (~2.5%)",
       },
     ],
     earningRates: [
@@ -1223,6 +1240,15 @@ export const CARD_TEMPLATES: CardTemplate[] = [
       { category: "Top 2 Spend Categories (auto)", multiplier: 3, unit: "points", programId: "amex-mr", note: "Automatically selects your highest-spend categories each month" },
       { category: "Everything Else", multiplier: 1, unit: "points", programId: "amex-mr" },
     ],
+    insurance: [
+      { type: "Out-of-Province/Country Medical", maxDays: 15, maxCoverage: "$5,000,000", ageLimit: 65, note: "No coverage for aged 65+" },
+      { type: "Car Rental Theft & Damage", note: "MSRP up to $85,000, up to 48 days" },
+      { type: "Flight Delay", maxCoverage: "$500 combined (with Baggage Delay)", note: "4-hour trigger" },
+      { type: "Baggage Delay", maxCoverage: "$500 combined (with Flight Delay)", note: "6-hour trigger" },
+      { type: "Baggage Loss", maxCoverage: "$500 all insured combined" },
+      { type: "Purchase Protection", note: "90 days, up to $1,000/occurrence" },
+      { type: "Extended Warranty", note: "Up to 1 additional year" },
+    ],
     currentOffer: {
       description: "Earn up to 60,000 Membership Rewards points — limited-time elevated offer, expires July 28, 2026",
       points: 60000,
@@ -1284,6 +1310,16 @@ export const CARD_TEMPLATES: CardTemplate[] = [
     earningRates: [
       { category: "Everything", multiplier: 1.25, unit: "points", programId: "amex-mr", note: "1.25× on all eligible purchases" },
     ],
+    insurance: [
+      { type: "Out-of-Province/Country Medical", maxDays: 15, maxCoverage: "$5,000,000", ageLimit: 65, note: "No coverage for aged 65+" },
+      { type: "Trip Cancellation", maxCoverage: "$1,500/person, $6,000 combined" },
+      { type: "Trip Interruption", maxCoverage: "$1,500/person, $6,000 combined" },
+      { type: "Car Rental Theft & Damage", note: "MSRP up to $85,000, up to 48 days" },
+      { type: "Flight Delay", maxCoverage: "$1,000 combined (with Baggage Delay)", note: "4-hour trigger" },
+      { type: "Baggage Delay", maxCoverage: "$1,000 combined (with Flight Delay)", note: "6-hour trigger" },
+      { type: "Purchase Protection", note: "120 days, up to $1,000/occurrence" },
+      { type: "Extended Warranty", note: "Up to 1 additional year" },
+    ],
     currentOffer: {
       description: "Earn up to 150,000 Membership Rewards points — 100,000 on $15,000 spend in 3 months + 50,000 on one purchase at months 15-17",
       points: 150000,
@@ -1332,6 +1368,13 @@ export const CARD_TEMPLATES: CardTemplate[] = [
     earningRates: [
       { category: "Air Canada Purchases", multiplier: 1, unit: "points", programId: "aeroplan" },
       { category: "Everything Else", multiplier: 1, unit: "points", programId: "aeroplan" },
+    ],
+    insurance: [
+      { type: "Car Rental Theft & Damage", note: "Up to 48 days" },
+      { type: "Flight Delay", maxCoverage: "$500/person", note: "4-hour trigger" },
+      { type: "Baggage Loss/Delay", maxCoverage: "$1,000/person" },
+      { type: "Purchase Protection", note: "90 days" },
+      { type: "Extended Warranty", note: "Up to 12 additional months" },
     ],
     currentOffer: {
       description: "Earn up to 20,000 Aeroplan points — 10,000 on first purchase + 10,000 on $1,500 spend in 90 days",
@@ -1434,6 +1477,13 @@ export const CARD_TEMPLATES: CardTemplate[] = [
       { category: "Groceries", multiplier: 0.03, unit: "percent", note: "3% cash back" },
       { category: "Gas & Recurring Payments", multiplier: 0.01, unit: "percent", note: "1% cash back" },
       { category: "Everything Else", multiplier: 0.005, unit: "percent", note: "0.5% cash back" },
+    ],
+    insurance: [
+      { type: "Out-of-Province/Country Medical", maxDays: 10, maxCoverage: "$2,000,000", ageLimit: 65, note: "4 days if aged 65+" },
+      { type: "Car Rental Theft & Damage", note: "Up to 48 days" },
+      { type: "Baggage Loss/Delay", maxCoverage: "$1,000/person", note: "6-hour trigger" },
+      { type: "Purchase Protection", note: "90 days" },
+      { type: "Extended Warranty", note: "Up to 1 additional year" },
     ],
     firstYearFeeWaived: true,
     currentOffer: {
@@ -1549,6 +1599,15 @@ export const CARD_TEMPLATES: CardTemplate[] = [
       { category: "Dining, Groceries & Gas", multiplier: 1.5, unit: "points", programId: "cibc-aventura" },
       { category: "Everything Else", multiplier: 1, unit: "points", programId: "cibc-aventura" },
     ],
+    insurance: [
+      { type: "Out-of-Province/Country Medical", maxDays: 15, maxCoverage: "$5,000,000", ageLimit: 65, note: "No coverage for aged 65+" },
+      { type: "Car Rental Theft & Damage", note: "Up to actual cash value, up to 48 days" },
+      { type: "Flight Delay", maxCoverage: "$500 total", note: "4-hour trigger; accommodation, meals & ground transport" },
+      { type: "Baggage Delay", maxCoverage: "$500", note: "6-hour trigger" },
+      { type: "Baggage Loss", maxCoverage: "$500" },
+      { type: "Purchase Protection", note: "90 days" },
+      { type: "Extended Warranty", note: "Up to 1 additional year" },
+    ],
     firstYearFeeWaived: true,
     currentOffer: {
       description: "Earn up to 15,000 Aventura points + first year annual fee rebated",
@@ -1602,6 +1661,16 @@ export const CARD_TEMPLATES: CardTemplate[] = [
       { category: "Dining & Groceries", multiplier: 2, unit: "points", programId: "cibc-aventura" },
       { category: "Everything Else", multiplier: 1, unit: "points", programId: "cibc-aventura" },
     ],
+    insurance: [
+      { type: "Out-of-Province/Country Medical", maxDays: 31, maxCoverage: "$5,000,000", ageLimit: 65, note: "10 days if aged 65+" },
+      { type: "Trip Cancellation", maxCoverage: "$2,500/person, $10,000 combined" },
+      { type: "Trip Interruption", maxCoverage: "$5,000/person, $25,000 combined" },
+      { type: "Car Rental Theft & Damage", note: "Up to actual cash value, up to 48 days" },
+      { type: "Flight Delay", maxCoverage: "$100 for ground transport", note: "Very limited — primarily covers ground transport to hotel" },
+      { type: "Baggage Loss", maxCoverage: "$1,000/person carry-on ($2,500 combined)" },
+      { type: "Purchase Protection", note: "180 days" },
+      { type: "Extended Warranty", note: "Up to 2 additional years" },
+    ],
     currentOffer: {
       description: "Earn up to 50,000 Aventura points — on qualifying spend in the first 4 months",
       points: 50000,
@@ -1623,6 +1692,13 @@ export const CARD_TEMPLATES: CardTemplate[] = [
     lastVerified: "2026-06-01",
     earningRates: [
       { category: "Everything", multiplier: 1.25, unit: "points", programId: "rbc-avion", note: "1.25× on all eligible purchases" },
+    ],
+    insurance: [
+      { type: "Trip Cancellation", maxCoverage: "$1,000/person, $5,000 combined" },
+      { type: "Trip Interruption", maxCoverage: "$2,500/person" },
+      { type: "Car Rental Theft & Damage", note: "Up to actual cash value, up to 48 days" },
+      { type: "Purchase Protection", note: "90 days" },
+      { type: "Extended Warranty", note: "Up to 1 additional year" },
     ],
     currentOffer: {
       description: "Earn up to 70,000 Avion Rewards points — limited-time offer, expires July 15, 2026",
@@ -1819,6 +1895,16 @@ export const CARD_TEMPLATES: CardTemplate[] = [
       { category: "WestJet Purchases", multiplier: 0.02, unit: "percent", note: "2% WestJet dollars on WestJet purchases" },
       { category: "Everything Else", multiplier: 0.015, unit: "percent", note: "1.5% WestJet dollars on all other purchases" },
     ],
+    insurance: [
+      { type: "Out-of-Province/Country Medical", maxDays: 15, maxCoverage: "Unlimited", ageLimit: 65, note: "3 days if aged 65+" },
+      { type: "Trip Cancellation", maxCoverage: "$1,500/person, $5,000 combined", note: "Added Nov 2025" },
+      { type: "Trip Interruption", maxCoverage: "$5,000/person, $25,000 combined" },
+      { type: "Car Rental Theft & Damage", note: "Up to 48 days" },
+      { type: "Flight Delay", maxCoverage: "$250/day, $500/person max" },
+      { type: "Baggage Delay", maxCoverage: "$500/person ($2,500 aggregate)" },
+      { type: "Purchase Protection", note: "90 days" },
+      { type: "Extended Warranty", note: "Up to 1 additional year" },
+    ],
     currentOffer: {
       description: "Earn up to 60,000 WestJet dollars — 30,000 on first purchase + 30,000 on $5,000 spend in 3 months",
       points: 60000,
@@ -1843,6 +1929,16 @@ export const CARD_TEMPLATES: CardTemplate[] = [
       { category: "British Airways Flights & Vacations", multiplier: 3, unit: "points", programId: "avios", note: "3 Avios per $1" },
       { category: "Travel", multiplier: 1.5, unit: "points", programId: "avios", note: "1.5 Avios per $1" },
       { category: "Everything Else", multiplier: 1, unit: "points", programId: "avios", note: "1 Avios per $1" },
+    ],
+    insurance: [
+      { type: "Out-of-Province/Country Medical", maxDays: 31, maxCoverage: "Unlimited", ageLimit: 65, note: "7 days if aged 65+" },
+      { type: "Trip Cancellation", maxCoverage: "$1,500/person, $5,000 combined" },
+      { type: "Trip Interruption", maxCoverage: "$1,500/person" },
+      { type: "Car Rental Theft & Damage", note: "MSRP up to $65,000, up to 48 days" },
+      { type: "Flight Delay", maxCoverage: "$250/occurrence, $500 max" },
+      { type: "Baggage Delay", maxCoverage: "$500/person" },
+      { type: "Purchase Protection", note: "90 days" },
+      { type: "Extended Warranty", note: "Up to 1 additional year" },
     ],
     currentOffer: {
       description: "Earn up to 60,000 Avios — 30,000 on approval + 30,000 on $3,000 spend in 3 months, offer expires August 4, 2026",
@@ -1889,17 +1985,8 @@ export const CARD_TEMPLATES: CardTemplate[] = [
     network: "Amex",
     annualFee: 120,
     lastVerified: "2026-06-01",
-    benefits: [
-      {
-        id: "scotia-gold-nofx",
-        name: "No Foreign Transaction Fee Savings",
-        value: 0,
-        frequency: "annual",
-        resetDate: "calendar-year",
-        category: "fx-savings",
-        note: "Input your annual FX spend to calculate estimated savings (~2.5%)",
-      },
-    ],
+    noFxFee: true,
+    benefits: [],
     supplementaryCardOptions: [
       { name: "Supplementary Card", fee: 0, perks: ["No FX fees", "Same earn rates"] },
     ],
@@ -1991,6 +2078,7 @@ export const CARD_TEMPLATES: CardTemplate[] = [
     network: "Mastercard",
     annualFee: 150,
     lastVerified: "2026-06-01",
+    noFxFee: true,
     benefits: [
       {
         id: "bmo-ascend-lounge",
@@ -2002,21 +2090,22 @@ export const CARD_TEMPLATES: CardTemplate[] = [
         category: "lounge",
         note: "4 complimentary visits/year via Mastercard Travel Pass (DragonPass)",
       },
-      {
-        id: "bmo-ascend-nofx",
-        name: "No Foreign Transaction Fee Savings",
-        value: 0,
-        frequency: "annual",
-        resetDate: "calendar-year",
-        category: "fx-savings",
-        note: "Input your annual FX spend to calculate estimated savings (~2.5%)",
-      },
     ],
     earningRates: [
       { category: "Travel", multiplier: 5, unit: "points", programId: "bmo-rewards" },
       { category: "Dining & Entertainment", multiplier: 3, unit: "points", programId: "bmo-rewards" },
       { category: "Recurring Bills", multiplier: 2, unit: "points", programId: "bmo-rewards" },
       { category: "Everything Else", multiplier: 1, unit: "points", programId: "bmo-rewards" },
+    ],
+    insurance: [
+      { type: "Out-of-Province/Country Medical", maxDays: 21, maxCoverage: "$5,000,000", ageLimit: 65, note: "No coverage for aged 65+" },
+      { type: "Trip Cancellation", maxCoverage: "$2,500/person, $5,000 combined" },
+      { type: "Trip Interruption", maxCoverage: "$2,000/person, $10,000 combined" },
+      { type: "Car Rental Theft & Damage", note: "MSRP up to $65,000, up to 48 days" },
+      { type: "Flight Delay", maxCoverage: "$500/trip all insured combined", note: "4-hour trigger" },
+      { type: "Baggage Delay", maxCoverage: "$500/person ($1,000 combined)" },
+      { type: "Purchase Protection", note: "90 days" },
+      { type: "Extended Warranty", note: "Up to 1 additional year" },
     ],
     firstYearFeeWaived: true,
     currentOffer: {
@@ -2062,6 +2151,17 @@ export const CARD_TEMPLATES: CardTemplate[] = [
       { category: "Air Miles Partners", multiplier: 0.3, unit: "points", programId: "air-miles", note: "3 Air Miles per $10 at partner stores" },
       { category: "Grocery & Drug Stores", multiplier: 0.2, unit: "points", programId: "air-miles", note: "2 Air Miles per $10" },
       { category: "Everything Else", multiplier: 0.1, unit: "points", programId: "air-miles", note: "1 Air Mile per $10 spent" },
+    ],
+    insurance: [
+      { type: "Out-of-Province/Country Medical", maxDays: 15, maxCoverage: "$5,000,000", ageLimit: 65, note: "No coverage for aged 65+" },
+      { type: "Trip Cancellation", maxCoverage: "$1,500/person" },
+      { type: "Trip Interruption", maxCoverage: "$2,000/person" },
+      { type: "Car Rental Theft & Damage", note: "MSRP up to $65,000, up to 48 days" },
+      { type: "Flight Delay", maxCoverage: "$500/trip all insured combined", note: "4-hour trigger" },
+      { type: "Baggage Delay", maxCoverage: "$500/person", note: "6-hour trigger" },
+      { type: "Baggage Loss", maxCoverage: "$500/person ($1,000 combined)" },
+      { type: "Purchase Protection", note: "90 days" },
+      { type: "Extended Warranty", note: "Up to 1 additional year" },
     ],
     offerHistory: [
       { description: "Earn up to 3,000 Air Miles on $4,500 spend in 110 days (elevated)", points: 3000, startDate: "2026-01-01", endDate: "2026-06-01" },
@@ -2149,6 +2249,17 @@ export const CARD_TEMPLATES: CardTemplate[] = [
       { category: "Travel & Entertainment", multiplier: 2, unit: "points", programId: "nbc-rewards" },
       { category: "Everything Else", multiplier: 1, unit: "points", programId: "nbc-rewards" },
     ],
+    insurance: [
+      { type: "Out-of-Province/Country Medical", maxDays: 60, maxCoverage: "$5,000,000", ageLimit: 65, note: "15 days ages 65–74; no coverage at 75+. Does NOT require trip charged to card." },
+      { type: "Trip Cancellation", maxCoverage: "$2,500/person" },
+      { type: "Trip Interruption", maxCoverage: "$5,000/person" },
+      { type: "Car Rental Theft & Damage", note: "MSRP up to $65,000, up to 48 days" },
+      { type: "Flight Delay", maxCoverage: "$500/person", note: "4-hour trigger" },
+      { type: "Baggage Delay", maxCoverage: "$500/person", note: "6-hour trigger" },
+      { type: "Baggage Loss", maxCoverage: "$1,000/person" },
+      { type: "Purchase Protection", note: "180 days" },
+      { type: "Extended Warranty", note: "Up to 2 additional years" },
+    ],
   },
 
   // ─── NEO FINANCIAL ────────────────────────────────────────────────────────
@@ -2172,6 +2283,7 @@ export const CARD_TEMPLATES: CardTemplate[] = [
     network: "Mastercard",
     annualFee: 99,
     lastVerified: "2026-06-01",
+    noFxFee: true,
     benefits: [
       {
         id: "neo-we-travel",
@@ -2180,15 +2292,6 @@ export const CARD_TEMPLATES: CardTemplate[] = [
         frequency: "annual",
         resetDate: "cardmember-year",
         category: "travel-credit",
-      },
-      {
-        id: "neo-we-nofx",
-        name: "No Foreign Transaction Fee Savings",
-        value: 0,
-        frequency: "annual",
-        resetDate: "calendar-year",
-        category: "fx-savings",
-        note: "Input your annual FX spend to calculate estimated savings (~2.5%)",
       },
     ],
     earningRates: [
@@ -2219,6 +2322,14 @@ export const CARD_TEMPLATES: CardTemplate[] = [
     earningRates: [
       { category: "Groceries, Restaurants & Digital Media", multiplier: 5, unit: "points", programId: "mbna-rewards" },
       { category: "Everything Else", multiplier: 2, unit: "points", programId: "mbna-rewards" },
+    ],
+    insurance: [
+      { type: "Out-of-Province/Country Medical", maxDays: 21, maxCoverage: "$2,000,000", ageLimit: 65, note: "No coverage for aged 65+" },
+      { type: "Car Rental Theft & Damage", note: "Up to 31 days, up to $200,000 (Mastercard World Elite benefit)" },
+      { type: "Flight Delay", maxCoverage: "$500/person", note: "4-hour trigger" },
+      { type: "Baggage Loss/Delay", maxCoverage: "$1,000/person", note: "4-hour trigger" },
+      { type: "Purchase Protection", note: "90 days" },
+      { type: "Extended Warranty", note: "Up to 2 additional years" },
     ],
     currentOffer: {
       description: "Earn up to 30,000 MBNA Rewards points — 20,000 on $2,000 spend in 90 days + 10,000 bonus with paperless statement enrollment",
@@ -2298,6 +2409,7 @@ export const CARD_TEMPLATES: CardTemplate[] = [
     network: "Mastercard",
     annualFee: 0,
     lastVerified: "2026-06-01",
+    noFxFee: true,
     benefits: [
       {
         id: "triangle-we-roadside",
@@ -2307,15 +2419,6 @@ export const CARD_TEMPLATES: CardTemplate[] = [
         resetDate: "cardmember-year",
         category: "other",
         note: "1-year complimentary Canadian Tire Roadside Assistance membership",
-      },
-      {
-        id: "triangle-we-nofx",
-        name: "No Foreign Transaction Fee Savings",
-        value: 0,
-        frequency: "annual",
-        resetDate: "calendar-year",
-        category: "fx-savings",
-        note: "Input your annual FX spend to calculate estimated savings (~2.5%)",
       },
     ],
     earningRates: [
@@ -2380,17 +2483,8 @@ export const CARD_TEMPLATES: CardTemplate[] = [
     network: "Mastercard",
     annualFee: 0,
     lastVerified: "2026-06-01",
-    benefits: [
-      {
-        id: "rogers-we-nofx",
-        name: "No Foreign Transaction Fee Savings",
-        value: 0,
-        frequency: "annual",
-        resetDate: "calendar-year",
-        category: "fx-savings",
-        note: "Input your annual FX spend to calculate estimated savings (~2.5%)",
-      },
-    ],
+    noFxFee: true,
+    benefits: [],
     earningRates: [
       { category: "US-Dollar & Foreign Currency Purchases", multiplier: 0.03, unit: "percent", note: "3% cash back (no FX fee = net 0.5% gain)" },
       { category: "Rogers, Fido & Shaw Bills", multiplier: 0.03, unit: "percent", note: "3% cash back on Rogers services" },
@@ -2453,17 +2547,8 @@ export const CARD_TEMPLATES: CardTemplate[] = [
     network: "Mastercard",
     annualFee: 0,
     lastVerified: "2026-06-01",
-    benefits: [
-      {
-        id: "brim-nofx",
-        name: "No Foreign Transaction Fee Savings",
-        value: 0,
-        frequency: "annual",
-        resetDate: "calendar-year",
-        category: "fx-savings",
-        note: "Input your annual FX spend to calculate estimated savings (~2.5%)",
-      },
-    ],
+    noFxFee: true,
+    benefits: [],
     earningRates: [
       { category: "Everything", multiplier: 0.01, unit: "percent", note: "1% cash back (Brim Rewards points)" },
     ],
@@ -2475,17 +2560,8 @@ export const CARD_TEMPLATES: CardTemplate[] = [
     network: "Mastercard",
     annualFee: 99,
     lastVerified: "2026-06-01",
-    benefits: [
-      {
-        id: "brim-world-nofx",
-        name: "No Foreign Transaction Fee Savings",
-        value: 0,
-        frequency: "annual",
-        resetDate: "calendar-year",
-        category: "fx-savings",
-        note: "Input your annual FX spend to calculate estimated savings (~2.5%)",
-      },
-    ],
+    noFxFee: true,
+    benefits: [],
     earningRates: [
       { category: "Everything", multiplier: 0.01, unit: "percent", note: "1% Brim Rewards cash back" },
     ],
@@ -2497,6 +2573,7 @@ export const CARD_TEMPLATES: CardTemplate[] = [
     network: "Mastercard",
     annualFee: 199,
     lastVerified: "2026-06-01",
+    noFxFee: true,
     benefits: [
       {
         id: "brim-we-travel",
@@ -2516,15 +2593,6 @@ export const CARD_TEMPLATES: CardTemplate[] = [
         category: "lounge",
         note: "2 complimentary visits/year",
       },
-      {
-        id: "brim-we-nofx",
-        name: "No Foreign Transaction Fee Savings",
-        value: 0,
-        frequency: "annual",
-        resetDate: "calendar-year",
-        category: "fx-savings",
-        note: "Input your annual FX spend to calculate estimated savings (~2.5%)",
-      },
     ],
     earningRates: [
       { category: "Everything", multiplier: 0.02, unit: "percent", note: "2% Brim Rewards cash back" },
@@ -2539,6 +2607,7 @@ export const CARD_TEMPLATES: CardTemplate[] = [
     network: "Mastercard",
     annualFee: 130,
     lastVerified: "2026-06-01",
+    noFxFee: true,
     benefits: [
       {
         id: "desj-ody-travel",
@@ -2559,20 +2628,21 @@ export const CARD_TEMPLATES: CardTemplate[] = [
         category: "lounge",
         note: "3 visits/year",
       },
-      {
-        id: "desj-ody-nofx",
-        name: "No Foreign Transaction Fee Savings",
-        value: 0,
-        frequency: "annual",
-        resetDate: "calendar-year",
-        category: "fx-savings",
-        note: "Input your annual FX spend to calculate estimated savings (~2.5%)",
-      },
     ],
     earningRates: [
       { category: "Dining & Groceries", multiplier: 0.035, unit: "percent", note: "3.5% BONUSDOLLARS cash back" },
       { category: "Entertainment & Transit", multiplier: 0.02, unit: "percent", note: "2%" },
       { category: "Everything Else", multiplier: 0.01, unit: "percent", note: "1%" },
+    ],
+    insurance: [
+      { type: "Out-of-Province/Country Medical", maxDays: 60, maxCoverage: "$5,000,000", ageLimit: 75, note: "60 days under 65; 15 days ages 65–74; no coverage at 75+" },
+      { type: "Trip Cancellation", maxCoverage: "$2,500/person (before departure)" },
+      { type: "Trip Interruption", maxCoverage: "Unlimited (after departure)", note: "Ticket must be purchased with card" },
+      { type: "Car Rental Theft & Damage", note: "MSRP up to $85,000, up to 48 days" },
+      { type: "Baggage Delay", maxCoverage: "$500", note: "6-hour trigger" },
+      { type: "Baggage Loss", maxCoverage: "$1,000/person" },
+      { type: "Purchase Protection", note: "120 days" },
+      { type: "Extended Warranty", note: "Up to 2 additional years" },
     ],
   },
   {
@@ -2598,17 +2668,8 @@ export const CARD_TEMPLATES: CardTemplate[] = [
     network: "Visa",
     annualFee: 0,
     lastVerified: "2026-06-01",
-    benefits: [
-      {
-        id: "ht-pref-nofx",
-        name: "No Foreign Transaction Fee Savings",
-        value: 0,
-        frequency: "annual",
-        resetDate: "calendar-year",
-        category: "fx-savings",
-        note: "Input your annual FX spend to calculate estimated savings (~2.5%)",
-      },
-    ],
+    noFxFee: true,
+    benefits: [],
     earningRates: [
       { category: "Everything", multiplier: 0.01, unit: "percent", note: "1% cash back on all purchases" },
     ],
@@ -2719,6 +2780,15 @@ export const CARD_TEMPLATES: CardTemplate[] = [
       { category: "Travel", multiplier: 2, unit: "points", programId: "capital-one-miles", note: "2× Capital One Miles" },
       { category: "Everything Else", multiplier: 1.5, unit: "points", programId: "capital-one-miles" },
     ],
+    insurance: [
+      { type: "Out-of-Province/Country Medical", maxDays: 22, ageLimit: 65, note: "8 days if aged 65+" },
+      { type: "Trip Cancellation", maxCoverage: "$1,000/person, $5,000 combined" },
+      { type: "Trip Interruption", maxCoverage: "$5,000/person, $25,000 combined" },
+      { type: "Car Rental Theft & Damage", note: "Up to 48 days" },
+      { type: "Baggage Delay", maxCoverage: "$100/day, up to 3 days", note: "4-hour trigger" },
+      { type: "Purchase Protection", note: "120 days" },
+      { type: "Extended Warranty", note: "Up to 2 additional years" },
+    ],
   },
 
   // ─── WALMART ──────────────────────────────────────────────────────────────
@@ -2779,6 +2849,7 @@ export const CARD_TEMPLATES: CardTemplate[] = [
     network: "Mastercard",
     annualFee: 120,
     lastVerified: "2026-06-01",
+    noFxFee: true,
     benefits: [
       {
         id: "atb-we-travel",
@@ -2788,15 +2859,6 @@ export const CARD_TEMPLATES: CardTemplate[] = [
         resetDate: "cardmember-year",
         category: "travel-credit",
         note: "Alberta-based issuer",
-      },
-      {
-        id: "atb-we-nofx",
-        name: "No Foreign Transaction Fee Savings",
-        value: 0,
-        frequency: "annual",
-        resetDate: "calendar-year",
-        category: "fx-savings",
-        note: "Input your annual FX spend to calculate estimated savings (~2.5%)",
       },
     ],
     earningRates: [
