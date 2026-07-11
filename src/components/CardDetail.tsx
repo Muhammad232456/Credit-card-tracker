@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { POINTS_PROGRAMS } from '../data/programs';
+import { getApplyUrl } from '../data/cards';
 import type { CardTemplate, UserCard, UserSettings, UserSupplementaryCard, WelcomeBonusTier } from '../types';
 import { trackBenefitMarked, trackCardRemoved } from '../analytics';
 import {
@@ -793,6 +794,13 @@ export default function CardDetail({
                   </div>
                 </div>
               ))}
+              <p className="text-xs text-gray-400 pt-2">
+                Source: official {template.issuer} benefit pages & insurance certificates
+                {(template.applyUrl ?? getApplyUrl(template.id)) && (
+                  <> · <a href={template.applyUrl ?? getApplyUrl(template.id)} target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:underline">view card page ↗</a></>
+                )}
+                {' '}· verified {template.lastVerified}
+              </p>
             </div>
           )}
         </div>
@@ -1028,7 +1036,13 @@ export default function CardDetail({
           <button onClick={() => { trackCardRemoved(template.id, template.name, template.issuer); onRemove(); }} className="text-sm text-red-500 hover:text-red-700 font-medium">
             🗑 Remove card permanently
           </button>
-          <p className="text-xs text-gray-400">Verified: {template.lastVerified}</p>
+          <p className="text-xs text-gray-400">
+            Data from official {template.issuer} pages
+            {(template.applyUrl ?? getApplyUrl(template.id)) && (
+              <> (<a href={template.applyUrl ?? getApplyUrl(template.id)} target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:underline">source ↗</a>)</>
+            )}
+            {' '}· verified {template.lastVerified}
+          </p>
         </div>
         <p className="text-sm text-gray-500 text-center font-medium">✓ Changes save automatically</p>
       </div>

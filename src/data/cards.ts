@@ -488,7 +488,7 @@ export const CARD_TEMPLATES: CardTemplate[] = [
     issuer: "TD",
     network: "Visa",
     annualFee: 139,
-    lastVerified: "2026-06-01",
+    lastVerified: "2026-07-11",
     benefits: [
       {
         id: "td-aero-bag",
@@ -515,15 +515,16 @@ export const CARD_TEMPLATES: CardTemplate[] = [
     earningRates: [
       { category: "Air Canada Purchases", multiplier: 1.5, unit: "points", programId: "aeroplan" },
       { category: "Groceries", multiplier: 1.5, unit: "points", programId: "aeroplan" },
-      { category: "Dining & Gas", multiplier: 1, unit: "points", programId: "aeroplan" },
-      { category: "Everything Else", multiplier: 1, unit: "points", programId: "aeroplan" },
+      { category: "Gas & EV Charging", multiplier: 1.5, unit: "points", programId: "aeroplan" },
+      { category: "Everything Else (incl. dining)", multiplier: 1, unit: "points", programId: "aeroplan" },
     ],
     insurance: [
-      { type: "Out-of-Province/Country Medical", maxDays: 10, maxCoverage: "$2,000,000", ageLimit: 65 },
+      { type: "Out-of-Province/Country Medical", maxDays: 21, maxCoverage: "$2,000,000", ageLimit: 65, note: "4 days if 65+" },
       { type: "Trip Cancellation", maxCoverage: "$1,500/person" },
       { type: "Trip Interruption", maxCoverage: "$5,000/person" },
       { type: "Car Rental Theft & Damage" },
       { type: "Flight Delay", maxCoverage: "$500" },
+      { type: "Delayed/Lost Baggage", maxCoverage: "$1,000/person" },
       { type: "Purchase Protection", note: "90 days" },
       { type: "Extended Warranty", note: "Up to 1 additional year" },
     ],
@@ -545,7 +546,7 @@ export const CARD_TEMPLATES: CardTemplate[] = [
     issuer: "TD",
     network: "Visa",
     annualFee: 599,
-    lastVerified: "2026-06-01",
+    lastVerified: "2026-07-11",
     benefits: [
       {
         id: "td-aeropri-companion",
@@ -590,15 +591,17 @@ export const CARD_TEMPLATES: CardTemplate[] = [
     ],
     earningRates: [
       { category: "Air Canada Purchases", multiplier: 2, unit: "points", programId: "aeroplan" },
-      { category: "Dining & Groceries", multiplier: 1.5, unit: "points", programId: "aeroplan" },
+      { category: "Gas, EV, Groceries, Travel, Transit & Dining", multiplier: 1.5, unit: "points", programId: "aeroplan", note: "Bonus rates capped at first $100,000/yr category spend" },
       { category: "Everything Else", multiplier: 1.25, unit: "points", programId: "aeroplan" },
     ],
     insurance: [
-      { type: "Out-of-Province/Country Medical", maxDays: 31, maxCoverage: "$5,000,000", ageLimit: 65 },
+      { type: "Out-of-Province/Country Medical", maxDays: 31, maxCoverage: "$5,000,000", ageLimit: 65, note: "4 days if 65+" },
       { type: "Trip Cancellation", maxCoverage: "$2,500/person" },
       { type: "Trip Interruption", maxCoverage: "$5,000/person" },
       { type: "Car Rental Theft & Damage" },
       { type: "Flight Delay", maxCoverage: "$1,000" },
+      { type: "Baggage Delay", maxCoverage: "$1,000/person" },
+      { type: "Baggage Loss", maxCoverage: "$2,500/person" },
       { type: "Purchase Protection", note: "120 days" },
       { type: "Extended Warranty", note: "Up to 2 additional years" },
     ],
@@ -621,7 +624,7 @@ export const CARD_TEMPLATES: CardTemplate[] = [
     issuer: "CIBC",
     network: "Visa",
     annualFee: 139,
-    lastVerified: "2026-06-01",
+    lastVerified: "2026-07-11",
     benefits: [
       {
         id: "cibc-aero-bag",
@@ -648,15 +651,16 @@ export const CARD_TEMPLATES: CardTemplate[] = [
     earningRates: [
       { category: "Air Canada Purchases", multiplier: 1.5, unit: "points", programId: "aeroplan" },
       { category: "Groceries", multiplier: 1.5, unit: "points", programId: "aeroplan" },
-      { category: "Dining & Gas", multiplier: 1, unit: "points", programId: "aeroplan" },
-      { category: "Everything Else", multiplier: 1, unit: "points", programId: "aeroplan" },
+      { category: "Gas & EV Charging", multiplier: 1.5, unit: "points", programId: "aeroplan" },
+      { category: "Everything Else (incl. dining)", multiplier: 1, unit: "points", programId: "aeroplan" },
     ],
     insurance: [
-      { type: "Out-of-Province/Country Medical", maxDays: 10, maxCoverage: "$2,000,000", ageLimit: 65 },
-      { type: "Trip Cancellation", maxCoverage: "$1,500/person" },
-      { type: "Trip Interruption", maxCoverage: "$5,000/person" },
+      { type: "Out-of-Province/Country Medical", maxDays: 15, maxCoverage: "$5,000,000", ageLimit: 65, note: "3 days if 65+" },
+      { type: "Trip Cancellation", maxCoverage: "$1,500/person", note: "$5,000 combined max" },
+      { type: "Trip Interruption", maxCoverage: "$2,000/person" },
       { type: "Car Rental Theft & Damage" },
       { type: "Flight Delay", maxCoverage: "$500" },
+      { type: "Baggage Delay", maxCoverage: "$500/person" },
       { type: "Purchase Protection", note: "90 days" },
       { type: "Extended Warranty", note: "Up to 1 additional year" },
     ],
@@ -676,11 +680,11 @@ export const CARD_TEMPLATES: CardTemplate[] = [
     name: "CIBC Aeroplan Visa Infinite Privilege",
     issuer: "CIBC",
     network: "Visa",
-    annualFee: 499,
-    lastVerified: "2026-06-01",
+    annualFee: 599,
+    lastVerified: "2026-07-11",
     earningRates: [
-      { category: "Dining, Food Delivery & Groceries", multiplier: 3, unit: "points", programId: "aeroplan" },
       { category: "Air Canada Purchases", multiplier: 2, unit: "points", programId: "aeroplan" },
+      { category: "Gas, EV, Groceries, Dining, Food Delivery & Travel", multiplier: 1.5, unit: "points", programId: "aeroplan" },
       { category: "Everything Else", multiplier: 1.25, unit: "points", programId: "aeroplan" },
     ],
     benefits: [
@@ -717,7 +721,7 @@ export const CARD_TEMPLATES: CardTemplate[] = [
       { type: "Out-of-Province/Country Medical", maxDays: 31, maxCoverage: "$5,000,000", ageLimit: 65, note: "10 days if aged 65+" },
       { type: "Trip Cancellation", maxCoverage: "$2,500/person, $10,000 combined" },
       { type: "Trip Interruption", maxCoverage: "$5,000/person, $25,000 combined" },
-      { type: "Car Rental Theft & Damage", note: "MSRP under $100,000, up to 48 days" },
+      { type: "Car Rental Theft & Damage", note: "MSRP up to $85,000, up to 48 days" },
       { type: "Flight Delay", maxCoverage: "$500 combined", note: "4-hour trigger" },
       { type: "Baggage Delay", maxCoverage: "$500/person ($1,000 combined)", note: "6-hour trigger" },
       { type: "Baggage Loss", maxCoverage: "$1,000/person ($2,500 combined)" },
@@ -744,7 +748,7 @@ export const CARD_TEMPLATES: CardTemplate[] = [
     issuer: "RBC",
     network: "Visa",
     annualFee: 120,
-    lastVerified: "2026-06-01",
+    lastVerified: "2026-07-11",
     benefits: [
       {
         id: "rbc-avion-dashpass",
@@ -769,10 +773,11 @@ export const CARD_TEMPLATES: CardTemplate[] = [
       { name: "Supplementary Card", fee: 50, perks: ["Same earn rates", "DashPass subscription"] },
     ],
     earningRates: [
-      { category: "Everything", multiplier: 1.25, unit: "points", programId: "rbc-avion", note: "On all eligible purchases" },
+      { category: "Travel Purchases", multiplier: 1.25, unit: "points", programId: "rbc-avion" },
+      { category: "Everything Else", multiplier: 1, unit: "points", programId: "rbc-avion" },
     ],
     insurance: [
-      { type: "Out-of-Province/Country Medical", maxDays: 15, maxCoverage: "$5,000,000", ageLimit: 65 },
+      { type: "Out-of-Province/Country Medical", maxDays: 15, maxCoverage: "Unlimited", ageLimit: 65, note: "3 days if 65+" },
       { type: "Trip Cancellation", maxCoverage: "$1,500/person" },
       { type: "Trip Interruption", maxCoverage: "$5,000/person" },
       { type: "Car Rental Theft & Damage" },
@@ -798,7 +803,7 @@ export const CARD_TEMPLATES: CardTemplate[] = [
     issuer: "RBC",
     network: "Visa",
     annualFee: 399,
-    lastVerified: "2026-06-01",
+    lastVerified: "2026-07-11",
     benefits: [
       {
         id: "rbc-avionpri-lounge",
@@ -837,11 +842,11 @@ export const CARD_TEMPLATES: CardTemplate[] = [
       { category: "Everything Else", multiplier: 1.25, unit: "points", programId: "rbc-avion" },
     ],
     insurance: [
-      { type: "Out-of-Province/Country Medical", maxDays: 31, maxCoverage: "$5,000,000", ageLimit: 65 },
+      { type: "Out-of-Province/Country Medical", maxDays: 31, ageLimit: 65, note: "7 days if 65+" },
       { type: "Trip Cancellation", maxCoverage: "$2,500/person" },
       { type: "Trip Interruption", maxCoverage: "$5,000/person" },
       { type: "Car Rental Theft & Damage" },
-      { type: "Flight Delay", maxCoverage: "$1,000" },
+      { type: "Flight Delay", maxCoverage: "$500" },
       { type: "Purchase Protection", note: "120 days" },
       { type: "Extended Warranty", note: "Up to 2 additional years" },
     ],
@@ -866,7 +871,7 @@ export const CARD_TEMPLATES: CardTemplate[] = [
     issuer: "Scotiabank",
     network: "Visa",
     annualFee: 150,
-    lastVerified: "2026-06-01",
+    lastVerified: "2026-07-11",
     noFxFee: true,
     benefits: [
       {
@@ -901,14 +906,14 @@ export const CARD_TEMPLATES: CardTemplate[] = [
       { name: "Supplementary Card", fee: 0, perks: ["No FX fees", "Same DragonPass lounge access pool"] },
     ],
     earningRates: [
-      { category: "Scene+ Purchases (Cineplex, etc.)", multiplier: 3, unit: "points", programId: "scene-plus" },
-      { category: "Dining & Groceries", multiplier: 2, unit: "points", programId: "scene-plus" },
+      { category: "Empire Grocers (Sobeys, Safeway, IGA, Foodland)", multiplier: 3, unit: "points", programId: "scene-plus", note: "$50,000/yr cap on accelerated rates" },
+      { category: "Other Groceries, Dining, Entertainment & Transit", multiplier: 2, unit: "points", programId: "scene-plus" },
       { category: "Everything Else", multiplier: 1, unit: "points", programId: "scene-plus" },
     ],
     insurance: [
-      { type: "Out-of-Province/Country Medical", maxDays: 25, maxCoverage: "$10,000,000", ageLimit: 64 },
+      { type: "Out-of-Province/Country Medical", maxDays: 25, maxCoverage: "$2,000,000", ageLimit: 65, note: "3 days if 65+" },
       { type: "Trip Cancellation", maxCoverage: "$1,500/person" },
-      { type: "Trip Interruption", maxCoverage: "$3,000/person" },
+      { type: "Trip Interruption", maxCoverage: "$2,500/person" },
       { type: "Car Rental Theft & Damage" },
       { type: "Flight Delay", maxCoverage: "$500" },
       { type: "Purchase Protection", note: "90 days" },
@@ -934,7 +939,7 @@ export const CARD_TEMPLATES: CardTemplate[] = [
     network: "Visa",
     annualFee: 599,
     annualFeeNote: "$449 with Scotiabank Ultimate Package",
-    lastVerified: "2026-06-01",
+    lastVerified: "2026-07-11",
     noFxFee: true,
     benefits: [
       {
@@ -965,9 +970,9 @@ export const CARD_TEMPLATES: CardTemplate[] = [
       },
     ],
     earningRates: [
-      { category: "Scene+ Purchases (Cineplex, etc.)", multiplier: 3, unit: "points", programId: "scene-plus" },
-      { category: "Dining & Groceries", multiplier: 2, unit: "points", programId: "scene-plus" },
-      { category: "Everything Else", multiplier: 1.5, unit: "points", programId: "scene-plus" },
+      { category: "Eligible Travel Purchases", multiplier: 3, unit: "points", programId: "scene-plus" },
+      { category: "Dining & Entertainment", multiplier: 2, unit: "points", programId: "scene-plus" },
+      { category: "Everything Else", multiplier: 1, unit: "points", programId: "scene-plus" },
     ],
     insurance: [
       { type: "Out-of-Province/Country Medical", maxDays: 31, maxCoverage: "$5,000,000", ageLimit: 65, note: "10 days if aged 65+. Effective Jan 27, 2025 (Manulife)" },
@@ -1339,11 +1344,18 @@ export const CARD_TEMPLATES: CardTemplate[] = [
     issuer: "TD",
     network: "Visa",
     annualFee: 0,
-    lastVerified: "2026-06-01",
+    lastVerified: "2026-07-11",
     benefits: [],
     earningRates: [
-      { category: "Online Purchases", multiplier: 2, unit: "points", programId: "td-rewards" },
+      { category: "Expedia for TD Bookings", multiplier: 4, unit: "points", programId: "td-rewards" },
+      { category: "Groceries, Dining & Transit", multiplier: 3, unit: "points", programId: "td-rewards", note: "Capped at $5,000 annual spend" },
+      { category: "Recurring Bills & Streaming", multiplier: 2, unit: "points", programId: "td-rewards", note: "Capped at $5,000 annual spend" },
       { category: "Everything Else", multiplier: 1, unit: "points", programId: "td-rewards" },
+    ],
+    insurance: [
+      { type: "Purchase Protection", note: "90 days" },
+      { type: "Extended Warranty" },
+      { type: "Mobile Device Insurance", maxCoverage: "$1,000" },
     ],
   },
   {
@@ -1352,7 +1364,7 @@ export const CARD_TEMPLATES: CardTemplate[] = [
     issuer: "TD",
     network: "Visa",
     annualFee: 89,
-    lastVerified: "2026-06-01",
+    lastVerified: "2026-07-11",
     benefits: [
       {
         id: "td-aeroplat-bag",
@@ -1366,8 +1378,8 @@ export const CARD_TEMPLATES: CardTemplate[] = [
       },
     ],
     earningRates: [
-      { category: "Air Canada Purchases", multiplier: 1, unit: "points", programId: "aeroplan" },
-      { category: "Everything Else", multiplier: 1, unit: "points", programId: "aeroplan" },
+      { category: "Gas, EV, Groceries & Air Canada", multiplier: 1, unit: "points", programId: "aeroplan", note: "Capped at $80,000/yr" },
+      { category: "Everything Else", multiplier: 0.67, unit: "points", programId: "aeroplan", note: "1 point per $1.50" },
     ],
     insurance: [
       { type: "Car Rental Theft & Damage", note: "Up to 48 days" },
@@ -1392,12 +1404,22 @@ export const CARD_TEMPLATES: CardTemplate[] = [
     issuer: "TD",
     network: "Visa",
     annualFee: 89,
-    lastVerified: "2026-06-01",
+    lastVerified: "2026-07-11",
     benefits: [],
     earningRates: [
-      { category: "Online Purchases", multiplier: 3, unit: "points", programId: "td-rewards" },
-      { category: "Dining & Groceries", multiplier: 1.5, unit: "points", programId: "td-rewards" },
-      { category: "Everything Else", multiplier: 1, unit: "points", programId: "td-rewards" },
+      { category: "Expedia for TD Bookings", multiplier: 6, unit: "points", programId: "td-rewards" },
+      { category: "Groceries, Dining & Transit", multiplier: 4.5, unit: "points", programId: "td-rewards", note: "Capped at $15,000 annual spend" },
+      { category: "Recurring Bills & Streaming", multiplier: 3, unit: "points", programId: "td-rewards", note: "Capped at $15,000 annual spend" },
+      { category: "Everything Else", multiplier: 1.5, unit: "points", programId: "td-rewards" },
+    ],
+    insurance: [
+      { type: "Flight/Trip Delay", maxCoverage: "$500" },
+      { type: "Baggage Loss/Delay", maxCoverage: "$1,000" },
+      { type: "Car Rental Theft & Damage" },
+      { type: "Hotel Burglary", maxCoverage: "$2,500" },
+      { type: "Mobile Device Insurance", maxCoverage: "$1,000" },
+      { type: "Purchase Protection", note: "90 days" },
+      { type: "Extended Warranty" },
     ],
     currentOffer: {
       description: "Earn up to 50,000 TD Rewards points — 15,000 on first purchase + 35,000 on $3,000 spend in 180 days",
@@ -1415,7 +1437,7 @@ export const CARD_TEMPLATES: CardTemplate[] = [
     issuer: "TD",
     network: "Visa",
     annualFee: 139,
-    lastVerified: "2026-06-01",
+    lastVerified: "2026-07-11",
     benefits: [
       {
         id: "td-fc-travel",
@@ -1441,13 +1463,14 @@ export const CARD_TEMPLATES: CardTemplate[] = [
     ],
     earningRates: [
       { category: "Expedia for TD Bookings", multiplier: 8, unit: "points", programId: "td-rewards" },
-      { category: "Dining, Groceries, Gas & Transit", multiplier: 3, unit: "points", programId: "td-rewards" },
-      { category: "Everything Else", multiplier: 1.5, unit: "points", programId: "td-rewards" },
+      { category: "Groceries, Dining & Transit", multiplier: 6, unit: "points", programId: "td-rewards", note: "Capped at $25,000 annual spend; gas not included" },
+      { category: "Recurring Bills & Streaming", multiplier: 4, unit: "points", programId: "td-rewards", note: "Capped at $25,000 annual spend" },
+      { category: "Everything Else", multiplier: 2, unit: "points", programId: "td-rewards" },
     ],
     insurance: [
-      { type: "Out-of-Province/Country Medical", maxDays: 21, maxCoverage: "$1,000,000", ageLimit: 65 },
+      { type: "Out-of-Province/Country Medical", maxDays: 21, maxCoverage: "$2,000,000", ageLimit: 65, note: "4 days if 65+" },
       { type: "Trip Cancellation", maxCoverage: "$1,500/person" },
-      { type: "Trip Interruption", maxCoverage: "$3,000/person" },
+      { type: "Trip Interruption", maxCoverage: "$5,000/person", note: "$25,000 max" },
       { type: "Car Rental Theft & Damage" },
       { type: "Flight Delay", maxCoverage: "$500" },
       { type: "Purchase Protection", note: "90 days" },
@@ -1470,13 +1493,12 @@ export const CARD_TEMPLATES: CardTemplate[] = [
     name: "TD Cash Back Visa Infinite",
     issuer: "TD",
     network: "Visa",
-    annualFee: 120,
-    lastVerified: "2026-06-01",
+    annualFee: 139,
+    lastVerified: "2026-07-11",
     benefits: [],
     earningRates: [
-      { category: "Groceries", multiplier: 0.03, unit: "percent", note: "3% cash back" },
-      { category: "Gas & Recurring Payments", multiplier: 0.01, unit: "percent", note: "1% cash back" },
-      { category: "Everything Else", multiplier: 0.005, unit: "percent", note: "0.5% cash back" },
+      { category: "Groceries, Gas, EV, Transit, Recurring Bills & Streaming", multiplier: 0.03, unit: "percent", note: "3% cash back, first $15,000/yr per category" },
+      { category: "Everything Else", multiplier: 0.01, unit: "percent", note: "1% cash back" },
     ],
     insurance: [
       { type: "Out-of-Province/Country Medical", maxDays: 10, maxCoverage: "$2,000,000", ageLimit: 65, note: "4 days if aged 65+" },
@@ -1504,10 +1526,17 @@ export const CARD_TEMPLATES: CardTemplate[] = [
     issuer: "CIBC",
     network: "Visa",
     annualFee: 0,
-    lastVerified: "2026-06-01",
+    lastVerified: "2026-07-11",
     benefits: [],
     earningRates: [
-      { category: "Everything", multiplier: 1, unit: "points", programId: "aeroplan", note: "1 Aeroplan point per $1" },
+      { category: "Gas, EV, Groceries & Air Canada", multiplier: 1, unit: "points", programId: "aeroplan" },
+      { category: "Everything Else", multiplier: 0.67, unit: "points", programId: "aeroplan", note: "1 point per $1.50" },
+    ],
+    insurance: [
+      { type: "Common Carrier Accident" },
+      { type: "Car Rental Theft & Damage" },
+      { type: "Purchase Protection", note: "90 days" },
+      { type: "Extended Warranty" },
     ],
     currentOffer: {
       description: "Earn up to 10,000 Aeroplan points — 10,000 on your first purchase",
@@ -1525,7 +1554,8 @@ export const CARD_TEMPLATES: CardTemplate[] = [
     issuer: "CIBC",
     network: "Visa",
     annualFee: 89,
-    lastVerified: "2026-06-01",
+    lastVerified: "2026-07-11",
+    discontinued: true,
     benefits: [
       {
         id: "cibc-aeroplat-bag",
@@ -1549,10 +1579,16 @@ export const CARD_TEMPLATES: CardTemplate[] = [
     issuer: "CIBC",
     network: "Visa",
     annualFee: 0,
-    lastVerified: "2026-06-01",
+    lastVerified: "2026-07-11",
     benefits: [],
     earningRates: [
-      { category: "Everything", multiplier: 0.01, unit: "percent", note: "1% cash back on all purchases" },
+      { category: "Groceries", multiplier: 0.02, unit: "percent", note: "2% cash back" },
+      { category: "Gas, EV, Transit, Dining & Recurring Payments", multiplier: 0.01, unit: "percent", note: "1% cash back" },
+      { category: "Everything Else", multiplier: 0.005, unit: "percent", note: "0.5% cash back" },
+    ],
+    insurance: [
+      { type: "Purchase Protection", note: "90 days" },
+      { type: "Extended Warranty", note: "Up to 1 additional year" },
     ],
     firstYearFeeWaived: true,
     currentOffer: {
@@ -1571,7 +1607,7 @@ export const CARD_TEMPLATES: CardTemplate[] = [
     issuer: "CIBC",
     network: "Visa",
     annualFee: 139,
-    lastVerified: "2026-06-01",
+    lastVerified: "2026-07-11",
     benefits: [
       {
         id: "cibc-av-gold-lounge",
@@ -1595,13 +1631,15 @@ export const CARD_TEMPLATES: CardTemplate[] = [
       },
     ],
     earningRates: [
-      { category: "Travel", multiplier: 2, unit: "points", programId: "cibc-aventura" },
-      { category: "Dining, Groceries & Gas", multiplier: 1.5, unit: "points", programId: "cibc-aventura" },
-      { category: "Everything Else", multiplier: 1, unit: "points", programId: "cibc-aventura" },
+      { category: "Travel via CIBC Rewards", multiplier: 2, unit: "points", programId: "cibc-aventura" },
+      { category: "Gas, EV, Groceries & Drug Stores", multiplier: 1.5, unit: "points", programId: "cibc-aventura" },
+      { category: "Everything Else (incl. dining)", multiplier: 1, unit: "points", programId: "cibc-aventura" },
     ],
     insurance: [
-      { type: "Out-of-Province/Country Medical", maxDays: 15, maxCoverage: "$5,000,000", ageLimit: 65, note: "No coverage for aged 65+" },
-      { type: "Car Rental Theft & Damage", note: "Up to actual cash value, up to 48 days" },
+      { type: "Out-of-Province/Country Medical", maxDays: 15, maxCoverage: "$5,000,000", ageLimit: 65, note: "3 days if 65+" },
+      { type: "Trip Cancellation", maxCoverage: "$1,500" },
+      { type: "Trip Interruption", maxCoverage: "$2,000" },
+      { type: "Car Rental Theft & Damage", note: "MSRP up to $65,000, up to 48 days" },
       { type: "Flight Delay", maxCoverage: "$500 total", note: "4-hour trigger; accommodation, meals & ground transport" },
       { type: "Baggage Delay", maxCoverage: "$500", note: "6-hour trigger" },
       { type: "Baggage Loss", maxCoverage: "$500" },
@@ -1625,7 +1663,7 @@ export const CARD_TEMPLATES: CardTemplate[] = [
     issuer: "CIBC",
     network: "Visa",
     annualFee: 499,
-    lastVerified: "2026-06-01",
+    lastVerified: "2026-07-11",
     benefits: [
       {
         id: "cibc-av-pri-travel",
@@ -1657,16 +1695,17 @@ export const CARD_TEMPLATES: CardTemplate[] = [
       },
     ],
     earningRates: [
-      { category: "Travel", multiplier: 3, unit: "points", programId: "cibc-aventura" },
-      { category: "Dining & Groceries", multiplier: 2, unit: "points", programId: "cibc-aventura" },
-      { category: "Everything Else", multiplier: 1, unit: "points", programId: "cibc-aventura" },
+      { category: "Travel via CIBC Rewards", multiplier: 3, unit: "points", programId: "cibc-aventura" },
+      { category: "Dining, Entertainment, Transit, Gas, EV & Groceries", multiplier: 2, unit: "points", programId: "cibc-aventura" },
+      { category: "Everything Else", multiplier: 1.25, unit: "points", programId: "cibc-aventura" },
     ],
     insurance: [
       { type: "Out-of-Province/Country Medical", maxDays: 31, maxCoverage: "$5,000,000", ageLimit: 65, note: "10 days if aged 65+" },
       { type: "Trip Cancellation", maxCoverage: "$2,500/person, $10,000 combined" },
       { type: "Trip Interruption", maxCoverage: "$5,000/person, $25,000 combined" },
-      { type: "Car Rental Theft & Damage", note: "Up to actual cash value, up to 48 days" },
-      { type: "Flight Delay", maxCoverage: "$100 for ground transport", note: "Very limited — primarily covers ground transport to hotel" },
+      { type: "Car Rental Theft & Damage", note: "MSRP up to $85,000, up to 48 days" },
+      { type: "Flight Delay", maxCoverage: "$500", note: "4-hour trigger" },
+      { type: "Baggage Delay", maxCoverage: "$500" },
       { type: "Baggage Loss", maxCoverage: "$1,000/person carry-on ($2,500 combined)" },
       { type: "Purchase Protection", note: "180 days" },
       { type: "Extended Warranty", note: "Up to 2 additional years" },
@@ -1689,14 +1728,17 @@ export const CARD_TEMPLATES: CardTemplate[] = [
     issuer: "RBC",
     network: "Visa",
     annualFee: 120,
-    lastVerified: "2026-06-01",
+    lastVerified: "2026-07-11",
     earningRates: [
-      { category: "Everything", multiplier: 1.25, unit: "points", programId: "rbc-avion", note: "1.25× on all eligible purchases" },
+      { category: "Everything", multiplier: 1, unit: "points", programId: "rbc-avion", note: "1 pt per $1 on all purchases" },
     ],
     insurance: [
       { type: "Trip Cancellation", maxCoverage: "$1,000/person, $5,000 combined" },
       { type: "Trip Interruption", maxCoverage: "$2,500/person" },
       { type: "Car Rental Theft & Damage", note: "Up to actual cash value, up to 48 days" },
+      { type: "Flight Delay", maxCoverage: "$500" },
+      { type: "Baggage Delay", maxCoverage: "$500" },
+      { type: "Baggage Loss", maxCoverage: "$500" },
       { type: "Purchase Protection", note: "90 days" },
       { type: "Extended Warranty", note: "Up to 1 additional year" },
     ],
@@ -1737,11 +1779,15 @@ export const CARD_TEMPLATES: CardTemplate[] = [
     issuer: "RBC",
     network: "Mastercard",
     annualFee: 0,
-    lastVerified: "2026-06-01",
+    lastVerified: "2026-07-11",
     benefits: [],
     earningRates: [
-      { category: "Groceries", multiplier: 0.02, unit: "percent", note: "2% cash back" },
-      { category: "Everything Else", multiplier: 0.01, unit: "percent", note: "1% cash back" },
+      { category: "Groceries", multiplier: 0.02, unit: "percent", note: "2% on first $6,000/yr grocery spend, then 1%" },
+      { category: "Everything Else", multiplier: 0.01, unit: "percent", note: "1% on first $6,000/yr, then 0.5%" },
+    ],
+    insurance: [
+      { type: "Purchase Protection", note: "90 days" },
+      { type: "Extended Warranty", note: "Up to 1 additional year" },
     ],
   },
   {
@@ -1750,11 +1796,16 @@ export const CARD_TEMPLATES: CardTemplate[] = [
     issuer: "RBC",
     network: "Visa",
     annualFee: 0,
-    lastVerified: "2026-06-01",
+    lastVerified: "2026-07-11",
+    discontinued: true,
     benefits: [],
     earningRates: [
-      { category: "Gas, Groceries & Drugstores", multiplier: 1, unit: "points", programId: "rbc-avion", note: "1 pt per $1 at select partners" },
-      { category: "Everything Else", multiplier: 1, unit: "points", programId: "rbc-avion" },
+      { category: "Gas, Groceries & Drugstores", multiplier: 1, unit: "points", programId: "rbc-avion" },
+      { category: "Everything Else", multiplier: 0.5, unit: "points", programId: "rbc-avion", note: "1 pt per $2" },
+    ],
+    insurance: [
+      { type: "Purchase Protection", note: "90 days" },
+      { type: "Extended Warranty", note: "Up to 1 additional year" },
     ],
   },
   {
@@ -1763,11 +1814,15 @@ export const CARD_TEMPLATES: CardTemplate[] = [
     issuer: "RBC",
     network: "Visa",
     annualFee: 0,
-    lastVerified: "2026-06-01",
+    lastVerified: "2026-07-11",
     benefits: [],
     earningRates: [
-      { category: "Groceries, Streaming, Dining & Transit", multiplier: 1.5, unit: "points", programId: "rbc-avion" },
-      { category: "Everything Else", multiplier: 1, unit: "points", programId: "rbc-avion" },
+      { category: "Groceries, Gas, Rideshare, Streaming & Entertainment", multiplier: 1.5, unit: "points", programId: "rbc-avion" },
+      { category: "Everything Else (incl. dining)", multiplier: 1, unit: "points", programId: "rbc-avion" },
+    ],
+    insurance: [
+      { type: "Purchase Protection", note: "90 days" },
+      { type: "Extended Warranty", note: "Up to 1 additional year (max 5)" },
     ],
     currentOffer: {
       description: "Earn up to 14,000 Avion Rewards points on qualifying purchases — offer expires November 4, 2026",
@@ -1786,7 +1841,7 @@ export const CARD_TEMPLATES: CardTemplate[] = [
     issuer: "RBC",
     network: "Visa",
     annualFee: 48,
-    lastVerified: "2026-06-01",
+    lastVerified: "2026-07-11",
     benefits: [
       {
         id: "rbc-ion-plus-petro",
@@ -1799,9 +1854,13 @@ export const CARD_TEMPLATES: CardTemplate[] = [
       },
     ],
     earningRates: [
-      { category: "Groceries, Streaming, Dining & Transit", multiplier: 3, unit: "points", programId: "rbc-avion" },
-      { category: "Travel & Gas", multiplier: 1.5, unit: "points", programId: "rbc-avion" },
+      { category: "Groceries, Gas, Dining, Food Delivery, Rideshare & Streaming", multiplier: 3, unit: "points", programId: "rbc-avion" },
       { category: "Everything Else", multiplier: 1, unit: "points", programId: "rbc-avion" },
+    ],
+    insurance: [
+      { type: "Mobile Device Insurance", maxCoverage: "$1,000" },
+      { type: "Purchase Protection", note: "90 days" },
+      { type: "Extended Warranty", note: "Up to 1 additional year" },
     ],
     currentOffer: {
       description: "Earn up to 28,000 Avion Rewards points on qualifying purchases — offer expires November 4, 2026",
@@ -1820,7 +1879,7 @@ export const CARD_TEMPLATES: CardTemplate[] = [
     issuer: "RBC",
     network: "Mastercard",
     annualFee: 39,
-    lastVerified: "2026-06-01",
+    lastVerified: "2026-07-11",
     benefits: [
       {
         id: "rbc-wj-companion",
@@ -1842,7 +1901,16 @@ export const CARD_TEMPLATES: CardTemplate[] = [
       },
     ],
     earningRates: [
-      { category: "Everything", multiplier: 0.015, unit: "percent", note: "1.5% WestJet dollars on all purchases" },
+      { category: "WestJet, Vacations & Sunwing + Dining, Food Delivery & Streaming", multiplier: 1.5, unit: "points", programId: "westjet-dollars", note: "1.5 WestJet points per $1" },
+      { category: "Everything Else", multiplier: 1, unit: "points", programId: "westjet-dollars" },
+    ],
+    insurance: [
+      { type: "Car Rental Theft & Damage" },
+      { type: "Baggage Delay" },
+      { type: "Hotel Burglary" },
+      { type: "Mobile Device Insurance" },
+      { type: "Purchase Protection", note: "90 days" },
+      { type: "Extended Warranty", note: "Up to 1 additional year" },
     ],
   },
   {
@@ -1850,8 +1918,8 @@ export const CARD_TEMPLATES: CardTemplate[] = [
     name: "RBC WestJet World Elite Mastercard",
     issuer: "RBC",
     network: "Mastercard",
-    annualFee: 119,
-    lastVerified: "2026-06-01",
+    annualFee: 139,
+    lastVerified: "2026-07-11",
     benefits: [
       {
         id: "rbc-wj-we-travel",
@@ -1892,8 +1960,8 @@ export const CARD_TEMPLATES: CardTemplate[] = [
       },
     ],
     earningRates: [
-      { category: "WestJet Purchases", multiplier: 0.02, unit: "percent", note: "2% WestJet dollars on WestJet purchases" },
-      { category: "Everything Else", multiplier: 0.015, unit: "percent", note: "1.5% WestJet dollars on all other purchases" },
+      { category: "WestJet, Vacations & Sunwing + Groceries, Gas, EV, Transit & Rideshare", multiplier: 2, unit: "points", programId: "westjet-dollars", note: "2 WestJet points per $1" },
+      { category: "Everything Else", multiplier: 1.5, unit: "points", programId: "westjet-dollars" },
     ],
     insurance: [
       { type: "Out-of-Province/Country Medical", maxDays: 15, maxCoverage: "Unlimited", ageLimit: 65, note: "3 days if aged 65+" },
@@ -1923,11 +1991,11 @@ export const CARD_TEMPLATES: CardTemplate[] = [
     issuer: "RBC",
     network: "Visa",
     annualFee: 165,
-    lastVerified: "2026-06-01",
+    lastVerified: "2026-07-11",
     benefits: [],
     earningRates: [
       { category: "British Airways Flights & Vacations", multiplier: 3, unit: "points", programId: "avios", note: "3 Avios per $1" },
-      { category: "Travel", multiplier: 1.5, unit: "points", programId: "avios", note: "1.5 Avios per $1" },
+      { category: "Dining & Food Delivery", multiplier: 2, unit: "points", programId: "avios", note: "2 Avios per $1" },
       { category: "Everything Else", multiplier: 1, unit: "points", programId: "avios", note: "1 Avios per $1" },
     ],
     insurance: [
@@ -1959,10 +2027,10 @@ export const CARD_TEMPLATES: CardTemplate[] = [
     issuer: "Scotiabank",
     network: "Visa",
     annualFee: 0,
-    lastVerified: "2026-06-01",
+    lastVerified: "2026-07-11",
     benefits: [],
     earningRates: [
-      { category: "Scene+ Partners (Cineplex, etc.)", multiplier: 5, unit: "points", programId: "scene-plus" },
+      { category: "Empire Grocers, Home Hardware & Cineplex", multiplier: 2, unit: "points", programId: "scene-plus", note: "Sobeys, Safeway, IGA, Foodland" },
       { category: "Everything Else", multiplier: 1, unit: "points", programId: "scene-plus" },
     ],
   },
@@ -1972,10 +2040,11 @@ export const CARD_TEMPLATES: CardTemplate[] = [
     issuer: "Scotiabank",
     network: "Visa",
     annualFee: 0,
-    lastVerified: "2026-06-01",
+    lastVerified: "2026-07-11",
     benefits: [],
     earningRates: [
-      { category: "Everything", multiplier: 0.01, unit: "percent", note: "1% cash back on all purchases" },
+      { category: "Groceries, Gas, EV, Transit, Rideshare, Food Delivery, Drugstores & Recurring Bills", multiplier: 0.01, unit: "percent", note: "1% cash back, combined $15,000/yr cap" },
+      { category: "Everything Else", multiplier: 0.005, unit: "percent", note: "0.5% cash back" },
     ],
   },
   {
@@ -1984,21 +2053,22 @@ export const CARD_TEMPLATES: CardTemplate[] = [
     issuer: "Scotiabank",
     network: "Amex",
     annualFee: 120,
-    lastVerified: "2026-06-01",
+    lastVerified: "2026-07-11",
     noFxFee: true,
     benefits: [],
     supplementaryCardOptions: [
       { name: "Supplementary Card", fee: 0, perks: ["No FX fees", "Same earn rates"] },
     ],
     earningRates: [
-      { category: "Dining, Groceries & Entertainment", multiplier: 6, unit: "points", programId: "scene-plus" },
-      { category: "Gas & Transit", multiplier: 3, unit: "points", programId: "scene-plus" },
+      { category: "Empire Grocers (Sobeys, Safeway, IGA, Foodland)", multiplier: 6, unit: "points", programId: "scene-plus", note: "$50,000/yr cap on accelerated rates" },
+      { category: "Other Groceries, Dining, Food Delivery & Entertainment", multiplier: 5, unit: "points", programId: "scene-plus" },
+      { category: "Gas, Transit & Streaming", multiplier: 3, unit: "points", programId: "scene-plus" },
       { category: "Everything Else", multiplier: 1, unit: "points", programId: "scene-plus" },
     ],
     insurance: [
-      { type: "Out-of-Province/Country Medical", maxDays: 25, maxCoverage: "$10,000,000", ageLimit: 64 },
+      { type: "Out-of-Province/Country Medical", maxDays: 25, maxCoverage: "$1,000,000", ageLimit: 65, note: "3 days if 65+" },
       { type: "Trip Cancellation", maxCoverage: "$1,500/person" },
-      { type: "Trip Interruption", maxCoverage: "$3,000/person" },
+      { type: "Trip Interruption", maxCoverage: "$1,500/person" },
       { type: "Car Rental Theft & Damage" },
       { type: "Flight Delay", maxCoverage: "$500" },
       { type: "Purchase Protection", note: "90 days" },
@@ -2023,12 +2093,22 @@ export const CARD_TEMPLATES: CardTemplate[] = [
     issuer: "Scotiabank",
     network: "Visa",
     annualFee: 120,
-    lastVerified: "2026-06-01",
+    lastVerified: "2026-07-11",
     benefits: [],
     earningRates: [
-      { category: "Groceries & Transit", multiplier: 0.04, unit: "percent", note: "4% cash back" },
-      { category: "Gas & Recurring Bills", multiplier: 0.02, unit: "percent", note: "2% cash back" },
+      { category: "Groceries & Recurring Bill Payments", multiplier: 0.04, unit: "percent", note: "4% cash back, $25,000/yr cap" },
+      { category: "Gas, EV, Transit, Rideshare & Food Delivery", multiplier: 0.02, unit: "percent", note: "2% cash back, $25,000/yr cap" },
       { category: "Everything Else", multiplier: 0.01, unit: "percent", note: "1% cash back" },
+    ],
+    insurance: [
+      { type: "Out-of-Province/Country Medical", maxDays: 15, maxCoverage: "$1,000,000", ageLimit: 65 },
+      { type: "Trip Cancellation", maxCoverage: "$1,500/person" },
+      { type: "Trip Interruption", maxCoverage: "$2,000/person" },
+      { type: "Flight Delay", maxCoverage: "$500" },
+      { type: "Baggage Delay/Loss", maxCoverage: "$500" },
+      { type: "Car Rental Theft & Damage" },
+      { type: "Purchase Protection", note: "90 days" },
+      { type: "Extended Warranty", note: "Up to 1 additional year" },
     ],
     firstYearFeeWaived: true,
     currentOffer: {
@@ -2223,41 +2303,22 @@ export const CARD_TEMPLATES: CardTemplate[] = [
     issuer: "National Bank",
     network: "Mastercard",
     annualFee: 115,
-    lastVerified: "2026-06-01",
-    benefits: [
-      {
-        id: "nbc-world-travel",
-        name: "Annual Travel Credit",
-        value: 150,
-        frequency: "annual",
-        resetDate: "calendar-year",
-        category: "travel-credit",
-        note: "Reimbursement for seat selection, airport parking, baggage fees, lounge access, ticket upgrades. Must submit within 60 days. Resets calendar year.",
-      },
-      {
-        id: "nbc-world-lounge",
-        name: "National Bank Lounge at YUL",
-        value: 40,
-        frequency: "per-use",
-        maxUses: 4,
-        resetDate: "cardmember-year",
-        category: "lounge",
-        note: "International terminal only. Cardholder + 1 guest + up to 2 children under 12.",
-      },
-    ],
+    lastVerified: "2026-07-11",
+    benefits: [],
     earningRates: [
-      { category: "Travel & Entertainment", multiplier: 2, unit: "points", programId: "nbc-rewards" },
-      { category: "Everything Else", multiplier: 1, unit: "points", programId: "nbc-rewards" },
+      { category: "All Purchases (first $20,000/yr)", multiplier: 1.25, unit: "points", programId: "nbc-rewards" },
+      { category: "All Purchases ($20,001–$30,000/yr)", multiplier: 2, unit: "points", programId: "nbc-rewards" },
+      { category: "All Purchases (over $30,000/yr)", multiplier: 1.25, unit: "points", programId: "nbc-rewards" },
     ],
     insurance: [
-      { type: "Out-of-Province/Country Medical", maxDays: 60, maxCoverage: "$5,000,000", ageLimit: 65, note: "15 days ages 65–74; no coverage at 75+. Does NOT require trip charged to card." },
+      { type: "Out-of-Province/Country Medical", maxDays: 60, maxCoverage: "$5,000,000", ageLimit: 65, note: "60 days age 54 and under; 31 days ages 55–64; 15 days ages 65+." },
       { type: "Trip Cancellation", maxCoverage: "$2,500/person" },
       { type: "Trip Interruption", maxCoverage: "$5,000/person" },
       { type: "Car Rental Theft & Damage", note: "MSRP up to $65,000, up to 48 days" },
       { type: "Flight Delay", maxCoverage: "$500/person", note: "4-hour trigger" },
       { type: "Baggage Delay", maxCoverage: "$500/person", note: "6-hour trigger" },
       { type: "Baggage Loss", maxCoverage: "$1,000/person" },
-      { type: "Purchase Protection", note: "180 days" },
+      { type: "Purchase Protection", note: "90 days" },
       { type: "Extended Warranty", note: "Up to 2 additional years" },
     ],
   },
@@ -2972,8 +3033,8 @@ export const CARD_APPLY_URLS: Record<string, string> = {
   "bmo-air-miles-mastercard": "https://www.bmo.com/en-ca/main/personal/credit-cards/bmo-air-miles-mastercard/",
   "bmo-air-miles-world-elite":"https://www.bmo.com/en-ca/main/personal/credit-cards/bmo-air-miles-world-elite-mastercard/",
   // NATIONAL BANK
-  "nbc-world-elite":     "https://www.nbc.ca/personal/credit-cards/world-elite-mastercard.html",
-  "nbc-mastercard-world":"https://www.nbc.ca/personal/credit-cards/mastercard-world.html",
+  "nbc-world-elite":     "https://www.nbc.ca/personal/mastercard-credit-cards/world-elite.html",
+  "nbc-mastercard-world":"https://www.nbc.ca/personal/mastercard-credit-cards/world.html",
   // ROGERS
   "rogers-world-elite": "https://www.rogers.com/credit-card",
   "fido-mastercard":    "https://www.fido.ca/credit-card",
