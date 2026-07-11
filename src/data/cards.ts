@@ -1016,7 +1016,7 @@ export const CARD_TEMPLATES: CardTemplate[] = [
     issuer: "BMO",
     network: "Visa",
     annualFee: 325,
-    lastVerified: "2026-06-01",
+    lastVerified: "2026-07-11",
     noFxFee: true,
     benefits: [
       {
@@ -1030,11 +1030,11 @@ export const CARD_TEMPLATES: CardTemplate[] = [
       },
     ],
     earningRates: [
-      { category: "Dining, Groceries, Gas & Transit", multiplier: 5, unit: "points", programId: "bmo-rewards", note: "5× BMO Rewards points" },
-      { category: "Everything Else", multiplier: 1, unit: "points", programId: "bmo-rewards" },
+      { category: "Travel, Dining, Groceries, Gas & Drugstores", multiplier: 5, unit: "points", programId: "bmo-rewards", note: "5× BMO Rewards points, capped at $100,000/yr combined; transit is 1x" },
+      { category: "Everything Else (incl. transit)", multiplier: 1, unit: "points", programId: "bmo-rewards" },
     ],
     insurance: [
-      { type: "Out-of-Province/Country Medical", maxDays: 21, maxCoverage: "$5,000,000", ageLimit: 65, note: "3 days if aged 65+" },
+      { type: "Out-of-Province/Country Medical", maxDays: 22, maxCoverage: "$5,000,000", ageLimit: 65, note: "3 days if aged 65+" },
       { type: "Trip Cancellation", maxCoverage: "$2,500/person, $5,000 combined" },
       { type: "Trip Interruption", maxCoverage: "$5,000/person, $25,000 combined" },
       { type: "Car Rental Theft & Damage", note: "MSRP up to $85,000, up to 48 days" },
@@ -1063,7 +1063,7 @@ export const CARD_TEMPLATES: CardTemplate[] = [
     annualFee: 199,
     annualFeeNote: "First year waived in current offer",
     firstYearFeeWaived: true,
-    lastVerified: "2026-06-01",
+    lastVerified: "2026-07-11",
     benefits: [
       {
         id: "bmo-viporter-companion",
@@ -1094,9 +1094,21 @@ export const CARD_TEMPLATES: CardTemplate[] = [
       },
     ],
     earningRates: [
-      { category: "Porter Airlines Purchases", multiplier: 5, unit: "points", programId: "viporter", note: "5× VIPorter points" },
-      { category: "Dining & Groceries", multiplier: 3, unit: "points", programId: "viporter" },
+      { category: "Porter Airlines Purchases", multiplier: 3, unit: "points", programId: "viporter", note: "Capped at $20,000/yr" },
+      { category: "Groceries & Dining", multiplier: 2, unit: "points", programId: "viporter", note: "Capped at $10,000/yr" },
+      { category: "Gas & Transportation", multiplier: 2, unit: "points", programId: "viporter", note: "Capped at $5,000/yr" },
+      { category: "Hotel", multiplier: 2, unit: "points", programId: "viporter", note: "Capped at $5,000/yr" },
       { category: "Everything Else", multiplier: 1, unit: "points", programId: "viporter" },
+    ],
+    insurance: [
+      { type: "Out-of-Province/Country Medical", maxDays: 21, maxCoverage: "$5,000,000", ageLimit: 64 },
+      { type: "Trip Cancellation", maxCoverage: "$1,500/person, $5,000 max" },
+      { type: "Trip Interruption", maxCoverage: "$2,000/person, $10,000 max" },
+      { type: "Flight Delay", maxCoverage: "$500/trip" },
+      { type: "Baggage Delay/Loss", maxCoverage: "$500/person, $1,000 max" },
+      { type: "Car Rental Theft & Damage", note: "MSRP up to $65,000" },
+      { type: "Purchase Protection", note: "90 days" },
+      { type: "Extended Warranty", note: "Up to 1 additional year" },
     ],
     offerHistory: [
       { description: "Earn up to 20,000 VIPorter points + first year free (elevated)", points: 20000, startDate: "2025-06-01", endDate: "2026-01-31" },
@@ -1110,7 +1122,7 @@ export const CARD_TEMPLATES: CardTemplate[] = [
     issuer: "National Bank",
     network: "Mastercard",
     annualFee: 150,
-    lastVerified: "2026-06-01",
+    lastVerified: "2026-07-11",
     benefits: [
       {
         id: "nbc-we-travel",
@@ -1136,18 +1148,22 @@ export const CARD_TEMPLATES: CardTemplate[] = [
       { name: "Supplementary Card", fee: 0, perks: ["Travel credit pool shared", "YUL lounge access"] },
     ],
     earningRates: [
-      { category: "Travel & Entertainment", multiplier: 2, unit: "points", programId: "nbc-rewards" },
-      { category: "Dining & Groceries", multiplier: 1.5, unit: "points", programId: "nbc-rewards" },
+      { category: "Groceries & Restaurants", multiplier: 5, unit: "points", programId: "nbc-rewards", note: "First $2,500/mo, then 2x" },
+      { category: "Gas, EV Charging & Recurring Bills", multiplier: 2, unit: "points", programId: "nbc-rewards" },
+      { category: "À la carte Travel", multiplier: 2, unit: "points", programId: "nbc-rewards" },
       { category: "Everything Else", multiplier: 1, unit: "points", programId: "nbc-rewards" },
     ],
     insurance: [
-      { type: "Out-of-Province/Country Medical", maxDays: 60, maxCoverage: "$5,000,000", ageLimit: 75 },
+      { type: "Out-of-Province/Country Medical", maxDays: 60, maxCoverage: "$5,000,000", ageLimit: 75, note: "31 days ages 55-64; 15 days ages 65-75; no coverage 75+" },
       { type: "Trip Cancellation", maxCoverage: "$2,500/person" },
-      { type: "Trip Interruption", maxCoverage: "$2,500/person" },
+      { type: "Trip Interruption", maxCoverage: "$5,000/person" },
       { type: "Car Rental Theft & Damage" },
       { type: "Flight Delay", maxCoverage: "$500" },
-      { type: "Purchase Protection", note: "90 days" },
-      { type: "Extended Warranty", note: "Up to 1 additional year" },
+      { type: "Baggage Delay", maxCoverage: "$500/person", note: "6-hour trigger" },
+      { type: "Baggage Loss", maxCoverage: "$1,000/person" },
+      { type: "Mobile Device Insurance", maxCoverage: "$1,000" },
+      { type: "Purchase Protection", note: "180 days" },
+      { type: "Extended Warranty", note: "Up to 2 additional years" },
     ],
     offerHistory: [
       { description: "Earn up to 35,000 NBC Rewards points (elevated)", points: 35000, startDate: "2026-01-01", endDate: "2026-06-29" },
@@ -2167,12 +2183,16 @@ export const CARD_TEMPLATES: CardTemplate[] = [
     issuer: "BMO",
     network: "Mastercard",
     annualFee: 0,
-    lastVerified: "2026-06-01",
+    lastVerified: "2026-07-11",
     benefits: [],
     earningRates: [
-      { category: "Groceries", multiplier: 0.03, unit: "percent", note: "3% cash back" },
-      { category: "Recurring Bill Payments", multiplier: 0.01, unit: "percent", note: "1% cash back" },
+      { category: "Groceries", multiplier: 0.03, unit: "percent", note: "3% cash back, capped at $500/mo" },
+      { category: "Recurring Bill Payments", multiplier: 0.01, unit: "percent", note: "1% cash back, capped at $500/mo" },
       { category: "Everything Else", multiplier: 0.005, unit: "percent", note: "0.5% cash back" },
+    ],
+    insurance: [
+      { type: "Purchase Protection", note: "90 days" },
+      { type: "Extended Warranty", note: "Up to 1 additional year" },
     ],
   },
   {
@@ -2181,11 +2201,15 @@ export const CARD_TEMPLATES: CardTemplate[] = [
     issuer: "BMO",
     network: "Mastercard",
     annualFee: 0,
-    lastVerified: "2026-06-01",
+    lastVerified: "2026-07-11",
     benefits: [],
     earningRates: [
       { category: "Air Miles Partners", multiplier: 0.08, unit: "points", programId: "air-miles", note: "2 Air Miles per $25 at partner stores" },
       { category: "Everything Else", multiplier: 0.04, unit: "points", programId: "air-miles", note: "1 Air Mile per $25 spent" },
+    ],
+    insurance: [
+      { type: "Purchase Protection", note: "90 days" },
+      { type: "Extended Warranty", note: "Up to 1 additional year" },
     ],
   },
   {
@@ -2194,7 +2218,7 @@ export const CARD_TEMPLATES: CardTemplate[] = [
     issuer: "BMO",
     network: "Mastercard",
     annualFee: 150,
-    lastVerified: "2026-06-01",
+    lastVerified: "2026-07-11",
     noFxFee: true,
     benefits: [
       {
@@ -2209,14 +2233,13 @@ export const CARD_TEMPLATES: CardTemplate[] = [
       },
     ],
     earningRates: [
-      { category: "Travel", multiplier: 5, unit: "points", programId: "bmo-rewards" },
-      { category: "Dining & Entertainment", multiplier: 3, unit: "points", programId: "bmo-rewards" },
-      { category: "Recurring Bills", multiplier: 2, unit: "points", programId: "bmo-rewards" },
+      { category: "Travel", multiplier: 5, unit: "points", programId: "bmo-rewards", note: "Capped at $15,000/yr" },
+      { category: "Dining, Entertainment & Recurring Bills", multiplier: 3, unit: "points", programId: "bmo-rewards", note: "Capped at $10,000/category/yr" },
       { category: "Everything Else", multiplier: 1, unit: "points", programId: "bmo-rewards" },
     ],
     insurance: [
       { type: "Out-of-Province/Country Medical", maxDays: 21, maxCoverage: "$5,000,000", ageLimit: 65, note: "No coverage for aged 65+" },
-      { type: "Trip Cancellation", maxCoverage: "$2,500/person, $5,000 combined" },
+      { type: "Trip Cancellation", maxCoverage: "$1,500/person, $5,000 max" },
       { type: "Trip Interruption", maxCoverage: "$2,000/person, $10,000 combined" },
       { type: "Car Rental Theft & Damage", note: "MSRP up to $65,000, up to 48 days" },
       { type: "Flight Delay", maxCoverage: "$500/trip all insured combined", note: "4-hour trigger" },
@@ -2242,7 +2265,8 @@ export const CARD_TEMPLATES: CardTemplate[] = [
     issuer: "BMO",
     network: "Mastercard",
     annualFee: 120,
-    lastVerified: "2026-06-01",
+    discontinued: true,
+    lastVerified: "2026-07-11",
     benefits: [
       {
         id: "bmo-am-we-anniversary",
@@ -2265,9 +2289,9 @@ export const CARD_TEMPLATES: CardTemplate[] = [
       },
     ],
     earningRates: [
-      { category: "Air Miles Partners", multiplier: 0.3, unit: "points", programId: "air-miles", note: "3 Air Miles per $10 at partner stores" },
-      { category: "Grocery & Drug Stores", multiplier: 0.2, unit: "points", programId: "air-miles", note: "2 Air Miles per $10" },
-      { category: "Everything Else", multiplier: 0.1, unit: "points", programId: "air-miles", note: "1 Air Mile per $10 spent" },
+      { category: "Air Miles Partners", multiplier: 0.25, unit: "points", programId: "air-miles", note: "3 miles per $12, capped $500/statement cycle" },
+      { category: "Grocery, Wholesale Club & Alcohol Retailers", multiplier: 0.167, unit: "points", programId: "air-miles", note: "2 miles per $12, capped $500/statement cycle" },
+      { category: "Everything Else", multiplier: 0.083, unit: "points", programId: "air-miles", note: "1 mile per $12 spent" },
     ],
     insurance: [
       { type: "Out-of-Province/Country Medical", maxDays: 15, maxCoverage: "$5,000,000", ageLimit: 65, note: "No coverage for aged 65+" },
@@ -2290,15 +2314,26 @@ export const CARD_TEMPLATES: CardTemplate[] = [
     name: "BMO CashBack World Elite Mastercard",
     issuer: "BMO",
     network: "Mastercard",
-    annualFee: 120,
-    lastVerified: "2026-06-01",
+    annualFee: 139,
+    lastVerified: "2026-07-11",
     benefits: [],
     earningRates: [
-      { category: "Groceries", multiplier: 0.05, unit: "percent", note: "5% cash back" },
-      { category: "Transit & Rideshares", multiplier: 0.04, unit: "percent", note: "4% cash back" },
-      { category: "Gas & EV Charging", multiplier: 0.03, unit: "percent", note: "3% cash back" },
-      { category: "Streaming & Subscriptions", multiplier: 0.02, unit: "percent", note: "2% cash back" },
+      { category: "Groceries", multiplier: 0.05, unit: "percent", note: "5% cash back, capped $500/mo" },
+      { category: "Transit & Rideshares", multiplier: 0.04, unit: "percent", note: "4% cash back, capped $300/mo" },
+      { category: "Gas & EV Charging", multiplier: 0.03, unit: "percent", note: "3% cash back, capped $300/mo" },
+      { category: "Recurring Bills", multiplier: 0.02, unit: "percent", note: "2% cash back, capped $500/mo" },
       { category: "Everything Else", multiplier: 0.01, unit: "percent", note: "1% cash back" },
+    ],
+    insurance: [
+      { type: "Out-of-Province/Country Medical", maxDays: 8, maxCoverage: "$5,000,000", ageLimit: 65 },
+      { type: "Car Rental Theft & Damage", note: "MSRP up to $65,000, up to 48 days" },
+      { type: "Common Carrier Accident", maxCoverage: "$500,000" },
+      { type: "Flight Delay", maxCoverage: "$500" },
+      { type: "Baggage Delay", maxCoverage: "$1,000" },
+      { type: "Baggage Loss", maxCoverage: "$500" },
+      { type: "Hotel Burglary", maxCoverage: "$1,000" },
+      { type: "Purchase Protection", note: "90 days" },
+      { type: "Extended Warranty", note: "Up to 1 additional year" },
     ],
     currentOffer: {
       description: "Earn up to $480 cash back in the first 12 months — up to $40 cash back per month on $2,000+ monthly spend",
@@ -2318,11 +2353,9 @@ export const CARD_TEMPLATES: CardTemplate[] = [
     issuer: "National Bank",
     network: "Mastercard",
     annualFee: 0,
-    lastVerified: "2026-06-01",
+    lastVerified: "2026-07-11",
     benefits: [],
-    earningRates: [
-      { category: "Everything", multiplier: 1, unit: "points", programId: "nbc-rewards", note: "1 À la carte Rewards point per $1" },
-    ],
+    earningRates: [],
     firstYearFeeWaived: true,
     currentOffer: {
       description: "Earn $70 cash back + first year annual fee refunded",
@@ -2367,10 +2400,11 @@ export const CARD_TEMPLATES: CardTemplate[] = [
     issuer: "Neo",
     network: "Mastercard",
     annualFee: 0,
-    lastVerified: "2026-06-01",
+    lastVerified: "2026-07-11",
     benefits: [],
     earningRates: [
       { category: "Neo Partner Stores", multiplier: 0.05, unit: "percent", note: "avg 5% cash back at 10,000+ Neo partners" },
+      { category: "Groceries, Gas & Recurring Payments", multiplier: 0.02, unit: "percent", note: "2% cash back" },
       { category: "Everything Else", multiplier: 0.005, unit: "percent", note: "0.5% cash back" },
     ],
   },
@@ -2379,8 +2413,8 @@ export const CARD_TEMPLATES: CardTemplate[] = [
     name: "Neo World Elite Mastercard",
     issuer: "Neo",
     network: "Mastercard",
-    annualFee: 99,
-    lastVerified: "2026-06-01",
+    annualFee: 149,
+    lastVerified: "2026-07-11",
     noFxFee: true,
     benefits: [
       {
@@ -2394,6 +2428,9 @@ export const CARD_TEMPLATES: CardTemplate[] = [
     ],
     earningRates: [
       { category: "Neo Partner Stores", multiplier: 0.05, unit: "percent", note: "avg 5% cash back at 10,000+ Neo partners" },
+      { category: "Groceries", multiplier: 0.05, unit: "percent", note: "5% cash back" },
+      { category: "Recurring Payments", multiplier: 0.04, unit: "percent", note: "4% cash back" },
+      { category: "Gas", multiplier: 0.03, unit: "percent", note: "3% cash back" },
       { category: "Everything Else", multiplier: 0.01, unit: "percent", note: "1% cash back" },
     ],
   },
@@ -2405,7 +2442,7 @@ export const CARD_TEMPLATES: CardTemplate[] = [
     issuer: "MBNA",
     network: "Mastercard",
     annualFee: 120,
-    lastVerified: "2026-06-01",
+    lastVerified: "2026-07-11",
     benefits: [
       {
         id: "mbna-rwe-anniversary",
@@ -2418,8 +2455,8 @@ export const CARD_TEMPLATES: CardTemplate[] = [
       },
     ],
     earningRates: [
-      { category: "Groceries, Restaurants & Digital Media", multiplier: 5, unit: "points", programId: "mbna-rewards" },
-      { category: "Everything Else", multiplier: 2, unit: "points", programId: "mbna-rewards" },
+      { category: "Groceries, Restaurants, Digital Media, Memberships & Utilities", multiplier: 5, unit: "points", programId: "mbna-rewards", note: "Capped at $50,000/yr combined" },
+      { category: "Everything Else", multiplier: 1, unit: "points", programId: "mbna-rewards" },
     ],
     insurance: [
       { type: "Out-of-Province/Country Medical", maxDays: 21, maxCoverage: "$2,000,000", ageLimit: 65, note: "No coverage for aged 65+" },
@@ -2445,7 +2482,8 @@ export const CARD_TEMPLATES: CardTemplate[] = [
     issuer: "MBNA",
     network: "Mastercard",
     annualFee: 75,
-    lastVerified: "2026-06-01",
+    discontinued: true,
+    lastVerified: "2026-07-11",
     benefits: [
       {
         id: "mbna-alaska-companion",
@@ -2477,12 +2515,12 @@ export const CARD_TEMPLATES: CardTemplate[] = [
     name: "MBNA Smart Cash Platinum Plus Mastercard",
     issuer: "MBNA",
     network: "Mastercard",
-    annualFee: 39,
-    lastVerified: "2026-06-01",
+    annualFee: 0,
+    lastVerified: "2026-07-11",
     benefits: [],
     earningRates: [
-      { category: "Groceries & Gas", multiplier: 0.05, unit: "percent", note: "5% cash back first 6 months, then 2%" },
-      { category: "Everything Else", multiplier: 0.01, unit: "percent", note: "1% cash back" },
+      { category: "Groceries & Gas", multiplier: 0.05, unit: "percent", note: "5% cash back first 6 months, then 2% (capped $500/mo)" },
+      { category: "Everything Else", multiplier: 0.005, unit: "percent", note: "0.5% cash back" },
     ],
   },
   {
@@ -2491,11 +2529,11 @@ export const CARD_TEMPLATES: CardTemplate[] = [
     issuer: "MBNA",
     network: "Mastercard",
     annualFee: 0,
-    lastVerified: "2026-06-01",
+    lastVerified: "2026-07-11",
     benefits: [],
     earningRates: [
-      { category: "Amazon.ca Purchases", multiplier: 0.025, unit: "percent", note: "2.5% cash back" },
-      { category: "Everything Else", multiplier: 0.0125, unit: "percent", note: "1.25% cash back" },
+      { category: "Amazon.ca & Whole Foods (Prime members)", multiplier: 0.025, unit: "percent", note: "2.5% cash back; 1.5% for non-Prime members" },
+      { category: "Everything Else", multiplier: 0.01, unit: "percent", note: "1% cash back" },
     ],
   },
 
@@ -2506,7 +2544,7 @@ export const CARD_TEMPLATES: CardTemplate[] = [
     issuer: "Canadian Tire",
     network: "Mastercard",
     annualFee: 0,
-    lastVerified: "2026-06-01",
+    lastVerified: "2026-07-11",
     noFxFee: true,
     benefits: [
       {
@@ -2521,8 +2559,14 @@ export const CARD_TEMPLATES: CardTemplate[] = [
     ],
     earningRates: [
       { category: "Canadian Tire, Sport Chek & Affiliates", multiplier: 0.04, unit: "percent", note: "4% CT Money back" },
-      { category: "Groceries (excl. Walmart/Costco)", multiplier: 0.015, unit: "percent", note: "1.5% CT Money back" },
+      { category: "Groceries (excl. Walmart/Costco)", multiplier: 0.03, unit: "percent", note: "3% CT Money back, capped $12,000/yr" },
+      { category: "Gas (Gas+/Petro-Canada)", multiplier: 0.05, unit: "percent", note: "7¢/L premium, 5¢/L other fuel" },
       { category: "Everything Else", multiplier: 0.005, unit: "percent", note: "0.5% CT Money back" },
+    ],
+    insurance: [
+      { type: "Car Rental Theft & Damage" },
+      { type: "Purchase Protection" },
+      { type: "Extended Warranty" },
     ],
     offerHistory: [
       { description: "Earn $150 CT Money welcome bonus (elevated)", points: 150, startDate: "2026-01-01", endDate: "2026-05-21" },
@@ -2550,10 +2594,11 @@ export const CARD_TEMPLATES: CardTemplate[] = [
     issuer: "PC Financial",
     network: "Mastercard",
     annualFee: 0,
-    lastVerified: "2026-06-01",
+    lastVerified: "2026-07-11",
     benefits: [],
     earningRates: [
-      { category: "Loblaw Stores & Shoppers Drug Mart", multiplier: 45, unit: "points", programId: "pc-optimum", note: "45 PC Optimum pts per $1 at Loblaw/Shoppers" },
+      { category: "Shoppers Drug Mart / Pharmaprix", multiplier: 45, unit: "points", programId: "pc-optimum", note: "45 PC Optimum pts per $1 (4.5%)" },
+      { category: "Loblaw Banner Stores (No Frills, Superstore, Maxi)", multiplier: 30, unit: "points", programId: "pc-optimum", note: "30 pts per $1 (3%)" },
       { category: "Esso & Mobil", multiplier: 30, unit: "points", programId: "pc-optimum" },
       { category: "Everything Else", multiplier: 10, unit: "points", programId: "pc-optimum" },
     ],
@@ -2580,13 +2625,13 @@ export const CARD_TEMPLATES: CardTemplate[] = [
     issuer: "Rogers",
     network: "Mastercard",
     annualFee: 0,
-    lastVerified: "2026-06-01",
+    lastVerified: "2026-07-11",
     noFxFee: true,
     benefits: [],
     earningRates: [
       { category: "US-Dollar & Foreign Currency Purchases", multiplier: 0.03, unit: "percent", note: "3% cash back (no FX fee = net 0.5% gain)" },
-      { category: "Rogers, Fido & Shaw Bills", multiplier: 0.03, unit: "percent", note: "3% cash back on Rogers services" },
-      { category: "Everything Else", multiplier: 0.015, unit: "percent", note: "1.5% cash back" },
+      { category: "Everything Else (with Rogers/Fido/Shaw/Comwave service)", multiplier: 0.02, unit: "percent", note: "2%, capped at $61,000/yr combined bonus spend, then 1.5%" },
+      { category: "Everything Else (without qualifying service)", multiplier: 0.015, unit: "percent", note: "1.5% cash back" },
     ],
     currentOffer: {
       description: "Earn $60 cash back welcome bonus",
@@ -2644,11 +2689,11 @@ export const CARD_TEMPLATES: CardTemplate[] = [
     issuer: "Brim",
     network: "Mastercard",
     annualFee: 0,
-    lastVerified: "2026-06-01",
+    lastVerified: "2026-07-11",
     noFxFee: true,
     benefits: [],
     earningRates: [
-      { category: "Everything", multiplier: 0.01, unit: "percent", note: "1% cash back (Brim Rewards points)" },
+      { category: "Everything", multiplier: 0.005, unit: "percent", note: "0.5% cash back (1 point per $2)" },
     ],
   },
   {
@@ -2669,8 +2714,9 @@ export const CARD_TEMPLATES: CardTemplate[] = [
     name: "Brim World Elite Mastercard",
     issuer: "Brim",
     network: "Mastercard",
-    annualFee: 199,
-    lastVerified: "2026-06-01",
+    annualFee: 89,
+    annualFeeNote: "+ $50 per additional cardholder",
+    lastVerified: "2026-07-11",
     noFxFee: true,
     benefits: [
       {
@@ -2693,7 +2739,12 @@ export const CARD_TEMPLATES: CardTemplate[] = [
       },
     ],
     earningRates: [
-      { category: "Everything", multiplier: 0.02, unit: "percent", note: "2% Brim Rewards cash back" },
+      { category: "Everything", multiplier: 0.01, unit: "percent", note: "1% base; 2% via Brim Open Rewards up to $25,000/yr spend, then reverts to 1%" },
+    ],
+    insurance: [
+      { type: "Out-of-Province/Country Medical", maxDays: 15, ageLimit: 65, note: "3 days if 65+" },
+      { type: "Purchase Protection", maxCoverage: "$25,000/policy-year" },
+      { type: "Extended Warranty" },
     ],
   },
 
@@ -2704,7 +2755,7 @@ export const CARD_TEMPLATES: CardTemplate[] = [
     issuer: "Desjardins",
     network: "Mastercard",
     annualFee: 130,
-    lastVerified: "2026-06-01",
+    lastVerified: "2026-07-11",
     noFxFee: true,
     benefits: [
       {
@@ -2728,8 +2779,10 @@ export const CARD_TEMPLATES: CardTemplate[] = [
       },
     ],
     earningRates: [
-      { category: "Dining & Groceries", multiplier: 0.035, unit: "percent", note: "3.5% BONUSDOLLARS cash back" },
-      { category: "Entertainment & Transit", multiplier: 0.02, unit: "percent", note: "2%" },
+      { category: "Groceries", multiplier: 0.03, unit: "percent", note: "3%, capped $10,000/yr, then 1%" },
+      { category: "Restaurants", multiplier: 0.03, unit: "percent", note: "3%, capped $6,000/yr" },
+      { category: "Travel", multiplier: 0.02, unit: "percent", note: "2%, capped $20,000/yr" },
+      { category: "Entertainment & Alternative Transportation", multiplier: 0.02, unit: "percent", note: "2%" },
       { category: "Everything Else", multiplier: 0.01, unit: "percent", note: "1%" },
     ],
     insurance: [
@@ -2780,11 +2833,11 @@ export const CARD_TEMPLATES: CardTemplate[] = [
     issuer: "Meridian",
     network: "Visa",
     annualFee: 99,
-    lastVerified: "2026-06-01",
+    lastVerified: "2026-07-11",
     benefits: [],
     earningRates: [
-      { category: "Groceries, Gas & Pharmacy", multiplier: 0.04, unit: "percent", note: "4% cash back" },
-      { category: "Utilities & Streaming", multiplier: 0.02, unit: "percent", note: "2% cash back" },
+      { category: "Groceries & Gas", multiplier: 0.04, unit: "percent", note: "4% cash back, capped $25,000/yr combined, then 1%" },
+      { category: "Pharmacy & Utility Bills", multiplier: 0.02, unit: "percent", note: "2% cash back" },
       { category: "Everything Else", multiplier: 0.01, unit: "percent", note: "1% cash back" },
     ],
     currentOffer: {
@@ -2804,7 +2857,7 @@ export const CARD_TEMPLATES: CardTemplate[] = [
     issuer: "Meridian",
     network: "Visa",
     annualFee: 99,
-    lastVerified: "2026-06-01",
+    lastVerified: "2026-07-11",
     benefits: [
       {
         id: "meridian-travel-credit",
@@ -2817,9 +2870,8 @@ export const CARD_TEMPLATES: CardTemplate[] = [
       },
     ],
     earningRates: [
-      { category: "Travel", multiplier: 3.5, unit: "points", programId: "meridian-rewards" },
-      { category: "Groceries & Dining", multiplier: 2, unit: "points", programId: "meridian-rewards" },
-      { category: "Everything Else", multiplier: 1, unit: "points", programId: "meridian-rewards" },
+      { category: "Foreign Currency Purchases", multiplier: 1.5, unit: "points", programId: "meridian-rewards", note: "3% (6 points per $2)" },
+      { category: "Everything Else", multiplier: 0.75, unit: "points", programId: "meridian-rewards", note: "1.5% (3 points per $2)" },
     ],
     currentOffer: {
       description: "Earn 7,000 bonus points on your first eligible purchase",
@@ -2839,7 +2891,9 @@ export const CARD_TEMPLATES: CardTemplate[] = [
     issuer: "Capital One",
     network: "Mastercard",
     annualFee: 0,
-    lastVerified: "2026-06-01",
+    discontinued: true,
+    annualFeeNote: "Discontinued March 2022 — Costco co-brand moved exclusively to CIBC (CIBC Costco Mastercard)",
+    lastVerified: "2026-07-11",
     benefits: [],
     earningRates: [
       { category: "Costco Purchases", multiplier: 0.03, unit: "percent", note: "3% cash back at Costco" },
@@ -2853,7 +2907,9 @@ export const CARD_TEMPLATES: CardTemplate[] = [
     issuer: "Capital One",
     network: "Mastercard",
     annualFee: 120,
-    lastVerified: "2026-06-01",
+    discontinued: true,
+    annualFeeNote: "No longer open to new applicants — renewed for legacy cardholders only",
+    lastVerified: "2026-07-11",
     benefits: [
       {
         id: "c1-aspire-travel",
@@ -2896,10 +2952,10 @@ export const CARD_TEMPLATES: CardTemplate[] = [
     issuer: "Walmart",
     network: "Mastercard",
     annualFee: 0,
-    lastVerified: "2026-06-01",
+    lastVerified: "2026-07-11",
     benefits: [],
     earningRates: [
-      { category: "Walmart.ca & In-Store (Grocery Pickup/Delivery)", multiplier: 0.0125, unit: "percent", note: "1.25% Walmart Reward Dollars" },
+      { category: "Walmart.ca & In-Store", multiplier: 0.03, unit: "percent", note: "3% Walmart Reward Dollars" },
       { category: "Everywhere Else", multiplier: 0.01, unit: "percent", note: "1% Walmart Reward Dollars" },
     ],
     currentOffer: {
@@ -2946,7 +3002,7 @@ export const CARD_TEMPLATES: CardTemplate[] = [
     issuer: "ATB",
     network: "Mastercard",
     annualFee: 120,
-    lastVerified: "2026-06-01",
+    lastVerified: "2026-07-11",
     noFxFee: true,
     benefits: [
       {
@@ -2960,9 +3016,9 @@ export const CARD_TEMPLATES: CardTemplate[] = [
       },
     ],
     earningRates: [
-      { category: "Gas, Groceries & Travel", multiplier: 3, unit: "points", programId: "atb-rewards", note: "3× ATB Rewards points" },
-      { category: "Dining & Entertainment", multiplier: 1.5, unit: "points", programId: "atb-rewards" },
-      { category: "Everything Else", multiplier: 1, unit: "points", programId: "atb-rewards" },
+      { category: "Travel (Airlines, Hotels, Motels, Car Rentals)", multiplier: 8, unit: "points", programId: "atb-rewards", note: "Capped at $50,000/yr combined, resets January" },
+      { category: "Groceries, Gas, Streaming & Entertainment", multiplier: 6, unit: "points", programId: "atb-rewards" },
+      { category: "Everything Else", multiplier: 2, unit: "points", programId: "atb-rewards" },
     ],
     currentOffer: {
       description: "Earn 40,000 ATB Rewards points ($200 value) on your first eligible purchase",
