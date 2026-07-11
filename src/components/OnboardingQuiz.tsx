@@ -74,7 +74,7 @@ export default function OnboardingQuiz({ onComplete, onSkip }: Props) {
         </div>
         <div className="space-y-3">
           {recs.map((rec, i) => (
-            <div key={rec.id} className="bg-white border border-line rounded-xl p-4">
+            <div key={rec.id} className="bg-surface border border-line rounded-xl p-4">
               <div className="flex items-start gap-3">
                 <span className="text-xs font-bold text-line mt-0.5">#{i + 1}</span>
                 <div className="flex-1 min-w-0">
@@ -127,7 +127,7 @@ export default function OnboardingQuiz({ onComplete, onSkip }: Props) {
             <button
               key={opt.id}
               onClick={() => { setSpendRange(opt.id); setStep(2); }}
-              className="w-full text-left bg-white border-2 border-line rounded-xl p-4 hover:border-ink-soft transition-colors"
+              className="w-full text-left bg-surface border-2 border-line rounded-xl p-4 hover:border-ink-soft transition-colors"
             >
               <p className="font-semibold text-ink">{opt.label}</p>
               <p className="text-xs text-ink-soft mt-0.5">{opt.sub}</p>
@@ -159,7 +159,7 @@ export default function OnboardingQuiz({ onComplete, onSkip }: Props) {
           <button
             key={opt.id}
             onClick={() => { setGoal(opt.id); setStep(1); }}
-            className="w-full text-left bg-white border-2 border-line rounded-xl p-4 hover:border-ink-soft transition-colors"
+            className="w-full text-left bg-surface border-2 border-line rounded-xl p-4 hover:border-ink-soft transition-colors"
           >
             <div className="flex items-center gap-3">
               <span className="text-2xl shrink-0">{opt.icon}</span>

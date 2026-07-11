@@ -13,7 +13,7 @@ export default function PrivacyPolicy({ onBack }: Props) {
         <p className="text-ink-soft text-sm mt-1">Last updated: July 8, 2026</p>
       </div>
 
-      <div className="bg-white border border-line rounded-xl p-5 space-y-5 text-sm text-ink leading-relaxed">
+      <div className="bg-surface border border-line rounded-xl p-5 space-y-5 text-sm text-ink leading-relaxed">
         <section>
           <h2 className="font-semibold text-ink text-base mb-2">Overview</h2>
           <p>

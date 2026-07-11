@@ -113,7 +113,7 @@ export default function AddCard({ existingCardIds, onAdd, onCancel }: Props) {
               className={`w-full text-left border rounded-xl p-4 transition-all ${
                 card.id === pendingId
                   ? 'border-brass bg-brass-soft ring-2 ring-brass'
-                  : 'bg-white border-line hover:border-brass hover:bg-brass-soft'
+                  : 'bg-surface border-line hover:border-brass hover:bg-brass-soft'
               }`}
             >
               <div className="flex items-start justify-between gap-3 min-w-0">
@@ -160,7 +160,7 @@ export default function AddCard({ existingCardIds, onAdd, onCancel }: Props) {
       {pendingId && (() => {
         const card = CARD_TEMPLATES.find(c => c.id === pendingId)!;
         return (
-          <div className="sticky bottom-16 sm:bottom-0 bg-white border-t border-line rounded-b-xl px-4 py-3 flex items-center justify-between gap-3 shadow-lg">
+          <div className="sticky bottom-16 sm:bottom-0 bg-surface border-t border-line rounded-b-xl px-4 py-3 flex items-center justify-between gap-3 shadow-lg">
             <p className="text-sm text-ink truncate">
               <span className="font-semibold">{card.name}</span>
             </p>

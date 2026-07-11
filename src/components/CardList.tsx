@@ -185,7 +185,7 @@ export default function CardList({ data, update, onCompare, isTablet }: Props) {
       <button
         key={userCard.cardId}
         onClick={() => { setSelectedCardId(userCard.cardId); trackCardDetailViewed(userCard.cardId, template.name, template.issuer); }}
-        className={`w-full text-left bg-white border border-line rounded-2xl overflow-hidden flex hover:-translate-y-0.5 hover:shadow-md transition-all ${dimmed ? 'opacity-50' : ''}`}
+        className={`w-full text-left bg-surface border border-line rounded-2xl overflow-hidden flex hover:-translate-y-0.5 hover:shadow-md transition-all ${dimmed ? 'opacity-50' : ''}`}
       >
         {/* Card face */}
         <div className={`w-28 sm:w-32 shrink-0 bg-gradient-to-br ${face} p-3 flex flex-col justify-between text-white`}>
@@ -273,7 +273,7 @@ export default function CardList({ data, update, onCompare, isTablet }: Props) {
         </div>
       )}
       {/* Active cards */}
-      <div className={isTablet ? 'grid grid-cols-2 gap-3' : 'space-y-3'}>
+      <div className={isTablet ? 'grid grid-cols-2 gap-3' : 'space-y-3 lg:grid lg:grid-cols-2 lg:gap-3 lg:space-y-0'}>
         {activeCards.map(c => renderCardRow(c, false))}
       </div>
 

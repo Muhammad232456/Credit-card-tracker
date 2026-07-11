@@ -275,7 +275,7 @@ export default function CardDetail({
       })()}
 
       {/* Net Annual Value */}
-      <div className="bg-white border border-line rounded-xl mt-4 overflow-hidden">
+      <div className="bg-surface border border-line rounded-xl mt-4 overflow-hidden">
         <button
           onClick={() => setShowNetValue(v => !v)}
           className="w-full px-4 py-3 flex items-center justify-between text-left"
@@ -341,7 +341,7 @@ export default function CardDetail({
       </div>
 
       {/* Card details */}
-      <div className="bg-white border border-line rounded-xl p-4 mt-4 space-y-4">
+      <div className="bg-surface border border-line rounded-xl p-4 mt-4 space-y-4">
         <p className="text-sm font-semibold text-ink">Card Details</p>
 
         <div className="grid grid-cols-2 gap-3">
@@ -478,7 +478,7 @@ export default function CardDetail({
       </div>
 
       {/* Product change history */}
-      <div className="bg-white border border-line rounded-xl mt-4 overflow-hidden">
+      <div className="bg-surface border border-line rounded-xl mt-4 overflow-hidden">
         <button
           onClick={() => setShowCardMeta(v => !v)}
           className="w-full px-4 py-3 flex items-center justify-between text-left"
@@ -527,7 +527,7 @@ export default function CardDetail({
       </div>
 
       {/* Welcome bonus tracker */}
-      <div className="bg-white border border-brass rounded-xl p-4 mt-4">
+      <div className="bg-surface border border-brass rounded-xl p-4 mt-4">
         <p className="text-sm font-semibold text-ink mb-3">🎯 Welcome Bonus Tracker</p>
         {userCard.welcomeBonus ? (() => {
           const wb = userCard.welcomeBonus!;
@@ -732,7 +732,7 @@ export default function CardDetail({
 
       {/* Earning rates */}
       {template.earningRates && template.earningRates.length > 0 && (
-        <div className="bg-white border border-line rounded-xl mt-4 overflow-hidden">
+        <div className="bg-surface border border-line rounded-xl mt-4 overflow-hidden">
           <button
             onClick={() => setShowEarning(v => !v)}
             className="w-full px-4 py-3 flex items-center justify-between text-left"
@@ -766,7 +766,7 @@ export default function CardDetail({
 
       {/* Insurance */}
       {template.insurance && template.insurance.length > 0 && (
-        <div className="bg-white border border-line rounded-xl mt-4 overflow-hidden">
+        <div className="bg-surface border border-line rounded-xl mt-4 overflow-hidden">
           <button
             onClick={() => setShowInsurance(v => !v)}
             className="w-full px-4 py-3 flex items-center justify-between text-left"
@@ -813,7 +813,7 @@ export default function CardDetail({
           )}
         </h3>
         {template.noFxFee && template.benefits.length === 0 && (
-          <div className="bg-white border border-line rounded-xl p-4 flex items-center gap-3">
+          <div className="bg-surface border border-line rounded-xl p-4 flex items-center gap-3">
             <div className="w-8 h-8 rounded-lg bg-brass-soft text-brass flex items-center justify-center shrink-0">
               <FxIcon className="w-4 h-4" />
             </div>
@@ -838,7 +838,7 @@ export default function CardDetail({
             : planned * effectiveVal;
           const BenefitIcon = CATEGORY_ICON_COMPONENTS[benefit.category];
           return (
-            <div key={benefit.id} className="bg-white border border-line rounded-xl p-4">
+            <div key={benefit.id} className="bg-surface border border-line rounded-xl p-4">
               <div className="flex items-start gap-3">
                 <div className="w-8 h-8 rounded-lg bg-brass-soft text-brass flex items-center justify-center shrink-0 mt-0.5">
                   <BenefitIcon className="w-4 h-4" />
@@ -871,9 +871,9 @@ export default function CardDetail({
                     {benefit.frequency === 'annual' ? (
                       <div className="flex gap-1.5">
                         {[
-                          { label: 'Unredeemed', usedVal: 0, plannedVal: 0, activeClass: 'bg-line text-ink-soft border-line', inactiveClass: 'bg-white text-ink-soft border-line' },
-                          { label: 'Planned', usedVal: 0, plannedVal: 1, activeClass: 'bg-amber-bg text-amber border-amber', inactiveClass: 'bg-white text-ink-soft border-line' },
-                          { label: 'Redeemed', usedVal: 1, plannedVal: 0, activeClass: 'bg-forest-bg text-forest border-forest', inactiveClass: 'bg-white text-ink-soft border-line' },
+                          { label: 'Unredeemed', usedVal: 0, plannedVal: 0, activeClass: 'bg-line text-ink-soft border-line', inactiveClass: 'bg-surface text-ink-soft border-line' },
+                          { label: 'Planned', usedVal: 0, plannedVal: 1, activeClass: 'bg-amber-bg text-amber border-amber', inactiveClass: 'bg-surface text-ink-soft border-line' },
+                          { label: 'Redeemed', usedVal: 1, plannedVal: 0, activeClass: 'bg-forest-bg text-forest border-forest', inactiveClass: 'bg-surface text-ink-soft border-line' },
                         ].map(opt => {
                           const isSelected = used === opt.usedVal && planned === opt.plannedVal;
                           return (
@@ -942,7 +942,7 @@ export default function CardDetail({
 
       {/* Supplementary cards */}
       {template.supplementaryCardOptions && template.supplementaryCardOptions.length > 0 && (
-        <div className="bg-white border border-line rounded-xl mt-4 overflow-hidden">
+        <div className="bg-surface border border-line rounded-xl mt-4 overflow-hidden">
           <button
             onClick={() => setShowSupplementary(v => !v)}
             className="w-full px-4 py-3 flex items-center justify-between text-left"

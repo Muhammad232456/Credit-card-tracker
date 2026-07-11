@@ -34,7 +34,7 @@ export default function RenewalTracker({ data, onSelectCard }: Props) {
       <div className="space-y-2">
         {cardsWithRenewal.map(({ userCard, template, days }) => {
           if (!template) return null;
-          const statusColor = days === null ? 'border-line bg-white' :
+          const statusColor = days === null ? 'border-line bg-surface' :
             days < 30 ? 'border-rust bg-rust-bg' :
             days < 60 ? 'border-amber bg-amber-bg' :
             'border-forest bg-forest-bg';

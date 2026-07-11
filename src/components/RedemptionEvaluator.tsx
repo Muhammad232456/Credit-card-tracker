@@ -134,7 +134,7 @@ export default function RedemptionEvaluator({ onBack, initialProgramId }: Props)
       </div>
 
       {/* Inputs */}
-      <div className="bg-white border border-line rounded-xl p-4 space-y-4">
+      <div className="bg-surface border border-line rounded-xl p-4 space-y-4">
         <div>
           <label className="text-xs font-medium text-ink-soft uppercase tracking-wide">
             {tab === 'airline' ? 'Airline / Program' : 'Hotel Program'}
@@ -142,7 +142,7 @@ export default function RedemptionEvaluator({ onBack, initialProgramId }: Props)
           <select
             value={programId}
             onChange={e => setProgramId(e.target.value)}
-            className="w-full mt-1.5 border border-line rounded-lg px-3 py-2.5 text-sm bg-white"
+            className="w-full mt-1.5 border border-line rounded-lg px-3 py-2.5 text-sm bg-surface"
           >
             <option value="">Select a program…</option>
             {programs.map(p => (
@@ -229,7 +229,7 @@ export default function RedemptionEvaluator({ onBack, initialProgramId }: Props)
 
       {/* Cash vs Points comparison */}
       {cash > 0 && pts > 0 && (
-        <div className="mt-4 bg-white border border-line rounded-xl overflow-hidden">
+        <div className="mt-4 bg-surface border border-line rounded-xl overflow-hidden">
           <div className="px-4 py-3 bg-paper border-b border-line">
             <p className="text-xs font-semibold text-ink-soft uppercase tracking-wide">Cash vs Points Comparison</p>
           </div>
@@ -297,7 +297,7 @@ export default function RedemptionEvaluator({ onBack, initialProgramId }: Props)
       )}
 
       {/* Rating guide */}
-      <div className="bg-white border border-line rounded-xl p-4 mt-4">
+      <div className="bg-surface border border-line rounded-xl p-4 mt-4">
         <p className="text-xs font-semibold text-ink-soft uppercase tracking-wide mb-3">Rating Guide</p>
         <div className="space-y-2 text-sm">
           <div className="flex items-start gap-3">

@@ -137,17 +137,17 @@ export default function Dashboard({ data, onNavigate, onStartQuiz }: Props) {
           </p>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-          <div className="bg-white border border-line rounded-xl p-5 text-center">
+          <div className="bg-surface border border-line rounded-xl p-5 text-center">
             <CardsIcon className="w-7 h-7 mx-auto mb-2 text-brass" />
             <p className="font-semibold text-ink">Add Cards</p>
             <p className="text-xs text-ink-soft mt-1">Track Canadian credit cards and their benefits</p>
           </div>
-          <div className="bg-white border border-line rounded-xl p-5 text-center">
+          <div className="bg-surface border border-line rounded-xl p-5 text-center">
             <PointsIcon className="w-7 h-7 mx-auto mb-2 text-brass" />
             <p className="font-semibold text-ink">Track Points</p>
             <p className="text-xs text-ink-soft mt-1">Monitor loyalty programs with CAD valuations</p>
           </div>
-          <div className="bg-white border border-line rounded-xl p-5 text-center">
+          <div className="bg-surface border border-line rounded-xl p-5 text-center">
             <OptimizeIcon className="w-7 h-7 mx-auto mb-2 text-brass" />
             <p className="font-semibold text-ink">Optimize Spend</p>
             <p className="text-xs text-ink-soft mt-1">Find the best card for each spend category</p>
@@ -226,7 +226,7 @@ export default function Dashboard({ data, onNavigate, onStartQuiz }: Props) {
 
       {/* Benefit reset calendar */}
       {upcomingResets.length > 0 && (
-        <div className="bg-white border border-orange-200 rounded-xl p-4">
+        <div className="bg-surface border border-orange-200 rounded-xl p-4">
           <h3 className="font-semibold text-ink mb-3 flex items-center gap-2">
             ⏰ Use Before Reset
             <span className="text-xs font-normal text-orange-600 bg-orange-50 px-2 py-0.5 rounded-full">next 60 days</span>
@@ -254,7 +254,7 @@ export default function Dashboard({ data, onNavigate, onStartQuiz }: Props) {
 
       {/* Welcome bonus progress */}
       {welcomeBonusCards.length > 0 && (
-        <div className="bg-white border border-brass rounded-xl p-4">
+        <div className="bg-surface border border-brass rounded-xl p-4">
           <h3 className="font-semibold text-ink mb-3 flex items-center gap-2"><OptimizeIcon className="w-4 h-4 text-brass" /> Welcome Bonus Progress</h3>
           <div className="space-y-3">
             {welcomeBonusCards.map(({ uc, template }) => {
@@ -305,7 +305,7 @@ export default function Dashboard({ data, onNavigate, onStartQuiz }: Props) {
             });
         });
         if (loungeEntries.length === 0) return (
-          <div className="bg-white border border-line rounded-xl p-4">
+          <div className="bg-surface border border-line rounded-xl p-4">
             <h3 className="font-semibold text-ink mb-2 flex items-center gap-2"><LoungeIcon className="w-4 h-4 text-brass" /> Lounge Access</h3>
             <p className="text-sm text-ink-soft">None of your current cards include lounge access.</p>
           </div>
@@ -319,7 +319,7 @@ export default function Dashboard({ data, onNavigate, onStartQuiz }: Props) {
         });
 
         return (
-          <div className="bg-white border border-line rounded-xl p-4">
+          <div className="bg-surface border border-line rounded-xl p-4">
             <h3 className="font-semibold text-ink mb-3 flex items-center gap-2">
               <LoungeIcon className="w-4 h-4 text-brass" /> Lounge Access
               <span className="text-xs font-normal text-ink-soft">
@@ -374,7 +374,7 @@ export default function Dashboard({ data, onNavigate, onStartQuiz }: Props) {
 
       {/* Upcoming renewals */}
       {upcomingRenewals.length > 0 && (
-        <div className="bg-white border border-line rounded-xl p-4">
+        <div className="bg-surface border border-line rounded-xl p-4">
           <h3 className="font-semibold text-ink mb-3">Upcoming Renewals</h3>
           <div className="space-y-2">
             {upcomingRenewals.map(({ uc, template, days }) => (
@@ -395,7 +395,7 @@ export default function Dashboard({ data, onNavigate, onStartQuiz }: Props) {
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         {/* Fee recovery */}
-        <div className="bg-white border border-line rounded-xl p-4">
+        <div className="bg-surface border border-line rounded-xl p-4">
           <h3 className="font-semibold text-ink mb-3">Fee Recovery by Card</h3>
           <div className="space-y-3">
             {activeCards.map(uc => {
@@ -424,7 +424,7 @@ export default function Dashboard({ data, onNavigate, onStartQuiz }: Props) {
         </div>
 
         {/* Points summary */}
-        <div className="bg-white border border-line rounded-xl p-4">
+        <div className="bg-surface border border-line rounded-xl p-4">
           <h3 className="font-semibold text-ink mb-3">Points Summary</h3>
           {data.pointsBalances.length === 0 ? (
             <button onClick={() => onNavigate('points')} className="w-full text-center text-sm text-brass hover:text-brass py-4">

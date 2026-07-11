@@ -48,7 +48,7 @@ export default function FxCalculator({ data }: Props) {
   const hasSavings = heldNoFxCards.length > 0;
 
   return (
-    <div className="bg-white border border-line rounded-xl overflow-hidden">
+    <div className="bg-surface border border-line rounded-xl overflow-hidden">
       <button
         onClick={() => setOpen(v => !v)}
         className="w-full px-4 py-3 flex items-center justify-between text-left"
@@ -88,7 +88,7 @@ export default function FxCalculator({ data }: Props) {
               <select
                 value={currency}
                 onChange={e => setCurrency(e.target.value)}
-                className="w-full mt-1.5 border border-line rounded-lg px-3 py-2.5 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-ink-soft"
+                className="w-full mt-1.5 border border-line rounded-lg px-3 py-2.5 text-sm bg-surface focus:outline-none focus:ring-2 focus:ring-ink-soft"
               >
                 {CURRENCIES.map(c => (
                   <option key={c.code} value={c.code}>{c.flag} {c.code} — {c.name}</option>

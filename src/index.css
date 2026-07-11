@@ -4,6 +4,7 @@
   --color-ink: #1B1E27;
   --color-ink-soft: #4A4F5E;
   --color-paper: #F7F5F1;
+  --color-surface: #FFFFFF;
   --color-brass: #B8873A;
   --color-brass-soft: #EFDFC1;
   --color-forest: #3F7D5C;
@@ -13,6 +14,25 @@
   --color-amber: #C9862B;
   --color-amber-bg: #F7EAD8;
   --color-line: #E4E0D8;
+}
+
+/* Dark theme — mirrors the system's dark-mode preference */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-ink: #F1EFEA;
+    --color-ink-soft: #A9A8AE;
+    --color-paper: #14151B;
+    --color-surface: #1D1F27;
+    --color-brass: #D6A559;
+    --color-brass-soft: #3A3220;
+    --color-forest: #6FAE87;
+    --color-forest-bg: #1E2C24;
+    --color-rust: #D8837D;
+    --color-rust-bg: #34211F;
+    --color-amber: #E0A75E;
+    --color-amber-bg: #332A1B;
+    --color-line: #2E303A;
+  }
 }
 
 @layer base {

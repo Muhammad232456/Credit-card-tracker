@@ -54,7 +54,7 @@ export default function InstallBanner() {
         </div>
         <button
           onClick={install}
-          className="bg-white text-ink text-xs font-semibold px-3 py-1.5 rounded-lg shrink-0"
+          className="bg-surface text-ink text-xs font-semibold px-3 py-1.5 rounded-lg shrink-0"
         >
           Install
         </button>

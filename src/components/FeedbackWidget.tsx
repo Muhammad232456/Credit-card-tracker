@@ -38,7 +38,7 @@ export default function FeedbackWidget() {
   }
 
   return (
-    <div className="bg-white border border-line rounded-xl overflow-hidden">
+    <div className="bg-surface border border-line rounded-xl overflow-hidden">
       <button
         onClick={() => setOpen(v => !v)}
         className="w-full px-4 py-3 flex items-center justify-between text-left"

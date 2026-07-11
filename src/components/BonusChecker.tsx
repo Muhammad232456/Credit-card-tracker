@@ -37,7 +37,7 @@ export default function BonusChecker({ card, data, update }: Props) {
   }
 
   return (
-    <div className="bg-white border border-line rounded-xl p-4">
+    <div className="bg-surface border border-line rounded-xl p-4">
       <div className="flex items-center justify-between">
         <div>
           <p className="font-medium text-ink text-sm">Current Welcome Bonus</p>

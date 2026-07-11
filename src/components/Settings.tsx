@@ -39,7 +39,7 @@ export default function Settings({ data, exportData, importData, resetYear, clea
         </p>
       </div>
 
-      <div className="bg-white border border-line rounded-xl divide-y divide-line">
+      <div className="bg-surface border border-line rounded-xl divide-y divide-line">
         <div className="p-4">
           <h3 className="font-semibold text-ink mb-1">Data Summary</h3>
           <div className="text-sm text-ink-soft space-y-1">

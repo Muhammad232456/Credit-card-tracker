@@ -143,7 +143,7 @@ export default function PointsTracker({ data, update, onViewTransfers, onEvaluat
           const dot = hasRating ? cppRatingDot(cpp, program.defaultCpp, program.excellentCpp) : null;
 
           return (
-            <div key={program.id} className="bg-white border border-line rounded-xl p-4">
+            <div key={program.id} className="bg-surface border border-line rounded-xl p-4">
               <div className="flex items-start justify-between gap-4">
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2 flex-wrap">
@@ -241,7 +241,7 @@ export default function PointsTracker({ data, update, onViewTransfers, onEvaluat
       </div>
 
       {addingProgram ? (
-        <div className="bg-white border border-line rounded-xl p-4">
+        <div className="bg-surface border border-line rounded-xl p-4">
           {selectedForAdd ? (() => {
             const prog = POINTS_PROGRAMS.find(p => p.id === selectedForAdd)!;
             return (

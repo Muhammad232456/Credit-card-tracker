@@ -41,7 +41,7 @@ export default function CardComparison({ onBack }: Props) {
       </div>
 
       {/* Card picker */}
-      <div className="bg-white border border-line rounded-xl p-4">
+      <div className="bg-surface border border-line rounded-xl p-4">
         <p className="text-xs text-ink-soft mb-2">
           Select up to 3 cards to compare
           {selectedIds.length > 0 && <span className="ml-1 text-ink font-medium">({selectedIds.length}/3 selected)</span>}
@@ -104,7 +104,7 @@ export default function CardComparison({ onBack }: Props) {
 
           {/* Current Offers */}
           {selected.some(t => t.currentOffer) && (
-            <div className="bg-white border border-line rounded-xl overflow-hidden">
+            <div className="bg-surface border border-line rounded-xl overflow-hidden">
               <div className="px-4 py-2 bg-paper border-b border-line">
                 <p className="text-xs font-semibold text-ink-soft uppercase tracking-wide">Current Welcome Offer</p>
               </div>
@@ -141,7 +141,7 @@ export default function CardComparison({ onBack }: Props) {
           )}
 
           {/* Earn rates */}
-          <div className="bg-white border border-line rounded-xl overflow-hidden">
+          <div className="bg-surface border border-line rounded-xl overflow-hidden">
             <div className="px-4 py-2 bg-paper border-b border-line">
               <p className="text-xs font-semibold text-ink-soft uppercase tracking-wide">Earn Rates by Category</p>
             </div>
@@ -160,7 +160,7 @@ export default function CardComparison({ onBack }: Props) {
                       return cpd >= oCpd;
                     });
                     return (
-                      <div key={t.id} className={`bg-white px-3 pb-2 text-center ${isTop && cpd > 0 ? 'bg-forest-bg' : ''}`}>
+                      <div key={t.id} className={`bg-surface px-3 pb-2 text-center ${isTop && cpd > 0 ? 'bg-forest-bg' : ''}`}>
                         {rate ? (
                           <p className={`text-xs font-medium ${isTop && cpd > 0 ? 'text-forest font-semibold' : 'text-ink'}`}>
                             {formatRate(rate, cpd)}
@@ -177,7 +177,7 @@ export default function CardComparison({ onBack }: Props) {
           </div>
 
           {/* Benefits */}
-          <div className="bg-white border border-line rounded-xl overflow-hidden">
+          <div className="bg-surface border border-line rounded-xl overflow-hidden">
             <div className="px-4 py-2 bg-paper border-b border-line">
               <p className="text-xs font-semibold text-ink-soft uppercase tracking-wide">Key Benefits</p>
             </div>

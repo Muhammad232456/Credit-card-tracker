@@ -188,7 +188,7 @@ export default function SpendOptimizer({ data, update, onNavigate }: Props) {
       </div>
 
       {/* Spend inputs */}
-      <div className="bg-white border border-line rounded-xl p-4">
+      <div className="bg-surface border border-line rounded-xl p-4">
         <h3 className="font-semibold text-ink mb-3 text-sm">Monthly Spend Profile</h3>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
           {SPEND_CATS.map(cat => (
@@ -241,7 +241,7 @@ export default function SpendOptimizer({ data, update, onNavigate }: Props) {
       {hasCards && hasSpend && (
         <>
           {/* Results */}
-          <div className="bg-white border border-line rounded-xl overflow-hidden">
+          <div className="bg-surface border border-line rounded-xl overflow-hidden">
             <div className="px-4 py-3 bg-paper border-b border-line flex items-center justify-between">
               <h3 className="font-semibold text-ink text-sm">Optimization Results</h3>
               <div className="flex items-center gap-3 text-xs text-ink-soft">
@@ -314,7 +314,7 @@ export default function SpendOptimizer({ data, update, onNavigate }: Props) {
 
           {/* "One card" ranking */}
           {cardBreakdown.length > 0 && (
-            <div className="bg-white border border-line rounded-xl overflow-hidden">
+            <div className="bg-surface border border-line rounded-xl overflow-hidden">
               <div className="px-4 py-3 bg-paper border-b border-line">
                 <h3 className="font-semibold text-ink text-sm">If You Used One Card for Everything</h3>
                 <p className="text-xs text-ink-soft mt-0.5">Ranked by total earn across all your spend</p>
@@ -347,7 +347,7 @@ export default function SpendOptimizer({ data, update, onNavigate }: Props) {
 
           {/* Cards Worth Getting */}
           {recommendations.length > 0 && (
-            <div className="bg-white border border-line rounded-xl overflow-hidden">
+            <div className="bg-surface border border-line rounded-xl overflow-hidden">
               <div className="px-4 py-3 bg-amber-bg border-b border-amber">
                 <h3 className="font-semibold text-ink text-sm">Cards Worth Getting</h3>
                 <p className="text-xs text-ink-soft mt-0.5">

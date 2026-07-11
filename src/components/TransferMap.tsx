@@ -51,7 +51,7 @@ export default function TransferMap({ focusProgram }: Props) {
               className={`flex-1 py-3 px-4 rounded-xl border-2 font-medium text-sm transition-all ${
                 activeSource === id
                   ? `${ISSUER_COLORS[id]} border-opacity-100`
-                  : 'border-line bg-white text-ink-soft hover:border-line'
+                  : 'border-line bg-surface text-ink-soft hover:border-line'
               }`}
             >
               {prog?.name}
@@ -80,7 +80,7 @@ export default function TransferMap({ focusProgram }: Props) {
           return (
             <div
               key={partner.id}
-              className={`bg-white border rounded-xl p-4 relative ${
+              className={`bg-surface border rounded-xl p-4 relative ${
                 isExpiring ? 'border-rust bg-rust-bg' : 'border-line'
               }`}
             >

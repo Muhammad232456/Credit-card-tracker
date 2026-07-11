@@ -99,13 +99,13 @@ export default function App() {
       {/* Quiz modal — opt-in, never auto-shown */}
       {showQuiz && (
         <div className="fixed inset-0 z-50 bg-black/50 flex items-center justify-center p-4">
-          <div className="bg-white rounded-2xl w-full max-w-lg shadow-2xl">
+          <div className="bg-surface rounded-2xl w-full max-w-lg shadow-2xl">
             <OnboardingQuiz onComplete={completeOnboarding} onSkip={() => setShowQuiz(false)} />
           </div>
         </div>
       )}
 
-      <main className="flex-1 max-w-2xl mx-auto w-full px-4 py-6 pb-28 sm:pb-6" style={{ paddingBottom: 'calc(7rem + env(safe-area-inset-bottom))' }}>
+      <main className="flex-1 max-w-4xl mx-auto w-full px-4 sm:px-6 py-6 pb-28 sm:pb-6" style={{ paddingBottom: 'calc(7rem + env(safe-area-inset-bottom))' }}>
         {activeTab === 'dashboard' && (
           <Dashboard data={data} onNavigate={navigate} onStartQuiz={() => setShowQuiz(true)} />
         )}
@@ -161,7 +161,7 @@ export default function App() {
       <InstallBanner />
       <Analytics />
 
-      <nav className="sm:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-line flex z-10 pb-[env(safe-area-inset-bottom)]">
+      <nav className="sm:hidden fixed bottom-0 left-0 right-0 bg-surface border-t border-line flex z-10 pb-[env(safe-area-inset-bottom)]">
         {TABS.filter(t => t.id !== 'settings').map(tab => (
           <button
             key={tab.id}
