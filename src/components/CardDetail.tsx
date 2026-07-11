@@ -7,6 +7,7 @@ import {
   effectiveBenefitValue, cardAge,
   SPEND_CATS, bestRateForCat, rateToCpd,
 } from '../utils';
+import { CATEGORY_ICON_COMPONENTS, FxIcon, CheckIcon } from './Icons';
 
 interface Props {
   template: CardTemplate;
@@ -19,20 +20,14 @@ interface Props {
   onBack: () => void;
 }
 
-const CATEGORY_ICONS: Record<string, string> = {
-  'travel-credit': '✈️', lounge: '🛋️', companion: '👥', 'free-night': '🏨',
-  status: '⭐', insurance: '🛡️', bag: '🧳', nexus: '🛂', 'fx-savings': '💱',
-  dining: '🍽️', delivery: '📦', fuel: '⛽', subscription: '📱', data: '📡', other: '•',
-};
-
-const ISSUER_COLORS: Record<string, string> = {
-  Amex: 'bg-blue-900', TD: 'bg-green-700', CIBC: 'bg-red-700', RBC: 'bg-blue-700',
-  Scotiabank: 'bg-red-600', BMO: 'bg-blue-600', 'National Bank': 'bg-red-800',
-  HSBC: 'bg-red-900', Neo: 'bg-purple-700', MBNA: 'bg-gray-700',
-  'Canadian Tire': 'bg-red-500', 'PC Financial': 'bg-orange-600', Rogers: 'bg-red-600',
-  Tangerine: 'bg-orange-500', Brim: 'bg-indigo-600', Desjardins: 'bg-green-800',
-  'Home Trust': 'bg-teal-700', Meridian: 'bg-cyan-700', 'Capital One': 'bg-red-700',
-  Walmart: 'bg-blue-800', Simplii: 'bg-pink-700', ATB: 'bg-amber-700',
+const ISSUER_FACE: Record<string, string> = {
+  Amex: 'from-[#1E3A5F] to-[#0E1F35]', TD: 'from-[#2E6B4F] to-[#143624]', CIBC: 'from-[#8B3A3A] to-[#4A1B1B]', RBC: 'from-[#1E4C6B] to-[#0E2536]',
+  Scotiabank: 'from-[#8B3A3A] to-[#3F1717]', BMO: 'from-[#1E4C6B] to-[#122E42]', 'National Bank': 'from-[#7A3030] to-[#3A1414]',
+  HSBC: 'from-[#7A2020] to-[#360E0E]', Neo: 'from-[#4A3468] to-[#241832]', MBNA: 'from-[#3E4451] to-[#1E2129]',
+  'Canadian Tire': 'from-[#8B3A3A] to-[#3F1717]', 'PC Financial': 'from-[#8B5A2A] to-[#3F2710]', Rogers: 'from-[#8B3A3A] to-[#3F1717]',
+  Tangerine: 'from-[#B8873A] to-[#5A3F13]', Brim: 'from-[#3C3A68] to-[#1C1B32]', Desjardins: 'from-[#2E6B4F] to-[#143624]',
+  'Home Trust': 'from-[#1E5A5A] to-[#0E2C2C]', Meridian: 'from-[#1E5A6B] to-[#0E2C36]', 'Capital One': 'from-[#8B3A3A] to-[#3F1717]',
+  Walmart: 'from-[#1E4C6B] to-[#0E2536]', Simplii: 'from-[#7A3055] to-[#3A1428]', ATB: 'from-[#B8873A] to-[#5A3F13]',
 };
 
 function calcNextRenewal(openedDate: string, feeFrequency: 'monthly' | 'annual' = 'annual'): string {
@@ -72,7 +67,7 @@ export default function CardDetail({
   const [tierSpend, setTierSpend] = useState('');
   const [bonusDeadline, setBonusDeadline] = useState('');
 
-  const headerBg = ISSUER_COLORS[template.issuer] ?? 'bg-slate-800';
+  const headerFace = ISSUER_FACE[template.issuer] ?? 'from-ink to-ink-soft';
   const feeFreq = template.feeFrequency ?? 'annual';
   const isActive = (userCard.status ?? 'active') === 'active';
   const age = userCard.openedDate ? cardAge(userCard.openedDate, userCard.closedDate) : null;
@@ -139,14 +134,14 @@ export default function CardDetail({
       </div>
 
       {/* Card header */}
-      <div className={`${headerBg} rounded-2xl p-6 text-white ${!isActive ? 'opacity-60' : ''}`}>
+      <div className={`bg-gradient-to-br ${headerFace} rounded-2xl p-6 text-white ${!isActive ? 'opacity-60' : ''}`}>
         <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-3">
           <div>
             <div className="flex items-center gap-2 flex-wrap">
               <p className="text-xs opacity-70 uppercase tracking-wide">{template.issuer} · {template.network}</p>
               {!isActive && <span className="text-xs bg-white/20 px-2 py-0.5 rounded-full font-medium">INACTIVE</span>}
               {template.firstYearFeeWaived && isActive && (
-                <span className="text-xs bg-emerald-400/30 border border-emerald-300/40 px-2 py-0.5 rounded-full font-medium">1st year free</span>
+                <span className="text-xs bg-brass/30 border border-brass/40 px-2 py-0.5 rounded-full font-medium">1st year free</span>
               )}
               {template.noFxFee && (
                 <span className="text-xs bg-white/20 border border-white/30 px-2 py-0.5 rounded-full font-medium">No FX Fee</span>
@@ -819,7 +814,9 @@ export default function CardDetail({
         </h3>
         {template.noFxFee && template.benefits.length === 0 && (
           <div className="bg-white border border-gray-200 rounded-xl p-4 flex items-center gap-3">
-            <span className="text-lg">💱</span>
+            <div className="w-8 h-8 rounded-lg bg-brass-soft text-brass flex items-center justify-center shrink-0">
+              <FxIcon className="w-4 h-4" />
+            </div>
             <div>
               <p className="font-medium text-gray-900 text-sm">No Foreign Transaction Fee</p>
               <p className="text-xs text-gray-500 mt-0.5">Card feature — no surcharge on purchases in foreign currencies</p>
@@ -839,10 +836,13 @@ export default function CardDetail({
           const plannedValue = benefit.frequency === 'annual'
             ? (planned > 0 && used === 0 ? effectiveVal : 0)
             : planned * effectiveVal;
+          const BenefitIcon = CATEGORY_ICON_COMPONENTS[benefit.category];
           return (
             <div key={benefit.id} className="bg-white border border-gray-200 rounded-xl p-4">
               <div className="flex items-start gap-3">
-                <span className="text-lg mt-0.5">{CATEGORY_ICONS[benefit.category]}</span>
+                <div className="w-8 h-8 rounded-lg bg-brass-soft text-brass flex items-center justify-center shrink-0 mt-0.5">
+                  <BenefitIcon className="w-4 h-4" />
+                </div>
                 <div className="flex-1 min-w-0">
                   <div className="flex items-start justify-between gap-2">
                     <div>

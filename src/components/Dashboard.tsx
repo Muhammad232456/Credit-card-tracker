@@ -4,6 +4,7 @@ import type { UserData, MonthlySpendProfile } from '../types';
 import { effectiveBenefitValue, nextCalendarReset, nextCardmemberReset, SPEND_CATS, bestRateForCat } from '../utils';
 import GlossaryTerm from './GlossaryTerm';
 import FeedbackWidget from './FeedbackWidget';
+import { WalletMark, CardsIcon, PointsIcon, OptimizeIcon, LoungeIcon, AlertIcon } from './Icons';
 
 interface Props {
   data: UserData;
@@ -126,34 +127,34 @@ export default function Dashboard({ data, onNavigate, onStartQuiz }: Props) {
     return (
       <div className="space-y-8 py-8">
         <div className="text-center">
-          <p className="text-5xl mb-4">🍁</p>
+          <WalletMark className="w-12 h-12 mx-auto mb-4 text-brass" />
           <h1 className="text-2xl font-bold text-gray-900">Canadian Credit Card Tracker</h1>
           <p className="text-gray-500 mt-2 max-w-md mx-auto text-sm">
             Track your points balances, card benefits, renewal dates, and annual fee recovery — all in your browser.
           </p>
           <p className="text-xs text-gray-400 mt-2">
-            🔒 No account needed — your data saves automatically on this device, completely free.
+            No account needed — your data saves automatically on this device, completely free.
           </p>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
           <div className="bg-white border border-gray-200 rounded-xl p-5 text-center">
-            <p className="text-3xl mb-2">💳</p>
+            <CardsIcon className="w-7 h-7 mx-auto mb-2 text-brass" />
             <p className="font-semibold text-gray-800">Add Cards</p>
             <p className="text-xs text-gray-500 mt-1">Track Canadian credit cards and their benefits</p>
           </div>
           <div className="bg-white border border-gray-200 rounded-xl p-5 text-center">
-            <p className="text-3xl mb-2">✈️</p>
+            <PointsIcon className="w-7 h-7 mx-auto mb-2 text-brass" />
             <p className="font-semibold text-gray-800">Track Points</p>
             <p className="text-xs text-gray-500 mt-1">Monitor loyalty programs with CAD valuations</p>
           </div>
           <div className="bg-white border border-gray-200 rounded-xl p-5 text-center">
-            <p className="text-3xl mb-2">🎯</p>
+            <OptimizeIcon className="w-7 h-7 mx-auto mb-2 text-brass" />
             <p className="font-semibold text-gray-800">Optimize Spend</p>
             <p className="text-xs text-gray-500 mt-1">Find the best card for each spend category</p>
           </div>
         </div>
         <div className="flex flex-col sm:flex-row gap-3 justify-center">
-          <button onClick={() => onNavigate('cards')} className="bg-slate-800 text-white px-6 py-3 rounded-xl font-medium hover:bg-slate-700 transition-colors">
+          <button onClick={() => onNavigate('cards')} className="bg-ink text-white px-6 py-3 rounded-xl font-medium hover:opacity-90 transition-opacity">
             Add Your First Card →
           </button>
           <button onClick={() => onNavigate('points')} className="border border-gray-300 text-gray-700 px-6 py-3 rounded-xl font-medium hover:bg-gray-50 transition-colors">
@@ -254,7 +255,7 @@ export default function Dashboard({ data, onNavigate, onStartQuiz }: Props) {
       {/* Welcome bonus progress */}
       {welcomeBonusCards.length > 0 && (
         <div className="bg-white border border-blue-200 rounded-xl p-4">
-          <h3 className="font-semibold text-gray-800 mb-3">🎯 Welcome Bonus Progress</h3>
+          <h3 className="font-semibold text-gray-800 mb-3 flex items-center gap-2"><OptimizeIcon className="w-4 h-4 text-brass" /> Welcome Bonus Progress</h3>
           <div className="space-y-3">
             {welcomeBonusCards.map(({ uc, template }) => {
               const wb = uc.welcomeBonus!;
@@ -305,7 +306,7 @@ export default function Dashboard({ data, onNavigate, onStartQuiz }: Props) {
         });
         if (loungeEntries.length === 0) return (
           <div className="bg-white border border-gray-200 rounded-xl p-4">
-            <h3 className="font-semibold text-gray-800 mb-2 flex items-center gap-2">🛋️ Lounge Access</h3>
+            <h3 className="font-semibold text-gray-800 mb-2 flex items-center gap-2"><LoungeIcon className="w-4 h-4 text-brass" /> Lounge Access</h3>
             <p className="text-sm text-gray-400">None of your current cards include lounge access.</p>
           </div>
         );
@@ -320,7 +321,7 @@ export default function Dashboard({ data, onNavigate, onStartQuiz }: Props) {
         return (
           <div className="bg-white border border-gray-200 rounded-xl p-4">
             <h3 className="font-semibold text-gray-800 mb-3 flex items-center gap-2">
-              🛋️ Lounge Access
+              <LoungeIcon className="w-4 h-4 text-brass" /> Lounge Access
               <span className="text-xs font-normal text-gray-500">
                 {loungeEntries.filter(e => !e.isPaid && (e.remaining === null || e.remaining > 0)).length} active
               </span>
@@ -456,7 +457,7 @@ export default function Dashboard({ data, onNavigate, onStartQuiz }: Props) {
       {/* Expiry warnings */}
       {data.cards.some(uc => { const t = getCardById(uc.cardId); return t?.benefits.some(b => b.expiryWarning); }) && (
         <div className="bg-red-50 border border-red-200 rounded-xl p-4">
-          <p className="font-semibold text-red-800 text-sm">⚠ Upcoming Changes</p>
+          <p className="font-semibold text-red-800 text-sm flex items-center gap-1.5"><AlertIcon className="w-3.5 h-3.5" /> Upcoming Changes</p>
           {data.cards.flatMap(uc => {
             const t = getCardById(uc.cardId);
             return (t?.benefits.filter(b => b.expiryWarning) ?? []).map(b => (

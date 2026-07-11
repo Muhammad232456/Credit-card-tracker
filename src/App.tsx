@@ -15,16 +15,17 @@ import AffiliateDisclosure from './components/AffiliateDisclosure';
 import InstallBanner from './components/InstallBanner';
 import { Analytics } from '@vercel/analytics/react';
 import { trackTabView, trackEvent } from './analytics';
+import { WalletMark, DashboardIcon, CardsIcon, PointsIcon, OptimizeIcon, RedeemIcon, SettingsIcon } from './components/Icons';
 
 type Tab = 'dashboard' | 'cards' | 'points' | 'optimize' | 'redeem' | 'transfers' | 'settings' | 'compare' | 'privacy' | 'affiliate';
 
-const TABS: { id: Tab; label: string; icon: string }[] = [
-  { id: 'dashboard', label: 'Dashboard', icon: '📊' },
-  { id: 'cards',     label: 'Cards',     icon: '💳' },
-  { id: 'points',    label: 'Points',    icon: '✈️' },
-  { id: 'optimize',  label: 'Optimize',  icon: '🎯' },
-  { id: 'redeem',    label: 'Redeem',    icon: '🧮' },
-  { id: 'settings',  label: 'Settings',  icon: '⚙️' },
+const TABS: { id: Tab; label: string; Icon: typeof DashboardIcon }[] = [
+  { id: 'dashboard', label: 'Dashboard', Icon: DashboardIcon },
+  { id: 'cards',     label: 'Cards',     Icon: CardsIcon },
+  { id: 'points',    label: 'Points',    Icon: PointsIcon },
+  { id: 'optimize',  label: 'Optimize',  Icon: OptimizeIcon },
+  { id: 'redeem',    label: 'Redeem',    Icon: RedeemIcon },
+  { id: 'settings',  label: 'Settings',  Icon: SettingsIcon },
 ];
 
 export default function App() {
@@ -58,27 +59,27 @@ export default function App() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 flex flex-col" data-device={device.deviceType}>
-      <header className="bg-slate-900 text-white px-4 py-3 flex items-center justify-between sticky top-0 z-10">
+    <div className="min-h-screen bg-paper flex flex-col" data-device={device.deviceType}>
+      <header className="bg-ink text-paper px-4 py-3 flex items-center justify-between sticky top-0 z-10">
         <button
           onClick={() => navigate('dashboard')}
           className="flex items-center gap-2 hover:opacity-80 transition-opacity"
         >
-          <span className="text-xl">🍁</span>
-          <span className="font-semibold text-sm hidden sm:block">CA Card Tracker</span>
+          <WalletMark className="w-5 h-5" />
+          <span className="font-semibold text-sm hidden sm:block tracking-tight">CA Card Tracker</span>
         </button>
         <nav className="flex gap-1">
           {TABS.filter(t => t.id !== 'settings').map(tab => (
             <button
               key={tab.id}
               onClick={() => { setActiveTab(tab.id); trackTabView(tab.id); }}
-              className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-colors ${
+              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition-colors ${
                 activeTab === tab.id
-                  ? 'bg-white text-slate-900'
-                  : 'text-slate-300 hover:text-white hover:bg-slate-700'
+                  ? 'bg-brass text-ink'
+                  : 'text-paper/55 hover:text-paper hover:bg-white/10'
               }`}
             >
-              <span className="sm:hidden">{tab.icon}</span>
+              <tab.Icon className="w-4 h-4 sm:hidden" />
               <span className="hidden sm:inline">{tab.label}</span>
             </button>
           ))}
@@ -86,11 +87,11 @@ export default function App() {
             onClick={() => setActiveTab('settings')}
             className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-colors ${
               activeTab === 'settings'
-                ? 'bg-white text-slate-900'
-                : 'text-slate-300 hover:text-white hover:bg-slate-700'
+                ? 'bg-brass text-ink'
+                : 'text-paper/55 hover:text-paper hover:bg-white/10'
             }`}
           >
-            ⚙️
+            <SettingsIcon className="w-4 h-4" />
           </button>
         </nav>
       </header>
@@ -150,26 +151,26 @@ export default function App() {
         )}
       </main>
 
-      <footer className="hidden sm:block text-center text-xs text-gray-400 py-4 border-t border-gray-100 bg-gray-50">
+      <footer className="hidden sm:block text-center text-xs text-ink-soft py-4 border-t border-line bg-paper">
         <span>© 2026 CA Card Tracker · </span>
-        <button onClick={() => navigate('privacy')} className="underline hover:text-gray-600">Privacy Policy</button>
+        <button onClick={() => navigate('privacy')} className="underline hover:text-ink">Privacy Policy</button>
         <span> · </span>
-        <button onClick={() => navigate('affiliate')} className="underline hover:text-gray-600">Affiliate Disclosure</button>
+        <button onClick={() => navigate('affiliate')} className="underline hover:text-ink">Affiliate Disclosure</button>
       </footer>
 
       <InstallBanner />
       <Analytics />
 
-      <nav className="sm:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 flex z-10 pb-[env(safe-area-inset-bottom)]">
+      <nav className="sm:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-line flex z-10 pb-[env(safe-area-inset-bottom)]">
         {TABS.filter(t => t.id !== 'settings').map(tab => (
           <button
             key={tab.id}
             onClick={() => { setActiveTab(tab.id); trackTabView(tab.id); }}
             className={`flex-1 py-3 flex flex-col items-center gap-0.5 text-xs font-medium transition-colors ${
-              activeTab === tab.id ? 'text-slate-900' : 'text-gray-400'
+              activeTab === tab.id ? 'text-brass' : 'text-ink-soft'
             }`}
           >
-            <span className="text-lg leading-none">{tab.icon}</span>
+            <tab.Icon className="w-5 h-5" />
             <span>{tab.label}</span>
           </button>
         ))}

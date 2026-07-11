@@ -5,6 +5,7 @@ import { effectiveBenefitValue, cardAge } from '../utils';
 import AddCard from './AddCard';
 import CardDetail from './CardDetail';
 import { trackCardAdded, trackCardRemoved, trackCardDetailViewed, trackAddCardFlowStarted, updatePersonProperties } from '../analytics';
+import { CardsIcon, CheckIcon, ClockIcon, AlertIcon } from './Icons';
 
 interface Props {
   data: UserData;
@@ -13,29 +14,29 @@ interface Props {
   isTablet?: boolean;
 }
 
-const ISSUER_COLORS: Record<string, string> = {
-  Amex: 'bg-blue-900',
-  TD: 'bg-green-700',
-  CIBC: 'bg-red-700',
-  RBC: 'bg-blue-700',
-  Scotiabank: 'bg-red-600',
-  BMO: 'bg-blue-600',
-  'National Bank': 'bg-red-800',
-  HSBC: 'bg-red-900',
-  Neo: 'bg-purple-700',
-  MBNA: 'bg-gray-700',
-  'Canadian Tire': 'bg-red-500',
-  'PC Financial': 'bg-orange-600',
-  Rogers: 'bg-red-600',
-  Tangerine: 'bg-orange-500',
-  Brim: 'bg-indigo-600',
-  Desjardins: 'bg-green-800',
-  'Home Trust': 'bg-teal-700',
-  Meridian: 'bg-cyan-700',
-  'Capital One': 'bg-red-700',
-  Walmart: 'bg-blue-800',
-  Simplii: 'bg-pink-700',
-  ATB: 'bg-amber-700',
+const ISSUER_FACE: Record<string, string> = {
+  Amex: 'from-[#1E3A5F] to-[#0E1F35]',
+  TD: 'from-[#2E6B4F] to-[#143624]',
+  CIBC: 'from-[#8B3A3A] to-[#4A1B1B]',
+  RBC: 'from-[#1E4C6B] to-[#0E2536]',
+  Scotiabank: 'from-[#8B3A3A] to-[#3F1717]',
+  BMO: 'from-[#1E4C6B] to-[#122E42]',
+  'National Bank': 'from-[#7A3030] to-[#3A1414]',
+  HSBC: 'from-[#7A2020] to-[#360E0E]',
+  Neo: 'from-[#4A3468] to-[#241832]',
+  MBNA: 'from-[#3E4451] to-[#1E2129]',
+  'Canadian Tire': 'from-[#8B3A3A] to-[#3F1717]',
+  'PC Financial': 'from-[#8B5A2A] to-[#3F2710]',
+  Rogers: 'from-[#8B3A3A] to-[#3F1717]',
+  Tangerine: 'from-[#B8873A] to-[#5A3F13]',
+  Brim: 'from-[#3C3A68] to-[#1C1B32]',
+  Desjardins: 'from-[#2E6B4F] to-[#143624]',
+  'Home Trust': 'from-[#1E5A5A] to-[#0E2C2C]',
+  Meridian: 'from-[#1E5A6B] to-[#0E2C36]',
+  'Capital One': 'from-[#8B3A3A] to-[#3F1717]',
+  Walmart: 'from-[#1E4C6B] to-[#0E2536]',
+  Simplii: 'from-[#7A3055] to-[#3A1428]',
+  ATB: 'from-[#B8873A] to-[#5A3F13]',
 };
 
 function calcNextRenewal(openedDate: string, feeFrequency: 'monthly' | 'annual' = 'annual'): string {
@@ -78,7 +79,7 @@ export default function CardList({ data, update, onCompare, isTablet }: Props) {
     setAddingCard(false);
     setSelectedCardId(cardId);
     const name = getCardById(cardId)?.name ?? 'Card';
-    setToast(`${name} added ✓`);
+    setToast(`${name} added`);
     setTimeout(() => setToast(null), 3000);
   }
 
@@ -165,7 +166,7 @@ export default function CardList({ data, update, onCompare, isTablet }: Props) {
     }, 0);
     const recoveryPct = template.annualFee > 0
       ? Math.round((totalValue / template.annualFee) * 100) : 100;
-    const headerBg = ISSUER_COLORS[template.issuer] ?? 'bg-slate-800';
+    const face = ISSUER_FACE[template.issuer] ?? 'from-ink to-ink-soft';
     const feeFreq = template.feeFrequency ?? 'annual';
 
     const renewal = getEffectiveRenewal(userCard, feeFreq);
@@ -173,80 +174,75 @@ export default function CardList({ data, update, onCompare, isTablet }: Props) {
       ? Math.ceil((new Date(renewal).getTime() - Date.now()) / (1000 * 60 * 60 * 24))
       : null;
 
+    const barClass = recoveryPct >= 100 ? 'bg-forest' : recoveryPct >= 50 ? 'bg-amber' : 'bg-rust';
+    const statusPill = renewalDays !== null
+      ? renewalDays < 30
+        ? { cls: 'bg-rust-bg text-rust', icon: AlertIcon, label: `Renews in ${renewalDays}d` }
+        : { cls: 'bg-amber-bg text-amber', icon: ClockIcon, label: `Renews in ${renewalDays}d` }
+      : null;
+
     return (
       <button
         key={userCard.cardId}
         onClick={() => { setSelectedCardId(userCard.cardId); trackCardDetailViewed(userCard.cardId, template.name, template.issuer); }}
-        className={`w-full text-left bg-white border border-gray-200 rounded-xl overflow-hidden hover:shadow-md transition-shadow ${dimmed ? 'opacity-50' : ''}`}
+        className={`w-full text-left bg-white border border-line rounded-2xl overflow-hidden flex hover:-translate-y-0.5 hover:shadow-md transition-all ${dimmed ? 'opacity-50' : ''}`}
       >
-        <div className={`${headerBg} px-4 py-3 flex items-center justify-between`}>
-          <div>
-            <p className="text-xs text-white/70 uppercase tracking-wide">{template.issuer}</p>
-            <div className="flex items-center gap-2 flex-wrap">
-              <p className="font-semibold text-white">{template.name}</p>
-              {dimmed && <span className="text-xs text-white/60 bg-white/10 px-1.5 py-0.5 rounded-full">Inactive</span>}
-              {template.firstYearFeeWaived && !dimmed && (
-                <span className="text-xs text-emerald-300 bg-white/10 px-1.5 py-0.5 rounded-full">1st yr free</span>
-              )}
-            </div>
-            {userCard.openedDate && (
-              <p className="text-xs text-white/50 mt-0.5">{cardAge(userCard.openedDate, userCard.closedDate)}</p>
-            )}
+        {/* Card face */}
+        <div className={`w-28 sm:w-32 shrink-0 bg-gradient-to-br ${face} p-3 flex flex-col justify-between text-white`}>
+          <div className="w-6 h-[18px] rounded-[4px] bg-gradient-to-br from-[#E9CD8C] to-brass shadow-inner" />
+          <div className="flex gap-1">
+            {[0, 1, 2, 3].map(i => <span key={i} className="w-1 h-1 rounded-full bg-white/50" />)}
           </div>
-          <div className="text-right">
-            <p className="font-mono text-white font-bold">
-              {feeFreq === 'monthly'
-                ? `$${(template.annualFee / 12).toFixed(2)}/mo`
-                : template.annualFee === 0 ? 'No fee' : `$${template.annualFee.toFixed(0)}/yr`}
-            </p>
-          </div>
+          <p className="text-[10px] font-bold uppercase tracking-wide opacity-85 truncate">{template.issuer}</p>
         </div>
-        <div className="px-4 py-3 flex items-center justify-between">
-          <div>
-            {template.benefits.length > 0 ? (
-              <>
-                <p className="text-sm text-gray-600">
-                  <span className="font-semibold text-emerald-600">${totalValue.toFixed(0)}</span>
-                  <span className="text-gray-400"> of ${template.annualFee.toFixed(0)} fee recovered</span>
-                </p>
-                <div className="flex items-center gap-2 mt-1.5">
-                  <div className="w-24 bg-gray-200 rounded-full h-1.5">
-                    <div
-                      className={`h-1.5 rounded-full ${
-                        recoveryPct >= 100 ? 'bg-emerald-500' : recoveryPct >= 50 ? 'bg-amber-500' : 'bg-red-500'
-                      }`}
-                      style={{ width: `${Math.min(100, recoveryPct)}%` }}
-                    />
-                  </div>
-                  <span className="text-xs text-gray-500">{recoveryPct}%</span>
-                </div>
-              </>
-            ) : (
-              <p className="text-sm text-gray-400">No trackable credits</p>
+
+        {/* Body */}
+        <div className="flex-1 min-w-0 px-4 py-3 flex flex-col justify-center gap-1">
+          <div className="flex items-center gap-2 flex-wrap">
+            <p className="font-semibold text-ink text-sm truncate">{template.name}</p>
+            {dimmed && <span className="text-[10px] font-semibold text-ink-soft bg-line px-1.5 py-0.5 rounded-full shrink-0">Inactive</span>}
+            {template.firstYearFeeWaived && !dimmed && (
+              <span className="text-[10px] font-semibold text-forest bg-forest-bg px-1.5 py-0.5 rounded-full shrink-0">1st yr free</span>
             )}
-            {(userCard.supplementaryCards?.length ?? 0) > 0 && (
-              <p className="text-xs text-blue-600 mt-1">
-                👤 {userCard.supplementaryCards!.length} supplementary
+          </div>
+          <p className="text-xs text-ink-soft">
+            {feeFreq === 'monthly'
+              ? `$${(template.annualFee / 12).toFixed(2)}/mo`
+              : template.annualFee === 0 ? 'No fee' : `$${template.annualFee.toFixed(0)}/yr`}
+            {userCard.openedDate && ` · held ${cardAge(userCard.openedDate, userCard.closedDate)}`}
+          </p>
+          {(userCard.supplementaryCards?.length ?? 0) > 0 && (
+            <p className="text-[11px] text-ink-soft">{userCard.supplementaryCards!.length} supplementary</p>
+          )}
+        </div>
+
+        {/* Stats */}
+        <div className="w-40 sm:w-48 shrink-0 px-4 py-3 flex flex-col justify-center gap-1.5 border-l border-line">
+          {template.benefits.length > 0 ? (
+            <>
+              <p className="text-sm tabular-nums">
+                <span className="font-bold text-ink">${totalValue.toFixed(0)}</span>
+                <span className="text-ink-soft text-xs"> of ${template.annualFee.toFixed(0)}</span>
               </p>
-            )}
-          </div>
-          <div className="text-right">
-            {renewalDays !== null && !dimmed && (
-              <div className={`text-xs px-2 py-1 rounded-full font-medium ${
-                renewalDays < 30 ? 'bg-red-100 text-red-700' :
-                renewalDays < 60 ? 'bg-amber-100 text-amber-700' :
-                'bg-green-100 text-green-700'
-              }`}>
-                Renews in {renewalDays}d
+              <div className="h-[5px] rounded-full bg-line overflow-hidden">
+                <div className={`h-full rounded-full ${barClass}`} style={{ width: `${Math.min(100, recoveryPct)}%` }} />
               </div>
-            )}
-            {renewalDays === null && !dimmed && !userCard.openedDate && (
-              <span className="text-xs text-gray-400">Set opened date →</span>
-            )}
-            {userCard.creditLimit && (
-              <p className="text-xs text-gray-400 mt-1 font-mono">${userCard.creditLimit.toLocaleString()} limit</p>
-            )}
-          </div>
+            </>
+          ) : (
+            <p className="text-xs text-ink-soft">No trackable credits</p>
+          )}
+          {statusPill && (
+            <span className={`inline-flex items-center gap-1 text-[10px] font-bold px-2 py-0.5 rounded-full w-fit ${statusPill.cls}`}>
+              <statusPill.icon className="w-2.5 h-2.5" />
+              {statusPill.label}
+            </span>
+          )}
+          {renewalDays === null && !dimmed && !userCard.openedDate && (
+            <span className="text-[11px] text-ink-soft">Set opened date →</span>
+          )}
+          {userCard.creditLimit && (
+            <p className="text-[11px] text-ink-soft">${userCard.creditLimit.toLocaleString()} limit</p>
+          )}
         </div>
       </button>
     );
@@ -255,12 +251,12 @@ export default function CardList({ data, update, onCompare, isTablet }: Props) {
   if (data.cards.length === 0) {
     return (
       <div className="text-center py-16">
-        <p className="text-5xl mb-4">💳</p>
-        <p className="text-lg font-semibold text-gray-800">No cards yet</p>
-        <p className="text-sm text-gray-500 mt-1">Add your first Canadian credit card to start tracking benefits.</p>
+        <CardsIcon className="w-12 h-12 mx-auto mb-4 text-ink-soft" />
+        <p className="text-lg font-semibold text-ink">No cards yet</p>
+        <p className="text-sm text-ink-soft mt-1">Add your first Canadian credit card to start tracking benefits.</p>
         <button
           onClick={() => setAddingCard(true)}
-          className="mt-6 bg-slate-800 text-white px-6 py-3 rounded-xl font-medium hover:bg-slate-700 transition-colors"
+          className="mt-6 bg-ink text-white px-6 py-3 rounded-xl font-medium hover:opacity-90 transition-opacity"
         >
           Add Your First Card
         </button>
@@ -271,7 +267,8 @@ export default function CardList({ data, update, onCompare, isTablet }: Props) {
   return (
     <div className="space-y-4 relative">
       {toast && (
-        <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 bg-emerald-700 text-white text-sm font-medium px-5 py-3 rounded-full shadow-lg pointer-events-none">
+        <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 bg-forest text-white text-sm font-medium px-5 py-3 rounded-full shadow-lg pointer-events-none flex items-center gap-2">
+          <CheckIcon className="w-4 h-4" />
           {toast}
         </div>
       )}
@@ -283,16 +280,16 @@ export default function CardList({ data, update, onCompare, isTablet }: Props) {
       <div className="flex gap-2">
         <button
           onClick={() => { setAddingCard(true); trackAddCardFlowStarted(); }}
-          className="flex-1 py-3 border-2 border-dashed border-gray-300 rounded-xl text-gray-500 hover:border-blue-400 hover:text-blue-600 transition-colors text-sm font-medium"
+          className="flex-1 py-3 border-2 border-dashed border-line rounded-xl text-ink-soft hover:border-brass hover:text-brass transition-colors text-sm font-medium"
         >
           + Add Another Card
         </button>
         {onCompare && (
           <button
             onClick={onCompare}
-            className="px-4 py-3 border-2 border-dashed border-gray-300 rounded-xl text-gray-500 hover:border-slate-500 hover:text-slate-700 transition-colors text-sm font-medium"
+            className="px-4 py-3 border-2 border-dashed border-line rounded-xl text-ink-soft hover:border-ink hover:text-ink transition-colors text-sm font-medium"
           >
-            ⚖️ Compare
+            Compare
           </button>
         )}
       </div>
@@ -302,9 +299,9 @@ export default function CardList({ data, update, onCompare, isTablet }: Props) {
         <div className="mt-4">
           <button
             onClick={() => setShowInactive(v => !v)}
-            className="flex items-center gap-2 text-sm text-gray-500 hover:text-gray-700 font-medium"
+            className="flex items-center gap-2 text-sm text-ink-soft hover:text-ink font-medium"
           >
-            📁 {inactiveCards.length} inactive card{inactiveCards.length > 1 ? 's' : ''}
+            {inactiveCards.length} inactive card{inactiveCards.length > 1 ? 's' : ''}
             <span className="text-xs">{showInactive ? '▲' : '▼'}</span>
           </button>
           {showInactive && (

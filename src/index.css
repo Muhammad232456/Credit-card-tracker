@@ -1,5 +1,20 @@
 @import "tailwindcss";
 
+@theme {
+  --color-ink: #1B1E27;
+  --color-ink-soft: #4A4F5E;
+  --color-paper: #F7F5F1;
+  --color-brass: #B8873A;
+  --color-brass-soft: #EFDFC1;
+  --color-forest: #3F7D5C;
+  --color-forest-bg: #E4EFE8;
+  --color-rust: #A63B3B;
+  --color-rust-bg: #F5E5E2;
+  --color-amber: #C9862B;
+  --color-amber-bg: #F7EAD8;
+  --color-line: #E4E0D8;
+}
+
 @layer base {
   body {
     margin: 0;
