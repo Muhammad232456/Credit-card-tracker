@@ -69,18 +69,18 @@ export default function OnboardingQuiz({ onComplete, onSkip }: Props) {
       <div className="space-y-6 py-4">
         <div className="text-center">
           <p className="text-4xl mb-3">🎉</p>
-          <h2 className="text-xl font-bold text-gray-900">Your Starter Stack</h2>
-          <p className="text-gray-500 text-sm mt-1">Based on your goal and spending level</p>
+          <h2 className="text-xl font-bold text-ink">Your Starter Stack</h2>
+          <p className="text-ink-soft text-sm mt-1">Based on your goal and spending level</p>
         </div>
         <div className="space-y-3">
           {recs.map((rec, i) => (
-            <div key={rec.id} className="bg-white border border-gray-200 rounded-xl p-4">
+            <div key={rec.id} className="bg-white border border-line rounded-xl p-4">
               <div className="flex items-start gap-3">
-                <span className="text-xs font-bold text-gray-300 mt-0.5">#{i + 1}</span>
+                <span className="text-xs font-bold text-line mt-0.5">#{i + 1}</span>
                 <div className="flex-1 min-w-0">
-                  <p className="font-semibold text-gray-900 text-sm">{rec.name}</p>
-                  <p className="text-xs text-gray-500 mt-0.5">{rec.issuer} · {rec.fee === 0 ? 'No annual fee' : `$${rec.fee.toFixed(0)}/yr`}</p>
-                  <p className="text-xs text-gray-600 mt-1.5 leading-relaxed">{rec.why}</p>
+                  <p className="font-semibold text-ink text-sm">{rec.name}</p>
+                  <p className="text-xs text-ink-soft mt-0.5">{rec.issuer} · {rec.fee === 0 ? 'No annual fee' : `$${rec.fee.toFixed(0)}/yr`}</p>
+                  <p className="text-xs text-ink-soft mt-1.5 leading-relaxed">{rec.why}</p>
                 </div>
                 {getApplyUrl(rec.id) && (
                   <a
@@ -88,7 +88,7 @@ export default function OnboardingQuiz({ onComplete, onSkip }: Props) {
                     target="_blank"
                     rel="noopener noreferrer"
                     onClick={() => trackApplyClick(rec.id, rec.name, rec.issuer, 'quiz')}
-                    className="shrink-0 bg-slate-800 text-white text-xs px-3 py-2 rounded-lg font-medium hover:bg-slate-700 transition-colors"
+                    className="shrink-0 bg-ink text-white text-xs px-3 py-2 rounded-lg font-medium hover:bg-ink transition-colors"
                   >
                     Apply →
                   </a>
@@ -97,12 +97,12 @@ export default function OnboardingQuiz({ onComplete, onSkip }: Props) {
             </div>
           ))}
         </div>
-        <p className="text-xs text-center text-gray-400">
+        <p className="text-xs text-center text-ink-soft">
           Add cards you already hold in the Cards tab to start tracking benefits and earn.
         </p>
         <button
           onClick={() => onComplete(goal)}
-          className="w-full bg-slate-800 text-white py-3 rounded-xl font-semibold hover:bg-slate-700 transition-colors"
+          className="w-full bg-ink text-white py-3 rounded-xl font-semibold hover:bg-ink transition-colors"
         >
           Go to Dashboard →
         </button>
@@ -115,8 +115,8 @@ export default function OnboardingQuiz({ onComplete, onSkip }: Props) {
       <div className="space-y-6 py-4">
         <div className="text-center">
           <p className="text-4xl mb-3">💰</p>
-          <h2 className="text-xl font-bold text-gray-900">What's your total monthly card spend?</h2>
-          <p className="text-gray-500 text-sm mt-1">Across all purchases — groceries, dining, travel, etc.</p>
+          <h2 className="text-xl font-bold text-ink">What's your total monthly card spend?</h2>
+          <p className="text-ink-soft text-sm mt-1">Across all purchases — groceries, dining, travel, etc.</p>
         </div>
         <div className="space-y-3">
           {([
@@ -127,14 +127,14 @@ export default function OnboardingQuiz({ onComplete, onSkip }: Props) {
             <button
               key={opt.id}
               onClick={() => { setSpendRange(opt.id); setStep(2); }}
-              className="w-full text-left bg-white border-2 border-gray-200 rounded-xl p-4 hover:border-slate-500 transition-colors"
+              className="w-full text-left bg-white border-2 border-line rounded-xl p-4 hover:border-ink-soft transition-colors"
             >
-              <p className="font-semibold text-gray-900">{opt.label}</p>
-              <p className="text-xs text-gray-500 mt-0.5">{opt.sub}</p>
+              <p className="font-semibold text-ink">{opt.label}</p>
+              <p className="text-xs text-ink-soft mt-0.5">{opt.sub}</p>
             </button>
           ))}
         </div>
-        <button onClick={() => setStep(0)} className="w-full text-center text-sm text-gray-400 hover:text-gray-600 py-2">
+        <button onClick={() => setStep(0)} className="w-full text-center text-sm text-ink-soft hover:text-ink-soft py-2">
           ← Back
         </button>
       </div>
@@ -145,8 +145,8 @@ export default function OnboardingQuiz({ onComplete, onSkip }: Props) {
     <div className="space-y-6 py-4">
       <div className="text-center">
         <p className="text-5xl mb-3">🍁</p>
-        <h1 className="text-2xl font-bold text-gray-900">Canadian Credit Card Tracker</h1>
-        <p className="text-gray-500 text-sm mt-2 max-w-sm mx-auto">
+        <h1 className="text-2xl font-bold text-ink">Canadian Credit Card Tracker</h1>
+        <p className="text-ink-soft text-sm mt-2 max-w-sm mx-auto">
           Let's find the right cards for you. What's your main goal?
         </p>
       </div>
@@ -159,19 +159,19 @@ export default function OnboardingQuiz({ onComplete, onSkip }: Props) {
           <button
             key={opt.id}
             onClick={() => { setGoal(opt.id); setStep(1); }}
-            className="w-full text-left bg-white border-2 border-gray-200 rounded-xl p-4 hover:border-slate-500 transition-colors"
+            className="w-full text-left bg-white border-2 border-line rounded-xl p-4 hover:border-ink-soft transition-colors"
           >
             <div className="flex items-center gap-3">
               <span className="text-2xl shrink-0">{opt.icon}</span>
               <div>
-                <p className="font-semibold text-gray-900">{opt.label}</p>
-                <p className="text-xs text-gray-500 mt-0.5">{opt.sub}</p>
+                <p className="font-semibold text-ink">{opt.label}</p>
+                <p className="text-xs text-ink-soft mt-0.5">{opt.sub}</p>
               </div>
             </div>
           </button>
         ))}
       </div>
-      <button onClick={onSkip} className="w-full text-center text-sm text-gray-400 hover:text-gray-600 py-2">
+      <button onClick={onSkip} className="w-full text-center text-sm text-ink-soft hover:text-ink-soft py-2">
         Skip — I'll set up manually
       </button>
     </div>

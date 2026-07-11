@@ -32,17 +32,17 @@ export default function Settings({ data, exportData, importData, resetYear, clea
 
   return (
     <div className="space-y-6">
-      <div className="bg-slate-800 rounded-2xl p-6 text-white">
+      <div className="bg-ink rounded-2xl p-6 text-white">
         <h2 className="text-lg font-semibold">Settings</h2>
-        <p className="text-slate-400 text-sm mt-1">
+        <p className="text-ink-soft text-sm mt-1">
           Your data is stored locally in this browser. Export to back it up or share across devices.
         </p>
       </div>
 
-      <div className="bg-white border border-gray-200 rounded-xl divide-y divide-gray-100">
+      <div className="bg-white border border-line rounded-xl divide-y divide-line">
         <div className="p-4">
-          <h3 className="font-semibold text-gray-800 mb-1">Data Summary</h3>
-          <div className="text-sm text-gray-600 space-y-1">
+          <h3 className="font-semibold text-ink mb-1">Data Summary</h3>
+          <div className="text-sm text-ink-soft space-y-1">
             <p>{data.cards.length} card{data.cards.length !== 1 ? 's' : ''} tracked</p>
             <p>{data.pointsBalances.length} loyalty program{data.pointsBalances.length !== 1 ? 's' : ''}</p>
             <p>Tracking year: {data.trackingYear}</p>
@@ -50,19 +50,19 @@ export default function Settings({ data, exportData, importData, resetYear, clea
         </div>
 
         <div className="p-4">
-          <h3 className="font-semibold text-gray-800 mb-2">Export Data</h3>
-          <p className="text-sm text-gray-500 mb-3">Download your data as JSON for backup or transfer.</p>
+          <h3 className="font-semibold text-ink mb-2">Export Data</h3>
+          <p className="text-sm text-ink-soft mb-3">Download your data as JSON for backup or transfer.</p>
           <button
             onClick={exportData}
-            className="bg-slate-800 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-slate-700 transition-colors"
+            className="bg-ink text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-ink transition-colors"
           >
             Download JSON
           </button>
         </div>
 
         <div className="p-4">
-          <h3 className="font-semibold text-gray-800 mb-2">Import Data</h3>
-          <p className="text-sm text-gray-500 mb-3">Restore from a previously exported JSON file. This will overwrite your current data.</p>
+          <h3 className="font-semibold text-ink mb-2">Import Data</h3>
+          <p className="text-sm text-ink-soft mb-3">Restore from a previously exported JSON file. This will overwrite your current data.</p>
           <input
             type="file"
             accept=".json"
@@ -72,34 +72,34 @@ export default function Settings({ data, exportData, importData, resetYear, clea
           />
           <button
             onClick={() => fileRef.current?.click()}
-            className="border border-gray-300 text-gray-700 px-4 py-2 rounded-lg text-sm font-medium hover:bg-gray-50 transition-colors"
+            className="border border-line text-ink px-4 py-2 rounded-lg text-sm font-medium hover:bg-paper transition-colors"
           >
             Import JSON
           </button>
-          {importError && <p className="mt-2 text-sm text-red-600">{importError}</p>}
+          {importError && <p className="mt-2 text-sm text-rust">{importError}</p>}
         </div>
 
         <div className="p-4">
-          <h3 className="font-semibold text-gray-800 mb-2">Reset Tracking Year</h3>
-          <p className="text-sm text-gray-500 mb-3">
+          <h3 className="font-semibold text-ink mb-2">Reset Tracking Year</h3>
+          <p className="text-sm text-ink-soft mb-3">
             Clears all benefit usage counts for the new year. Keeps your cards, points balances, and dates.
           </p>
           {confirmReset ? (
             <div className="flex gap-3">
               <button
                 onClick={() => { resetYear(); setConfirmReset(false); }}
-                className="bg-amber-500 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-amber-600"
+                className="bg-amber text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-amber"
               >
                 Yes, reset usage
               </button>
-              <button onClick={() => setConfirmReset(false)} className="text-gray-500 text-sm px-4 py-2">
+              <button onClick={() => setConfirmReset(false)} className="text-ink-soft text-sm px-4 py-2">
                 Cancel
               </button>
             </div>
           ) : (
             <button
               onClick={() => setConfirmReset(true)}
-              className="border border-amber-300 text-amber-700 px-4 py-2 rounded-lg text-sm font-medium hover:bg-amber-50 transition-colors"
+              className="border border-amber text-amber px-4 py-2 rounded-lg text-sm font-medium hover:bg-amber-bg transition-colors"
             >
               Reset Year
             </button>
@@ -107,26 +107,26 @@ export default function Settings({ data, exportData, importData, resetYear, clea
         </div>
 
         <div className="p-4">
-          <h3 className="font-semibold text-gray-800 mb-2">Clear All Data</h3>
-          <p className="text-sm text-gray-500 mb-3">
+          <h3 className="font-semibold text-ink mb-2">Clear All Data</h3>
+          <p className="text-sm text-ink-soft mb-3">
             Permanently delete all cards, points, and settings from this browser.
           </p>
           {confirmClear ? (
             <div className="flex gap-3">
               <button
                 onClick={() => { clearAll(); setConfirmClear(false); }}
-                className="bg-red-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-red-700"
+                className="bg-rust text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-rust"
               >
                 Yes, delete everything
               </button>
-              <button onClick={() => setConfirmClear(false)} className="text-gray-500 text-sm px-4 py-2">
+              <button onClick={() => setConfirmClear(false)} className="text-ink-soft text-sm px-4 py-2">
                 Cancel
               </button>
             </div>
           ) : (
             <button
               onClick={() => setConfirmClear(true)}
-              className="border border-red-300 text-red-600 px-4 py-2 rounded-lg text-sm font-medium hover:bg-red-50 transition-colors"
+              className="border border-rust text-rust px-4 py-2 rounded-lg text-sm font-medium hover:bg-rust-bg transition-colors"
             >
               Clear All Data
             </button>
@@ -134,7 +134,7 @@ export default function Settings({ data, exportData, importData, resetYear, clea
         </div>
       </div>
 
-      <div className="text-center text-xs text-gray-400 pb-4">
+      <div className="text-center text-xs text-ink-soft pb-4">
         Canadian Credit Card Tracker · Data verified June 2026
       </div>
     </div>

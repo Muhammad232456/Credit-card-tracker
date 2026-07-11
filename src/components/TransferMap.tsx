@@ -8,14 +8,14 @@ interface Props {
 }
 
 const ALLIANCE_COLORS: Record<string, string> = {
-  star: 'bg-yellow-100 text-yellow-800',
-  oneworld: 'bg-red-100 text-red-800',
-  skyteam: 'bg-blue-100 text-blue-800',
+  star: 'bg-amber-bg text-amber',
+  oneworld: 'bg-rust-bg text-rust',
+  skyteam: 'bg-brass-soft text-brass',
 };
 
 const ISSUER_COLORS: Record<string, string> = {
-  'amex-mr': 'border-blue-700 bg-blue-50',
-  'rbc-avion': 'border-blue-500 bg-blue-50',
+  'amex-mr': 'border-brass bg-brass-soft',
+  'rbc-avion': 'border-brass bg-brass-soft',
 };
 
 export default function TransferMap({ focusProgram }: Props) {
@@ -34,9 +34,9 @@ export default function TransferMap({ focusProgram }: Props) {
 
   return (
     <div className="space-y-6">
-      <div className="bg-slate-800 rounded-2xl p-6 text-white">
+      <div className="bg-ink rounded-2xl p-6 text-white">
         <h2 className="text-lg font-semibold">Transfer Partner Map</h2>
-        <p className="text-slate-400 text-sm mt-1">
+        <p className="text-ink-soft text-sm mt-1">
           Canada has only 2 transferable currencies: Amex MR and RBC Avion. All other programs (Scene+, TD, BMO, NBC, HSBC) are portal-only with no airline/hotel transfers.
         </p>
       </div>
@@ -51,7 +51,7 @@ export default function TransferMap({ focusProgram }: Props) {
               className={`flex-1 py-3 px-4 rounded-xl border-2 font-medium text-sm transition-all ${
                 activeSource === id
                   ? `${ISSUER_COLORS[id]} border-opacity-100`
-                  : 'border-gray-200 bg-white text-gray-600 hover:border-gray-300'
+                  : 'border-line bg-white text-ink-soft hover:border-line'
               }`}
             >
               {prog?.name}
@@ -62,11 +62,11 @@ export default function TransferMap({ focusProgram }: Props) {
 
       {sourceProgram && (
         <div className="text-center py-2">
-          <span className="inline-block bg-slate-800 text-white px-4 py-2 rounded-full text-sm font-semibold">
+          <span className="inline-block bg-ink text-white px-4 py-2 rounded-full text-sm font-semibold">
             {sourceProgram.name}
           </span>
           {sourceProgram.note && (
-            <p className="text-xs text-gray-500 mt-2">{sourceProgram.note}</p>
+            <p className="text-xs text-ink-soft mt-2">{sourceProgram.note}</p>
           )}
         </div>
       )}
@@ -81,16 +81,16 @@ export default function TransferMap({ focusProgram }: Props) {
             <div
               key={partner.id}
               className={`bg-white border rounded-xl p-4 relative ${
-                isExpiring ? 'border-red-300 bg-red-50' : 'border-gray-200'
+                isExpiring ? 'border-rust bg-rust-bg' : 'border-line'
               }`}
             >
               {isExpiring && (
-                <div className="absolute top-3 right-3 bg-red-600 text-white text-xs px-2 py-0.5 rounded-full font-bold">
+                <div className="absolute top-3 right-3 bg-rust text-white text-xs px-2 py-0.5 rounded-full font-bold">
                   ENDING {route.expiryDate}
                 </div>
               )}
               {isOverlap && (
-                <div className="absolute top-3 left-3 bg-slate-600 text-white text-xs px-2 py-0.5 rounded-full">
+                <div className="absolute top-3 left-3 bg-ink-soft text-white text-xs px-2 py-0.5 rounded-full">
                   Also via {activeSource === 'amex-mr' ? 'RBC Avion' : 'Amex MR'}
                 </div>
               )}
@@ -98,22 +98,22 @@ export default function TransferMap({ focusProgram }: Props) {
               <div className={`flex items-start justify-between gap-4 ${isOverlap ? 'mt-6' : ''}`}>
                 <div>
                   <div className="flex items-center gap-2 flex-wrap">
-                    <span className="font-semibold text-gray-900">{partner.name}</span>
+                    <span className="font-semibold text-ink">{partner.name}</span>
                     {partner.alliance && (
                       <span className={`text-xs px-2 py-0.5 rounded-full font-medium capitalize ${ALLIANCE_COLORS[partner.alliance]}`}>
                         {partner.alliance}
                       </span>
                     )}
-                    <span className="text-xs text-gray-500 capitalize">{partner.type}</span>
+                    <span className="text-xs text-ink-soft capitalize">{partner.type}</span>
                   </div>
-                  <p className="text-xs text-gray-500 mt-1">{route.notes}</p>
+                  <p className="text-xs text-ink-soft mt-1">{route.notes}</p>
                 </div>
                 <div className="text-right shrink-0">
-                  <p className="font-mono font-bold text-lg text-gray-900">
+                  <p className="font-mono font-bold text-lg text-ink">
                     {route.ratio[0]}:{route.ratio[1]}
                   </p>
-                  <p className="text-xs text-gray-500">{route.transferSpeed}</p>
-                  <p className="text-xs text-gray-400">min {route.minimumTransfer.toLocaleString()}</p>
+                  <p className="text-xs text-ink-soft">{route.transferSpeed}</p>
+                  <p className="text-xs text-ink-soft">min {route.minimumTransfer.toLocaleString()}</p>
                 </div>
               </div>
             </div>
@@ -122,9 +122,9 @@ export default function TransferMap({ focusProgram }: Props) {
       </div>
 
       {activeSource === 'amex-mr' && (
-        <div className="bg-blue-50 border border-blue-200 rounded-xl p-4">
-          <p className="text-sm font-semibold text-blue-800">Overlap Tip</p>
-          <p className="text-xs text-blue-700 mt-1">
+        <div className="bg-brass-soft border border-brass rounded-xl p-4">
+          <p className="text-sm font-semibold text-brass">Overlap Tip</p>
+          <p className="text-xs text-brass mt-1">
             Both Amex MR and RBC Avion transfer 1:1 to BA Avios and Cathay Asia Miles. Burn RBC Avion on these overlapping partners and save Amex MR for exclusive partners (Aeroplan, Flying Blue, Delta, Etihad).
           </p>
         </div>

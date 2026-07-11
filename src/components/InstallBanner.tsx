@@ -46,19 +46,19 @@ export default function InstallBanner() {
   // Android / Chrome install banner
   if (deferredPrompt) {
     return (
-      <div className="sm:hidden fixed bottom-20 left-4 right-4 z-40 bg-slate-900 text-white rounded-2xl px-4 py-3 flex items-center gap-3 shadow-xl">
+      <div className="sm:hidden fixed bottom-20 left-4 right-4 z-40 bg-ink text-white rounded-2xl px-4 py-3 flex items-center gap-3 shadow-xl">
         <span className="text-2xl">🍁</span>
         <div className="flex-1 min-w-0">
           <p className="text-sm font-semibold">Add to Home Screen</p>
-          <p className="text-xs text-slate-400">Use CA Card Tracker like an app</p>
+          <p className="text-xs text-ink-soft">Use CA Card Tracker like an app</p>
         </div>
         <button
           onClick={install}
-          className="bg-white text-slate-900 text-xs font-semibold px-3 py-1.5 rounded-lg shrink-0"
+          className="bg-white text-ink text-xs font-semibold px-3 py-1.5 rounded-lg shrink-0"
         >
           Install
         </button>
-        <button onClick={dismiss} className="text-slate-400 hover:text-white text-lg leading-none shrink-0">×</button>
+        <button onClick={dismiss} className="text-ink-soft hover:text-white text-lg leading-none shrink-0">×</button>
       </div>
     );
   }
@@ -66,16 +66,16 @@ export default function InstallBanner() {
   // iOS instructions banner
   if (showIOS) {
     return (
-      <div className="sm:hidden fixed bottom-20 left-4 right-4 z-40 bg-slate-900 text-white rounded-2xl px-4 py-3 shadow-xl">
+      <div className="sm:hidden fixed bottom-20 left-4 right-4 z-40 bg-ink text-white rounded-2xl px-4 py-3 shadow-xl">
         <div className="flex items-start gap-3">
           <span className="text-2xl">🍁</span>
           <div className="flex-1">
             <p className="text-sm font-semibold">Add to Home Screen</p>
-            <p className="text-xs text-slate-400 mt-0.5">
+            <p className="text-xs text-ink-soft mt-0.5">
               Tap <span className="text-white font-medium">Share</span> <span className="text-base">⎙</span> then <span className="text-white font-medium">Add to Home Screen</span>
             </p>
           </div>
-          <button onClick={dismiss} className="text-slate-400 hover:text-white text-lg leading-none shrink-0">×</button>
+          <button onClick={dismiss} className="text-ink-soft hover:text-white text-lg leading-none shrink-0">×</button>
         </div>
       </div>
     );

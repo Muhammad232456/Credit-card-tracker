@@ -38,23 +38,23 @@ export default function FeedbackWidget() {
   }
 
   return (
-    <div className="bg-white border border-gray-200 rounded-xl overflow-hidden">
+    <div className="bg-white border border-line rounded-xl overflow-hidden">
       <button
         onClick={() => setOpen(v => !v)}
         className="w-full px-4 py-3 flex items-center justify-between text-left"
       >
         <div className="flex items-center gap-2">
           <span>💬</span>
-          <span className="text-sm font-semibold text-gray-700">Share Feedback</span>
-          <span className="text-xs text-gray-400 hidden sm:block">— suggest a feature or report an issue</span>
+          <span className="text-sm font-semibold text-ink">Share Feedback</span>
+          <span className="text-xs text-ink-soft hidden sm:block">— suggest a feature or report an issue</span>
         </div>
-        <span className="text-gray-400 text-sm">{open ? '▲' : '▼'}</span>
+        <span className="text-ink-soft text-sm">{open ? '▲' : '▼'}</span>
       </button>
 
       {open && (
-        <div className="border-t border-gray-100 px-4 pb-4 pt-3 space-y-3">
+        <div className="border-t border-line px-4 pb-4 pt-3 space-y-3">
           {status === 'sent' ? (
-            <p className="text-sm text-emerald-700 font-medium text-center py-4">
+            <p className="text-sm text-forest font-medium text-center py-4">
               ✓ Thanks for your feedback!
             </p>
           ) : (
@@ -64,15 +64,15 @@ export default function FeedbackWidget() {
                 placeholder="What could be better? Missing a card? Found a bug?"
                 value={message}
                 onChange={e => setMessage(e.target.value)}
-                className="w-full border border-gray-300 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-slate-400 resize-none"
+                className="w-full border border-line rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-ink-soft resize-none"
               />
               {status === 'error' && (
-                <p className="text-xs text-red-600">Something went wrong — try again.</p>
+                <p className="text-xs text-rust">Something went wrong — try again.</p>
               )}
               <button
                 onClick={submit}
                 disabled={!message.trim() || status === 'sending'}
-                className="w-full bg-slate-800 text-white py-2.5 rounded-lg text-sm font-medium hover:bg-slate-700 transition-colors disabled:opacity-40"
+                className="w-full bg-ink text-white py-2.5 rounded-lg text-sm font-medium hover:bg-ink transition-colors disabled:opacity-40"
               >
                 {status === 'sending' ? 'Sending…' : 'Submit Feedback'}
               </button>

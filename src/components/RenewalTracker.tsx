@@ -30,14 +30,14 @@ export default function RenewalTracker({ data, onSelectCard }: Props) {
 
   return (
     <div className="space-y-3">
-      <h3 className="font-semibold text-gray-800">Upcoming Renewals</h3>
+      <h3 className="font-semibold text-ink">Upcoming Renewals</h3>
       <div className="space-y-2">
         {cardsWithRenewal.map(({ userCard, template, days }) => {
           if (!template) return null;
-          const statusColor = days === null ? 'border-gray-200 bg-white' :
-            days < 30 ? 'border-red-300 bg-red-50' :
-            days < 60 ? 'border-amber-300 bg-amber-50' :
-            'border-green-200 bg-green-50';
+          const statusColor = days === null ? 'border-line bg-white' :
+            days < 30 ? 'border-rust bg-rust-bg' :
+            days < 60 ? 'border-amber bg-amber-bg' :
+            'border-forest bg-forest-bg';
 
           const badge = days === null ? null :
             days < 30 ? `🔴 ${days}d` :
@@ -51,21 +51,21 @@ export default function RenewalTracker({ data, onSelectCard }: Props) {
               className={`w-full text-left border rounded-xl p-3 flex items-center justify-between hover:shadow-sm transition-shadow ${statusColor}`}
             >
               <div>
-                <p className="font-medium text-gray-900 text-sm">{template.name}</p>
-                <p className="text-xs text-gray-500">
+                <p className="font-medium text-ink text-sm">{template.name}</p>
+                <p className="text-xs text-ink-soft">
                   {userCard.renewalDate
                     ? `Renews ${new Date(userCard.renewalDate).toLocaleDateString('en-CA')}`
                     : 'No renewal date set'}
                 </p>
               </div>
-              {badge && <span className="font-mono text-sm font-bold text-gray-700">{badge}</span>}
-              {!days && days !== 0 && <span className="text-xs text-gray-400">Set date →</span>}
+              {badge && <span className="font-mono text-sm font-bold text-ink">{badge}</span>}
+              {!days && days !== 0 && <span className="text-xs text-ink-soft">Set date →</span>}
             </button>
           );
         })}
       </div>
       {noRenewalDate.length > 0 && (
-        <p className="text-xs text-gray-500">
+        <p className="text-xs text-ink-soft">
           {noRenewalDate.length} card{noRenewalDate.length !== 1 ? 's' : ''} missing renewal date — tap to set.
         </p>
       )}

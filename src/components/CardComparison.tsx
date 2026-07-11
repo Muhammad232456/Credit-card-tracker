@@ -34,24 +34,24 @@ export default function CardComparison({ onBack }: Props) {
   return (
     <div className="space-y-4">
       <div className="flex items-center gap-3 mb-2">
-        <button onClick={onBack} className="text-sm text-gray-500 hover:text-gray-700 flex items-center gap-1">
+        <button onClick={onBack} className="text-sm text-ink-soft hover:text-ink flex items-center gap-1">
           ← Back
         </button>
-        <h2 className="font-semibold text-gray-900">Compare Cards</h2>
+        <h2 className="font-semibold text-ink">Compare Cards</h2>
       </div>
 
       {/* Card picker */}
-      <div className="bg-white border border-gray-200 rounded-xl p-4">
-        <p className="text-xs text-gray-500 mb-2">
+      <div className="bg-white border border-line rounded-xl p-4">
+        <p className="text-xs text-ink-soft mb-2">
           Select up to 3 cards to compare
-          {selectedIds.length > 0 && <span className="ml-1 text-slate-700 font-medium">({selectedIds.length}/3 selected)</span>}
+          {selectedIds.length > 0 && <span className="ml-1 text-ink font-medium">({selectedIds.length}/3 selected)</span>}
         </p>
         <input
           type="text"
           placeholder="Search by name or issuer…"
           value={search}
           onChange={e => setSearch(e.target.value)}
-          className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm mb-3 focus:outline-none focus:ring-2 focus:ring-slate-400"
+          className="w-full border border-line rounded-lg px-3 py-2 text-sm mb-3 focus:outline-none focus:ring-2 focus:ring-ink-soft"
         />
         <div className="space-y-1 max-h-52 overflow-y-auto">
           {filtered.map(t => {
@@ -63,13 +63,13 @@ export default function CardComparison({ onBack }: Props) {
                 onClick={() => toggle(t.id)}
                 disabled={disabled}
                 className={`w-full text-left px-3 py-2 rounded-lg text-sm flex items-center justify-between transition-colors ${
-                  isSel ? 'bg-slate-800 text-white' :
-                  disabled ? 'text-gray-300 cursor-not-allowed' :
-                  'hover:bg-gray-50 text-gray-800'
+                  isSel ? 'bg-ink text-white' :
+                  disabled ? 'text-line cursor-not-allowed' :
+                  'hover:bg-paper text-ink'
                 }`}
               >
                 <span className="truncate flex-1">{t.name}</span>
-                <span className={`text-xs ml-2 shrink-0 ${isSel ? 'text-slate-300' : 'text-gray-400'}`}>
+                <span className={`text-xs ml-2 shrink-0 ${isSel ? 'text-line' : 'text-ink-soft'}`}>
                   {t.annualFee === 0 ? 'No fee' : `$${t.annualFee}/yr`}
                 </span>
               </button>
@@ -79,7 +79,7 @@ export default function CardComparison({ onBack }: Props) {
       </div>
 
       {selected.length < 2 && (
-        <p className="text-center text-sm text-gray-400 py-6">Select at least 2 cards to see the comparison</p>
+        <p className="text-center text-sm text-ink-soft py-6">Select at least 2 cards to see the comparison</p>
       )}
 
       {selected.length >= 2 && (
@@ -88,15 +88,15 @@ export default function CardComparison({ onBack }: Props) {
           {/* Header */}
           <div className={`grid gap-2 ${cols}`}>
             {selected.map(t => (
-              <div key={t.id} className="bg-slate-800 text-white rounded-xl p-3 text-center">
+              <div key={t.id} className="bg-ink text-white rounded-xl p-3 text-center">
                 <p className="text-xs font-semibold leading-tight truncate">{t.name}</p>
-                <p className="text-slate-400 text-xs mt-0.5">{t.issuer}</p>
+                <p className="text-ink-soft text-xs mt-0.5">{t.issuer}</p>
                 <p className="font-mono font-bold text-lg mt-1">
                   {t.annualFee === 0 ? 'Free' : `$${t.annualFee}`}
-                  {t.annualFee > 0 && <span className="text-slate-400 text-xs">/yr</span>}
+                  {t.annualFee > 0 && <span className="text-ink-soft text-xs">/yr</span>}
                 </p>
                 {t.firstYearFeeWaived && (
-                  <p className="text-emerald-400 text-xs mt-0.5">1st year free</p>
+                  <p className="text-forest text-xs mt-0.5">1st year free</p>
                 )}
               </div>
             ))}
@@ -104,22 +104,22 @@ export default function CardComparison({ onBack }: Props) {
 
           {/* Current Offers */}
           {selected.some(t => t.currentOffer) && (
-            <div className="bg-white border border-gray-200 rounded-xl overflow-hidden">
-              <div className="px-4 py-2 bg-gray-50 border-b border-gray-100">
-                <p className="text-xs font-semibold text-gray-500 uppercase tracking-wide">Current Welcome Offer</p>
+            <div className="bg-white border border-line rounded-xl overflow-hidden">
+              <div className="px-4 py-2 bg-paper border-b border-line">
+                <p className="text-xs font-semibold text-ink-soft uppercase tracking-wide">Current Welcome Offer</p>
               </div>
-              <div className={`grid divide-x divide-gray-100 ${cols}`}>
+              <div className={`grid divide-x divide-line ${cols}`}>
                 {selected.map(t => {
                   const offer = t.currentOffer;
                   if (!offer) return (
                     <div key={t.id} className="p-3">
-                      <p className="text-xs text-gray-300 italic">No current offer</p>
+                      <p className="text-xs text-line italic">No current offer</p>
                     </div>
                   );
                   const ratingColors = {
-                    'standard':      { badge: 'bg-amber-100 text-amber-700',   border: 'border-amber-200' },
+                    'standard':      { badge: 'bg-amber-bg text-amber',   border: 'border-amber' },
                     'elevated':      { badge: 'bg-orange-100 text-orange-700',  border: 'border-orange-200' },
-                    'all-time-high': { badge: 'bg-emerald-100 text-emerald-700', border: 'border-emerald-300' },
+                    'all-time-high': { badge: 'bg-forest-bg text-forest', border: 'border-forest' },
                   };
                   const rc = offer.rating ? ratingColors[offer.rating] : ratingColors['standard'];
                   return (
@@ -129,9 +129,9 @@ export default function CardComparison({ onBack }: Props) {
                           {offer.rating === 'all-time-high' ? 'All-Time High' : offer.rating === 'elevated' ? 'Elevated' : 'Standard'}
                         </span>
                       )}
-                      <p className="text-xs text-gray-700 leading-snug">{offer.description}</p>
+                      <p className="text-xs text-ink leading-snug">{offer.description}</p>
                       {offer.expiryDate && (
-                        <p className="text-xs text-red-500 font-medium">Expires {offer.expiryDate}</p>
+                        <p className="text-xs text-rust font-medium">Expires {offer.expiryDate}</p>
                       )}
                     </div>
                   );
@@ -141,14 +141,14 @@ export default function CardComparison({ onBack }: Props) {
           )}
 
           {/* Earn rates */}
-          <div className="bg-white border border-gray-200 rounded-xl overflow-hidden">
-            <div className="px-4 py-2 bg-gray-50 border-b border-gray-100">
-              <p className="text-xs font-semibold text-gray-500 uppercase tracking-wide">Earn Rates by Category</p>
+          <div className="bg-white border border-line rounded-xl overflow-hidden">
+            <div className="px-4 py-2 bg-paper border-b border-line">
+              <p className="text-xs font-semibold text-ink-soft uppercase tracking-wide">Earn Rates by Category</p>
             </div>
             {SPEND_CATS.filter(c => c.id !== 'other').map(cat => (
-              <div key={cat.id} className="border-b border-gray-100 last:border-0">
-                <p className="text-xs text-gray-500 px-4 pt-2 pb-0.5">{cat.icon} {cat.label}</p>
-                <div className={`grid gap-px bg-gray-100 ${cols}`}>
+              <div key={cat.id} className="border-b border-line last:border-0">
+                <p className="text-xs text-ink-soft px-4 pt-2 pb-0.5">{cat.icon} {cat.label}</p>
+                <div className={`grid gap-px bg-line ${cols}`}>
                   {selected.map(t => {
                     const { rate, cpd } = t.earningRates?.length
                       ? bestRateForCat(t.earningRates, cat.keywords, POINTS_PROGRAMS)
@@ -160,13 +160,13 @@ export default function CardComparison({ onBack }: Props) {
                       return cpd >= oCpd;
                     });
                     return (
-                      <div key={t.id} className={`bg-white px-3 pb-2 text-center ${isTop && cpd > 0 ? 'bg-emerald-50' : ''}`}>
+                      <div key={t.id} className={`bg-white px-3 pb-2 text-center ${isTop && cpd > 0 ? 'bg-forest-bg' : ''}`}>
                         {rate ? (
-                          <p className={`text-xs font-medium ${isTop && cpd > 0 ? 'text-emerald-700 font-semibold' : 'text-gray-700'}`}>
+                          <p className={`text-xs font-medium ${isTop && cpd > 0 ? 'text-forest font-semibold' : 'text-ink'}`}>
                             {formatRate(rate, cpd)}
                           </p>
                         ) : (
-                          <p className="text-xs text-gray-300">—</p>
+                          <p className="text-xs text-line">—</p>
                         )}
                       </div>
                     );
@@ -177,24 +177,24 @@ export default function CardComparison({ onBack }: Props) {
           </div>
 
           {/* Benefits */}
-          <div className="bg-white border border-gray-200 rounded-xl overflow-hidden">
-            <div className="px-4 py-2 bg-gray-50 border-b border-gray-100">
-              <p className="text-xs font-semibold text-gray-500 uppercase tracking-wide">Key Benefits</p>
+          <div className="bg-white border border-line rounded-xl overflow-hidden">
+            <div className="px-4 py-2 bg-paper border-b border-line">
+              <p className="text-xs font-semibold text-ink-soft uppercase tracking-wide">Key Benefits</p>
             </div>
-            <div className={`grid divide-x divide-gray-100 ${cols}`}>
+            <div className={`grid divide-x divide-line ${cols}`}>
               {selected.map(t => (
                 <div key={t.id} className="p-3 space-y-1.5">
                   {t.benefits.length === 0 ? (
-                    <p className="text-xs text-gray-300 italic">No tracked credits</p>
+                    <p className="text-xs text-line italic">No tracked credits</p>
                   ) : (
                     <>
                       {t.benefits.slice(0, 5).map(b => (
-                        <p key={b.id} className="text-xs text-gray-700 leading-snug">
+                        <p key={b.id} className="text-xs text-ink leading-snug">
                           • {b.name}{b.value > 0 ? ` ($${b.value})` : ''}
                         </p>
                       ))}
                       {t.benefits.length > 5 && (
-                        <p className="text-xs text-gray-400">+{t.benefits.length - 5} more</p>
+                        <p className="text-xs text-ink-soft">+{t.benefits.length - 5} more</p>
                       )}
                     </>
                   )}
@@ -214,19 +214,19 @@ export default function CardComparison({ onBack }: Props) {
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={() => trackApplyClick(t.id, t.name, t.issuer, 'comparison')}
-                  className="bg-slate-800 text-white text-xs text-center py-2.5 rounded-xl font-semibold hover:bg-slate-700 transition-colors block"
+                  className="bg-ink text-white text-xs text-center py-2.5 rounded-xl font-semibold hover:bg-ink transition-colors block"
                 >
                   Apply — {t.issuer} →
                 </a>
               ) : (
-                <div key={t.id} className="bg-gray-100 text-gray-400 text-xs text-center py-2.5 rounded-xl">
+                <div key={t.id} className="bg-line text-ink-soft text-xs text-center py-2.5 rounded-xl">
                   Search online to apply
                 </div>
               );
             })}
           </div>
 
-          <p className="text-xs text-gray-400 text-center">
+          <p className="text-xs text-ink-soft text-center">
             Green earn rates indicate the highest for that category among the selected cards.
           </p>
           </div>

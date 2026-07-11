@@ -128,45 +128,45 @@ export default function Dashboard({ data, onNavigate, onStartQuiz }: Props) {
       <div className="space-y-8 py-8">
         <div className="text-center">
           <WalletMark className="w-12 h-12 mx-auto mb-4 text-brass" />
-          <h1 className="text-2xl font-bold text-gray-900">Canadian Credit Card Tracker</h1>
-          <p className="text-gray-500 mt-2 max-w-md mx-auto text-sm">
+          <h1 className="text-2xl font-bold text-ink">Canadian Credit Card Tracker</h1>
+          <p className="text-ink-soft mt-2 max-w-md mx-auto text-sm">
             Track your points balances, card benefits, renewal dates, and annual fee recovery — all in your browser.
           </p>
-          <p className="text-xs text-gray-400 mt-2">
+          <p className="text-xs text-ink-soft mt-2">
             No account needed — your data saves automatically on this device, completely free.
           </p>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-          <div className="bg-white border border-gray-200 rounded-xl p-5 text-center">
+          <div className="bg-white border border-line rounded-xl p-5 text-center">
             <CardsIcon className="w-7 h-7 mx-auto mb-2 text-brass" />
-            <p className="font-semibold text-gray-800">Add Cards</p>
-            <p className="text-xs text-gray-500 mt-1">Track Canadian credit cards and their benefits</p>
+            <p className="font-semibold text-ink">Add Cards</p>
+            <p className="text-xs text-ink-soft mt-1">Track Canadian credit cards and their benefits</p>
           </div>
-          <div className="bg-white border border-gray-200 rounded-xl p-5 text-center">
+          <div className="bg-white border border-line rounded-xl p-5 text-center">
             <PointsIcon className="w-7 h-7 mx-auto mb-2 text-brass" />
-            <p className="font-semibold text-gray-800">Track Points</p>
-            <p className="text-xs text-gray-500 mt-1">Monitor loyalty programs with CAD valuations</p>
+            <p className="font-semibold text-ink">Track Points</p>
+            <p className="text-xs text-ink-soft mt-1">Monitor loyalty programs with CAD valuations</p>
           </div>
-          <div className="bg-white border border-gray-200 rounded-xl p-5 text-center">
+          <div className="bg-white border border-line rounded-xl p-5 text-center">
             <OptimizeIcon className="w-7 h-7 mx-auto mb-2 text-brass" />
-            <p className="font-semibold text-gray-800">Optimize Spend</p>
-            <p className="text-xs text-gray-500 mt-1">Find the best card for each spend category</p>
+            <p className="font-semibold text-ink">Optimize Spend</p>
+            <p className="text-xs text-ink-soft mt-1">Find the best card for each spend category</p>
           </div>
         </div>
         <div className="flex flex-col sm:flex-row gap-3 justify-center">
           <button onClick={() => onNavigate('cards')} className="bg-ink text-white px-6 py-3 rounded-xl font-medium hover:opacity-90 transition-opacity">
             Add Your First Card →
           </button>
-          <button onClick={() => onNavigate('points')} className="border border-gray-300 text-gray-700 px-6 py-3 rounded-xl font-medium hover:bg-gray-50 transition-colors">
+          <button onClick={() => onNavigate('points')} className="border border-line text-ink px-6 py-3 rounded-xl font-medium hover:bg-paper transition-colors">
             Track Points First →
           </button>
         </div>
         {onStartQuiz && (
           <div className="text-center">
-            <p className="text-xs text-gray-400 mb-2">Not sure which cards to get?</p>
+            <p className="text-xs text-ink-soft mb-2">Not sure which cards to get?</p>
             <button
               onClick={onStartQuiz}
-              className="text-sm text-blue-600 hover:text-blue-700 font-medium underline underline-offset-2"
+              className="text-sm text-brass hover:text-brass font-medium underline underline-offset-2"
             >
               Get personalized card recommendations →
             </button>
@@ -179,45 +179,45 @@ export default function Dashboard({ data, onNavigate, onStartQuiz }: Props) {
   return (
     <div className="space-y-6">
       {/* Hero stats */}
-      <div className="bg-slate-800 rounded-2xl p-6 text-white">
-        <p className="text-slate-400 text-sm">{new Date().toLocaleDateString('en-CA', { weekday: 'long', month: 'long', day: 'numeric' })}</p>
+      <div className="bg-ink rounded-2xl p-6 text-white">
+        <p className="text-ink-soft text-sm">{new Date().toLocaleDateString('en-CA', { weekday: 'long', month: 'long', day: 'numeric' })}</p>
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-4">
           <div>
-            <p className="text-slate-400 text-xs uppercase tracking-wide">Points Value</p>
+            <p className="text-ink-soft text-xs uppercase tracking-wide">Points Value</p>
             <p className="font-mono font-bold text-xl mt-1">${totalPoints.toLocaleString('en-CA', { maximumFractionDigits: 0 })}</p>
-            <p className="text-slate-500 text-xs">in loyalty programs</p>
+            <p className="text-ink-soft text-xs">in loyalty programs</p>
           </div>
           <div>
-            <p className="text-slate-400 text-xs uppercase tracking-wide">
+            <p className="text-ink-soft text-xs uppercase tracking-wide">
               <GlossaryTerm term="Benefit Recovery">Benefit Recovery</GlossaryTerm>
             </p>
             <p className="font-mono font-bold text-xl mt-1">{overallRecovery}%</p>
-            <p className="text-slate-500 text-xs">${totalRecovered.toFixed(0)} recovered of ${totalFees.toFixed(0)} in fees</p>
+            <p className="text-ink-soft text-xs">${totalRecovered.toFixed(0)} recovered of ${totalFees.toFixed(0)} in fees</p>
           </div>
           <div>
-            <p className="text-slate-400 text-xs uppercase tracking-wide">Active Cards</p>
+            <p className="text-ink-soft text-xs uppercase tracking-wide">Active Cards</p>
             <p className="font-mono font-bold text-xl mt-1">{activeCards.length}</p>
             {data.cards.length > activeCards.length && (
-              <p className="text-slate-500 text-xs">{data.cards.length - activeCards.length} inactive</p>
+              <p className="text-ink-soft text-xs">{data.cards.length - activeCards.length} inactive</p>
             )}
           </div>
           <div>
-            <p className="text-slate-400 text-xs uppercase tracking-wide">Total Credit</p>
+            <p className="text-ink-soft text-xs uppercase tracking-wide">Total Credit</p>
             {totalCreditLimit > 0 ? (
               <>
                 <p className="font-mono font-bold text-xl mt-1">${totalCreditLimit.toLocaleString()}</p>
-                <p className="text-slate-500 text-xs">across {activeCards.filter(c => c.creditLimit).length} cards</p>
+                <p className="text-ink-soft text-xs">across {activeCards.filter(c => c.creditLimit).length} cards</p>
               </>
             ) : (
-              <p className="font-mono text-slate-500 text-sm mt-1">—</p>
+              <p className="font-mono text-ink-soft text-sm mt-1">—</p>
             )}
           </div>
           {hasSpendProfile && (
             <div className="col-span-2 sm:col-span-4 border-t border-white/10 pt-4 mt-2">
-              <p className="text-slate-400 text-xs uppercase tracking-wide">Est. Annual Earn</p>
+              <p className="text-ink-soft text-xs uppercase tracking-wide">Est. Annual Earn</p>
               <div className="flex items-baseline gap-2 mt-1">
-                <p className="font-mono font-bold text-2xl text-emerald-400">${Math.round(portfolioEarn).toLocaleString()}</p>
-                <p className="text-slate-400 text-xs">using the best card per category</p>
+                <p className="font-mono font-bold text-2xl text-forest">${Math.round(portfolioEarn).toLocaleString()}</p>
+                <p className="text-ink-soft text-xs">using the best card per category</p>
               </div>
             </div>
           )}
@@ -227,7 +227,7 @@ export default function Dashboard({ data, onNavigate, onStartQuiz }: Props) {
       {/* Benefit reset calendar */}
       {upcomingResets.length > 0 && (
         <div className="bg-white border border-orange-200 rounded-xl p-4">
-          <h3 className="font-semibold text-gray-800 mb-3 flex items-center gap-2">
+          <h3 className="font-semibold text-ink mb-3 flex items-center gap-2">
             ⏰ Use Before Reset
             <span className="text-xs font-normal text-orange-600 bg-orange-50 px-2 py-0.5 rounded-full">next 60 days</span>
           </h3>
@@ -239,13 +239,13 @@ export default function Dashboard({ data, onNavigate, onStartQuiz }: Props) {
                 className="w-full text-left flex items-center gap-3 p-2 rounded-lg hover:bg-orange-50 transition-colors"
               >
                 <span className={`text-xs font-bold px-2 py-1 rounded-full shrink-0 ${
-                  r.daysUntil <= 14 ? 'bg-red-100 text-red-700' : 'bg-orange-100 text-orange-700'
+                  r.daysUntil <= 14 ? 'bg-rust-bg text-rust' : 'bg-orange-100 text-orange-700'
                 }`}>{r.daysUntil}d</span>
                 <div className="flex-1 min-w-0">
-                  <p className="text-sm font-medium text-gray-800 truncate">{r.benefitName}</p>
-                  <p className="text-xs text-gray-500">{r.cardName}</p>
+                  <p className="text-sm font-medium text-ink truncate">{r.benefitName}</p>
+                  <p className="text-xs text-ink-soft">{r.cardName}</p>
                 </div>
-                <span className="text-sm font-mono text-emerald-700 font-semibold shrink-0">${r.value}</span>
+                <span className="text-sm font-mono text-forest font-semibold shrink-0">${r.value}</span>
               </button>
             ))}
           </div>
@@ -254,8 +254,8 @@ export default function Dashboard({ data, onNavigate, onStartQuiz }: Props) {
 
       {/* Welcome bonus progress */}
       {welcomeBonusCards.length > 0 && (
-        <div className="bg-white border border-blue-200 rounded-xl p-4">
-          <h3 className="font-semibold text-gray-800 mb-3 flex items-center gap-2"><OptimizeIcon className="w-4 h-4 text-brass" /> Welcome Bonus Progress</h3>
+        <div className="bg-white border border-brass rounded-xl p-4">
+          <h3 className="font-semibold text-ink mb-3 flex items-center gap-2"><OptimizeIcon className="w-4 h-4 text-brass" /> Welcome Bonus Progress</h3>
           <div className="space-y-3">
             {welcomeBonusCards.map(({ uc, template }) => {
               const wb = uc.welcomeBonus!;
@@ -269,15 +269,15 @@ export default function Dashboard({ data, onNavigate, onStartQuiz }: Props) {
               return (
                 <button key={uc.cardId} onClick={() => onNavigate('cards', uc.cardId)} className="w-full text-left">
                   <div className="flex items-center justify-between text-sm mb-1">
-                    <span className="font-medium text-gray-800 truncate flex-1 mr-2">{template!.name}</span>
-                    <span className="text-xs text-gray-500 shrink-0">${wb.spendSoFar.toLocaleString()} / ${spendTarget.toLocaleString()}</span>
+                    <span className="font-medium text-ink truncate flex-1 mr-2">{template!.name}</span>
+                    <span className="text-xs text-ink-soft shrink-0">${wb.spendSoFar.toLocaleString()} / ${spendTarget.toLocaleString()}</span>
                   </div>
-                  <div className="bg-gray-200 rounded-full h-2 mb-1">
-                    <div className={`h-2 rounded-full transition-all ${pct >= 100 ? 'bg-emerald-500' : 'bg-blue-500'}`} style={{ width: `${pct}%` }} />
+                  <div className="bg-line rounded-full h-2 mb-1">
+                    <div className={`h-2 rounded-full transition-all ${pct >= 100 ? 'bg-forest' : 'bg-brass'}`} style={{ width: `${pct}%` }} />
                   </div>
-                  <div className="flex items-center justify-between text-xs text-gray-500">
-                    <span className="text-blue-600 font-medium">{spendTier.label.replace(/\b(\d{4,})\b/g, n => Number(n).toLocaleString())}</span>
-                    <span className={deadlineDays !== null && deadlineDays < 30 ? 'text-red-600 font-medium' : ''}>
+                  <div className="flex items-center justify-between text-xs text-ink-soft">
+                    <span className="text-brass font-medium">{spendTier.label.replace(/\b(\d{4,})\b/g, n => Number(n).toLocaleString())}</span>
+                    <span className={deadlineDays !== null && deadlineDays < 30 ? 'text-rust font-medium' : ''}>
                       {pct < 100 && `$${remaining.toLocaleString()} to go`}
                       {deadlineDays !== null && ` · ${deadlineDays}d left`}
                     </span>
@@ -305,9 +305,9 @@ export default function Dashboard({ data, onNavigate, onStartQuiz }: Props) {
             });
         });
         if (loungeEntries.length === 0) return (
-          <div className="bg-white border border-gray-200 rounded-xl p-4">
-            <h3 className="font-semibold text-gray-800 mb-2 flex items-center gap-2"><LoungeIcon className="w-4 h-4 text-brass" /> Lounge Access</h3>
-            <p className="text-sm text-gray-400">None of your current cards include lounge access.</p>
+          <div className="bg-white border border-line rounded-xl p-4">
+            <h3 className="font-semibold text-ink mb-2 flex items-center gap-2"><LoungeIcon className="w-4 h-4 text-brass" /> Lounge Access</h3>
+            <p className="text-sm text-ink-soft">None of your current cards include lounge access.</p>
           </div>
         );
 
@@ -319,10 +319,10 @@ export default function Dashboard({ data, onNavigate, onStartQuiz }: Props) {
         });
 
         return (
-          <div className="bg-white border border-gray-200 rounded-xl p-4">
-            <h3 className="font-semibold text-gray-800 mb-3 flex items-center gap-2">
+          <div className="bg-white border border-line rounded-xl p-4">
+            <h3 className="font-semibold text-ink mb-3 flex items-center gap-2">
               <LoungeIcon className="w-4 h-4 text-brass" /> Lounge Access
-              <span className="text-xs font-normal text-gray-500">
+              <span className="text-xs font-normal text-ink-soft">
                 {loungeEntries.filter(e => !e.isPaid && (e.remaining === null || e.remaining > 0)).length} active
               </span>
             </h3>
@@ -333,34 +333,34 @@ export default function Dashboard({ data, onNavigate, onStartQuiz }: Props) {
                   <button
                     key={b.id}
                     onClick={() => onNavigate('cards', cardId)}
-                    className={`w-full text-left flex items-start justify-between gap-3 p-3 rounded-lg border transition-colors hover:bg-gray-50 ${
-                      exhausted ? 'border-gray-100 opacity-50' : isPaid ? 'border-amber-100 bg-amber-50/40' : 'border-gray-200'
+                    className={`w-full text-left flex items-start justify-between gap-3 p-3 rounded-lg border transition-colors hover:bg-paper ${
+                      exhausted ? 'border-line opacity-50' : isPaid ? 'border-amber-bg bg-amber-bg/40' : 'border-line'
                     }`}
                   >
                     <div className="flex-1 min-w-0">
-                      <p className="text-sm font-medium text-gray-800 truncate">{b.name}</p>
-                      <p className="text-xs text-gray-500 mt-0.5 truncate">{cardName}</p>
+                      <p className="text-sm font-medium text-ink truncate">{b.name}</p>
+                      <p className="text-xs text-ink-soft mt-0.5 truncate">{cardName}</p>
                       {b.expiryWarning && (
-                        <p className="text-xs text-amber-600 mt-1 leading-snug">{b.expiryWarning}</p>
+                        <p className="text-xs text-amber mt-1 leading-snug">{b.expiryWarning}</p>
                       )}
                       {isPaid && b.note && (
-                        <p className="text-xs text-amber-700 mt-1">{b.note}</p>
+                        <p className="text-xs text-amber mt-1">{b.note}</p>
                       )}
                       {!isPaid && b.note && !b.expiryWarning && (
-                        <p className="text-xs text-gray-400 mt-0.5">{b.note}</p>
+                        <p className="text-xs text-ink-soft mt-0.5">{b.note}</p>
                       )}
                     </div>
                     <div className="shrink-0 text-right">
                       {isPaid ? (
-                        <span className="text-xs font-medium text-amber-700 bg-amber-100 px-2 py-1 rounded-full">Paid</span>
+                        <span className="text-xs font-medium text-amber bg-amber-bg px-2 py-1 rounded-full">Paid</span>
                       ) : total === null ? (
-                        <span className="text-xs font-medium text-emerald-700 bg-emerald-50 px-2 py-1 rounded-full">Unlimited</span>
+                        <span className="text-xs font-medium text-forest bg-forest-bg px-2 py-1 rounded-full">Unlimited</span>
                       ) : exhausted ? (
-                        <span className="text-xs font-medium text-gray-400 bg-gray-100 px-2 py-1 rounded-full">Used up</span>
+                        <span className="text-xs font-medium text-ink-soft bg-line px-2 py-1 rounded-full">Used up</span>
                       ) : (
                         <div className="text-right">
-                          <p className="text-lg font-bold text-emerald-700 font-mono leading-none">{remaining}</p>
-                          <p className="text-xs text-gray-400 mt-0.5">{used}/{total} used</p>
+                          <p className="text-lg font-bold text-forest font-mono leading-none">{remaining}</p>
+                          <p className="text-xs text-ink-soft mt-0.5">{used}/{total} used</p>
                         </div>
                       )}
                     </div>
@@ -374,19 +374,19 @@ export default function Dashboard({ data, onNavigate, onStartQuiz }: Props) {
 
       {/* Upcoming renewals */}
       {upcomingRenewals.length > 0 && (
-        <div className="bg-white border border-gray-200 rounded-xl p-4">
-          <h3 className="font-semibold text-gray-800 mb-3">Upcoming Renewals</h3>
+        <div className="bg-white border border-line rounded-xl p-4">
+          <h3 className="font-semibold text-ink mb-3">Upcoming Renewals</h3>
           <div className="space-y-2">
             {upcomingRenewals.map(({ uc, template, days }) => (
               <button
                 key={uc.cardId}
                 onClick={() => onNavigate('cards', uc.cardId)}
                 className={`w-full text-left flex items-center justify-between p-3 rounded-lg border ${
-                  days < 30 ? 'border-red-200 bg-red-50' : days < 60 ? 'border-amber-200 bg-amber-50' : 'border-gray-200 bg-gray-50'
+                  days < 30 ? 'border-rust bg-rust-bg' : days < 60 ? 'border-amber bg-amber-bg' : 'border-line bg-paper'
                 }`}
               >
-                <span className="text-sm font-medium text-gray-800">{template?.name}</span>
-                <span className={`text-sm font-mono font-bold ${days < 30 ? 'text-red-700' : days < 60 ? 'text-amber-700' : 'text-green-700'}`}>{days}d</span>
+                <span className="text-sm font-medium text-ink">{template?.name}</span>
+                <span className={`text-sm font-mono font-bold ${days < 30 ? 'text-rust' : days < 60 ? 'text-amber' : 'text-forest'}`}>{days}d</span>
               </button>
             ))}
           </div>
@@ -395,8 +395,8 @@ export default function Dashboard({ data, onNavigate, onStartQuiz }: Props) {
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         {/* Fee recovery */}
-        <div className="bg-white border border-gray-200 rounded-xl p-4">
-          <h3 className="font-semibold text-gray-800 mb-3">Fee Recovery by Card</h3>
+        <div className="bg-white border border-line rounded-xl p-4">
+          <h3 className="font-semibold text-ink mb-3">Fee Recovery by Card</h3>
           <div className="space-y-3">
             {activeCards.map(uc => {
               const t = getCardById(uc.cardId);
@@ -410,11 +410,11 @@ export default function Dashboard({ data, onNavigate, onStartQuiz }: Props) {
               return (
                 <div key={uc.cardId}>
                   <div className="flex items-center justify-between text-sm mb-1">
-                    <span className="text-gray-700 truncate flex-1 mr-2">{t.name}</span>
-                    <span className={`font-mono font-semibold shrink-0 ${pct >= 100 ? 'text-emerald-600' : pct >= 50 ? 'text-amber-600' : 'text-red-600'}`}>{pct}%</span>
+                    <span className="text-ink truncate flex-1 mr-2">{t.name}</span>
+                    <span className={`font-mono font-semibold shrink-0 ${pct >= 100 ? 'text-forest' : pct >= 50 ? 'text-amber' : 'text-rust'}`}>{pct}%</span>
                   </div>
-                  <div className="bg-gray-200 rounded-full h-1.5">
-                    <div className={`h-1.5 rounded-full ${pct >= 100 ? 'bg-emerald-500' : pct >= 50 ? 'bg-amber-500' : 'bg-red-500'}`}
+                  <div className="bg-line rounded-full h-1.5">
+                    <div className={`h-1.5 rounded-full ${pct >= 100 ? 'bg-forest' : pct >= 50 ? 'bg-amber' : 'bg-rust'}`}
                       style={{ width: `${Math.min(100, pct)}%` }} />
                   </div>
                 </div>
@@ -424,10 +424,10 @@ export default function Dashboard({ data, onNavigate, onStartQuiz }: Props) {
         </div>
 
         {/* Points summary */}
-        <div className="bg-white border border-gray-200 rounded-xl p-4">
-          <h3 className="font-semibold text-gray-800 mb-3">Points Summary</h3>
+        <div className="bg-white border border-line rounded-xl p-4">
+          <h3 className="font-semibold text-ink mb-3">Points Summary</h3>
           {data.pointsBalances.length === 0 ? (
-            <button onClick={() => onNavigate('points')} className="w-full text-center text-sm text-blue-600 hover:text-blue-800 py-4">
+            <button onClick={() => onNavigate('points')} className="w-full text-center text-sm text-brass hover:text-brass py-4">
               + Add loyalty programs →
             </button>
           ) : (
@@ -438,14 +438,14 @@ export default function Dashboard({ data, onNavigate, onStartQuiz }: Props) {
                 const value = (pb.balance * cpp) / 100;
                 return (
                   <div key={pb.programId} className="flex items-center justify-between text-sm">
-                    <span className="text-gray-700 truncate flex-1 mr-2">{prog?.name}</span>
-                    <span className="font-mono text-gray-500 mr-2">{pb.balance.toLocaleString()}</span>
-                    <span className="font-mono text-emerald-600 font-semibold shrink-0">${value.toFixed(0)}</span>
+                    <span className="text-ink truncate flex-1 mr-2">{prog?.name}</span>
+                    <span className="font-mono text-ink-soft mr-2">{pb.balance.toLocaleString()}</span>
+                    <span className="font-mono text-forest font-semibold shrink-0">${value.toFixed(0)}</span>
                   </div>
                 );
               })}
               {data.pointsBalances.length > 5 && (
-                <button onClick={() => onNavigate('points')} className="text-xs text-blue-600 hover:text-blue-800">
+                <button onClick={() => onNavigate('points')} className="text-xs text-brass hover:text-brass">
                   +{data.pointsBalances.length - 5} more →
                 </button>
               )}
@@ -456,12 +456,12 @@ export default function Dashboard({ data, onNavigate, onStartQuiz }: Props) {
 
       {/* Expiry warnings */}
       {data.cards.some(uc => { const t = getCardById(uc.cardId); return t?.benefits.some(b => b.expiryWarning); }) && (
-        <div className="bg-red-50 border border-red-200 rounded-xl p-4">
-          <p className="font-semibold text-red-800 text-sm flex items-center gap-1.5"><AlertIcon className="w-3.5 h-3.5" /> Upcoming Changes</p>
+        <div className="bg-rust-bg border border-rust rounded-xl p-4">
+          <p className="font-semibold text-rust text-sm flex items-center gap-1.5"><AlertIcon className="w-3.5 h-3.5" /> Upcoming Changes</p>
           {data.cards.flatMap(uc => {
             const t = getCardById(uc.cardId);
             return (t?.benefits.filter(b => b.expiryWarning) ?? []).map(b => (
-              <p key={b.id} className="text-xs text-red-700 mt-1">
+              <p key={b.id} className="text-xs text-rust mt-1">
                 <strong>{t?.name}</strong>: {b.expiryWarning}
               </p>
             ));

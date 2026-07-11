@@ -37,12 +37,12 @@ export default function BonusChecker({ card, data, update }: Props) {
   }
 
   return (
-    <div className="bg-white border border-gray-200 rounded-xl p-4">
+    <div className="bg-white border border-line rounded-xl p-4">
       <div className="flex items-center justify-between">
         <div>
-          <p className="font-medium text-gray-800 text-sm">Current Welcome Bonus</p>
+          <p className="font-medium text-ink text-sm">Current Welcome Bonus</p>
           {cached && (
-            <p className="text-xs text-gray-500">
+            <p className="text-xs text-ink-soft">
               Last checked: {new Date(cached.checkedAt).toLocaleDateString('en-CA')}
             </p>
           )}
@@ -50,30 +50,30 @@ export default function BonusChecker({ card, data, update }: Props) {
         <button
           onClick={checkBonus}
           disabled={checking}
-          className="bg-slate-800 text-white px-3 py-1.5 rounded-lg text-xs font-medium hover:bg-slate-700 disabled:opacity-50 transition-colors"
+          className="bg-ink text-white px-3 py-1.5 rounded-lg text-xs font-medium hover:bg-ink disabled:opacity-50 transition-colors"
         >
           {checking ? 'Checking...' : cached ? 'Refresh' : 'Check Now'}
         </button>
       </div>
 
       {error && (
-        <p className="mt-3 text-sm text-red-600">{error}</p>
+        <p className="mt-3 text-sm text-rust">{error}</p>
       )}
 
       {result && (
         <div className="mt-3 space-y-2">
-          <p className="text-sm font-semibold text-gray-900">{result.bonus_summary}</p>
-          <div className="grid grid-cols-2 gap-2 text-xs text-gray-600">
+          <p className="text-sm font-semibold text-ink">{result.bonus_summary}</p>
+          <div className="grid grid-cols-2 gap-2 text-xs text-ink-soft">
             <div>
-              <span className="text-gray-400">Spend req: </span>
+              <span className="text-ink-soft">Spend req: </span>
               {result.spend_requirement}
             </div>
             <div>
-              <span className="text-gray-400">Timeframe: </span>
+              <span className="text-ink-soft">Timeframe: </span>
               {result.timeframe}
             </div>
             {result.expiry_date && (
-              <div className="col-span-2 text-amber-600">
+              <div className="col-span-2 text-amber">
                 Expires: {result.expiry_date}
               </div>
             )}
@@ -83,7 +83,7 @@ export default function BonusChecker({ card, data, update }: Props) {
               href={result.source_url}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-xs text-blue-600 hover:text-blue-800 underline"
+              className="text-xs text-brass hover:text-brass underline"
             >
               Source →
             </a>
@@ -92,7 +92,7 @@ export default function BonusChecker({ card, data, update }: Props) {
       )}
 
       {!cached && !checking && !error && (
-        <p className="mt-2 text-xs text-gray-400">
+        <p className="mt-2 text-xs text-ink-soft">
           Uses Claude AI + web search. Results cached for 7 days.
         </p>
       )}

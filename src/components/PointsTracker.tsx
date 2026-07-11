@@ -11,10 +11,10 @@ interface Props {
 }
 
 const PROGRAM_COLORS: Record<string, string> = {
-  airline: 'bg-blue-100 text-blue-800',
+  airline: 'bg-brass-soft text-brass',
   hotel: 'bg-purple-100 text-purple-800',
-  transferable: 'bg-amber-100 text-amber-800',
-  bank: 'bg-gray-100 text-gray-700',
+  transferable: 'bg-amber-bg text-amber',
+  bank: 'bg-line text-ink',
 };
 
 function cppRatingDot(cpp: number, defaultCpp: number, excellentCpp?: number): string {
@@ -110,12 +110,12 @@ export default function PointsTracker({ data, update, onViewTransfers, onEvaluat
 
   return (
     <div className="space-y-6">
-      <div className="bg-slate-800 rounded-2xl p-6 text-white">
-        <p className="text-slate-400 text-sm">Total Portfolio Value (est.)</p>
+      <div className="bg-ink rounded-2xl p-6 text-white">
+        <p className="text-ink-soft text-sm">Total Portfolio Value (est.)</p>
         <p className="text-4xl font-mono font-bold mt-1">
           ${totalValue.toLocaleString('en-CA', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} CAD
         </p>
-        <p className="text-slate-400 text-xs mt-2">
+        <p className="text-ink-soft text-xs mt-2">
           Based on default cpp valuations. Adjust per-program below.
         </p>
         <button
@@ -127,7 +127,7 @@ export default function PointsTracker({ data, update, onViewTransfers, onEvaluat
       </div>
 
       {trackedPrograms.length === 0 && (
-        <div className="text-center py-12 text-gray-500">
+        <div className="text-center py-12 text-ink-soft">
           <p className="text-lg">No programs tracked yet.</p>
           <p className="text-sm mt-1">Add your first loyalty program below.</p>
         </div>
@@ -143,23 +143,23 @@ export default function PointsTracker({ data, update, onViewTransfers, onEvaluat
           const dot = hasRating ? cppRatingDot(cpp, program.defaultCpp, program.excellentCpp) : null;
 
           return (
-            <div key={program.id} className="bg-white border border-gray-200 rounded-xl p-4">
+            <div key={program.id} className="bg-white border border-line rounded-xl p-4">
               <div className="flex items-start justify-between gap-4">
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2 flex-wrap">
-                    <span className="font-semibold text-gray-900 truncate">{program.name}</span>
+                    <span className="font-semibold text-ink truncate">{program.name}</span>
                     <span className={`text-xs px-2 py-0.5 rounded-full font-medium ${PROGRAM_COLORS[program.type]}`}>
                       {program.type}
                     </span>
                     {program.alliance && (
-                      <span className="text-xs text-gray-500 capitalize">{program.alliance}</span>
+                      <span className="text-xs text-ink-soft capitalize">{program.alliance}</span>
                     )}
                   </div>
                   {program.note && (
-                    <p className="text-xs text-gray-500 mt-0.5">{program.note}</p>
+                    <p className="text-xs text-ink-soft mt-0.5">{program.note}</p>
                   )}
                   {bal && (
-                    <p className="text-xs text-gray-400 mt-1">
+                    <p className="text-xs text-ink-soft mt-1">
                       Updated {new Date(bal.lastUpdated).toLocaleDateString('en-CA')}
                     </p>
                   )}
@@ -177,33 +177,33 @@ export default function PointsTracker({ data, update, onViewTransfers, onEvaluat
                       onClick={() => setEditingId(program.id)}
                       className={`text-right transition-colors ${
                         (bal?.balance ?? 0) === 0
-                          ? 'text-xs text-blue-500 hover:text-blue-700 border border-dashed border-blue-300 rounded-lg px-2 py-1'
-                          : 'font-mono text-xl font-bold text-gray-900 hover:text-blue-600'
+                          ? 'text-xs text-brass hover:text-brass border border-dashed border-brass rounded-lg px-2 py-1'
+                          : 'font-mono text-xl font-bold text-ink hover:text-brass'
                       }`}
                       title="Click to edit"
                     >
                       {(bal?.balance ?? 0) === 0 ? '+ Enter points' : (bal!.balance).toLocaleString('en-CA')}
                     </button>
                   )}
-                  <p className="font-mono text-sm text-emerald-600 font-semibold">
+                  <p className="font-mono text-sm text-forest font-semibold">
                     ≈ ${value.toLocaleString('en-CA', { minimumFractionDigits: 0, maximumFractionDigits: 0 })} CAD
                   </p>
 
                   <div className="flex items-center gap-1.5">
                     {dot && <span title={`Benchmark: ${program.defaultCpp}¢${program.excellentCpp ? ` · Excellent: ${program.excellentCpp}¢` : ''}`}>{dot}</span>}
-                    <span className="text-xs text-gray-500">cpp:</span>
+                    <span className="text-xs text-ink-soft">cpp:</span>
                     <input
                       type="number"
                       step="0.1"
                       min="0"
                       value={cpp}
                       onChange={e => updateCpp(program.id, parseFloat(e.target.value) || 0)}
-                      className="w-16 font-mono text-xs border border-gray-300 rounded px-1.5 py-0.5 text-right"
+                      className="w-16 font-mono text-xs border border-line rounded px-1.5 py-0.5 text-right"
                     />
-                    <span className="text-xs text-gray-500">¢</span>
+                    <span className="text-xs text-ink-soft">¢</span>
                   </div>
                   {hasRating && (
-                    <p className="text-xs text-gray-400 text-right">
+                    <p className="text-xs text-ink-soft text-right">
                       benchmark {program.defaultCpp}¢
                       {program.excellentCpp ? ` · excellent ${program.excellentCpp}¢` : ''}
                     </p>
@@ -211,11 +211,11 @@ export default function PointsTracker({ data, update, onViewTransfers, onEvaluat
                 </div>
               </div>
 
-              <div className="flex items-center gap-3 mt-3 pt-3 border-t border-gray-100">
+              <div className="flex items-center gap-3 mt-3 pt-3 border-t border-line">
                 {program.isTransferable && (
                   <button
                     onClick={() => onViewTransfers(program.id)}
-                    className="text-xs text-blue-600 hover:text-blue-800 font-medium"
+                    className="text-xs text-brass hover:text-brass font-medium"
                   >
                     Transfer Partners →
                   </button>
@@ -230,7 +230,7 @@ export default function PointsTracker({ data, update, onViewTransfers, onEvaluat
                 )}
                 <button
                   onClick={() => removeProgram(program.id)}
-                  className="text-xs text-red-400 hover:text-red-600 ml-auto"
+                  className="text-xs text-rust hover:text-rust ml-auto"
                 >
                   Remove
                 </button>
@@ -241,13 +241,13 @@ export default function PointsTracker({ data, update, onViewTransfers, onEvaluat
       </div>
 
       {addingProgram ? (
-        <div className="bg-white border border-gray-200 rounded-xl p-4">
+        <div className="bg-white border border-line rounded-xl p-4">
           {selectedForAdd ? (() => {
             const prog = POINTS_PROGRAMS.find(p => p.id === selectedForAdd)!;
             return (
               <div>
-                <p className="font-medium text-gray-700 mb-3">
-                  Adding <span className="text-gray-900">{prog.name}</span>
+                <p className="font-medium text-ink mb-3">
+                  Adding <span className="text-ink">{prog.name}</span>
                 </p>
                 <div className="flex items-center gap-2">
                   <input
@@ -261,17 +261,17 @@ export default function PointsTracker({ data, update, onViewTransfers, onEvaluat
                       if (e.key === 'Escape') setSelectedForAdd(null);
                     }}
                     placeholder="Starting balance (0)"
-                    className="flex-1 border border-gray-300 rounded-lg px-3 py-2 text-sm font-mono"
+                    className="flex-1 border border-line rounded-lg px-3 py-2 text-sm font-mono"
                   />
                   <button
                     onClick={() => addProgram(selectedForAdd, parseInt(addBalance) || 0)}
-                    className="bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-blue-700 transition-colors"
+                    className="bg-brass text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-brass transition-colors"
                   >
                     Add
                   </button>
                   <button
                     onClick={() => setSelectedForAdd(null)}
-                    className="text-sm text-gray-500 hover:text-gray-700 px-3 py-2"
+                    className="text-sm text-ink-soft hover:text-ink px-3 py-2"
                   >
                     Back
                   </button>
@@ -280,13 +280,13 @@ export default function PointsTracker({ data, update, onViewTransfers, onEvaluat
             );
           })() : (
             <div>
-              <p className="font-medium text-gray-700 mb-3">Add Program</p>
+              <p className="font-medium text-ink mb-3">Add Program</p>
               <input
                 type="text"
                 value={programSearch}
                 onChange={e => setProgramSearch(e.target.value)}
                 placeholder="Search programs..."
-                className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm mb-3"
+                className="w-full border border-line rounded-lg px-3 py-2 text-sm mb-3"
                 autoFocus
               />
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 max-h-64 overflow-y-auto">
@@ -296,9 +296,9 @@ export default function PointsTracker({ data, update, onViewTransfers, onEvaluat
                     <button
                       key={p.id}
                       onClick={() => { setSelectedForAdd(p.id); setAddBalance(''); }}
-                      className="text-left px-3 py-2 rounded-lg border border-gray-200 hover:border-blue-400 hover:bg-blue-50 text-sm transition-colors"
+                      className="text-left px-3 py-2 rounded-lg border border-line hover:border-brass hover:bg-brass-soft text-sm transition-colors"
                     >
-                      <span className="font-medium text-gray-800">{p.name}</span>
+                      <span className="font-medium text-ink">{p.name}</span>
                       <span className={`ml-2 text-xs px-1.5 py-0.5 rounded-full ${PROGRAM_COLORS[p.type]}`}>
                         {p.type}
                       </span>
@@ -307,7 +307,7 @@ export default function PointsTracker({ data, update, onViewTransfers, onEvaluat
               </div>
               <button
                 onClick={cancelAdd}
-                className="mt-3 text-sm text-gray-500 hover:text-gray-700"
+                className="mt-3 text-sm text-ink-soft hover:text-ink"
               >
                 Cancel
               </button>
@@ -318,7 +318,7 @@ export default function PointsTracker({ data, update, onViewTransfers, onEvaluat
         untrackedPrograms.length > 0 && (
           <button
             onClick={() => setAddingProgram(true)}
-            className="w-full py-3 border-2 border-dashed border-gray-300 rounded-xl text-gray-500 hover:border-blue-400 hover:text-blue-600 transition-colors text-sm font-medium"
+            className="w-full py-3 border-2 border-dashed border-line rounded-xl text-ink-soft hover:border-brass hover:text-brass transition-colors text-sm font-medium"
           >
             + Add Loyalty Program
           </button>
@@ -351,11 +351,11 @@ function BalanceEditor({
           if (e.key === 'Escape') onCancel();
         }}
         autoFocus
-        className="w-28 font-mono text-sm border border-blue-400 rounded px-2 py-1 text-right"
+        className="w-28 font-mono text-sm border border-brass rounded px-2 py-1 text-right"
       />
       <button
         onClick={() => onSave(parseInt(value) || 0)}
-        className="text-xs bg-blue-600 text-white px-2 py-1 rounded hover:bg-blue-700"
+        className="text-xs bg-brass text-white px-2 py-1 rounded hover:bg-brass"
       >
         Save
       </button>

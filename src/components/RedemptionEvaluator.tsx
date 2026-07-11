@@ -52,18 +52,18 @@ export default function RedemptionEvaluator({ onBack, initialProgramId }: Props)
     if (selected.excellentCpp && cpp >= selected.excellentCpp) {
       rating = 'excellent';
       ratingLabel = '🟢 EXCELLENT';
-      ratingColor = 'text-emerald-700';
-      ratingBg = 'bg-emerald-50 border-emerald-200';
+      ratingColor = 'text-forest';
+      ratingBg = 'bg-forest-bg border-forest';
     } else if (cpp > selected.defaultCpp) {
       rating = 'good';
       ratingLabel = '🟡 GOOD';
-      ratingColor = 'text-amber-700';
-      ratingBg = 'bg-amber-50 border-amber-200';
+      ratingColor = 'text-amber';
+      ratingBg = 'bg-amber-bg border-amber';
     } else {
       rating = 'poor';
       ratingLabel = '🔴 POOR';
-      ratingColor = 'text-red-700';
-      ratingBg = 'bg-red-50 border-red-200';
+      ratingColor = 'text-rust';
+      ratingBg = 'bg-rust-bg border-rust';
     }
   }
 
@@ -97,14 +97,14 @@ export default function RedemptionEvaluator({ onBack, initialProgramId }: Props)
   return (
     <div className="space-y-0">
       {onBack && (
-        <button onClick={onBack} className="text-sm text-gray-500 hover:text-gray-700 mb-4 flex items-center gap-1">
+        <button onClick={onBack} className="text-sm text-ink-soft hover:text-ink mb-4 flex items-center gap-1">
           ← Back to Points
         </button>
       )}
 
-      <div className="bg-slate-800 rounded-2xl p-6 text-white mb-4">
+      <div className="bg-ink rounded-2xl p-6 text-white mb-4">
         <h2 className="text-lg font-semibold">Redemption Evaluator</h2>
-        <p className="text-slate-400 text-sm mt-1">
+        <p className="text-ink-soft text-sm mt-1">
           Compare using points vs paying cash — taxes included.
         </p>
       </div>
@@ -115,8 +115,8 @@ export default function RedemptionEvaluator({ onBack, initialProgramId }: Props)
           onClick={() => switchTab('airline')}
           className={`flex-1 py-2.5 rounded-xl text-sm font-semibold border transition-colors ${
             tab === 'airline'
-              ? 'bg-slate-800 text-white border-slate-800'
-              : 'border-gray-300 text-gray-600 hover:border-gray-400'
+              ? 'bg-ink text-white border-ink'
+              : 'border-line text-ink-soft hover:border-ink-soft'
           }`}
         >
           ✈️ Airline
@@ -125,8 +125,8 @@ export default function RedemptionEvaluator({ onBack, initialProgramId }: Props)
           onClick={() => switchTab('hotel')}
           className={`flex-1 py-2.5 rounded-xl text-sm font-semibold border transition-colors ${
             tab === 'hotel'
-              ? 'bg-slate-800 text-white border-slate-800'
-              : 'border-gray-300 text-gray-600 hover:border-gray-400'
+              ? 'bg-ink text-white border-ink'
+              : 'border-line text-ink-soft hover:border-ink-soft'
           }`}
         >
           🏨 Hotel
@@ -134,15 +134,15 @@ export default function RedemptionEvaluator({ onBack, initialProgramId }: Props)
       </div>
 
       {/* Inputs */}
-      <div className="bg-white border border-gray-200 rounded-xl p-4 space-y-4">
+      <div className="bg-white border border-line rounded-xl p-4 space-y-4">
         <div>
-          <label className="text-xs font-medium text-gray-600 uppercase tracking-wide">
+          <label className="text-xs font-medium text-ink-soft uppercase tracking-wide">
             {tab === 'airline' ? 'Airline / Program' : 'Hotel Program'}
           </label>
           <select
             value={programId}
             onChange={e => setProgramId(e.target.value)}
-            className="w-full mt-1.5 border border-gray-300 rounded-lg px-3 py-2.5 text-sm bg-white"
+            className="w-full mt-1.5 border border-line rounded-lg px-3 py-2.5 text-sm bg-white"
           >
             <option value="">Select a program…</option>
             {programs.map(p => (
@@ -153,10 +153,10 @@ export default function RedemptionEvaluator({ onBack, initialProgramId }: Props)
             ))}
           </select>
           {selected?.note && (
-            <p className="text-xs text-blue-600 mt-1">{selected.note}</p>
+            <p className="text-xs text-brass mt-1">{selected.note}</p>
           )}
           {selected?.sweetSpots && (
-            <p className="text-xs text-amber-700 bg-amber-50 rounded-lg px-2.5 py-1.5 mt-1.5">
+            <p className="text-xs text-amber bg-amber-bg rounded-lg px-2.5 py-1.5 mt-1.5">
               💡 {selected.sweetSpots}
             </p>
           )}
@@ -165,11 +165,11 @@ export default function RedemptionEvaluator({ onBack, initialProgramId }: Props)
         {/* Cash price + points */}
         <div className="grid grid-cols-2 gap-3">
           <div>
-            <label className="text-xs font-medium text-gray-600 uppercase tracking-wide">
+            <label className="text-xs font-medium text-ink-soft uppercase tracking-wide">
               {tab === 'airline' ? 'Full Cash Price (CAD)' : 'Full Cash Price (CAD)'}
             </label>
             <div className="relative mt-1.5">
-              <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-sm">$</span>
+              <span className="absolute left-3 top-1/2 -translate-y-1/2 text-ink-soft text-sm">$</span>
               <input
                 type="number"
                 min="0"
@@ -177,31 +177,31 @@ export default function RedemptionEvaluator({ onBack, initialProgramId }: Props)
                 placeholder="e.g. 850.00"
                 value={cashPrice}
                 onChange={e => setCashPrice(e.target.value)}
-                className="w-full border border-gray-300 rounded-lg pl-7 pr-3 py-2.5 text-sm font-mono"
+                className="w-full border border-line rounded-lg pl-7 pr-3 py-2.5 text-sm font-mono"
               />
             </div>
           </div>
           <div>
-            <label className="text-xs font-medium text-gray-600 uppercase tracking-wide">Points Required</label>
+            <label className="text-xs font-medium text-ink-soft uppercase tracking-wide">Points Required</label>
             <input
               type="number"
               min="0"
               placeholder="e.g. 55000"
               value={points}
               onChange={e => setPoints(e.target.value)}
-              className="w-full mt-1.5 border border-gray-300 rounded-lg px-3 py-2.5 text-sm font-mono"
+              className="w-full mt-1.5 border border-line rounded-lg px-3 py-2.5 text-sm font-mono"
             />
           </div>
         </div>
 
         {/* Taxes field */}
         <div>
-          <label className="text-xs font-medium text-gray-600 uppercase tracking-wide">
+          <label className="text-xs font-medium text-ink-soft uppercase tracking-wide">
             Taxes &amp; Fees Out of Pocket (CAD)
-            <span className="ml-1 font-normal text-gray-400 normal-case">(optional)</span>
+            <span className="ml-1 font-normal text-ink-soft normal-case">(optional)</span>
           </label>
           <div className="relative mt-1.5">
-            <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-sm">$</span>
+            <span className="absolute left-3 top-1/2 -translate-y-1/2 text-ink-soft text-sm">$</span>
             <input
               type="number"
               min="0"
@@ -209,19 +209,19 @@ export default function RedemptionEvaluator({ onBack, initialProgramId }: Props)
               placeholder="e.g. 120.00"
               value={taxes}
               onChange={e => setTaxes(e.target.value)}
-              className="w-full border border-gray-300 rounded-lg pl-7 pr-3 py-2.5 text-sm font-mono"
+              className="w-full border border-line rounded-lg pl-7 pr-3 py-2.5 text-sm font-mono"
             />
           </div>
-          <p className="text-xs text-gray-400 mt-1">
+          <p className="text-xs text-ink-soft mt-1">
             Carrier-imposed fees, airport taxes, surcharges you must pay even when redeeming points.
           </p>
         </div>
 
         {selected && (
-          <div className="flex items-center gap-4 text-xs text-gray-500 pt-1 border-t border-gray-100">
-            <span>Benchmark: <strong className="text-gray-700">{selected.defaultCpp}¢/pt</strong></span>
+          <div className="flex items-center gap-4 text-xs text-ink-soft pt-1 border-t border-line">
+            <span>Benchmark: <strong className="text-ink">{selected.defaultCpp}¢/pt</strong></span>
             {selected.excellentCpp && (
-              <span>Excellent: <strong className="text-emerald-700">{selected.excellentCpp}¢/pt</strong></span>
+              <span>Excellent: <strong className="text-forest">{selected.excellentCpp}¢/pt</strong></span>
             )}
           </div>
         )}
@@ -229,47 +229,47 @@ export default function RedemptionEvaluator({ onBack, initialProgramId }: Props)
 
       {/* Cash vs Points comparison */}
       {cash > 0 && pts > 0 && (
-        <div className="mt-4 bg-white border border-gray-200 rounded-xl overflow-hidden">
-          <div className="px-4 py-3 bg-gray-50 border-b border-gray-200">
-            <p className="text-xs font-semibold text-gray-500 uppercase tracking-wide">Cash vs Points Comparison</p>
+        <div className="mt-4 bg-white border border-line rounded-xl overflow-hidden">
+          <div className="px-4 py-3 bg-paper border-b border-line">
+            <p className="text-xs font-semibold text-ink-soft uppercase tracking-wide">Cash vs Points Comparison</p>
           </div>
-          <div className="divide-y divide-gray-100">
+          <div className="divide-y divide-line">
             {/* Option A: Pay cash */}
             <div className="flex items-center justify-between px-4 py-3">
               <div>
-                <p className="text-sm font-semibold text-gray-800">Option A — Pay cash</p>
-                <p className="text-xs text-gray-500 mt-0.5">No points used, full price</p>
+                <p className="text-sm font-semibold text-ink">Option A — Pay cash</p>
+                <p className="text-xs text-ink-soft mt-0.5">No points used, full price</p>
               </div>
-              <p className="font-mono font-bold text-lg text-gray-900">${cash.toFixed(2)}</p>
+              <p className="font-mono font-bold text-lg text-ink">${cash.toFixed(2)}</p>
             </div>
             {/* Option B: Use points */}
             <div className="flex items-center justify-between px-4 py-3">
               <div>
-                <p className="text-sm font-semibold text-gray-800">Option B — Use points</p>
-                <p className="text-xs text-gray-500 mt-0.5">
+                <p className="text-sm font-semibold text-ink">Option B — Use points</p>
+                <p className="text-xs text-ink-soft mt-0.5">
                   {pts.toLocaleString()} pts
                   {hasTaxes ? ` + $${taxAmt.toFixed(2)} taxes/fees` : ' (no taxes entered)'}
                 </p>
               </div>
               <div className="text-right">
-                <p className="font-mono font-bold text-lg text-gray-900">
+                <p className="font-mono font-bold text-lg text-ink">
                   {hasTaxes ? `$${taxAmt.toFixed(2)}` : '$0'}
                 </p>
-                <p className="text-xs text-gray-400">out of pocket</p>
+                <p className="text-xs text-ink-soft">out of pocket</p>
               </div>
             </div>
             {/* Benchmark verdict */}
             {cashVsBenchmark !== null && (
-              <div className={`flex items-center justify-between px-4 py-3 ${cashVsBenchmark >= 0 ? 'bg-emerald-50' : 'bg-red-50'}`}>
+              <div className={`flex items-center justify-between px-4 py-3 ${cashVsBenchmark >= 0 ? 'bg-forest-bg' : 'bg-rust-bg'}`}>
                 <div>
-                  <p className="text-sm font-semibold text-gray-800">
+                  <p className="text-sm font-semibold text-ink">
                     {cashVsBenchmark >= 0 ? 'Extra value vs. best redemption' : 'Value lost vs. best redemption'}
                   </p>
-                  <p className="text-xs text-gray-500 mt-0.5">
+                  <p className="text-xs text-ink-soft mt-0.5">
                     {pts.toLocaleString()} pts at {selected?.defaultCpp}¢ benchmark = ${((pts * (selected?.defaultCpp ?? 0)) / 100).toFixed(0)}
                   </p>
                 </div>
-                <p className={`font-mono font-bold text-lg ${cashVsBenchmark >= 0 ? 'text-emerald-700' : 'text-red-700'}`}>
+                <p className={`font-mono font-bold text-lg ${cashVsBenchmark >= 0 ? 'text-forest' : 'text-rust'}`}>
                   {cashVsBenchmark >= 0 ? '+' : ''}${cashVsBenchmark.toFixed(0)}
                 </p>
               </div>
@@ -291,38 +291,38 @@ export default function RedemptionEvaluator({ onBack, initialProgramId }: Props)
             <p className={`text-lg font-bold ${ratingColor}`}>{ratingLabel}</p>
           </div>
           {hasTaxes && (
-            <p className="text-xs text-gray-500 mt-1">effective CPP after taxes</p>
+            <p className="text-xs text-ink-soft mt-1">effective CPP after taxes</p>
           )}
         </div>
       )}
 
       {/* Rating guide */}
-      <div className="bg-white border border-gray-200 rounded-xl p-4 mt-4">
-        <p className="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-3">Rating Guide</p>
+      <div className="bg-white border border-line rounded-xl p-4 mt-4">
+        <p className="text-xs font-semibold text-ink-soft uppercase tracking-wide mb-3">Rating Guide</p>
         <div className="space-y-2 text-sm">
           <div className="flex items-start gap-3">
             <span className="text-base leading-none mt-0.5">🟢</span>
             <div>
-              <span className="font-semibold text-emerald-700">EXCELLENT</span>
-              <span className="text-gray-500"> — ≥ excellent threshold · Outstanding value, book it!</span>
+              <span className="font-semibold text-forest">EXCELLENT</span>
+              <span className="text-ink-soft"> — ≥ excellent threshold · Outstanding value, book it!</span>
             </div>
           </div>
           <div className="flex items-start gap-3">
             <span className="text-base leading-none mt-0.5">🟡</span>
             <div>
-              <span className="font-semibold text-amber-700">GOOD</span>
-              <span className="text-gray-500"> — Above benchmark CPP · Solid redemption, go for it</span>
+              <span className="font-semibold text-amber">GOOD</span>
+              <span className="text-ink-soft"> — Above benchmark CPP · Solid redemption, go for it</span>
             </div>
           </div>
           <div className="flex items-start gap-3">
             <span className="text-base leading-none mt-0.5">🔴</span>
             <div>
-              <span className="font-semibold text-red-700">POOR</span>
-              <span className="text-gray-500"> — At or below benchmark · Consider paying cash instead</span>
+              <span className="font-semibold text-rust">POOR</span>
+              <span className="text-ink-soft"> — At or below benchmark · Consider paying cash instead</span>
             </div>
           </div>
         </div>
-        <p className="text-xs text-gray-400 mt-3 pt-3 border-t border-gray-100">
+        <p className="text-xs text-ink-soft mt-3 pt-3 border-t border-line">
           CPP is calculated on net savings (cash price minus taxes). Benchmarks from Prince of Travel, RewardExpert & points community data (2024–25).
         </p>
       </div>

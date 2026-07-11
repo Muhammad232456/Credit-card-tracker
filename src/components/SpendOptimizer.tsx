@@ -19,13 +19,13 @@ const DEFAULT_SPEND: MonthlySpendProfile = {
 };
 
 const ISSUER_COLORS: Record<string, string> = {
-  Amex: 'bg-blue-900', TD: 'bg-green-700', CIBC: 'bg-red-700', RBC: 'bg-blue-700',
-  Scotiabank: 'bg-red-600', BMO: 'bg-blue-600', 'National Bank': 'bg-red-800',
-  HSBC: 'bg-red-900', Neo: 'bg-purple-700', MBNA: 'bg-gray-700',
-  'Canadian Tire': 'bg-red-500', 'PC Financial': 'bg-orange-600', Rogers: 'bg-red-600',
-  Tangerine: 'bg-orange-500', Brim: 'bg-indigo-600', Desjardins: 'bg-green-800',
-  'Home Trust': 'bg-teal-700', Meridian: 'bg-cyan-700', 'Capital One': 'bg-red-700',
-  Walmart: 'bg-blue-800', Simplii: 'bg-pink-700', ATB: 'bg-amber-700',
+  Amex: 'bg-brass', TD: 'bg-forest', CIBC: 'bg-rust', RBC: 'bg-brass',
+  Scotiabank: 'bg-rust', BMO: 'bg-brass', 'National Bank': 'bg-rust',
+  HSBC: 'bg-rust', Neo: 'bg-purple-700', MBNA: 'bg-ink',
+  'Canadian Tire': 'bg-rust', 'PC Financial': 'bg-orange-600', Rogers: 'bg-rust',
+  Tangerine: 'bg-orange-500', Brim: 'bg-indigo-600', Desjardins: 'bg-forest',
+  'Home Trust': 'bg-teal-700', Meridian: 'bg-cyan-700', 'Capital One': 'bg-rust',
+  Walmart: 'bg-brass', Simplii: 'bg-pink-700', ATB: 'bg-amber',
 };
 
 interface BestOption {
@@ -180,51 +180,51 @@ export default function SpendOptimizer({ data, update, onNavigate }: Props) {
 
   return (
     <div className="space-y-6">
-      <div className="bg-slate-800 rounded-2xl p-6 text-white">
+      <div className="bg-ink rounded-2xl p-6 text-white">
         <h2 className="text-lg font-semibold">Spend Optimizer</h2>
-        <p className="text-slate-400 text-sm mt-1">
+        <p className="text-ink-soft text-sm mt-1">
           Enter your average monthly spend per category to see which card earns the most.
         </p>
       </div>
 
       {/* Spend inputs */}
-      <div className="bg-white border border-gray-200 rounded-xl p-4">
-        <h3 className="font-semibold text-gray-800 mb-3 text-sm">Monthly Spend Profile</h3>
+      <div className="bg-white border border-line rounded-xl p-4">
+        <h3 className="font-semibold text-ink mb-3 text-sm">Monthly Spend Profile</h3>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
           {SPEND_CATS.map(cat => (
             <div key={cat.id} className="flex items-center gap-2">
               <span className="text-lg w-7 shrink-0 text-center">{cat.icon}</span>
-              <label className="text-sm text-gray-700 w-32 shrink-0">{cat.label}</label>
+              <label className="text-sm text-ink w-32 shrink-0">{cat.label}</label>
               <div className="flex-1 relative">
-                <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-sm">$</span>
+                <span className="absolute left-3 top-1/2 -translate-y-1/2 text-ink-soft text-sm">$</span>
                 <input
                   type="number"
                   min="0"
                   value={spend[cat.id as keyof MonthlySpendProfile] || ''}
                   onChange={e => setAmount(cat.id, e.target.value)}
                   placeholder="0"
-                  className="w-full border border-gray-300 rounded-lg pl-7 pr-3 py-2 text-sm font-mono"
+                  className="w-full border border-line rounded-lg pl-7 pr-3 py-2 text-sm font-mono"
                 />
               </div>
             </div>
           ))}
         </div>
         {totalMonthly > 0 && (
-          <p className="text-xs text-gray-500 mt-3 pt-3 border-t border-gray-100">
-            Total: <span className="font-mono font-semibold text-gray-700">${totalMonthly.toLocaleString()}/mo</span>
+          <p className="text-xs text-ink-soft mt-3 pt-3 border-t border-line">
+            Total: <span className="font-mono font-semibold text-ink">${totalMonthly.toLocaleString()}/mo</span>
             {' '}· <span className="font-mono">${(totalMonthly * 12).toLocaleString()}/yr</span>
           </p>
         )}
       </div>
 
       {!hasCards && (
-        <div className="text-center py-10 text-gray-400">
+        <div className="text-center py-10 text-ink-soft">
           <p className="text-4xl mb-3">💳</p>
-          <p className="text-base font-medium text-gray-600">No cards added yet</p>
+          <p className="text-base font-medium text-ink-soft">No cards added yet</p>
           <p className="text-sm mt-1 mb-4">Add your cards first, then come back to see which card earns the most for each spending category.</p>
           <button
             onClick={() => onNavigate('cards')}
-            className="bg-slate-800 text-white px-5 py-2.5 rounded-xl text-sm font-medium hover:bg-slate-700 transition-colors"
+            className="bg-ink text-white px-5 py-2.5 rounded-xl text-sm font-medium hover:bg-ink transition-colors"
           >
             Add Your First Card →
           </button>
@@ -232,7 +232,7 @@ export default function SpendOptimizer({ data, update, onNavigate }: Props) {
       )}
 
       {hasCards && !hasSpend && (
-        <div className="text-center py-8 text-gray-400">
+        <div className="text-center py-8 text-ink-soft">
           <p className="text-3xl mb-2">👆</p>
           <p className="text-sm">Enter your monthly spending above to see which card to use for each category.</p>
         </div>
@@ -241,15 +241,15 @@ export default function SpendOptimizer({ data, update, onNavigate }: Props) {
       {hasCards && hasSpend && (
         <>
           {/* Results */}
-          <div className="bg-white border border-gray-200 rounded-xl overflow-hidden">
-            <div className="px-4 py-3 bg-gray-50 border-b border-gray-200 flex items-center justify-between">
-              <h3 className="font-semibold text-gray-800 text-sm">Optimization Results</h3>
-              <div className="flex items-center gap-3 text-xs text-gray-500">
+          <div className="bg-white border border-line rounded-xl overflow-hidden">
+            <div className="px-4 py-3 bg-paper border-b border-line flex items-center justify-between">
+              <h3 className="font-semibold text-ink text-sm">Optimization Results</h3>
+              <div className="flex items-center gap-3 text-xs text-ink-soft">
                 <span className="flex items-center gap-1"><span>🎯</span> Best points</span>
                 <span className="flex items-center gap-1"><span>💵</span> Best cash back</span>
               </div>
             </div>
-            <div className="divide-y divide-gray-100">
+            <div className="divide-y divide-line">
               {results.filter(r => r.monthly > 0).map(r => {
                 const showBoth = r.bestPoints && r.bestCash && r.bestPoints.card !== r.bestCash.card;
                 const onlyOne = r.bestPoints ?? r.bestCash;
@@ -259,13 +259,13 @@ export default function SpendOptimizer({ data, update, onNavigate }: Props) {
                     <div className="flex items-center justify-between mb-2">
                       <div className="flex items-center gap-2">
                         <span className="text-base">{r.cat.icon}</span>
-                        <span className="text-xs text-gray-500">{r.cat.label}</span>
+                        <span className="text-xs text-ink-soft">{r.cat.label}</span>
                       </div>
                       <div className="text-right">
-                        <span className="font-mono font-bold text-emerald-700 text-sm">
+                        <span className="font-mono font-bold text-forest text-sm">
                           ${r.annualVal > 0 ? r.annualVal.toFixed(0) : '—'}
                         </span>
-                        <span className="text-xs text-gray-400">/yr</span>
+                        <span className="text-xs text-ink-soft">/yr</span>
                       </div>
                     </div>
 
@@ -273,69 +273,69 @@ export default function SpendOptimizer({ data, update, onNavigate }: Props) {
                       <div className="space-y-1.5">
                         <div className="flex items-center gap-2">
                           <span className="text-xs w-4 shrink-0">🎯</span>
-                          <span className={`text-xs px-1.5 py-0.5 rounded-full text-white font-medium shrink-0 ${ISSUER_COLORS[r.bestPoints!.issuer] ?? 'bg-slate-700'}`}>
+                          <span className={`text-xs px-1.5 py-0.5 rounded-full text-white font-medium shrink-0 ${ISSUER_COLORS[r.bestPoints!.issuer] ?? 'bg-ink'}`}>
                             {r.bestPoints!.issuer}
                           </span>
-                          <span className="text-sm font-medium text-gray-800 truncate">{r.bestPoints!.card}</span>
-                          <span className="text-xs text-blue-600 font-mono ml-auto shrink-0">{r.bestPoints!.rate}</span>
+                          <span className="text-sm font-medium text-ink truncate">{r.bestPoints!.card}</span>
+                          <span className="text-xs text-brass font-mono ml-auto shrink-0">{r.bestPoints!.rate}</span>
                         </div>
                         <div className="flex items-center gap-2">
                           <span className="text-xs w-4 shrink-0">💵</span>
-                          <span className={`text-xs px-1.5 py-0.5 rounded-full text-white font-medium shrink-0 ${ISSUER_COLORS[r.bestCash!.issuer] ?? 'bg-slate-700'}`}>
+                          <span className={`text-xs px-1.5 py-0.5 rounded-full text-white font-medium shrink-0 ${ISSUER_COLORS[r.bestCash!.issuer] ?? 'bg-ink'}`}>
                             {r.bestCash!.issuer}
                           </span>
-                          <span className="text-sm font-medium text-gray-800 truncate">{r.bestCash!.card}</span>
-                          <span className="text-xs text-emerald-600 font-mono ml-auto shrink-0">{r.bestCash!.rate}</span>
+                          <span className="text-sm font-medium text-ink truncate">{r.bestCash!.card}</span>
+                          <span className="text-xs text-forest font-mono ml-auto shrink-0">{r.bestCash!.rate}</span>
                         </div>
                       </div>
                     ) : onlyOne ? (
                       <div className="flex items-center gap-2">
                         <span className="text-xs w-4 shrink-0">{r.bestPoints ? '🎯' : '💵'}</span>
-                        <span className={`text-xs px-1.5 py-0.5 rounded-full text-white font-medium shrink-0 ${ISSUER_COLORS[onlyOne.issuer] ?? 'bg-slate-700'}`}>
+                        <span className={`text-xs px-1.5 py-0.5 rounded-full text-white font-medium shrink-0 ${ISSUER_COLORS[onlyOne.issuer] ?? 'bg-ink'}`}>
                           {onlyOne.issuer}
                         </span>
-                        <span className="text-sm font-medium text-gray-800 truncate">{onlyOne.card}</span>
-                        <span className={`text-xs font-mono ml-auto shrink-0 ${r.bestPoints ? 'text-blue-600' : 'text-emerald-600'}`}>
+                        <span className="text-sm font-medium text-ink truncate">{onlyOne.card}</span>
+                        <span className={`text-xs font-mono ml-auto shrink-0 ${r.bestPoints ? 'text-brass' : 'text-forest'}`}>
                           {onlyOne.rate}
                         </span>
                       </div>
                     ) : (
-                      <p className="text-sm text-gray-400">No card match</p>
+                      <p className="text-sm text-ink-soft">No card match</p>
                     )}
                   </div>
                 );
               })}
             </div>
-            <div className="px-4 py-3 bg-emerald-50 border-t border-emerald-200 flex justify-between items-center">
-              <span className="text-sm font-semibold text-gray-800">Total estimated annual earn</span>
-              <span className="font-mono font-bold text-xl text-emerald-700">${totalAnnual.toFixed(0)}</span>
+            <div className="px-4 py-3 bg-forest-bg border-t border-forest flex justify-between items-center">
+              <span className="text-sm font-semibold text-ink">Total estimated annual earn</span>
+              <span className="font-mono font-bold text-xl text-forest">${totalAnnual.toFixed(0)}</span>
             </div>
           </div>
 
           {/* "One card" ranking */}
           {cardBreakdown.length > 0 && (
-            <div className="bg-white border border-gray-200 rounded-xl overflow-hidden">
-              <div className="px-4 py-3 bg-gray-50 border-b border-gray-200">
-                <h3 className="font-semibold text-gray-800 text-sm">If You Used One Card for Everything</h3>
-                <p className="text-xs text-gray-500 mt-0.5">Ranked by total earn across all your spend</p>
+            <div className="bg-white border border-line rounded-xl overflow-hidden">
+              <div className="px-4 py-3 bg-paper border-b border-line">
+                <h3 className="font-semibold text-ink text-sm">If You Used One Card for Everything</h3>
+                <p className="text-xs text-ink-soft mt-0.5">Ranked by total earn across all your spend</p>
               </div>
-              <div className="divide-y divide-gray-100">
+              <div className="divide-y divide-line">
                 {cardBreakdown.map((c, i) => (
                   <div key={c.id} className="px-4 py-3 flex items-center gap-3">
-                    <span className={`text-xs font-bold w-5 shrink-0 ${i === 0 ? 'text-emerald-600' : 'text-gray-400'}`}>
+                    <span className={`text-xs font-bold w-5 shrink-0 ${i === 0 ? 'text-forest' : 'text-ink-soft'}`}>
                       #{i + 1}
                     </span>
-                    <span className={`text-xs px-1.5 py-0.5 rounded-full text-white font-medium shrink-0 ${ISSUER_COLORS[c.issuer] ?? 'bg-slate-700'}`}>
+                    <span className={`text-xs px-1.5 py-0.5 rounded-full text-white font-medium shrink-0 ${ISSUER_COLORS[c.issuer] ?? 'bg-ink'}`}>
                       {c.issuer}
                     </span>
-                    <span className="text-sm text-gray-800 flex-1 truncate">{c.name}</span>
-                    <span className="font-mono font-bold text-sm text-gray-700">${c.total.toFixed(0)}/yr</span>
+                    <span className="text-sm text-ink flex-1 truncate">{c.name}</span>
+                    <span className="font-mono font-bold text-sm text-ink">${c.total.toFixed(0)}/yr</span>
                   </div>
                 ))}
               </div>
               {bestSingle && (
-                <div className="px-4 py-3 bg-blue-50 border-t border-blue-200">
-                  <p className="text-xs text-blue-700">
+                <div className="px-4 py-3 bg-brass-soft border-t border-brass">
+                  <p className="text-xs text-brass">
                     Optimizing by category earns{' '}
                     <span className="font-bold">${(totalAnnual - bestSingle.total).toFixed(0)}</span>
                     {' '}more than using {bestSingle.name} for everything.
@@ -347,29 +347,29 @@ export default function SpendOptimizer({ data, update, onNavigate }: Props) {
 
           {/* Cards Worth Getting */}
           {recommendations.length > 0 && (
-            <div className="bg-white border border-gray-200 rounded-xl overflow-hidden">
-              <div className="px-4 py-3 bg-amber-50 border-b border-amber-200">
-                <h3 className="font-semibold text-gray-800 text-sm">Cards Worth Getting</h3>
-                <p className="text-xs text-gray-500 mt-0.5">
+            <div className="bg-white border border-line rounded-xl overflow-hidden">
+              <div className="px-4 py-3 bg-amber-bg border-b border-amber">
+                <h3 className="font-semibold text-ink text-sm">Cards Worth Getting</h3>
+                <p className="text-xs text-ink-soft mt-0.5">
                   Based on your spend — incremental <GlossaryTerm term="Earn Rate">earn</GlossaryTerm> above your current best card per category
                 </p>
               </div>
-              <div className="divide-y divide-gray-100">
+              <div className="divide-y divide-line">
                 {recommendations.map((rec, i) => (
                   <div key={rec.cardId} className="p-4">
                     <div className="flex items-start justify-between gap-3">
                       <div className="flex-1 min-w-0">
                         {/* Rank + issuer + name */}
                         <div className="flex items-center gap-2 flex-wrap">
-                          <span className="text-xs font-bold text-amber-600">#{i + 1}</span>
-                          <span className={`text-xs px-1.5 py-0.5 rounded-full text-white font-medium ${ISSUER_COLORS[rec.issuer] ?? 'bg-slate-700'}`}>
+                          <span className="text-xs font-bold text-amber">#{i + 1}</span>
+                          <span className={`text-xs px-1.5 py-0.5 rounded-full text-white font-medium ${ISSUER_COLORS[rec.issuer] ?? 'bg-ink'}`}>
                             {rec.issuer}
                           </span>
-                          <span className="text-sm font-semibold text-gray-900 truncate">{rec.name}</span>
+                          <span className="text-sm font-semibold text-ink truncate">{rec.name}</span>
                         </div>
 
                         {/* Fee */}
-                        <p className="text-xs text-gray-500 mt-1">
+                        <p className="text-xs text-ink-soft mt-1">
                           {rec.annualFee === 0
                             ? 'No annual fee'
                             : rec.firstYearFree
@@ -378,7 +378,7 @@ export default function SpendOptimizer({ data, update, onNavigate }: Props) {
                         </p>
                         {/* Why this card */}
                         {rec.topCat && (
-                          <p className="text-xs text-blue-700 bg-blue-50 rounded-md px-2 py-1 mt-1.5 inline-block">
+                          <p className="text-xs text-brass bg-brass-soft rounded-md px-2 py-1 mt-1.5 inline-block">
                             {rec.topCatRate && <span className="font-semibold">{rec.topCatRate}</span>}
                             {rec.topCatRate && ' · '}
                             {rec.topCat}
@@ -388,11 +388,11 @@ export default function SpendOptimizer({ data, update, onNavigate }: Props) {
 
                       {/* Earn numbers */}
                       <div className="text-right shrink-0">
-                        <p className="text-xs text-gray-400">extra earn/yr</p>
-                        <p className="font-mono font-bold text-base text-gray-900">
+                        <p className="text-xs text-ink-soft">extra earn/yr</p>
+                        <p className="font-mono font-bold text-base text-ink">
                           +${rec.incremental.toFixed(0)}
                         </p>
-                        <p className={`text-xs font-semibold mt-0.5 ${rec.netValue >= 0 ? 'text-emerald-600' : 'text-amber-600'}`}>
+                        <p className={`text-xs font-semibold mt-0.5 ${rec.netValue >= 0 ? 'text-forest' : 'text-amber'}`}>
                           {rec.netValue >= 0
                             ? `+$${rec.netValue.toFixed(0)} after fee`
                             : `-$${Math.abs(rec.netValue).toFixed(0)} after fee`}
@@ -408,12 +408,12 @@ export default function SpendOptimizer({ data, update, onNavigate }: Props) {
                           target="_blank"
                           rel="noopener noreferrer"
                           onClick={() => trackApplyClick(rec.cardId, rec.name, rec.issuer, 'optimizer')}
-                          className="inline-flex items-center gap-1.5 bg-slate-800 hover:bg-slate-700 text-white text-xs font-semibold px-4 py-2 rounded-lg transition-colors"
+                          className="inline-flex items-center gap-1.5 bg-ink hover:bg-ink text-white text-xs font-semibold px-4 py-2 rounded-lg transition-colors"
                         >
                           Apply Now →
                         </a>
                       ) : (
-                        <span className="inline-flex items-center gap-1.5 bg-gray-100 text-gray-500 text-xs font-semibold px-4 py-2 rounded-lg">
+                        <span className="inline-flex items-center gap-1.5 bg-line text-ink-soft text-xs font-semibold px-4 py-2 rounded-lg">
                           Search online to apply
                         </span>
                       )}
@@ -421,8 +421,8 @@ export default function SpendOptimizer({ data, update, onNavigate }: Props) {
                   </div>
                 ))}
               </div>
-              <div className="px-4 py-3 bg-gray-50 border-t border-gray-200">
-                <p className="text-xs text-gray-400">
+              <div className="px-4 py-3 bg-paper border-t border-line">
+                <p className="text-xs text-ink-soft">
                   Extra earn is calculated vs your current best card per category. Net value subtracts the annual fee from year 1. Actual value depends on how you redeem points.
                 </p>
               </div>
@@ -433,11 +433,11 @@ export default function SpendOptimizer({ data, update, onNavigate }: Props) {
 
       <FxCalculator data={data} />
 
-      <div className="bg-amber-50 border border-amber-200 rounded-xl p-3 text-xs text-amber-800 space-y-1">
+      <div className="bg-amber-bg border border-amber rounded-xl p-3 text-xs text-amber space-y-1">
         <p className="font-semibold">⚠ Estimates may not reflect real-world earning</p>
         <p>Spend categories assume your card is accepted at every merchant. In practice, some stores restrict card networks — for example, Costco only accepts Mastercard, and some merchants don't accept Amex. Your actual earn may be lower if part of your spend is at merchants that don't accept your card.</p>
       </div>
-      <p className="text-xs text-gray-400 text-center pb-2">
+      <p className="text-xs text-ink-soft text-center pb-2">
         Points values use default <GlossaryTerm term="CPP">CPP</GlossaryTerm> benchmarks. Set your personal CPP in the Points tab to personalize results.
       </p>
     </div>
