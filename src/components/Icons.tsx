@@ -1,3 +1,5 @@
+import type { ReactElement } from 'react';
+
 interface IconProps {
   className?: string;
 }
@@ -249,7 +251,7 @@ export function DotIcon({ className }: IconProps) {
   );
 }
 
-export const CATEGORY_ICON_COMPONENTS: Record<string, (props: IconProps) => JSX.Element> = {
+export const CATEGORY_ICON_COMPONENTS: Record<string, (props: IconProps) => ReactElement> = {
   'travel-credit': TravelCreditIcon,
   lounge: LoungeIcon,
   companion: CompanionIcon,

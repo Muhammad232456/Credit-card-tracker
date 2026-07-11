@@ -7,7 +7,7 @@ import {
   effectiveBenefitValue, cardAge,
   SPEND_CATS, bestRateForCat, rateToCpd,
 } from '../utils';
-import { CATEGORY_ICON_COMPONENTS, FxIcon, CheckIcon } from './Icons';
+import { CATEGORY_ICON_COMPONENTS, FxIcon } from './Icons';
 
 interface Props {
   template: CardTemplate;
