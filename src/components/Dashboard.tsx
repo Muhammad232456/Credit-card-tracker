@@ -224,10 +224,10 @@ export default function Dashboard({ data, onNavigate, onStartQuiz }: Props) {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 items-start">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-10 gap-y-8 items-start">
       {/* Benefit reset calendar */}
       {upcomingResets.length > 0 && (
-        <div className="bg-surface border border-line rounded-xl p-4">
+        <div>
           <h3 className="font-semibold text-ink mb-3 flex items-center gap-2">
             <ClockIcon className="w-4 h-4 text-amber" /> Use Before Reset
             <span className="text-xs font-normal text-amber bg-amber-bg px-2 py-0.5 rounded-full">next 60 days</span>
@@ -254,7 +254,7 @@ export default function Dashboard({ data, onNavigate, onStartQuiz }: Props) {
 
       {/* Welcome bonus progress */}
       {welcomeBonusCards.length > 0 && (
-        <div className="bg-surface border border-line rounded-xl p-4">
+        <div>
           <h3 className="font-semibold text-ink mb-3 flex items-center gap-2"><OptimizeIcon className="w-4 h-4 text-brass" /> Welcome Bonus Progress</h3>
           <div className="space-y-3">
             {welcomeBonusCards.map(({ uc, template }) => {
@@ -305,7 +305,7 @@ export default function Dashboard({ data, onNavigate, onStartQuiz }: Props) {
             });
         });
         if (loungeEntries.length === 0) return (
-          <div className="bg-surface border border-line rounded-xl p-4">
+          <div>
             <h3 className="font-semibold text-ink mb-2 flex items-center gap-2"><LoungeIcon className="w-4 h-4 text-brass" /> Lounge Access</h3>
             <p className="text-sm text-ink-soft">None of your current cards include lounge access.</p>
           </div>
@@ -319,7 +319,7 @@ export default function Dashboard({ data, onNavigate, onStartQuiz }: Props) {
         });
 
         return (
-          <div className="bg-surface border border-line rounded-xl p-4">
+          <div>
             <h3 className="font-semibold text-ink mb-3 flex items-center gap-2">
               <LoungeIcon className="w-4 h-4 text-brass" /> Lounge Access
               <span className="text-xs font-normal text-ink-soft">
@@ -372,7 +372,7 @@ export default function Dashboard({ data, onNavigate, onStartQuiz }: Props) {
 
       {/* Upcoming renewals */}
       {upcomingRenewals.length > 0 && (
-        <div className="bg-surface border border-line rounded-xl p-4">
+        <div>
           <h3 className="font-semibold text-ink mb-3">Upcoming Renewals</h3>
           <div className="space-y-1">
             {upcomingRenewals.map(({ uc, template, days }) => (
@@ -391,7 +391,7 @@ export default function Dashboard({ data, onNavigate, onStartQuiz }: Props) {
       )}
 
         {/* Fee recovery */}
-        <div className="bg-surface border border-line rounded-xl p-4">
+        <div>
           <h3 className="font-semibold text-ink mb-3">Fee Recovery by Card</h3>
           <div className="space-y-3">
             {activeCards.map(uc => {
@@ -420,7 +420,7 @@ export default function Dashboard({ data, onNavigate, onStartQuiz }: Props) {
         </div>
 
         {/* Points summary */}
-        <div className="bg-surface border border-line rounded-xl p-4">
+        <div>
           <h3 className="font-semibold text-ink mb-3">Points Summary</h3>
           {data.pointsBalances.length === 0 ? (
             <button onClick={() => onNavigate('points')} className="w-full text-center text-sm text-brass hover:text-brass py-4">

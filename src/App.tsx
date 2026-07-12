@@ -60,7 +60,7 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-paper flex flex-col" data-device={device.deviceType}>
-      <header className="bg-ink text-paper px-4 py-3 flex items-center justify-between sticky top-0 z-10">
+      <header className="bg-ink text-paper px-4 sm:px-8 py-3 flex items-center justify-between sticky top-0 z-10">
         <button
           onClick={() => navigate('dashboard')}
           className="flex items-center gap-2 hover:opacity-80 transition-opacity"
