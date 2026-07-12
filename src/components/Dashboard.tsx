@@ -227,7 +227,7 @@ export default function Dashboard({ data, onNavigate, onStartQuiz }: Props) {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 items-start">
       {/* Benefit reset calendar */}
       {upcomingResets.length > 0 && (
-        <div className="bg-surface border border-amber/40 rounded-xl p-4">
+        <div className="bg-surface border border-line rounded-xl p-4">
           <h3 className="font-semibold text-ink mb-3 flex items-center gap-2">
             <ClockIcon className="w-4 h-4 text-amber" /> Use Before Reset
             <span className="text-xs font-normal text-amber bg-amber-bg px-2 py-0.5 rounded-full">next 60 days</span>
@@ -237,11 +237,10 @@ export default function Dashboard({ data, onNavigate, onStartQuiz }: Props) {
               <button
                 key={i}
                 onClick={() => onNavigate('cards', r.cardId)}
-                className="w-full text-left flex items-center gap-3 p-2 rounded-lg hover:bg-amber-bg transition-colors"
+                className="w-full text-left flex items-center gap-3 py-2 border-l-2 pl-3 hover:bg-paper transition-colors"
+                style={{ borderColor: r.daysUntil <= 14 ? 'var(--color-rust)' : 'var(--color-amber)' }}
               >
-                <span className={`text-xs font-bold px-2 py-1 rounded-full shrink-0 ${
-                  r.daysUntil <= 14 ? 'bg-rust-bg text-rust' : 'bg-amber-bg text-amber'
-                }`}>{r.daysUntil}d</span>
+                <span className={`text-xs font-bold shrink-0 ${r.daysUntil <= 14 ? 'text-rust' : 'text-amber'}`}>{r.daysUntil}d</span>
                 <div className="flex-1 min-w-0">
                   <p className="text-sm font-medium text-ink truncate">{r.benefitName}</p>
                   <p className="text-xs text-ink-soft">{r.cardName}</p>
@@ -255,7 +254,7 @@ export default function Dashboard({ data, onNavigate, onStartQuiz }: Props) {
 
       {/* Welcome bonus progress */}
       {welcomeBonusCards.length > 0 && (
-        <div className="bg-surface border border-brass rounded-xl p-4">
+        <div className="bg-surface border border-line rounded-xl p-4">
           <h3 className="font-semibold text-ink mb-3 flex items-center gap-2"><OptimizeIcon className="w-4 h-4 text-brass" /> Welcome Bonus Progress</h3>
           <div className="space-y-3">
             {welcomeBonusCards.map(({ uc, template }) => {
@@ -334,9 +333,7 @@ export default function Dashboard({ data, onNavigate, onStartQuiz }: Props) {
                   <button
                     key={b.id}
                     onClick={() => onNavigate('cards', cardId)}
-                    className={`w-full text-left flex items-start justify-between gap-3 p-3 rounded-lg border transition-colors hover:bg-paper ${
-                      exhausted ? 'border-line opacity-50' : isPaid ? 'border-amber-bg bg-amber-bg/40' : 'border-line'
-                    }`}
+                    className={`w-full text-left flex items-start justify-between gap-3 py-2.5 border-b border-line last:border-0 hover:bg-paper transition-colors ${exhausted ? 'opacity-50' : ''}`}
                   >
                     <div className="flex-1 min-w-0">
                       <p className="text-sm font-medium text-ink truncate">{b.name}</p>
@@ -377,14 +374,13 @@ export default function Dashboard({ data, onNavigate, onStartQuiz }: Props) {
       {upcomingRenewals.length > 0 && (
         <div className="bg-surface border border-line rounded-xl p-4">
           <h3 className="font-semibold text-ink mb-3">Upcoming Renewals</h3>
-          <div className="space-y-2">
+          <div className="space-y-1">
             {upcomingRenewals.map(({ uc, template, days }) => (
               <button
                 key={uc.cardId}
                 onClick={() => onNavigate('cards', uc.cardId)}
-                className={`w-full text-left flex items-center justify-between p-3 rounded-lg border ${
-                  days < 30 ? 'border-rust bg-rust-bg' : days < 60 ? 'border-amber bg-amber-bg' : 'border-line bg-paper'
-                }`}
+                className="w-full text-left flex items-center justify-between py-2 border-l-2 pl-3 hover:bg-paper transition-colors"
+                style={{ borderColor: days < 30 ? 'var(--color-rust)' : days < 60 ? 'var(--color-amber)' : 'var(--color-line)' }}
               >
                 <span className="text-sm font-medium text-ink">{template?.name}</span>
                 <span className={`text-sm font-mono font-bold ${days < 30 ? 'text-rust' : days < 60 ? 'text-amber' : 'text-forest'}`}>{days}d</span>
