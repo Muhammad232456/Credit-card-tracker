@@ -88,7 +88,7 @@ export default function OnboardingQuiz({ onComplete, onSkip }: Props) {
                     target="_blank"
                     rel="noopener noreferrer"
                     onClick={() => trackApplyClick(rec.id, rec.name, rec.issuer, 'quiz')}
-                    className="shrink-0 bg-ink text-white text-xs px-3 py-2 rounded-lg font-medium hover:bg-ink transition-colors"
+                    className="shrink-0 bg-brass text-ink text-xs px-3 py-2 rounded-lg font-medium hover:opacity-90 transition-opacity"
                   >
                     Apply →
                   </a>
@@ -102,7 +102,7 @@ export default function OnboardingQuiz({ onComplete, onSkip }: Props) {
         </p>
         <button
           onClick={() => onComplete(goal)}
-          className="w-full bg-ink text-white py-3 rounded-xl font-semibold hover:bg-ink transition-colors"
+          className="w-full bg-brass text-ink py-3 rounded-xl font-semibold hover:opacity-90 transition-opacity"
         >
           Go to Dashboard →
         </button>

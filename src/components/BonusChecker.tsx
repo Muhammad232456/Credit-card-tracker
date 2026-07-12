@@ -50,7 +50,7 @@ export default function BonusChecker({ card, data, update }: Props) {
         <button
           onClick={checkBonus}
           disabled={checking}
-          className="bg-ink text-white px-3 py-1.5 rounded-lg text-xs font-medium hover:bg-ink disabled:opacity-50 transition-colors"
+          className="bg-brass text-ink px-3 py-1.5 rounded-lg text-xs font-medium hover:opacity-90 disabled:opacity-50 transition-opacity"
         >
           {checking ? 'Checking...' : cached ? 'Refresh' : 'Check Now'}
         </button>

@@ -63,13 +63,13 @@ export default function CardComparison({ onBack }: Props) {
                 onClick={() => toggle(t.id)}
                 disabled={disabled}
                 className={`w-full text-left px-3 py-2 rounded-lg text-sm flex items-center justify-between transition-colors ${
-                  isSel ? 'bg-ink text-white' :
+                  isSel ? 'bg-brass text-ink' :
                   disabled ? 'text-line cursor-not-allowed' :
                   'hover:bg-paper text-ink'
                 }`}
               >
                 <span className="truncate flex-1">{t.name}</span>
-                <span className={`text-xs ml-2 shrink-0 ${isSel ? 'text-line' : 'text-ink-soft'}`}>
+                <span className={`text-xs ml-2 shrink-0 ${isSel ? 'text-ink/70' : 'text-ink-soft'}`}>
                   {t.annualFee === 0 ? 'No fee' : `$${t.annualFee}/yr`}
                 </span>
               </button>
@@ -88,7 +88,7 @@ export default function CardComparison({ onBack }: Props) {
           {/* Header */}
           <div className={`grid gap-2 ${cols}`}>
             {selected.map(t => (
-              <div key={t.id} className="bg-ink text-white rounded-xl p-3 text-center">
+              <div key={t.id} className="bg-surface border border-brass/40 text-ink rounded-xl p-3 text-center">
                 <p className="text-xs font-semibold leading-tight truncate">{t.name}</p>
                 <p className="text-ink-soft text-xs mt-0.5">{t.issuer}</p>
                 <p className="font-mono font-bold text-lg mt-1">
@@ -214,7 +214,7 @@ export default function CardComparison({ onBack }: Props) {
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={() => trackApplyClick(t.id, t.name, t.issuer, 'comparison')}
-                  className="bg-ink text-white text-xs text-center py-2.5 rounded-xl font-semibold hover:bg-ink transition-colors block"
+                  className="bg-brass text-ink text-xs text-center py-2.5 rounded-xl font-semibold hover:opacity-90 transition-opacity block"
                 >
                   Apply — {t.issuer} →
                 </a>

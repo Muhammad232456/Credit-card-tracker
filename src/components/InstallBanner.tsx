@@ -46,7 +46,7 @@ export default function InstallBanner() {
   // Android / Chrome install banner
   if (deferredPrompt) {
     return (
-      <div className="sm:hidden fixed bottom-20 left-4 right-4 z-40 bg-ink text-white rounded-2xl px-4 py-3 flex items-center gap-3 shadow-xl">
+      <div className="sm:hidden fixed bottom-20 left-4 right-4 z-40 bg-ink text-paper rounded-2xl px-4 py-3 flex items-center gap-3 shadow-xl">
         <span className="text-2xl">🍁</span>
         <div className="flex-1 min-w-0">
           <p className="text-sm font-semibold">Add to Home Screen</p>
@@ -58,7 +58,7 @@ export default function InstallBanner() {
         >
           Install
         </button>
-        <button onClick={dismiss} className="text-ink-soft hover:text-white text-lg leading-none shrink-0">×</button>
+        <button onClick={dismiss} className="text-ink-soft hover:text-paper text-lg leading-none shrink-0">×</button>
       </div>
     );
   }
@@ -66,16 +66,16 @@ export default function InstallBanner() {
   // iOS instructions banner
   if (showIOS) {
     return (
-      <div className="sm:hidden fixed bottom-20 left-4 right-4 z-40 bg-ink text-white rounded-2xl px-4 py-3 shadow-xl">
+      <div className="sm:hidden fixed bottom-20 left-4 right-4 z-40 bg-ink text-paper rounded-2xl px-4 py-3 shadow-xl">
         <div className="flex items-start gap-3">
           <span className="text-2xl">🍁</span>
           <div className="flex-1">
             <p className="text-sm font-semibold">Add to Home Screen</p>
             <p className="text-xs text-ink-soft mt-0.5">
-              Tap <span className="text-white font-medium">Share</span> <span className="text-base">⎙</span> then <span className="text-white font-medium">Add to Home Screen</span>
+              Tap <span className="text-paper font-medium">Share</span> <span className="text-base">⎙</span> then <span className="text-paper font-medium">Add to Home Screen</span>
             </p>
           </div>
-          <button onClick={dismiss} className="text-ink-soft hover:text-white text-lg leading-none shrink-0">×</button>
+          <button onClick={dismiss} className="text-ink-soft hover:text-paper text-lg leading-none shrink-0">×</button>
         </div>
       </div>
     );

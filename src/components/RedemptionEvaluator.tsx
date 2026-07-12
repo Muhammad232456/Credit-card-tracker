@@ -102,7 +102,7 @@ export default function RedemptionEvaluator({ onBack, initialProgramId }: Props)
         </button>
       )}
 
-      <div className="bg-ink rounded-2xl p-6 text-white mb-4">
+      <div className="bg-surface border border-brass/40 rounded-2xl p-6 text-ink mb-4">
         <h2 className="text-lg font-semibold">Redemption Evaluator</h2>
         <p className="text-ink-soft text-sm mt-1">
           Compare using points vs paying cash — taxes included.
@@ -115,7 +115,7 @@ export default function RedemptionEvaluator({ onBack, initialProgramId }: Props)
           onClick={() => switchTab('airline')}
           className={`flex-1 py-2.5 rounded-xl text-sm font-semibold border transition-colors ${
             tab === 'airline'
-              ? 'bg-ink text-white border-ink'
+              ? 'bg-brass text-ink border-brass'
               : 'border-line text-ink-soft hover:border-ink-soft'
           }`}
         >
@@ -125,7 +125,7 @@ export default function RedemptionEvaluator({ onBack, initialProgramId }: Props)
           onClick={() => switchTab('hotel')}
           className={`flex-1 py-2.5 rounded-xl text-sm font-semibold border transition-colors ${
             tab === 'hotel'
-              ? 'bg-ink text-white border-ink'
+              ? 'bg-brass text-ink border-brass'
               : 'border-line text-ink-soft hover:border-ink-soft'
           }`}
         >

@@ -110,7 +110,7 @@ export default function PointsTracker({ data, update, onViewTransfers, onEvaluat
 
   return (
     <div className="space-y-6">
-      <div className="bg-ink rounded-2xl p-6 text-white">
+      <div className="bg-surface border border-brass/40 rounded-2xl p-6 text-ink">
         <p className="text-ink-soft text-sm">Total Portfolio Value (est.)</p>
         <p className="text-4xl font-mono font-bold mt-1">
           ${totalValue.toLocaleString('en-CA', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} CAD
@@ -120,7 +120,7 @@ export default function PointsTracker({ data, update, onViewTransfers, onEvaluat
         </p>
         <button
           onClick={() => onEvaluate()}
-          className="mt-4 bg-white/10 hover:bg-white/20 text-white text-sm font-medium px-4 py-2 rounded-xl transition-colors"
+          className="mt-4 bg-brass-soft hover:opacity-80 text-brass text-sm font-medium px-4 py-2 rounded-xl transition-colors"
         >
           🧮 Evaluate a Redemption →
         </button>
@@ -265,7 +265,7 @@ export default function PointsTracker({ data, update, onViewTransfers, onEvaluat
                   />
                   <button
                     onClick={() => addProgram(selectedForAdd, parseInt(addBalance) || 0)}
-                    className="bg-brass text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-brass transition-colors"
+                    className="bg-brass text-ink px-4 py-2 rounded-lg text-sm font-semibold hover:opacity-90 transition-opacity"
                   >
                     Add
                   </button>
@@ -355,7 +355,7 @@ function BalanceEditor({
       />
       <button
         onClick={() => onSave(parseInt(value) || 0)}
-        className="text-xs bg-brass text-white px-2 py-1 rounded hover:bg-brass"
+        className="text-xs bg-brass text-ink px-2 py-1 rounded hover:opacity-90"
       >
         Save
       </button>

@@ -29,9 +29,9 @@ export default function GlossaryTerm({ term, children }: Props) {
       {open && (
         <>
           <div className="fixed inset-0 z-40" onClick={() => setOpen(false)} />
-          <div className="absolute bottom-full left-0 z-50 mb-2 w-72 bg-ink text-white text-xs rounded-xl p-3.5 shadow-2xl">
-            <p className="font-semibold text-line mb-1.5">{term}</p>
-            <p className="text-line leading-relaxed">{def}</p>
+          <div className="absolute bottom-full left-0 z-50 mb-2 w-72 bg-ink text-paper text-xs rounded-xl p-3.5 shadow-2xl">
+            <p className="font-semibold text-paper mb-1.5">{term}</p>
+            <p className="text-paper/70 leading-relaxed">{def}</p>
           </div>
         </>
       )}

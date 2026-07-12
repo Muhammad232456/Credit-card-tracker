@@ -154,7 +154,7 @@ export default function Dashboard({ data, onNavigate, onStartQuiz }: Props) {
           </div>
         </div>
         <div className="flex flex-col sm:flex-row gap-3 justify-center">
-          <button onClick={() => onNavigate('cards')} className="bg-ink text-white px-6 py-3 rounded-xl font-medium hover:opacity-90 transition-opacity">
+          <button onClick={() => onNavigate('cards')} className="bg-brass text-ink px-6 py-3 rounded-xl font-medium hover:opacity-90 transition-opacity">
             Add Your First Card →
           </button>
           <button onClick={() => onNavigate('points')} className="border border-line text-ink px-6 py-3 rounded-xl font-medium hover:bg-paper transition-colors">
@@ -179,7 +179,7 @@ export default function Dashboard({ data, onNavigate, onStartQuiz }: Props) {
   return (
     <div className="space-y-6">
       {/* Hero stats */}
-      <div className="bg-ink rounded-2xl p-6 text-white">
+      <div className="bg-surface border border-brass/40 rounded-2xl p-6 text-ink">
         <p className="text-ink-soft text-sm">{new Date().toLocaleDateString('en-CA', { weekday: 'long', month: 'long', day: 'numeric' })}</p>
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-4">
           <div>
@@ -213,7 +213,7 @@ export default function Dashboard({ data, onNavigate, onStartQuiz }: Props) {
             )}
           </div>
           {hasSpendProfile && (
-            <div className="col-span-2 sm:col-span-4 border-t border-white/10 pt-4 mt-2">
+            <div className="col-span-2 sm:col-span-4 border-t border-line pt-4 mt-2">
               <p className="text-ink-soft text-xs uppercase tracking-wide">Est. Annual Earn</p>
               <div className="flex items-baseline gap-2 mt-1">
                 <p className="font-mono font-bold text-2xl text-forest">${Math.round(portfolioEarn).toLocaleString()}</p>

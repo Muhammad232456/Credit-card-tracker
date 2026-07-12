@@ -72,7 +72,7 @@ export default function FeedbackWidget() {
               <button
                 onClick={submit}
                 disabled={!message.trim() || status === 'sending'}
-                className="w-full bg-ink text-white py-2.5 rounded-lg text-sm font-medium hover:bg-ink transition-colors disabled:opacity-40"
+                className="w-full bg-brass text-ink py-2.5 rounded-lg text-sm font-medium hover:opacity-90 transition-opacity disabled:opacity-40"
               >
                 {status === 'sending' ? 'Sending…' : 'Submit Feedback'}
               </button>

@@ -82,7 +82,7 @@ export default function AddCard({ existingCardIds, onAdd, onCancel }: Props) {
         <button
           onClick={() => setSelectedIssuer(null)}
           className={`px-3 py-1 rounded-full text-xs font-medium border transition-colors ${
-            !selectedIssuer ? 'bg-ink text-white border-ink' : 'border-line text-ink-soft hover:border-ink-soft'
+            !selectedIssuer ? 'bg-brass text-ink border-brass' : 'border-line text-ink-soft hover:border-ink-soft'
           }`}
         >
           All ({available.length})
@@ -166,7 +166,7 @@ export default function AddCard({ existingCardIds, onAdd, onCancel }: Props) {
             </p>
             <button
               onClick={() => onAdd(pendingId)}
-              className="shrink-0 bg-brass text-white px-5 py-2 rounded-lg text-sm font-semibold hover:bg-brass transition-colors"
+              className="shrink-0 bg-brass text-ink px-5 py-2 rounded-lg text-sm font-semibold hover:opacity-90 transition-opacity"
             >
               Add Card
             </button>

@@ -5,8 +5,8 @@ interface Props {
 export default function AffiliateDisclosure({ onBack }: Props) {
   return (
     <div className="space-y-6">
-      <div className="bg-ink rounded-2xl p-6 text-white">
-        <button onClick={onBack} className="text-ink-soft hover:text-white text-sm mb-3 flex items-center gap-1">
+      <div className="bg-surface border border-brass/40 rounded-2xl p-6 text-ink">
+        <button onClick={onBack} className="text-ink-soft hover:text-ink text-sm mb-3 flex items-center gap-1">
           ← Back
         </button>
         <h1 className="text-xl font-bold">Affiliate Disclosure</h1>

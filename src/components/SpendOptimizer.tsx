@@ -19,13 +19,13 @@ const DEFAULT_SPEND: MonthlySpendProfile = {
 };
 
 const ISSUER_COLORS: Record<string, string> = {
-  Amex: 'bg-brass', TD: 'bg-forest', CIBC: 'bg-rust', RBC: 'bg-brass',
-  Scotiabank: 'bg-rust', BMO: 'bg-brass', 'National Bank': 'bg-rust',
-  HSBC: 'bg-rust', Neo: 'bg-purple-700', MBNA: 'bg-ink',
-  'Canadian Tire': 'bg-rust', 'PC Financial': 'bg-orange-600', Rogers: 'bg-rust',
-  Tangerine: 'bg-orange-500', Brim: 'bg-indigo-600', Desjardins: 'bg-forest',
-  'Home Trust': 'bg-teal-700', Meridian: 'bg-cyan-700', 'Capital One': 'bg-rust',
-  Walmart: 'bg-brass', Simplii: 'bg-pink-700', ATB: 'bg-amber',
+  Amex: 'bg-[#1E3A5F]', TD: 'bg-[#2E6B4F]', CIBC: 'bg-[#8B3A3A]', RBC: 'bg-[#1E4C6B]',
+  Scotiabank: 'bg-[#8B3A3A]', BMO: 'bg-[#1E4C6B]', 'National Bank': 'bg-[#7A3030]',
+  HSBC: 'bg-[#7A2020]', Neo: 'bg-[#4A3468]', MBNA: 'bg-[#3E4451]',
+  'Canadian Tire': 'bg-[#8B3A3A]', 'PC Financial': 'bg-[#8B5A2A]', Rogers: 'bg-[#8B3A3A]',
+  Tangerine: 'bg-[#B8873A]', Brim: 'bg-[#3C3A68]', Desjardins: 'bg-[#2E6B4F]',
+  'Home Trust': 'bg-[#1E5A5A]', Meridian: 'bg-[#1E5A6B]', 'Capital One': 'bg-[#8B3A3A]',
+  Walmart: 'bg-[#1E4C6B]', Simplii: 'bg-[#7A3055]', ATB: 'bg-[#B8873A]',
 };
 
 interface BestOption {
@@ -180,7 +180,7 @@ export default function SpendOptimizer({ data, update, onNavigate }: Props) {
 
   return (
     <div className="space-y-6">
-      <div className="bg-ink rounded-2xl p-6 text-white">
+      <div className="bg-surface border border-brass/40 rounded-2xl p-6 text-ink">
         <h2 className="text-lg font-semibold">Spend Optimizer</h2>
         <p className="text-ink-soft text-sm mt-1">
           Enter your average monthly spend per category to see which card earns the most.
@@ -224,7 +224,7 @@ export default function SpendOptimizer({ data, update, onNavigate }: Props) {
           <p className="text-sm mt-1 mb-4">Add your cards first, then come back to see which card earns the most for each spending category.</p>
           <button
             onClick={() => onNavigate('cards')}
-            className="bg-ink text-white px-5 py-2.5 rounded-xl text-sm font-medium hover:bg-ink transition-colors"
+            className="bg-brass text-ink px-5 py-2.5 rounded-xl text-sm font-medium hover:opacity-90 transition-opacity"
           >
             Add Your First Card →
           </button>
@@ -408,7 +408,7 @@ export default function SpendOptimizer({ data, update, onNavigate }: Props) {
                           target="_blank"
                           rel="noopener noreferrer"
                           onClick={() => trackApplyClick(rec.cardId, rec.name, rec.issuer, 'optimizer')}
-                          className="inline-flex items-center gap-1.5 bg-ink hover:bg-ink text-white text-xs font-semibold px-4 py-2 rounded-lg transition-colors"
+                          className="inline-flex items-center gap-1.5 bg-brass hover:opacity-90 text-ink text-xs font-semibold px-4 py-2 rounded-lg transition-colors"
                         >
                           Apply Now →
                         </a>

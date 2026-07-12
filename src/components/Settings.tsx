@@ -32,7 +32,7 @@ export default function Settings({ data, exportData, importData, resetYear, clea
 
   return (
     <div className="space-y-6">
-      <div className="bg-ink rounded-2xl p-6 text-white">
+      <div className="bg-surface border border-brass/40 rounded-2xl p-6 text-ink">
         <h2 className="text-lg font-semibold">Settings</h2>
         <p className="text-ink-soft text-sm mt-1">
           Your data is stored locally in this browser. Export to back it up or share across devices.
@@ -54,7 +54,7 @@ export default function Settings({ data, exportData, importData, resetYear, clea
           <p className="text-sm text-ink-soft mb-3">Download your data as JSON for backup or transfer.</p>
           <button
             onClick={exportData}
-            className="bg-ink text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-ink transition-colors"
+            className="bg-brass text-ink px-4 py-2 rounded-lg text-sm font-medium hover:opacity-90 transition-opacity"
           >
             Download JSON
           </button>
@@ -88,7 +88,7 @@ export default function Settings({ data, exportData, importData, resetYear, clea
             <div className="flex gap-3">
               <button
                 onClick={() => { resetYear(); setConfirmReset(false); }}
-                className="bg-amber text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-amber"
+                className="bg-amber text-ink px-4 py-2 rounded-lg text-sm font-medium hover:opacity-90"
               >
                 Yes, reset usage
               </button>
@@ -115,7 +115,7 @@ export default function Settings({ data, exportData, importData, resetYear, clea
             <div className="flex gap-3">
               <button
                 onClick={() => { clearAll(); setConfirmClear(false); }}
-                className="bg-rust text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-rust"
+                className="bg-rust text-paper px-4 py-2 rounded-lg text-sm font-medium hover:opacity-90"
               >
                 Yes, delete everything
               </button>

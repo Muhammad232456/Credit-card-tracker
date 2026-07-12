@@ -34,7 +34,7 @@ export default function TransferMap({ focusProgram }: Props) {
 
   return (
     <div className="space-y-6">
-      <div className="bg-ink rounded-2xl p-6 text-white">
+      <div className="bg-surface border border-brass/40 rounded-2xl p-6 text-ink">
         <h2 className="text-lg font-semibold">Transfer Partner Map</h2>
         <p className="text-ink-soft text-sm mt-1">
           Canada has only 2 transferable currencies: Amex MR and RBC Avion. All other programs (Scene+, TD, BMO, NBC, HSBC) are portal-only with no airline/hotel transfers.
@@ -62,7 +62,7 @@ export default function TransferMap({ focusProgram }: Props) {
 
       {sourceProgram && (
         <div className="text-center py-2">
-          <span className="inline-block bg-ink text-white px-4 py-2 rounded-full text-sm font-semibold">
+          <span className="inline-block bg-brass text-ink px-4 py-2 rounded-full text-sm font-semibold">
             {sourceProgram.name}
           </span>
           {sourceProgram.note && (
@@ -85,12 +85,12 @@ export default function TransferMap({ focusProgram }: Props) {
               }`}
             >
               {isExpiring && (
-                <div className="absolute top-3 right-3 bg-rust text-white text-xs px-2 py-0.5 rounded-full font-bold">
+                <div className="absolute top-3 right-3 bg-rust text-paper text-xs px-2 py-0.5 rounded-full font-bold">
                   ENDING {route.expiryDate}
                 </div>
               )}
               {isOverlap && (
-                <div className="absolute top-3 left-3 bg-ink-soft text-white text-xs px-2 py-0.5 rounded-full">
+                <div className="absolute top-3 left-3 bg-ink-soft text-paper text-xs px-2 py-0.5 rounded-full">
                   Also via {activeSource === 'amex-mr' ? 'RBC Avion' : 'Amex MR'}
                 </div>
               )}

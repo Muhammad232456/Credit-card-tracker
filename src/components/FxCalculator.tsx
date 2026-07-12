@@ -146,7 +146,7 @@ export default function FxCalculator({ data }: Props) {
                             target="_blank"
                             rel="noopener noreferrer"
                             onClick={() => trackApplyClick(t.id, t.name, t.issuer, 'fx_calculator')}
-                            className="text-xs bg-ink text-white px-3 py-1.5 rounded-lg font-medium hover:bg-ink transition-colors"
+                            className="text-xs bg-brass text-ink px-3 py-1.5 rounded-lg font-medium hover:opacity-90 transition-opacity"
                           >
                             Apply →
                           </a>

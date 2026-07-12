@@ -256,7 +256,7 @@ export default function CardList({ data, update, onCompare, isTablet }: Props) {
         <p className="text-sm text-ink-soft mt-1">Add your first Canadian credit card to start tracking benefits.</p>
         <button
           onClick={() => setAddingCard(true)}
-          className="mt-6 bg-ink text-white px-6 py-3 rounded-xl font-medium hover:opacity-90 transition-opacity"
+          className="mt-6 bg-brass text-ink px-6 py-3 rounded-xl font-medium hover:opacity-90 transition-opacity"
         >
           Add Your First Card
         </button>
@@ -267,7 +267,7 @@ export default function CardList({ data, update, onCompare, isTablet }: Props) {
   return (
     <div className="space-y-4 relative">
       {toast && (
-        <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 bg-forest text-white text-sm font-medium px-5 py-3 rounded-full shadow-lg pointer-events-none flex items-center gap-2">
+        <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 bg-forest text-paper text-sm font-medium px-5 py-3 rounded-full shadow-lg pointer-events-none flex items-center gap-2">
           <CheckIcon className="w-4 h-4" />
           {toast}
         </div>

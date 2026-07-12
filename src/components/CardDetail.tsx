@@ -248,7 +248,7 @@ export default function CardDetail({
               </div>
               {template.currentOffer!.applyUrl && (
                 <a href={template.currentOffer!.applyUrl} target="_blank" rel="noopener noreferrer"
-                  className="shrink-0 bg-ink hover:bg-ink text-white text-xs font-semibold px-3 py-1.5 rounded-lg transition-colors">
+                  className="shrink-0 bg-brass hover:opacity-90 text-ink text-xs font-semibold px-3 py-1.5 rounded-lg transition-colors">
                   Apply →
                 </a>
               )}
@@ -554,7 +554,7 @@ export default function CardDetail({
                           onUpdateCard({ welcomeBonus: { ...wb, tiers: updated } });
                         }}
                         className={`mt-0.5 w-5 h-5 rounded-full border-2 flex items-center justify-center shrink-0 transition-colors ${
-                          tier.earned ? 'bg-forest border-forest text-white' : 'border-ink-soft'
+                          tier.earned ? 'bg-forest border-forest text-paper' : 'border-ink-soft'
                         }`}
                       >
                         {tier.earned && <span className="text-xs leading-none">✓</span>}
@@ -648,7 +648,7 @@ export default function CardDetail({
                       setTierLabel(''); setTierSpend('');
                     }}
                     disabled={!tierLabel.trim()}
-                    className="w-full py-1.5 bg-brass text-white rounded-lg text-sm font-medium hover:bg-brass disabled:opacity-40"
+                    className="w-full py-1.5 bg-brass text-ink rounded-lg text-sm font-medium hover:opacity-90 disabled:opacity-40"
                   >Add Tier</button>
                 </div>
               </details>
@@ -722,7 +722,7 @@ export default function CardDetail({
                     onUpdateCard({ welcomeBonus: { tiers: draftTiers, spendSoFar: 0, deadline: bonusDeadline || undefined } });
                     setDraftTiers([]); setBonusDeadline('');
                   }}
-                  className="w-full py-2 bg-brass text-white rounded-lg text-sm font-medium hover:bg-brass"
+                  className="w-full py-2 bg-brass text-ink rounded-lg text-sm font-medium hover:opacity-90"
                 >Start Tracking ({draftTiers.length} tier{draftTiers.length !== 1 ? 's' : ''})</button>
               </div>
             )}
@@ -1010,7 +1010,7 @@ export default function CardDetail({
                 <button
                   onClick={addSupplementary}
                   disabled={!newSupHolder.trim()}
-                  className="w-full py-2 bg-ink text-white rounded-lg text-sm font-medium hover:bg-ink disabled:opacity-40 disabled:cursor-not-allowed"
+                  className="w-full py-2 bg-brass text-ink rounded-lg text-sm font-medium hover:opacity-90 disabled:opacity-40 disabled:cursor-not-allowed"
                 >
                   Add Cardholder
                 </button>
