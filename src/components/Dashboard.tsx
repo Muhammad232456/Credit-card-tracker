@@ -225,24 +225,26 @@ export default function Dashboard({ data, onNavigate, onStartQuiz }: Props) {
     );
   }
 
-  // Credits & Perks — all trackable dollar-value benefits (excluding lounge which has its own tile)
-  const CREDIT_CATEGORIES = new Set(['travel-credit', 'dining', 'delivery', 'fuel', 'subscription', 'nexus', 'free-night', 'companion']);
-  const creditBenefits = activeCards.flatMap(uc => {
+  // Card perks: dollar credits + status/perk benefits (excluding lounge which has its own tile)
+  const CREDIT_CATS = new Set(['travel-credit', 'dining', 'delivery', 'fuel', 'subscription', 'nexus', 'free-night', 'companion']);
+  const cardPerks = activeCards.flatMap(uc => {
     const t = getCardById(uc.cardId);
     if (!t) return [];
     return t.benefits
-      .filter(b => CREDIT_CATEGORIES.has(b.category) && b.maxUses !== undefined)
+      .filter(b => b.category !== 'lounge' && (CREDIT_CATS.has(b.category) || b.category === 'status'))
       .map(b => {
         const val = effectiveBenefitValue(b, settings);
-        if (val === 0) return null;
+        const isStatus = b.category === 'status';
+        if (!isStatus && val === 0) return null;
         const used = uc.benefitUsage[b.id] ?? 0;
-        const maxUses = b.maxUses!;
-        const isAnnual = b.frequency === 'annual';
-        const isUsed = isAnnual && used >= maxUses;
-        return { cardId: uc.cardId, cardName: t.name, issuer: t.issuer, b, used, maxUses, val, isUsed, isAnnual };
+        const effectiveMax = b.maxUses ?? (b.frequency !== 'monthly' ? 1 : null);
+        const isMonthly = b.frequency === 'monthly';
+        const isUsed = !isStatus && !isMonthly && effectiveMax !== null && used >= effectiveMax;
+        return { cardId: uc.cardId, cardName: t.name, issuer: t.issuer, b, used, val, isUsed, isMonthly, isStatus };
       })
       .filter((x): x is NonNullable<typeof x> => x !== null);
   }).sort((a, b) => {
+    if (a.isStatus !== b.isStatus) return a.isStatus ? 1 : -1;
     if (a.isUsed !== b.isUsed) return a.isUsed ? 1 : -1;
     return b.val - a.val;
   });
@@ -450,18 +452,18 @@ export default function Dashboard({ data, onNavigate, onStartQuiz }: Props) {
           </div>
         )}
 
-        {/* Credits & Perks — always-on view of every dollar credit across cards */}
-        {creditBenefits.length > 0 && (
+        {/* Perks — dollar credits + status perks across all cards */}
+        {cardPerks.length > 0 && (
           <div className="lg:col-span-2 bg-surface border border-line rounded-2xl p-5">
             <div className="flex items-center justify-between mb-4">
-              <h3 className="font-semibold text-ink">Credits & Perks</h3>
+              <h3 className="font-semibold text-ink">Perks</h3>
               <span className="text-xs text-ink-soft">
-                {creditBenefits.filter(c => !c.isUsed).length} available
-                {creditBenefits.filter(c => c.isUsed).length > 0 && ` · ${creditBenefits.filter(c => c.isUsed).length} used`}
+                {cardPerks.filter(c => !c.isUsed).length} active
+                {cardPerks.filter(c => c.isUsed).length > 0 && ` · ${cardPerks.filter(c => c.isUsed).length} used`}
               </span>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-1">
-              {creditBenefits.map(({ cardId, cardName, issuer, b, val, isUsed, isAnnual }) => (
+              {cardPerks.map(({ cardId, cardName, issuer, b, val, isUsed, isMonthly, isStatus }) => (
                 <button
                   key={`${cardId}-${b.id}`}
                   onClick={() => onNavigate('cards', cardId)}
@@ -472,18 +474,24 @@ export default function Dashboard({ data, onNavigate, onStartQuiz }: Props) {
                     <p className="text-sm font-medium text-ink truncate">{b.name}</p>
                     <p className="text-xs text-ink-soft truncate">{cardName}</p>
                   </div>
-                  <div className="text-right shrink-0 mr-2">
-                    <p className={`text-sm font-semibold tabular-nums ${isUsed ? 'text-ink-soft' : 'text-forest'}`}>
-                      ${val.toFixed(0)}
-                    </p>
-                    <p className="text-xs text-ink-soft">{isAnnual ? '/yr' : '/mo'}</p>
-                  </div>
-                  {isUsed ? (
+                  {!isStatus && (
+                    <div className="text-right shrink-0 mr-2">
+                      <p className={`text-sm font-semibold tabular-nums ${isUsed ? 'text-ink-soft' : 'text-forest'}`}>
+                        ${val.toFixed(0)}
+                      </p>
+                      <p className="text-xs text-ink-soft">
+                        {isMonthly ? '/mo' : b.frequency === 'per-use' ? 'once' : '/yr'}
+                      </p>
+                    </div>
+                  )}
+                  {isStatus ? (
+                    <span className="text-[10px] font-semibold bg-brass-soft/40 text-brass px-1.5 py-0.5 rounded-full shrink-0 w-14 text-center">Active</span>
+                  ) : isUsed ? (
                     <span className="text-[10px] font-semibold bg-line text-ink-soft px-1.5 py-0.5 rounded-full shrink-0 w-14 text-center">Used</span>
-                  ) : isAnnual ? (
-                    <span className="text-[10px] font-semibold bg-forest-bg text-forest px-1.5 py-0.5 rounded-full shrink-0 w-14 text-center">Available</span>
-                  ) : (
+                  ) : isMonthly ? (
                     <span className="text-[10px] font-semibold bg-brass-soft/40 text-brass px-1.5 py-0.5 rounded-full shrink-0 w-14 text-center">Monthly</span>
+                  ) : (
+                    <span className="text-[10px] font-semibold bg-forest-bg text-forest px-1.5 py-0.5 rounded-full shrink-0 w-14 text-center">Available</span>
                   )}
                 </button>
               ))}

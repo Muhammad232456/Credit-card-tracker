@@ -666,6 +666,12 @@ export default function CardDetail({
           <div className="space-y-3">
             <p className="text-xs text-ink-soft">Add each component of the welcome bonus, then save.</p>
             <div className="space-y-2">
+              <div className="flex items-center gap-2">
+                <label className="text-xs text-ink-soft shrink-0 w-28">Spend deadline</label>
+                <input type="date" value={bonusDeadline}
+                  onChange={e => setBonusDeadline(e.target.value)}
+                  className="flex-1 border border-line rounded-lg px-3 py-2 text-sm" />
+              </div>
               <select
                 value={tierType}
                 onChange={e => setTierType(e.target.value as WelcomeBonusTier['type'])}
@@ -683,14 +689,9 @@ export default function CardDetail({
                 className="w-full border border-line rounded-lg px-3 py-2 text-sm"
               />
               {tierType === 'spend' && (
-                <div className="grid grid-cols-2 gap-2">
-                  <input type="number" placeholder="Min spend ($)" value={tierSpend}
-                    onChange={e => setTierSpend(e.target.value)}
-                    className="w-full border border-line rounded-lg px-3 py-2 text-sm font-mono" />
-                  <input type="date" value={bonusDeadline}
-                    onChange={e => setBonusDeadline(e.target.value)}
-                    className="w-full border border-line rounded-lg px-3 py-2 text-sm" />
-                </div>
+                <input type="number" placeholder="Min spend required ($)" value={tierSpend}
+                  onChange={e => setTierSpend(e.target.value)}
+                  className="w-full border border-line rounded-lg px-3 py-2 text-sm font-mono" />
               )}
               <button
                 onClick={() => {
