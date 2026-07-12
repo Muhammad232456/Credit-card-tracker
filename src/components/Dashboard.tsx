@@ -375,50 +375,58 @@ export default function Dashboard({ data, onNavigate, onStartQuiz }: Props) {
           </div>
         )}
 
-        {/* Fee Recovery — full width, ring progress per card */}
-        <div className="lg:col-span-2 bg-surface border border-line rounded-2xl p-5">
-          <div className="flex items-center justify-between mb-4">
-            <h3 className="font-semibold text-ink">Fee Recovery by Card</h3>
-            <span className="text-xs text-ink-soft tabular-nums">
-              ${totalRecovered.toFixed(0)} of ${totalFees.toFixed(0)} recovered
-            </span>
+        {/* Lounge Access — moved here, right after welcome bonus */}
+        {loungeEntries.length > 0 ? (
+          <div className="lg:col-span-2 bg-forest-bg border border-forest/20 rounded-2xl p-5">
+            <h3 className="font-semibold text-ink mb-4 flex items-center gap-2">
+              <LoungeIcon className="w-4 h-4 text-forest" />
+              Lounge Access
+              <span className="ml-auto text-xs text-forest font-medium">
+                {loungeEntries.filter(e => !e.isPaid && (e.remaining === null || e.remaining > 0)).length} active
+              </span>
+            </h3>
+            <div className="space-y-3">
+              {loungeEntries.map(({ cardId, cardName, issuer, b, used, total, remaining, isPaid }) => {
+                const exhausted = remaining !== null && remaining <= 0;
+                return (
+                  <button
+                    key={b.id}
+                    onClick={() => onNavigate('cards', cardId)}
+                    className={`w-full text-left flex items-center gap-3 hover:opacity-80 transition-opacity ${exhausted ? 'opacity-50' : ''}`}
+                  >
+                    <CardChip issuer={issuer} />
+                    <div className="flex-1 min-w-0">
+                      <p className="text-sm font-medium text-ink truncate">{b.name}</p>
+                      <p className="text-xs text-ink-soft truncate">{cardName}</p>
+                    </div>
+                    <div className="shrink-0 text-right">
+                      {isPaid ? (
+                        <span className="text-xs font-medium text-amber bg-amber-bg px-2 py-0.5 rounded-full">Paid</span>
+                      ) : total === null ? (
+                        <span className="text-xs font-medium text-forest bg-forest-bg px-2 py-0.5 rounded-full border border-forest/20">Unlimited</span>
+                      ) : exhausted ? (
+                        <span className="text-xs font-medium text-ink-soft bg-line px-2 py-0.5 rounded-full">Used up</span>
+                      ) : (
+                        <div className="text-right">
+                          <p className="text-2xl font-bold text-forest font-mono leading-none">{remaining}</p>
+                          <p className="text-xs text-ink-soft">{used}/{total} used</p>
+                        </div>
+                      )}
+                    </div>
+                  </button>
+                );
+              })}
+            </div>
           </div>
-          <div className="space-y-3">
-            {activeCards.map(uc => {
-              const t = getCardById(uc.cardId);
-              if (!t) return null;
-              const recovered = t.benefits.reduce((s, b) => {
-                const used = uc.benefitUsage[b.id] ?? 0;
-                const val = effectiveBenefitValue(b, settings);
-                return s + (b.frequency === 'annual' ? (used > 0 ? val : 0) : used * val);
-              }, 0);
-              const pct = t.annualFee > 0 ? Math.round((recovered / t.annualFee) * 100) : 100;
-              const pctColor = pct >= 100 ? 'text-forest' : pct >= 50 ? 'text-amber' : 'text-rust';
-              return (
-                <button
-                  key={uc.cardId}
-                  onClick={() => onNavigate('cards', uc.cardId)}
-                  className="w-full text-left flex items-center gap-3 hover:bg-paper rounded-xl px-2 py-1 -mx-2 transition-colors"
-                >
-                  <CardChip issuer={t.issuer} />
-                  <span className="flex-1 text-sm text-ink truncate">{t.name}</span>
-                  <div className="relative shrink-0">
-                    <RingProgress pct={pct} />
-                    <span className={`absolute inset-0 flex items-center justify-center text-[9px] font-bold ${pctColor}`}>
-                      {pct}%
-                    </span>
-                  </div>
-                  <div className="w-20 text-right shrink-0">
-                    <p className={`text-sm font-bold ${pctColor}`}>
-                      ${recovered.toFixed(0)}
-                    </p>
-                    <p className="text-xs text-ink-soft">of ${t.annualFee.toFixed(0)}</p>
-                  </div>
-                </button>
-              );
-            })}
+        ) : (
+          <div className="lg:col-span-2 bg-surface border border-line rounded-2xl p-5">
+            <h3 className="font-semibold text-ink mb-2 flex items-center gap-2">
+              <LoungeIcon className="w-4 h-4 text-ink-soft" />
+              Lounge Access
+            </h3>
+            <p className="text-sm text-ink-soft">None of your current cards include lounge access.</p>
           </div>
-        </div>
+        )}
 
         {/* Points Summary — brass tint */}
         <div className="bg-brass-soft/20 border border-brass/20 rounded-2xl p-5">
@@ -488,58 +496,48 @@ export default function Dashboard({ data, onNavigate, onStartQuiz }: Props) {
           </div>
         )}
 
-        {/* Lounge Access */}
-        {loungeEntries.length > 0 ? (
-          <div className="bg-forest-bg border border-forest/20 rounded-2xl p-5">
-            <h3 className="font-semibold text-ink mb-4 flex items-center gap-2">
-              <LoungeIcon className="w-4 h-4 text-forest" />
-              Lounge Access
-              <span className="ml-auto text-xs text-forest font-medium">
-                {loungeEntries.filter(e => !e.isPaid && (e.remaining === null || e.remaining > 0)).length} active
-              </span>
-            </h3>
-            <div className="space-y-3">
-              {loungeEntries.map(({ cardId, cardName, issuer, b, used, total, remaining, isPaid }) => {
-                const exhausted = remaining !== null && remaining <= 0;
-                return (
-                  <button
-                    key={b.id}
-                    onClick={() => onNavigate('cards', cardId)}
-                    className={`w-full text-left flex items-center gap-3 hover:opacity-80 transition-opacity ${exhausted ? 'opacity-50' : ''}`}
-                  >
-                    <CardChip issuer={issuer} />
-                    <div className="flex-1 min-w-0">
-                      <p className="text-sm font-medium text-ink truncate">{b.name}</p>
-                      <p className="text-xs text-ink-soft truncate">{cardName}</p>
-                    </div>
-                    <div className="shrink-0 text-right">
-                      {isPaid ? (
-                        <span className="text-xs font-medium text-amber bg-amber-bg px-2 py-0.5 rounded-full">Paid</span>
-                      ) : total === null ? (
-                        <span className="text-xs font-medium text-forest bg-forest-bg px-2 py-0.5 rounded-full border border-forest/20">Unlimited</span>
-                      ) : exhausted ? (
-                        <span className="text-xs font-medium text-ink-soft bg-line px-2 py-0.5 rounded-full">Used up</span>
-                      ) : (
-                        <div className="text-right">
-                          <p className="text-2xl font-bold text-forest font-mono leading-none">{remaining}</p>
-                          <p className="text-xs text-ink-soft">{used}/{total} used</p>
-                        </div>
-                      )}
-                    </div>
-                  </button>
-                );
-              })}
-            </div>
+        {/* Fee Recovery — full width, ring progress per card */}
+        <div className="lg:col-span-2 bg-surface border border-line rounded-2xl p-5">
+          <div className="flex items-center justify-between mb-4">
+            <h3 className="font-semibold text-ink">Fee Recovery by Card</h3>
+            <span className="text-xs text-ink-soft tabular-nums">
+              ${totalRecovered.toFixed(0)} of ${totalFees.toFixed(0)} recovered
+            </span>
           </div>
-        ) : (
-          <div className="bg-surface border border-line rounded-2xl p-5">
-            <h3 className="font-semibold text-ink mb-2 flex items-center gap-2">
-              <LoungeIcon className="w-4 h-4 text-ink-soft" />
-              Lounge Access
-            </h3>
-            <p className="text-sm text-ink-soft">None of your current cards include lounge access.</p>
+          <div className="space-y-3">
+            {activeCards.map(uc => {
+              const t = getCardById(uc.cardId);
+              if (!t) return null;
+              const recovered = t.benefits.reduce((s, b) => {
+                const used = uc.benefitUsage[b.id] ?? 0;
+                const val = effectiveBenefitValue(b, settings);
+                return s + (b.frequency === 'annual' ? (used > 0 ? val : 0) : used * val);
+              }, 0);
+              const pct = t.annualFee > 0 ? Math.round((recovered / t.annualFee) * 100) : 100;
+              const pctColor = pct >= 100 ? 'text-forest' : pct >= 50 ? 'text-amber' : 'text-rust';
+              return (
+                <button
+                  key={uc.cardId}
+                  onClick={() => onNavigate('cards', uc.cardId)}
+                  className="w-full text-left flex items-center gap-3 hover:bg-paper rounded-xl px-2 py-1 -mx-2 transition-colors"
+                >
+                  <CardChip issuer={t.issuer} />
+                  <span className="flex-1 text-sm text-ink truncate">{t.name}</span>
+                  <div className="relative shrink-0">
+                    <RingProgress pct={pct} />
+                    <span className={`absolute inset-0 flex items-center justify-center text-[9px] font-bold ${pctColor}`}>
+                      {pct}%
+                    </span>
+                  </div>
+                  <div className="w-20 text-right shrink-0">
+                    <p className={`text-sm font-bold ${pctColor}`}>${recovered.toFixed(0)}</p>
+                    <p className="text-xs text-ink-soft">of ${t.annualFee.toFixed(0)}</p>
+                  </div>
+                </button>
+              );
+            })}
           </div>
-        )}
+        </div>
       </div>
 
       {/* Expiry warnings — full width alert */}
