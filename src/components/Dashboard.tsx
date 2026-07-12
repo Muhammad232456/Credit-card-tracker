@@ -483,7 +483,15 @@ export default function Dashboard({ data, onNavigate, onStartQuiz }: Props) {
               ))}
             </div>
           </div>
-        ) : null}
+        ) : (
+          <div className="bg-surface border border-line rounded-2xl p-5">
+            <h3 className="font-semibold text-ink mb-2 flex items-center gap-2">
+              <span className="text-ink-soft text-xs font-bold">★</span>
+              Status & Elite
+            </h3>
+            <p className="text-sm text-ink-soft">None of your current cards include status benefits.</p>
+          </div>
+        )}
 
         {/* Perks — dollar credits + status perks across all cards */}
         {cardPerks.length > 0 && (
