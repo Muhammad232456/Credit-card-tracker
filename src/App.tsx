@@ -105,7 +105,7 @@ export default function App() {
         </div>
       )}
 
-      <main className="flex-1 max-w-6xl mx-auto w-full px-4 sm:px-8 py-6 pb-28 sm:pb-6" style={{ paddingBottom: 'calc(7rem + env(safe-area-inset-bottom))' }}>
+      <main className="flex-1 w-full px-4 sm:px-8 py-6 pb-28 sm:pb-6" style={{ paddingBottom: 'calc(7rem + env(safe-area-inset-bottom))' }}>
         {activeTab === 'dashboard' && (
           <Dashboard data={data} onNavigate={navigate} onStartQuiz={() => setShowQuiz(true)} />
         )}
