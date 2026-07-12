@@ -224,6 +224,7 @@ export default function Dashboard({ data, onNavigate, onStartQuiz }: Props) {
         </div>
       </div>
 
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 items-start">
       {/* Benefit reset calendar */}
       {upcomingResets.length > 0 && (
         <div className="bg-surface border border-amber/40 rounded-xl p-4">
@@ -393,7 +394,6 @@ export default function Dashboard({ data, onNavigate, onStartQuiz }: Props) {
         </div>
       )}
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         {/* Fee recovery */}
         <div className="bg-surface border border-line rounded-xl p-4">
           <h3 className="font-semibold text-ink mb-3">Fee Recovery by Card</h3>
