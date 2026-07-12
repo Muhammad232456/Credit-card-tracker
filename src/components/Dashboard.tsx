@@ -225,28 +225,35 @@ export default function Dashboard({ data, onNavigate, onStartQuiz }: Props) {
     );
   }
 
-  // Card perks: dollar credits + status/perk benefits (excluding lounge which has its own tile)
+  // Card perks: dollar credits only (lounge and status have their own tiles)
   const CREDIT_CATS = new Set(['travel-credit', 'dining', 'delivery', 'fuel', 'subscription', 'nexus', 'free-night', 'companion']);
   const cardPerks = activeCards.flatMap(uc => {
     const t = getCardById(uc.cardId);
     if (!t) return [];
     return t.benefits
-      .filter(b => b.category !== 'lounge' && (CREDIT_CATS.has(b.category) || b.category === 'status'))
+      .filter(b => CREDIT_CATS.has(b.category))
       .map(b => {
         const val = effectiveBenefitValue(b, settings);
-        const isStatus = b.category === 'status';
-        if (!isStatus && val === 0) return null;
+        if (val === 0) return null;
         const used = uc.benefitUsage[b.id] ?? 0;
         const effectiveMax = b.maxUses ?? (b.frequency !== 'monthly' ? 1 : null);
         const isMonthly = b.frequency === 'monthly';
-        const isUsed = !isStatus && !isMonthly && effectiveMax !== null && used >= effectiveMax;
-        return { cardId: uc.cardId, cardName: t.name, issuer: t.issuer, b, used, val, isUsed, isMonthly, isStatus };
+        const isUsed = !isMonthly && effectiveMax !== null && used >= effectiveMax;
+        return { cardId: uc.cardId, cardName: t.name, issuer: t.issuer, b, used, val, isUsed, isMonthly };
       })
       .filter((x): x is NonNullable<typeof x> => x !== null);
   }).sort((a, b) => {
-    if (a.isStatus !== b.isStatus) return a.isStatus ? 1 : -1;
     if (a.isUsed !== b.isUsed) return a.isUsed ? 1 : -1;
     return b.val - a.val;
+  });
+
+  // Status perks — hotel status, elite status, etc. (shown beside Lounge)
+  const statusPerks = activeCards.flatMap(uc => {
+    const t = getCardById(uc.cardId);
+    if (!t) return [];
+    return t.benefits
+      .filter(b => b.category === 'status')
+      .map(b => ({ cardId: uc.cardId, cardName: t.name, issuer: t.issuer, b }));
   });
 
   // Lounge data
@@ -399,9 +406,9 @@ export default function Dashboard({ data, onNavigate, onStartQuiz }: Props) {
           </div>
         )}
 
-        {/* Lounge Access — moved here, right after welcome bonus */}
+        {/* Lounge Access — half width, Status sits beside it */}
         {loungeEntries.length > 0 ? (
-          <div className="lg:col-span-2 bg-forest-bg border border-forest/20 rounded-2xl p-5">
+          <div className="bg-forest-bg border border-forest/20 rounded-2xl p-5">
             <h3 className="font-semibold text-ink mb-4 flex items-center gap-2">
               <LoungeIcon className="w-4 h-4 text-forest" />
               Lounge Access
@@ -443,7 +450,7 @@ export default function Dashboard({ data, onNavigate, onStartQuiz }: Props) {
             </div>
           </div>
         ) : (
-          <div className="lg:col-span-2 bg-surface border border-line rounded-2xl p-5">
+          <div className="bg-surface border border-line rounded-2xl p-5">
             <h3 className="font-semibold text-ink mb-2 flex items-center gap-2">
               <LoungeIcon className="w-4 h-4 text-ink-soft" />
               Lounge Access
@@ -451,6 +458,32 @@ export default function Dashboard({ data, onNavigate, onStartQuiz }: Props) {
             <p className="text-sm text-ink-soft">None of your current cards include lounge access.</p>
           </div>
         )}
+
+        {/* Status — beside Lounge */}
+        {statusPerks.length > 0 ? (
+          <div className="bg-brass-soft/20 border border-brass/20 rounded-2xl p-5">
+            <h3 className="font-semibold text-ink mb-4 flex items-center gap-2">
+              <span className="w-4 h-4 text-brass flex items-center justify-center text-xs font-bold">★</span>
+              Status & Elite
+            </h3>
+            <div className="space-y-3">
+              {statusPerks.map(({ cardId, cardName, issuer, b }) => (
+                <button
+                  key={`${cardId}-${b.id}`}
+                  onClick={() => onNavigate('cards', cardId)}
+                  className="w-full text-left flex items-center gap-3 hover:opacity-80 transition-opacity"
+                >
+                  <CardChip issuer={issuer} />
+                  <div className="flex-1 min-w-0">
+                    <p className="text-sm font-medium text-ink truncate">{b.name}</p>
+                    <p className="text-xs text-ink-soft truncate">{cardName}</p>
+                  </div>
+                  <span className="text-[10px] font-semibold bg-brass-soft/40 text-brass px-1.5 py-0.5 rounded-full shrink-0">Active</span>
+                </button>
+              ))}
+            </div>
+          </div>
+        ) : null}
 
         {/* Perks — dollar credits + status perks across all cards */}
         {cardPerks.length > 0 && (
@@ -463,7 +496,7 @@ export default function Dashboard({ data, onNavigate, onStartQuiz }: Props) {
               </span>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-1">
-              {cardPerks.map(({ cardId, cardName, issuer, b, val, isUsed, isMonthly, isStatus }) => (
+              {cardPerks.map(({ cardId, cardName, issuer, b, val, isUsed, isMonthly }) => (
                 <button
                   key={`${cardId}-${b.id}`}
                   onClick={() => onNavigate('cards', cardId)}
@@ -474,19 +507,15 @@ export default function Dashboard({ data, onNavigate, onStartQuiz }: Props) {
                     <p className="text-sm font-medium text-ink truncate">{b.name}</p>
                     <p className="text-xs text-ink-soft truncate">{cardName}</p>
                   </div>
-                  {!isStatus && (
-                    <div className="text-right shrink-0 mr-2">
-                      <p className={`text-sm font-semibold tabular-nums ${isUsed ? 'text-ink-soft' : 'text-forest'}`}>
-                        ${val.toFixed(0)}
-                      </p>
-                      <p className="text-xs text-ink-soft">
-                        {isMonthly ? '/mo' : b.frequency === 'per-use' ? 'once' : '/yr'}
-                      </p>
-                    </div>
-                  )}
-                  {isStatus ? (
-                    <span className="text-[10px] font-semibold bg-brass-soft/40 text-brass px-1.5 py-0.5 rounded-full shrink-0 w-14 text-center">Active</span>
-                  ) : isUsed ? (
+                  <div className="text-right shrink-0 mr-2">
+                    <p className={`text-sm font-semibold tabular-nums ${isUsed ? 'text-ink-soft' : 'text-forest'}`}>
+                      ${val.toFixed(0)}
+                    </p>
+                    <p className="text-xs text-ink-soft">
+                      {isMonthly ? '/mo' : b.frequency === 'per-use' ? 'once' : '/yr'}
+                    </p>
+                  </div>
+                  {isUsed ? (
                     <span className="text-[10px] font-semibold bg-line text-ink-soft px-1.5 py-0.5 rounded-full shrink-0 w-14 text-center">Used</span>
                   ) : isMonthly ? (
                     <span className="text-[10px] font-semibold bg-brass-soft/40 text-brass px-1.5 py-0.5 rounded-full shrink-0 w-14 text-center">Monthly</span>
