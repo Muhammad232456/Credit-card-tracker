@@ -12,15 +12,15 @@ interface Props {
 
 const PROGRAM_COLORS: Record<string, string> = {
   airline: 'bg-brass-soft text-brass',
-  hotel: 'bg-purple-100 text-purple-800',
+  hotel: 'bg-forest-bg text-forest',
   transferable: 'bg-amber-bg text-amber',
   bank: 'bg-line text-ink',
 };
 
 function cppRatingDot(cpp: number, defaultCpp: number, excellentCpp?: number): string {
-  if (excellentCpp && cpp >= excellentCpp) return '🟢';
-  if (cpp > defaultCpp) return '🟡';
-  return '🔴';
+  if (excellentCpp && cpp >= excellentCpp) return 'bg-forest';
+  if (cpp > defaultCpp) return 'bg-amber';
+  return 'bg-rust';
 }
 
 export default function PointsTracker({ data, update, onViewTransfers, onEvaluate }: Props) {
@@ -122,7 +122,7 @@ export default function PointsTracker({ data, update, onViewTransfers, onEvaluat
           onClick={() => onEvaluate()}
           className="mt-4 bg-brass-soft hover:opacity-80 text-brass text-sm font-medium px-4 py-2 rounded-xl transition-colors"
         >
-          🧮 Evaluate a Redemption →
+          Evaluate a Redemption →
         </button>
       </div>
 
@@ -190,7 +190,7 @@ export default function PointsTracker({ data, update, onViewTransfers, onEvaluat
                   </p>
 
                   <div className="flex items-center gap-1.5">
-                    {dot && <span title={`Benchmark: ${program.defaultCpp}¢${program.excellentCpp ? ` · Excellent: ${program.excellentCpp}¢` : ''}`}>{dot}</span>}
+                    {dot && <span title={`Benchmark: ${program.defaultCpp}¢${program.excellentCpp ? ` · Excellent: ${program.excellentCpp}¢` : ''}`} className={`inline-block w-2 h-2 rounded-full ${dot}`} />}
                     <span className="text-xs text-ink-soft">cpp:</span>
                     <input
                       type="number"
@@ -223,9 +223,9 @@ export default function PointsTracker({ data, update, onViewTransfers, onEvaluat
                 {(program.type === 'airline' || program.type === 'hotel' || program.type === 'transferable') && (
                   <button
                     onClick={() => onEvaluate(program.id)}
-                    className="text-xs text-violet-600 hover:text-violet-800 font-medium"
+                    className="text-xs text-brass hover:opacity-80 font-medium"
                   >
-                    🧮 Evaluate Redemption →
+                    Evaluate Redemption →
                   </button>
                 )}
                 <button

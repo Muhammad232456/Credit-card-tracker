@@ -7,7 +7,10 @@ import {
   effectiveBenefitValue, cardAge,
   SPEND_CATS, bestRateForCat, rateToCpd,
 } from '../utils';
-import { CATEGORY_ICON_COMPONENTS, FxIcon } from './Icons';
+import {
+  CATEGORY_ICON_COMPONENTS, FxIcon, GiftIcon, DollarCircleIcon, CheckIcon, AlertIcon,
+  CalendarIcon, ClipboardIcon, OptimizeIcon, XIcon, CompanionIcon, TrashIcon, ShieldIcon,
+} from './Icons';
 
 interface Props {
   template: CardTemplate;
@@ -218,7 +221,7 @@ export default function CardDetail({
         }
         const ratingConfig = {
           'standard':     { label: 'Standard Offer',  bg: 'bg-amber-bg',   border: 'border-amber', badge: 'bg-amber-bg text-amber' },
-          'elevated':     { label: 'Elevated Offer',  bg: 'bg-orange-50',  border: 'border-orange-200', badge: 'bg-orange-100 text-orange-700' },
+          'elevated':     { label: 'Elevated Offer',  bg: 'bg-brass-soft',  border: 'border-brass', badge: 'bg-brass-soft text-brass' },
           'all-time-high':{ label: 'All-Time High!',  bg: 'bg-forest-bg', border: 'border-forest', badge: 'bg-forest-bg text-forest' },
         };
         const cfg = ratingConfig[template.currentOffer!.rating ?? 'standard'];
@@ -229,7 +232,7 @@ export default function CardDetail({
         return (
           <div className={`mt-4 ${cfg.bg} border ${cfg.border} rounded-xl overflow-hidden`}>
             <div className="px-4 py-3 flex items-start gap-3">
-              <span className="text-xl">🎁</span>
+              <GiftIcon className="w-5 h-5 text-brass shrink-0 mt-0.5" />
               <div className="flex-1 min-w-0">
                 <div className="flex items-center gap-2 flex-wrap">
                   <p className="text-sm font-semibold text-ink">Current Offer</p>
@@ -281,7 +284,7 @@ export default function CardDetail({
           className="w-full px-4 py-3 flex items-center justify-between text-left"
         >
           <div className="flex items-center gap-3">
-            <span className="text-sm font-semibold text-ink">💰 Net Annual Value</span>
+            <span className="text-sm font-semibold text-ink flex items-center gap-1.5"><DollarCircleIcon className="w-4 h-4" /> Net Annual Value</span>
             <span className={`text-sm font-mono font-bold ${netValue >= 0 ? 'text-forest' : 'text-rust'}`}>
               {netValue >= 0 ? '+' : ''}${netValue.toFixed(0)}
             </span>
@@ -324,10 +327,10 @@ export default function CardDetail({
                   netValue >= 50 ? 'text-forest' : netValue >= -50 ? 'text-amber' : 'text-rust'
                 }`}>
                   {netValue >= 50
-                    ? `✓ Worth keeping — earns $${Math.round(netValue)} more than it costs`
+                    ? `Worth keeping — earns $${Math.round(netValue)} more than it costs`
                     : netValue >= -50
-                    ? `≈ Breaking even — use your benefits to push it positive`
-                    : `⚠ Not justifying the fee — consider downgrading or cancelling`}
+                    ? `Breaking even — use your benefits to push it positive`
+                    : `Not justifying the fee — consider downgrading or cancelling`}
                 </p>
                 {netValue < -50 && (
                   <p className="text-xs text-rust mt-1">
@@ -402,16 +405,16 @@ export default function CardDetail({
                     href={gcalUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-xs px-2.5 py-1.5 rounded-lg border border-line text-ink-soft hover:border-ink-soft hover:text-ink transition-colors"
+                    className="text-xs px-2.5 py-1.5 rounded-lg border border-line text-ink-soft hover:border-ink-soft hover:text-ink transition-colors inline-flex items-center gap-1.5"
                   >
-                    📅 Google Calendar
+                    <CalendarIcon className="w-3.5 h-3.5" /> Google Calendar
                   </a>
                   <a
                     href={icsUrl}
                     download={`${template.name}-renewal.ics`}
-                    className="text-xs px-2.5 py-1.5 rounded-lg border border-line text-ink-soft hover:border-ink-soft hover:text-ink transition-colors"
+                    className="text-xs px-2.5 py-1.5 rounded-lg border border-line text-ink-soft hover:border-ink-soft hover:text-ink transition-colors inline-flex items-center gap-1.5"
                   >
-                    📅 Apple / Outlook
+                    <CalendarIcon className="w-3.5 h-3.5" /> Apple / Outlook
                   </a>
                 </>
               );
@@ -483,8 +486,8 @@ export default function CardDetail({
           onClick={() => setShowCardMeta(v => !v)}
           className="w-full px-4 py-3 flex items-center justify-between text-left"
         >
-          <span className="text-sm font-semibold text-ink">
-            📋 Product History
+          <span className="text-sm font-semibold text-ink flex items-center gap-1.5">
+            <ClipboardIcon className="w-4 h-4" /> Product History
             {userCard.productChangeNote && (
               <span className="ml-2 text-xs font-normal text-ink-soft truncate">{userCard.productChangeNote}</span>
             )}
@@ -528,7 +531,7 @@ export default function CardDetail({
 
       {/* Welcome bonus tracker */}
       <div className="bg-surface border border-brass rounded-xl p-4 mt-4">
-        <p className="text-sm font-semibold text-ink mb-3">🎯 Welcome Bonus Tracker</p>
+        <p className="text-sm font-semibold text-ink mb-3 flex items-center gap-1.5"><OptimizeIcon className="w-4 h-4 text-brass" /> Welcome Bonus Tracker</p>
         {userCard.welcomeBonus ? (() => {
           const wb = userCard.welcomeBonus!;
           const spendTier = wb.tiers.find(t => t.type === 'spend');
@@ -557,7 +560,7 @@ export default function CardDetail({
                           tier.earned ? 'bg-forest border-forest text-paper' : 'border-ink-soft'
                         }`}
                       >
-                        {tier.earned && <span className="text-xs leading-none">✓</span>}
+                        {tier.earned && <CheckIcon className="w-3 h-3" />}
                       </button>
                       <div className="flex-1 min-w-0">
                         <p className={`text-sm font-medium ${tier.earned ? 'text-forest' : 'text-ink'}`}>
@@ -578,8 +581,8 @@ export default function CardDetail({
                       </div>
                       <button
                         onClick={() => onUpdateCard({ welcomeBonus: { ...wb, tiers: wb.tiers.filter((_, j) => j !== i) } })}
-                        className="text-line hover:text-rust text-xs shrink-0"
-                      >✕</button>
+                        className="text-ink-soft hover:text-rust text-xs shrink-0"
+                      ><XIcon className="w-3.5 h-3.5" /></button>
                     </div>
                   </div>
                 );
@@ -714,7 +717,7 @@ export default function CardDetail({
                     <span className="text-ink-soft">○</span>
                     <span className="flex-1 text-ink">{t.label}</span>
                     <span className="text-xs text-ink-soft capitalize">{t.type === 'approval' ? 'on approval' : t.type === 'spend' ? `spend $${t.spendRequired?.toLocaleString()}` : 'anniversary'}</span>
-                    <button onClick={() => setDraftTiers(prev => prev.filter((_, j) => j !== i))} className="text-line hover:text-rust text-xs">✕</button>
+                    <button onClick={() => setDraftTiers(prev => prev.filter((_, j) => j !== i))} className="text-ink-soft hover:text-rust text-xs"><XIcon className="w-3.5 h-3.5" /></button>
                   </div>
                 ))}
                 <button
@@ -737,7 +740,7 @@ export default function CardDetail({
             onClick={() => setShowEarning(v => !v)}
             className="w-full px-4 py-3 flex items-center justify-between text-left"
           >
-            <span className="text-sm font-semibold text-ink">💎 Earning Rates</span>
+            <span className="text-sm font-semibold text-ink flex items-center gap-1.5"><DollarCircleIcon className="w-4 h-4 text-brass" /> Earning Rates</span>
             <span className="text-ink-soft text-sm">{showEarning ? '▲' : '▼'}</span>
           </button>
           {showEarning && (
@@ -771,7 +774,7 @@ export default function CardDetail({
             onClick={() => setShowInsurance(v => !v)}
             className="w-full px-4 py-3 flex items-center justify-between text-left"
           >
-            <span className="text-sm font-semibold text-ink">🛡️ Insurance Coverage</span>
+            <span className="text-sm font-semibold text-ink flex items-center gap-1.5"><ShieldIcon className="w-4 h-4 text-brass" /> Insurance Coverage</span>
             <span className="text-ink-soft text-sm">{showInsurance ? '▲' : '▼'}</span>
           </button>
           {showInsurance && (
@@ -848,8 +851,8 @@ export default function CardDetail({
                     <div>
                       <p className="font-medium text-ink text-sm">{benefit.name}</p>
                       {benefit.note && <p className="text-xs text-ink-soft mt-0.5">{benefit.note}</p>}
-                      {benefit.condition && <p className="text-xs text-amber mt-0.5">⚠ {benefit.condition}</p>}
-                      {benefit.expiryWarning && <p className="text-xs text-rust mt-0.5 font-medium">⚠ {benefit.expiryWarning}</p>}
+                      {benefit.condition && <p className="text-xs text-amber mt-0.5 flex items-center gap-1"><AlertIcon className="w-3 h-3 shrink-0" /> {benefit.condition}</p>}
+                      {benefit.expiryWarning && <p className="text-xs text-rust mt-0.5 font-medium flex items-center gap-1"><AlertIcon className="w-3 h-3 shrink-0" /> {benefit.expiryWarning}</p>}
                     </div>
                     <div className="text-right shrink-0">
                       {effectiveVal > 0 && (
@@ -862,7 +865,7 @@ export default function CardDetail({
                         <p className="font-mono text-sm font-bold text-amber">${plannedValue.toFixed(0)} planned</p>
                       )}
                       {earnedValue === 0 && plannedValue === 0 && (
-                        <p className="font-mono text-sm text-line">$0</p>
+                        <p className="font-mono text-sm text-ink-soft">$0</p>
                       )}
                     </div>
                   </div>
@@ -947,8 +950,8 @@ export default function CardDetail({
             onClick={() => setShowSupplementary(v => !v)}
             className="w-full px-4 py-3 flex items-center justify-between text-left"
           >
-            <span className="text-sm font-semibold text-ink">
-              👤 Supplementary Cards
+            <span className="text-sm font-semibold text-ink flex items-center gap-1.5">
+              <CompanionIcon className="w-4 h-4 text-brass" /> Supplementary Cards
               {(userCard.supplementaryCards?.length ?? 0) > 0 && (
                 <span className="ml-2 text-xs bg-brass-soft text-brass px-1.5 py-0.5 rounded-full">
                   {userCard.supplementaryCards!.length}
@@ -1024,17 +1027,18 @@ export default function CardDetail({
       <div className="mt-6 pt-4 border-t border-line space-y-3">
         <button
           onClick={toggleStatus}
-          className={`text-sm font-medium px-4 py-2 rounded-lg border transition-colors ${
+          className={`text-sm font-medium px-4 py-2 rounded-lg border transition-colors flex items-center gap-1.5 ${
             isActive
               ? 'border-amber text-amber hover:bg-amber-bg'
               : 'border-forest text-forest hover:bg-forest-bg'
           }`}
         >
-          {isActive ? '📁 Mark as Inactive (keep history)' : '✅ Reactivate Card'}
+          {isActive ? <ClipboardIcon className="w-4 h-4" /> : <CheckIcon className="w-4 h-4" />}
+          {isActive ? 'Mark as Inactive (keep history)' : 'Reactivate Card'}
         </button>
         <div className="flex items-center justify-between">
-          <button onClick={() => { trackCardRemoved(template.id, template.name, template.issuer); onRemove(); }} className="text-sm text-rust hover:text-rust font-medium">
-            🗑 Remove card permanently
+          <button onClick={() => { trackCardRemoved(template.id, template.name, template.issuer); onRemove(); }} className="text-sm text-rust hover:text-rust font-medium flex items-center gap-1.5">
+            <TrashIcon className="w-4 h-4" /> Remove card permanently
           </button>
           <p className="text-xs text-ink-soft">
             Data from official {template.issuer} pages
@@ -1044,7 +1048,7 @@ export default function CardDetail({
             {' '}· verified {template.lastVerified}
           </p>
         </div>
-        <p className="text-sm text-ink-soft text-center font-medium">✓ Changes save automatically</p>
+        <p className="text-sm text-ink-soft text-center font-medium flex items-center justify-center gap-1.5"><CheckIcon className="w-3.5 h-3.5" /> Changes save automatically</p>
       </div>
     </div>
   );

@@ -4,7 +4,7 @@ import type { UserData, MonthlySpendProfile } from '../types';
 import { effectiveBenefitValue, nextCalendarReset, nextCardmemberReset, SPEND_CATS, bestRateForCat } from '../utils';
 import GlossaryTerm from './GlossaryTerm';
 import FeedbackWidget from './FeedbackWidget';
-import { WalletMark, CardsIcon, PointsIcon, OptimizeIcon, LoungeIcon, AlertIcon } from './Icons';
+import { WalletMark, CardsIcon, PointsIcon, OptimizeIcon, LoungeIcon, AlertIcon, ClockIcon } from './Icons';
 
 interface Props {
   data: UserData;
@@ -226,20 +226,20 @@ export default function Dashboard({ data, onNavigate, onStartQuiz }: Props) {
 
       {/* Benefit reset calendar */}
       {upcomingResets.length > 0 && (
-        <div className="bg-surface border border-orange-200 rounded-xl p-4">
+        <div className="bg-surface border border-amber/40 rounded-xl p-4">
           <h3 className="font-semibold text-ink mb-3 flex items-center gap-2">
-            ⏰ Use Before Reset
-            <span className="text-xs font-normal text-orange-600 bg-orange-50 px-2 py-0.5 rounded-full">next 60 days</span>
+            <ClockIcon className="w-4 h-4 text-amber" /> Use Before Reset
+            <span className="text-xs font-normal text-amber bg-amber-bg px-2 py-0.5 rounded-full">next 60 days</span>
           </h3>
           <div className="space-y-1">
             {upcomingResets.slice(0, 5).map((r, i) => (
               <button
                 key={i}
                 onClick={() => onNavigate('cards', r.cardId)}
-                className="w-full text-left flex items-center gap-3 p-2 rounded-lg hover:bg-orange-50 transition-colors"
+                className="w-full text-left flex items-center gap-3 p-2 rounded-lg hover:bg-amber-bg transition-colors"
               >
                 <span className={`text-xs font-bold px-2 py-1 rounded-full shrink-0 ${
-                  r.daysUntil <= 14 ? 'bg-rust-bg text-rust' : 'bg-orange-100 text-orange-700'
+                  r.daysUntil <= 14 ? 'bg-rust-bg text-rust' : 'bg-amber-bg text-amber'
                 }`}>{r.daysUntil}d</span>
                 <div className="flex-1 min-w-0">
                   <p className="text-sm font-medium text-ink truncate">{r.benefitName}</p>

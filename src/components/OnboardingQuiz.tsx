@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { getApplyUrl } from '../data/cards';
 import { trackApplyClick } from '../analytics';
+import { WalletMark, CheckIcon, DollarCircleIcon, PlaneIcon, OptimizeIcon } from './Icons';
 
 type Goal = 'cashback' | 'travel' | 'both';
 type SpendRange = 'low' | 'medium' | 'high';
@@ -68,7 +69,7 @@ export default function OnboardingQuiz({ onComplete, onSkip }: Props) {
     return (
       <div className="space-y-6 py-4">
         <div className="text-center">
-          <p className="text-4xl mb-3">🎉</p>
+          <CheckIcon className="w-10 h-10 mx-auto mb-3 text-forest" />
           <h2 className="text-xl font-bold text-ink">Your Starter Stack</h2>
           <p className="text-ink-soft text-sm mt-1">Based on your goal and spending level</p>
         </div>
@@ -76,7 +77,7 @@ export default function OnboardingQuiz({ onComplete, onSkip }: Props) {
           {recs.map((rec, i) => (
             <div key={rec.id} className="bg-surface border border-line rounded-xl p-4">
               <div className="flex items-start gap-3">
-                <span className="text-xs font-bold text-line mt-0.5">#{i + 1}</span>
+                <span className="text-xs font-bold text-ink-soft mt-0.5">#{i + 1}</span>
                 <div className="flex-1 min-w-0">
                   <p className="font-semibold text-ink text-sm">{rec.name}</p>
                   <p className="text-xs text-ink-soft mt-0.5">{rec.issuer} · {rec.fee === 0 ? 'No annual fee' : `$${rec.fee.toFixed(0)}/yr`}</p>
@@ -114,7 +115,7 @@ export default function OnboardingQuiz({ onComplete, onSkip }: Props) {
     return (
       <div className="space-y-6 py-4">
         <div className="text-center">
-          <p className="text-4xl mb-3">💰</p>
+          <DollarCircleIcon className="w-10 h-10 mx-auto mb-3 text-brass" />
           <h2 className="text-xl font-bold text-ink">What's your total monthly card spend?</h2>
           <p className="text-ink-soft text-sm mt-1">Across all purchases — groceries, dining, travel, etc.</p>
         </div>
@@ -144,7 +145,7 @@ export default function OnboardingQuiz({ onComplete, onSkip }: Props) {
   return (
     <div className="space-y-6 py-4">
       <div className="text-center">
-        <p className="text-5xl mb-3">🍁</p>
+        <WalletMark className="w-12 h-12 mx-auto mb-3 text-brass" />
         <h1 className="text-2xl font-bold text-ink">Canadian Credit Card Tracker</h1>
         <p className="text-ink-soft text-sm mt-2 max-w-sm mx-auto">
           Let's find the right cards for you. What's your main goal?
@@ -152,17 +153,17 @@ export default function OnboardingQuiz({ onComplete, onSkip }: Props) {
       </div>
       <div className="space-y-3">
         {([
-          { id: 'cashback', icon: '💵', label: 'Earn Cash Back',       sub: 'Get money back on everyday purchases — simple and straightforward' },
-          { id: 'travel',   icon: '✈️', label: 'Earn Travel Points',   sub: 'Collect points and miles to pay for flights and hotels' },
-          { id: 'both',     icon: '🎯', label: 'Maximize Everything',  sub: 'Best of both worlds — mix of travel points and cash back' },
-        ] as { id: Goal; icon: string; label: string; sub: string }[]).map(opt => (
+          { id: 'cashback', icon: DollarCircleIcon, label: 'Earn Cash Back',       sub: 'Get money back on everyday purchases — simple and straightforward' },
+          { id: 'travel',   icon: PlaneIcon, label: 'Earn Travel Points',   sub: 'Collect points and miles to pay for flights and hotels' },
+          { id: 'both',     icon: OptimizeIcon, label: 'Maximize Everything',  sub: 'Best of both worlds — mix of travel points and cash back' },
+        ] as { id: Goal; icon: typeof DollarCircleIcon; label: string; sub: string }[]).map(opt => (
           <button
             key={opt.id}
             onClick={() => { setGoal(opt.id); setStep(1); }}
             className="w-full text-left bg-surface border-2 border-line rounded-xl p-4 hover:border-ink-soft transition-colors"
           >
             <div className="flex items-center gap-3">
-              <span className="text-2xl shrink-0">{opt.icon}</span>
+              <opt.icon className="w-6 h-6 shrink-0 text-brass" />
               <div>
                 <p className="font-semibold text-ink">{opt.label}</p>
                 <p className="text-xs text-ink-soft mt-0.5">{opt.sub}</p>

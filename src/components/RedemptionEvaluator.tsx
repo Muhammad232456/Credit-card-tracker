@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { POINTS_PROGRAMS } from '../data/programs';
 import { trackRedemptionEvaluated } from '../analytics';
+import { PlaneIcon, HotelIcon, LightbulbIcon } from './Icons';
 
 interface Props {
   onBack?: () => void;
@@ -8,9 +9,9 @@ interface Props {
 }
 
 const ALLIANCE_LABELS: Record<string, string> = {
-  star: '★ Star Alliance',
-  oneworld: '✦ Oneworld',
-  skyteam: '◆ SkyTeam',
+  star: 'Star Alliance',
+  oneworld: 'Oneworld',
+  skyteam: 'SkyTeam',
 };
 
 export default function RedemptionEvaluator({ onBack, initialProgramId }: Props) {
@@ -51,17 +52,17 @@ export default function RedemptionEvaluator({ onBack, initialProgramId }: Props)
   if (cpp !== null && selected) {
     if (selected.excellentCpp && cpp >= selected.excellentCpp) {
       rating = 'excellent';
-      ratingLabel = '🟢 EXCELLENT';
+      ratingLabel = 'EXCELLENT';
       ratingColor = 'text-forest';
       ratingBg = 'bg-forest-bg border-forest';
     } else if (cpp > selected.defaultCpp) {
       rating = 'good';
-      ratingLabel = '🟡 GOOD';
+      ratingLabel = 'GOOD';
       ratingColor = 'text-amber';
       ratingBg = 'bg-amber-bg border-amber';
     } else {
       rating = 'poor';
-      ratingLabel = '🔴 POOR';
+      ratingLabel = 'POOR';
       ratingColor = 'text-rust';
       ratingBg = 'bg-rust-bg border-rust';
     }
@@ -72,9 +73,9 @@ export default function RedemptionEvaluator({ onBack, initialProgramId }: Props)
     : null;
 
   const ratingDescriptions: Record<Rating, string> = {
-    excellent: `🚀 Use your points — outstanding value, one of the best uses of these points.`,
-    good: `✓ Use your points — solid value above benchmark.`,
-    poor: `💡 Pay cash instead — save your points for a better redemption.`,
+    excellent: `Use your points — outstanding value, one of the best uses of these points.`,
+    good: `Use your points — solid value above benchmark.`,
+    poor: `Pay cash instead — save your points for a better redemption.`,
   };
 
   const trackedRef = useRef<string | null>(null);
@@ -113,23 +114,23 @@ export default function RedemptionEvaluator({ onBack, initialProgramId }: Props)
       <div className="flex gap-2 mb-4">
         <button
           onClick={() => switchTab('airline')}
-          className={`flex-1 py-2.5 rounded-xl text-sm font-semibold border transition-colors ${
+          className={`flex-1 py-2.5 rounded-xl text-sm font-semibold border transition-colors flex items-center justify-center gap-1.5 ${
             tab === 'airline'
               ? 'bg-brass text-ink border-brass'
               : 'border-line text-ink-soft hover:border-ink-soft'
           }`}
         >
-          ✈️ Airline
+          <PlaneIcon className="w-4 h-4" /> Airline
         </button>
         <button
           onClick={() => switchTab('hotel')}
-          className={`flex-1 py-2.5 rounded-xl text-sm font-semibold border transition-colors ${
+          className={`flex-1 py-2.5 rounded-xl text-sm font-semibold border transition-colors flex items-center justify-center gap-1.5 ${
             tab === 'hotel'
               ? 'bg-brass text-ink border-brass'
               : 'border-line text-ink-soft hover:border-ink-soft'
           }`}
         >
-          🏨 Hotel
+          <HotelIcon className="w-4 h-4" /> Hotel
         </button>
       </div>
 
@@ -156,8 +157,8 @@ export default function RedemptionEvaluator({ onBack, initialProgramId }: Props)
             <p className="text-xs text-brass mt-1">{selected.note}</p>
           )}
           {selected?.sweetSpots && (
-            <p className="text-xs text-amber bg-amber-bg rounded-lg px-2.5 py-1.5 mt-1.5">
-              💡 {selected.sweetSpots}
+            <p className="text-xs text-amber bg-amber-bg rounded-lg px-2.5 py-1.5 mt-1.5 flex items-start gap-1.5">
+              <LightbulbIcon className="w-3.5 h-3.5 shrink-0 mt-0.5" /> {selected.sweetSpots}
             </p>
           )}
         </div>
@@ -301,21 +302,21 @@ export default function RedemptionEvaluator({ onBack, initialProgramId }: Props)
         <p className="text-xs font-semibold text-ink-soft uppercase tracking-wide mb-3">Rating Guide</p>
         <div className="space-y-2 text-sm">
           <div className="flex items-start gap-3">
-            <span className="text-base leading-none mt-0.5">🟢</span>
+            <span className="w-2.5 h-2.5 rounded-full bg-forest shrink-0 mt-1.5" />
             <div>
               <span className="font-semibold text-forest">EXCELLENT</span>
               <span className="text-ink-soft"> — ≥ excellent threshold · Outstanding value, book it!</span>
             </div>
           </div>
           <div className="flex items-start gap-3">
-            <span className="text-base leading-none mt-0.5">🟡</span>
+            <span className="w-2.5 h-2.5 rounded-full bg-amber shrink-0 mt-1.5" />
             <div>
               <span className="font-semibold text-amber">GOOD</span>
               <span className="text-ink-soft"> — Above benchmark CPP · Solid redemption, go for it</span>
             </div>
           </div>
           <div className="flex items-start gap-3">
-            <span className="text-base leading-none mt-0.5">🔴</span>
+            <span className="w-2.5 h-2.5 rounded-full bg-rust shrink-0 mt-1.5" />
             <div>
               <span className="font-semibold text-rust">POOR</span>
               <span className="text-ink-soft"> — At or below benchmark · Consider paying cash instead</span>

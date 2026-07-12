@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { CARD_TEMPLATES, CARD_INCOME_REQS } from '../data/cards';
 import type { Issuer } from '../types';
+import { GiftIcon } from './Icons';
 
 interface Props {
   existingCardIds: string[];
@@ -147,8 +148,8 @@ export default function AddCard({ existingCardIds, onAdd, onCancel }: Props) {
                   {card.currentOffer && (() => {
                     const r = card.currentOffer!.rating;
                     const label = r === 'all-time-high' ? 'All-Time High' : r === 'elevated' ? 'Elevated Offer' : 'Standard Offer';
-                    const cls = r === 'all-time-high' ? 'text-forest' : r === 'elevated' ? 'text-orange-500' : 'text-amber';
-                    return <p className={`text-xs font-medium ${cls}`}>🎁 {label}</p>;
+                    const cls = r === 'all-time-high' ? 'text-forest' : r === 'elevated' ? 'text-brass' : 'text-amber';
+                    return <p className={`text-xs font-medium ${cls} flex items-center gap-1`}><GiftIcon className="w-3 h-3" /> {label}</p>;
                   })()}
                 </div>
               </div>

@@ -2,18 +2,19 @@ import { useState } from 'react';
 import { CARD_TEMPLATES, getApplyUrl } from '../data/cards';
 import type { UserData } from '../types';
 import { trackApplyClick } from '../analytics';
+import { FxIcon } from './Icons';
 
 const FX_RATE = 0.025;
 
 const CURRENCIES = [
-  { code: 'USD', flag: '🇺🇸', name: 'US Dollar' },
-  { code: 'EUR', flag: '🇪🇺', name: 'Euro' },
-  { code: 'GBP', flag: '🇬🇧', name: 'British Pound' },
-  { code: 'MXN', flag: '🇲🇽', name: 'Mexican Peso' },
-  { code: 'JPY', flag: '🇯🇵', name: 'Japanese Yen' },
-  { code: 'AUD', flag: '🇦🇺', name: 'Australian Dollar' },
-  { code: 'THB', flag: '🇹🇭', name: 'Thai Baht' },
-  { code: 'INR', flag: '🇮🇳', name: 'Indian Rupee' },
+  { code: 'USD', name: 'US Dollar' },
+  { code: 'EUR', name: 'Euro' },
+  { code: 'GBP', name: 'British Pound' },
+  { code: 'MXN', name: 'Mexican Peso' },
+  { code: 'JPY', name: 'Japanese Yen' },
+  { code: 'AUD', name: 'Australian Dollar' },
+  { code: 'THB', name: 'Thai Baht' },
+  { code: 'INR', name: 'Indian Rupee' },
 ];
 
 interface Props {
@@ -54,7 +55,7 @@ export default function FxCalculator({ data }: Props) {
         className="w-full px-4 py-3 flex items-center justify-between text-left"
       >
         <div className="flex items-center gap-2">
-          <span>💱</span>
+          <FxIcon className="w-4 h-4 text-brass" />
           <span className="text-sm font-semibold text-ink">FX Trip Calculator</span>
           <span className="text-xs text-ink-soft hidden sm:block">— estimate foreign transaction fee savings</span>
         </div>
@@ -91,7 +92,7 @@ export default function FxCalculator({ data }: Props) {
                 className="w-full mt-1.5 border border-line rounded-lg px-3 py-2.5 text-sm bg-surface focus:outline-none focus:ring-2 focus:ring-ink-soft"
               >
                 {CURRENCIES.map(c => (
-                  <option key={c.code} value={c.code}>{c.flag} {c.code} — {c.name}</option>
+                  <option key={c.code} value={c.code}>{c.code} — {c.name}</option>
                 ))}
               </select>
             </div>

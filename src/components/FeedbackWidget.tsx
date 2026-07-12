@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { trackEvent } from '../analytics';
+import { MessageIcon, CheckIcon } from './Icons';
 
 const ACCESS_KEY = import.meta.env.VITE_WEB3FORMS_KEY as string | undefined;
 
@@ -44,7 +45,7 @@ export default function FeedbackWidget() {
         className="w-full px-4 py-3 flex items-center justify-between text-left"
       >
         <div className="flex items-center gap-2">
-          <span>💬</span>
+          <MessageIcon className="w-4 h-4 text-brass" />
           <span className="text-sm font-semibold text-ink">Share Feedback</span>
           <span className="text-xs text-ink-soft hidden sm:block">— suggest a feature or report an issue</span>
         </div>
@@ -54,8 +55,8 @@ export default function FeedbackWidget() {
       {open && (
         <div className="border-t border-line px-4 pb-4 pt-3 space-y-3">
           {status === 'sent' ? (
-            <p className="text-sm text-forest font-medium text-center py-4">
-              ✓ Thanks for your feedback!
+            <p className="text-sm text-forest font-medium text-center py-4 flex items-center justify-center gap-1.5">
+              <CheckIcon className="w-4 h-4" /> Thanks for your feedback!
             </p>
           ) : (
             <>

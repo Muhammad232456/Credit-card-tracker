@@ -6,6 +6,7 @@ import { SPEND_CATS, bestRateForCat, formatRate } from '../utils';
 import FxCalculator from './FxCalculator';
 import GlossaryTerm from './GlossaryTerm';
 import { trackApplyClick } from '../analytics';
+import { SPEND_CAT_ICON_COMPONENTS, CardsIcon, OptimizeIcon, DollarCircleIcon, AlertIcon } from './Icons';
 
 interface Props {
   data: UserData;
@@ -191,9 +192,11 @@ export default function SpendOptimizer({ data, update, onNavigate }: Props) {
       <div className="bg-surface border border-line rounded-xl p-4">
         <h3 className="font-semibold text-ink mb-3 text-sm">Monthly Spend Profile</h3>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-          {SPEND_CATS.map(cat => (
+          {SPEND_CATS.map(cat => {
+            const CatIcon = SPEND_CAT_ICON_COMPONENTS[cat.id];
+            return (
             <div key={cat.id} className="flex items-center gap-2">
-              <span className="text-lg w-7 shrink-0 text-center">{cat.icon}</span>
+              <CatIcon className="w-5 h-5 shrink-0 text-ink-soft" />
               <label className="text-sm text-ink w-32 shrink-0">{cat.label}</label>
               <div className="flex-1 relative">
                 <span className="absolute left-3 top-1/2 -translate-y-1/2 text-ink-soft text-sm">$</span>
@@ -207,7 +210,8 @@ export default function SpendOptimizer({ data, update, onNavigate }: Props) {
                 />
               </div>
             </div>
-          ))}
+            );
+          })}
         </div>
         {totalMonthly > 0 && (
           <p className="text-xs text-ink-soft mt-3 pt-3 border-t border-line">
@@ -219,7 +223,7 @@ export default function SpendOptimizer({ data, update, onNavigate }: Props) {
 
       {!hasCards && (
         <div className="text-center py-10 text-ink-soft">
-          <p className="text-4xl mb-3">💳</p>
+          <CardsIcon className="w-10 h-10 mx-auto mb-3 text-ink-soft" />
           <p className="text-base font-medium text-ink-soft">No cards added yet</p>
           <p className="text-sm mt-1 mb-4">Add your cards first, then come back to see which card earns the most for each spending category.</p>
           <button
@@ -233,7 +237,6 @@ export default function SpendOptimizer({ data, update, onNavigate }: Props) {
 
       {hasCards && !hasSpend && (
         <div className="text-center py-8 text-ink-soft">
-          <p className="text-3xl mb-2">👆</p>
           <p className="text-sm">Enter your monthly spending above to see which card to use for each category.</p>
         </div>
       )}
@@ -245,8 +248,8 @@ export default function SpendOptimizer({ data, update, onNavigate }: Props) {
             <div className="px-4 py-3 bg-paper border-b border-line flex items-center justify-between">
               <h3 className="font-semibold text-ink text-sm">Optimization Results</h3>
               <div className="flex items-center gap-3 text-xs text-ink-soft">
-                <span className="flex items-center gap-1"><span>🎯</span> Best points</span>
-                <span className="flex items-center gap-1"><span>💵</span> Best cash back</span>
+                <span className="flex items-center gap-1"><OptimizeIcon className="w-3.5 h-3.5" /> Best points</span>
+                <span className="flex items-center gap-1"><DollarCircleIcon className="w-3.5 h-3.5" /> Best cash back</span>
               </div>
             </div>
             <div className="divide-y divide-line">
@@ -258,7 +261,7 @@ export default function SpendOptimizer({ data, update, onNavigate }: Props) {
                   <div key={r.cat.id} className="px-4 py-3">
                     <div className="flex items-center justify-between mb-2">
                       <div className="flex items-center gap-2">
-                        <span className="text-base">{r.cat.icon}</span>
+                        {(() => { const CatIcon = SPEND_CAT_ICON_COMPONENTS[r.cat.id]; return <CatIcon className="w-4 h-4 text-ink-soft" />; })()}
                         <span className="text-xs text-ink-soft">{r.cat.label}</span>
                       </div>
                       <div className="text-right">
@@ -272,16 +275,16 @@ export default function SpendOptimizer({ data, update, onNavigate }: Props) {
                     {showBoth ? (
                       <div className="space-y-1.5">
                         <div className="flex items-center gap-2">
-                          <span className="text-xs w-4 shrink-0">🎯</span>
-                          <span className={`text-xs px-1.5 py-0.5 rounded-full text-white font-medium shrink-0 ${ISSUER_COLORS[r.bestPoints!.issuer] ?? 'bg-ink'}`}>
+                          <OptimizeIcon className="w-3.5 h-3.5 shrink-0 text-ink-soft" />
+                          <span className={`text-xs px-1.5 py-0.5 rounded-full text-white font-medium shrink-0 ${ISSUER_COLORS[r.bestPoints!.issuer] ?? 'bg-ink-soft'}`}>
                             {r.bestPoints!.issuer}
                           </span>
                           <span className="text-sm font-medium text-ink truncate">{r.bestPoints!.card}</span>
                           <span className="text-xs text-brass font-mono ml-auto shrink-0">{r.bestPoints!.rate}</span>
                         </div>
                         <div className="flex items-center gap-2">
-                          <span className="text-xs w-4 shrink-0">💵</span>
-                          <span className={`text-xs px-1.5 py-0.5 rounded-full text-white font-medium shrink-0 ${ISSUER_COLORS[r.bestCash!.issuer] ?? 'bg-ink'}`}>
+                          <DollarCircleIcon className="w-3.5 h-3.5 shrink-0 text-ink-soft" />
+                          <span className={`text-xs px-1.5 py-0.5 rounded-full text-white font-medium shrink-0 ${ISSUER_COLORS[r.bestCash!.issuer] ?? 'bg-ink-soft'}`}>
                             {r.bestCash!.issuer}
                           </span>
                           <span className="text-sm font-medium text-ink truncate">{r.bestCash!.card}</span>
@@ -290,8 +293,8 @@ export default function SpendOptimizer({ data, update, onNavigate }: Props) {
                       </div>
                     ) : onlyOne ? (
                       <div className="flex items-center gap-2">
-                        <span className="text-xs w-4 shrink-0">{r.bestPoints ? '🎯' : '💵'}</span>
-                        <span className={`text-xs px-1.5 py-0.5 rounded-full text-white font-medium shrink-0 ${ISSUER_COLORS[onlyOne.issuer] ?? 'bg-ink'}`}>
+                        {r.bestPoints ? <OptimizeIcon className="w-3.5 h-3.5 shrink-0 text-ink-soft" /> : <DollarCircleIcon className="w-3.5 h-3.5 shrink-0 text-ink-soft" />}
+                        <span className={`text-xs px-1.5 py-0.5 rounded-full text-white font-medium shrink-0 ${ISSUER_COLORS[onlyOne.issuer] ?? 'bg-ink-soft'}`}>
                           {onlyOne.issuer}
                         </span>
                         <span className="text-sm font-medium text-ink truncate">{onlyOne.card}</span>
@@ -325,7 +328,7 @@ export default function SpendOptimizer({ data, update, onNavigate }: Props) {
                     <span className={`text-xs font-bold w-5 shrink-0 ${i === 0 ? 'text-forest' : 'text-ink-soft'}`}>
                       #{i + 1}
                     </span>
-                    <span className={`text-xs px-1.5 py-0.5 rounded-full text-white font-medium shrink-0 ${ISSUER_COLORS[c.issuer] ?? 'bg-ink'}`}>
+                    <span className={`text-xs px-1.5 py-0.5 rounded-full text-white font-medium shrink-0 ${ISSUER_COLORS[c.issuer] ?? 'bg-ink-soft'}`}>
                       {c.issuer}
                     </span>
                     <span className="text-sm text-ink flex-1 truncate">{c.name}</span>
@@ -362,7 +365,7 @@ export default function SpendOptimizer({ data, update, onNavigate }: Props) {
                         {/* Rank + issuer + name */}
                         <div className="flex items-center gap-2 flex-wrap">
                           <span className="text-xs font-bold text-amber">#{i + 1}</span>
-                          <span className={`text-xs px-1.5 py-0.5 rounded-full text-white font-medium ${ISSUER_COLORS[rec.issuer] ?? 'bg-ink'}`}>
+                          <span className={`text-xs px-1.5 py-0.5 rounded-full text-white font-medium ${ISSUER_COLORS[rec.issuer] ?? 'bg-ink-soft'}`}>
                             {rec.issuer}
                           </span>
                           <span className="text-sm font-semibold text-ink truncate">{rec.name}</span>
@@ -434,7 +437,7 @@ export default function SpendOptimizer({ data, update, onNavigate }: Props) {
       <FxCalculator data={data} />
 
       <div className="bg-amber-bg border border-amber rounded-xl p-3 text-xs text-amber space-y-1">
-        <p className="font-semibold">⚠ Estimates may not reflect real-world earning</p>
+        <p className="font-semibold flex items-center gap-1.5"><AlertIcon className="w-3.5 h-3.5" /> Estimates may not reflect real-world earning</p>
         <p>Spend categories assume your card is accepted at every merchant. In practice, some stores restrict card networks — for example, Costco only accepts Mastercard, and some merchants don't accept Amex. Your actual earn may be lower if part of your spend is at merchants that don't accept your card.</p>
       </div>
       <p className="text-xs text-ink-soft text-center pb-2">

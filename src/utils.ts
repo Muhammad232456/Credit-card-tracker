@@ -2,15 +2,15 @@ import type { EarningRate, BenefitTemplate, UserSettings } from './types';
 import type { PointsProgram } from './types';
 
 export const SPEND_CATS = [
-  { id: 'groceries',     label: 'Groceries',         icon: '🛒', keywords: ['grocer', 'supermarket', 'food store', 'loblaws', 'sobeys', 'metro', 'costco'] },
-  { id: 'dining',        label: 'Dining & Bars',      icon: '🍽️', keywords: ['dining', 'restaurant', 'bar', 'coffee', 'food delivery', 'instacart', 'doordash', 'drink'] },
-  { id: 'gas',           label: 'Gas & EV',           icon: '⛽', keywords: ['gas', 'fuel', 'petro', 'ev charging', 'esso', 'station'] },
-  { id: 'transit',       label: 'Transit & Rideshare',icon: '🚇', keywords: ['transit', 'rideshare', 'uber', 'lyft', 'ttc', 'presto', 'bus', 'subway', 'train'] },
-  { id: 'travel',        label: 'Travel',             icon: '✈️', keywords: ['travel', 'flight', 'hotel', 'airline', 'airbnb', 'airport', 'vacation', 'porter', 'westjet', 'air canada', 'british airways'] },
-  { id: 'entertainment', label: 'Entertainment',      icon: '🎬', keywords: ['entertainment', 'movie', 'cineplex', 'sport', 'theatre', 'scene', 'gaming'] },
-  { id: 'streaming',     label: 'Streaming & Subs',   icon: '📺', keywords: ['streaming', 'subscription', 'recurring', 'bill', 'digital media', 'digital'] },
-  { id: 'drugstore',     label: 'Drug & Pharmacy',    icon: '💊', keywords: ['drug', 'pharmacy', 'shoppers', 'rexall'] },
-  { id: 'other',         label: 'Everything Else',    icon: '🛍️', keywords: [] },
+  { id: 'groceries',     label: 'Groceries',         keywords: ['grocer', 'supermarket', 'food store', 'loblaws', 'sobeys', 'metro', 'costco'] },
+  { id: 'dining',        label: 'Dining & Bars',      keywords: ['dining', 'restaurant', 'bar', 'coffee', 'food delivery', 'instacart', 'doordash', 'drink'] },
+  { id: 'gas',           label: 'Gas & EV',           keywords: ['gas', 'fuel', 'petro', 'ev charging', 'esso', 'station'] },
+  { id: 'transit',       label: 'Transit & Rideshare', keywords: ['transit', 'rideshare', 'uber', 'lyft', 'ttc', 'presto', 'bus', 'subway', 'train'] },
+  { id: 'travel',        label: 'Travel',             keywords: ['travel', 'flight', 'hotel', 'airline', 'airbnb', 'airport', 'vacation', 'porter', 'westjet', 'air canada', 'british airways'] },
+  { id: 'entertainment', label: 'Entertainment',      keywords: ['entertainment', 'movie', 'cineplex', 'sport', 'theatre', 'scene', 'gaming'] },
+  { id: 'streaming',     label: 'Streaming & Subs',   keywords: ['streaming', 'subscription', 'recurring', 'bill', 'digital media', 'digital'] },
+  { id: 'drugstore',     label: 'Drug & Pharmacy',    keywords: ['drug', 'pharmacy', 'shoppers', 'rexall'] },
+  { id: 'other',         label: 'Everything Else',    keywords: [] },
 ] as const;
 
 export type SpendCatId = typeof SPEND_CATS[number]['id'];

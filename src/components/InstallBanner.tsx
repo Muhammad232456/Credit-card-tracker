@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { WalletMark } from './Icons';
 
 const DISMISSED_KEY = 'pwa-install-dismissed';
 
@@ -47,7 +48,7 @@ export default function InstallBanner() {
   if (deferredPrompt) {
     return (
       <div className="sm:hidden fixed bottom-20 left-4 right-4 z-40 bg-ink text-paper rounded-2xl px-4 py-3 flex items-center gap-3 shadow-xl">
-        <span className="text-2xl">🍁</span>
+        <WalletMark className="w-6 h-6 shrink-0" />
         <div className="flex-1 min-w-0">
           <p className="text-sm font-semibold">Add to Home Screen</p>
           <p className="text-xs text-ink-soft">Use CA Card Tracker like an app</p>
@@ -68,7 +69,7 @@ export default function InstallBanner() {
     return (
       <div className="sm:hidden fixed bottom-20 left-4 right-4 z-40 bg-ink text-paper rounded-2xl px-4 py-3 shadow-xl">
         <div className="flex items-start gap-3">
-          <span className="text-2xl">🍁</span>
+          <WalletMark className="w-6 h-6 shrink-0" />
           <div className="flex-1">
             <p className="text-sm font-semibold">Add to Home Screen</p>
             <p className="text-xs text-ink-soft mt-0.5">

@@ -39,10 +39,11 @@ export default function RenewalTracker({ data, onSelectCard }: Props) {
             days < 60 ? 'border-amber bg-amber-bg' :
             'border-forest bg-forest-bg';
 
-          const badge = days === null ? null :
-            days < 30 ? `🔴 ${days}d` :
-            days < 60 ? `🟡 ${days}d` :
-            `🟢 ${days}d`;
+          const badge = days === null ? null : `${days}d`;
+          const badgeColor = days === null ? 'text-ink' :
+            days < 30 ? 'text-rust' :
+            days < 60 ? 'text-amber' :
+            'text-forest';
 
           return (
             <button
@@ -58,7 +59,7 @@ export default function RenewalTracker({ data, onSelectCard }: Props) {
                     : 'No renewal date set'}
                 </p>
               </div>
-              {badge && <span className="font-mono text-sm font-bold text-ink">{badge}</span>}
+              {badge && <span className={`font-mono text-sm font-bold ${badgeColor}`}>{badge}</span>}
               {!days && days !== 0 && <span className="text-xs text-ink-soft">Set date →</span>}
             </button>
           );

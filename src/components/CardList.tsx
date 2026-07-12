@@ -188,16 +188,16 @@ export default function CardList({ data, update, onCompare, isTablet }: Props) {
         className={`w-full text-left bg-surface border border-line rounded-2xl overflow-hidden flex hover:-translate-y-0.5 hover:shadow-md transition-all ${dimmed ? 'opacity-50' : ''}`}
       >
         {/* Card face */}
-        <div className={`w-28 sm:w-32 shrink-0 bg-gradient-to-br ${face} p-3 flex flex-col justify-between text-white`}>
-          <div className="w-6 h-[18px] rounded-[4px] bg-gradient-to-br from-[#E9CD8C] to-brass shadow-inner" />
-          <div className="flex gap-1">
+        <div className={`w-16 sm:w-28 lg:w-32 shrink-0 bg-gradient-to-br ${face} p-2 sm:p-3 flex flex-col justify-between text-white`}>
+          <div className="w-5 h-[14px] sm:w-6 sm:h-[18px] rounded-[4px] bg-gradient-to-br from-[#E9CD8C] to-brass shadow-inner" />
+          <div className="hidden sm:flex gap-1">
             {[0, 1, 2, 3].map(i => <span key={i} className="w-1 h-1 rounded-full bg-white/50" />)}
           </div>
-          <p className="text-[10px] font-bold uppercase tracking-wide opacity-85 truncate">{template.issuer}</p>
+          <p className="text-[9px] sm:text-[10px] font-bold uppercase tracking-wide opacity-85 truncate">{template.issuer}</p>
         </div>
 
         {/* Body */}
-        <div className="flex-1 min-w-0 px-4 py-3 flex flex-col justify-center gap-1">
+        <div className="flex-1 min-w-0 px-2.5 sm:px-4 py-3 flex flex-col justify-center gap-1">
           <div className="flex items-center gap-2 flex-wrap">
             <p className="font-semibold text-ink text-sm truncate">{template.name}</p>
             {dimmed && <span className="text-[10px] font-semibold text-ink-soft bg-line px-1.5 py-0.5 rounded-full shrink-0">Inactive</span>}
@@ -205,7 +205,7 @@ export default function CardList({ data, update, onCompare, isTablet }: Props) {
               <span className="text-[10px] font-semibold text-forest bg-forest-bg px-1.5 py-0.5 rounded-full shrink-0">1st yr free</span>
             )}
           </div>
-          <p className="text-xs text-ink-soft">
+          <p className="text-xs text-ink-soft truncate">
             {feeFreq === 'monthly'
               ? `$${(template.annualFee / 12).toFixed(2)}/mo`
               : template.annualFee === 0 ? 'No fee' : `$${template.annualFee.toFixed(0)}/yr`}
@@ -217,31 +217,31 @@ export default function CardList({ data, update, onCompare, isTablet }: Props) {
         </div>
 
         {/* Stats */}
-        <div className="w-40 sm:w-48 shrink-0 px-4 py-3 flex flex-col justify-center gap-1.5 border-l border-line">
+        <div className="w-24 sm:w-40 lg:w-48 shrink-0 px-2 sm:px-4 py-3 flex flex-col justify-center gap-1.5 border-l border-line">
           {template.benefits.length > 0 ? (
             <>
-              <p className="text-sm tabular-nums">
+              <p className="text-xs sm:text-sm tabular-nums truncate">
                 <span className="font-bold text-ink">${totalValue.toFixed(0)}</span>
-                <span className="text-ink-soft text-xs"> of ${template.annualFee.toFixed(0)}</span>
+                <span className="text-ink-soft text-[10px] sm:text-xs"> of ${template.annualFee.toFixed(0)}</span>
               </p>
               <div className="h-[5px] rounded-full bg-line overflow-hidden">
                 <div className={`h-full rounded-full ${barClass}`} style={{ width: `${Math.min(100, recoveryPct)}%` }} />
               </div>
             </>
           ) : (
-            <p className="text-xs text-ink-soft">No trackable credits</p>
+            <p className="text-[10px] sm:text-xs text-ink-soft">No trackable credits</p>
           )}
           {statusPill && (
-            <span className={`inline-flex items-center gap-1 text-[10px] font-bold px-2 py-0.5 rounded-full w-fit ${statusPill.cls}`}>
-              <statusPill.icon className="w-2.5 h-2.5" />
-              {statusPill.label}
+            <span className={`inline-flex items-center gap-1 text-[9px] sm:text-[10px] font-bold px-1.5 sm:px-2 py-0.5 rounded-full w-fit ${statusPill.cls}`}>
+              <statusPill.icon className="w-2.5 h-2.5 shrink-0" />
+              <span className="truncate">{statusPill.label}</span>
             </span>
           )}
           {renewalDays === null && !dimmed && !userCard.openedDate && (
-            <span className="text-[11px] text-ink-soft">Set opened date →</span>
+            <span className="text-[10px] sm:text-[11px] text-ink-soft">Set date →</span>
           )}
           {userCard.creditLimit && (
-            <p className="text-[11px] text-ink-soft">${userCard.creditLimit.toLocaleString()} limit</p>
+            <p className="text-[10px] sm:text-[11px] text-ink-soft truncate">${userCard.creditLimit.toLocaleString()} limit</p>
           )}
         </div>
       </button>

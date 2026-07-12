@@ -3,6 +3,7 @@ import { CARD_TEMPLATES, getApplyUrl } from '../data/cards';
 import { POINTS_PROGRAMS } from '../data/programs';
 import { SPEND_CATS, bestRateForCat, formatRate } from '../utils';
 import { trackApplyClick } from '../analytics';
+import { SPEND_CAT_ICON_COMPONENTS } from './Icons';
 
 interface Props {
   onBack: () => void;
@@ -64,7 +65,7 @@ export default function CardComparison({ onBack }: Props) {
                 disabled={disabled}
                 className={`w-full text-left px-3 py-2 rounded-lg text-sm flex items-center justify-between transition-colors ${
                   isSel ? 'bg-brass text-ink' :
-                  disabled ? 'text-line cursor-not-allowed' :
+                  disabled ? 'text-ink-soft cursor-not-allowed' :
                   'hover:bg-paper text-ink'
                 }`}
               >
@@ -113,12 +114,12 @@ export default function CardComparison({ onBack }: Props) {
                   const offer = t.currentOffer;
                   if (!offer) return (
                     <div key={t.id} className="p-3">
-                      <p className="text-xs text-line italic">No current offer</p>
+                      <p className="text-xs text-ink-soft italic">No current offer</p>
                     </div>
                   );
                   const ratingColors = {
                     'standard':      { badge: 'bg-amber-bg text-amber',   border: 'border-amber' },
-                    'elevated':      { badge: 'bg-orange-100 text-orange-700',  border: 'border-orange-200' },
+                    'elevated':      { badge: 'bg-brass-soft text-brass',  border: 'border-brass' },
                     'all-time-high': { badge: 'bg-forest-bg text-forest', border: 'border-forest' },
                   };
                   const rc = offer.rating ? ratingColors[offer.rating] : ratingColors['standard'];
@@ -145,9 +146,11 @@ export default function CardComparison({ onBack }: Props) {
             <div className="px-4 py-2 bg-paper border-b border-line">
               <p className="text-xs font-semibold text-ink-soft uppercase tracking-wide">Earn Rates by Category</p>
             </div>
-            {SPEND_CATS.filter(c => c.id !== 'other').map(cat => (
+            {SPEND_CATS.filter(c => c.id !== 'other').map(cat => {
+              const CatIcon = SPEND_CAT_ICON_COMPONENTS[cat.id];
+              return (
               <div key={cat.id} className="border-b border-line last:border-0">
-                <p className="text-xs text-ink-soft px-4 pt-2 pb-0.5">{cat.icon} {cat.label}</p>
+                <p className="text-xs text-ink-soft px-4 pt-2 pb-0.5 flex items-center gap-1.5"><CatIcon className="w-3.5 h-3.5" /> {cat.label}</p>
                 <div className={`grid gap-px bg-line ${cols}`}>
                   {selected.map(t => {
                     const { rate, cpd } = t.earningRates?.length
@@ -166,14 +169,15 @@ export default function CardComparison({ onBack }: Props) {
                             {formatRate(rate, cpd)}
                           </p>
                         ) : (
-                          <p className="text-xs text-line">—</p>
+                          <p className="text-xs text-ink-soft">—</p>
                         )}
                       </div>
                     );
                   })}
                 </div>
               </div>
-            ))}
+              );
+            })}
           </div>
 
           {/* Benefits */}
@@ -185,7 +189,7 @@ export default function CardComparison({ onBack }: Props) {
               {selected.map(t => (
                 <div key={t.id} className="p-3 space-y-1.5">
                   {t.benefits.length === 0 ? (
-                    <p className="text-xs text-line italic">No tracked credits</p>
+                    <p className="text-xs text-ink-soft italic">No tracked credits</p>
                   ) : (
                     <>
                       {t.benefits.slice(0, 5).map(b => (
