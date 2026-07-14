@@ -1,4 +1,4 @@
-import { useState } from 'react';
+﻿import { useState } from 'react';
 import { POINTS_PROGRAMS } from '../data/programs';
 import { getApplyUrl } from '../data/cards';
 import type { CardTemplate, UserCard, UserSettings, UserSupplementaryCard, WelcomeBonusTier } from '../types';
@@ -327,10 +327,10 @@ export default function CardDetail({
                   netValue >= 50 ? 'text-forest' : netValue >= -50 ? 'text-amber' : 'text-rust'
                 }`}>
                   {netValue >= 50
-                    ? `Worth keeping — earns $${Math.round(netValue)} more than it costs`
+                    ? `Worth keeping - earns $${Math.round(netValue)} more than it costs`
                     : netValue >= -50
-                    ? `Breaking even — use your benefits to push it positive`
-                    : `Not justifying the fee — consider downgrading or cancelling`}
+                    ? `Breaking even - use your benefits to push it positive`
+                    : `Not justifying the fee - consider downgrading or cancelling`}
                 </p>
                 {netValue < -50 && (
                   <p className="text-xs text-rust mt-1">
@@ -383,7 +383,7 @@ export default function CardDetail({
                 : `Renewal was ${Math.abs(renewalDays)} days ago`}
             </p>
             {renewalDays > 0 && (() => {
-              const title = encodeURIComponent(`${template.name} — Annual Fee Renewal`);
+              const title = encodeURIComponent(`${template.name} - Annual Fee Renewal`);
               const details = encodeURIComponent(`Review whether to keep or cancel your ${template.name} (annual fee: $${template.annualFee}).`);
               const date = renewal.replace(/-/g, '');
               const gcalUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${title}&dates=${date}/${date}&details=${details}`;
@@ -393,7 +393,7 @@ export default function CardDetail({
                 'BEGIN:VEVENT',
                 `DTSTART;VALUE=DATE:${date}`,
                 `DTEND;VALUE=DATE:${date}`,
-                `SUMMARY:${template.name} — Annual Fee Renewal`,
+                `SUMMARY:${template.name} - Annual Fee Renewal`,
                 `DESCRIPTION:Review whether to keep or cancel your ${template.name} (annual fee: $${template.annualFee}).`,
                 'END:VEVENT',
                 'END:VCALENDAR',
@@ -810,10 +810,10 @@ export default function CardDetail({
         <h3 className="font-semibold text-ink">
           Benefits Checklist
           {template.benefits.length === 0 && !template.noFxFee && (
-            <span className="ml-2 text-sm font-normal text-ink-soft">— no trackable credits</span>
+            <span className="ml-2 text-sm font-normal text-ink-soft">· no trackable credits</span>
           )}
           {template.benefits.length === 0 && template.noFxFee && (
-            <span className="ml-2 text-sm font-normal text-ink-soft">— card feature only</span>
+            <span className="ml-2 text-sm font-normal text-ink-soft">· card feature only</span>
           )}
         </h3>
         {template.noFxFee && template.benefits.length === 0 && (
@@ -823,7 +823,7 @@ export default function CardDetail({
             </div>
             <div>
               <p className="font-medium text-ink text-sm">No Foreign Transaction Fee</p>
-              <p className="text-xs text-ink-soft mt-0.5">Card feature — no surcharge on purchases in foreign currencies</p>
+              <p className="text-xs text-ink-soft mt-0.5">Card feature - no surcharge on purchases in foreign currencies</p>
             </div>
           </div>
         )}
@@ -997,7 +997,7 @@ export default function CardDetail({
                     className="w-full border border-line rounded-lg px-3 py-2 text-sm"
                   >
                     {template.supplementaryCardOptions.map((opt, i) => (
-                      <option key={i} value={i}>{opt.name} — {opt.fee === 0 ? 'Free' : `$${opt.fee}/yr`}</option>
+                      <option key={i} value={i}>{opt.name} - {opt.fee === 0 ? 'Free' : `$${opt.fee}/yr`}</option>
                     ))}
                   </select>
                 )}

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+﻿import { useState } from 'react';
 import { trackEvent } from '../analytics';
 import { MessageIcon, CheckIcon } from './Icons';
 
@@ -20,7 +20,7 @@ export default function FeedbackWidget() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           access_key: ACCESS_KEY,
-          subject: 'CA Card Tracker — User Feedback',
+          subject: 'CA Card Tracker - User Feedback',
           message: message.trim(),
           from_name: 'CA Card Tracker User',
         }),
@@ -47,7 +47,7 @@ export default function FeedbackWidget() {
         <div className="flex items-center gap-2">
           <MessageIcon className="w-4 h-4 text-brass" />
           <span className="text-sm font-semibold text-ink">Share Feedback</span>
-          <span className="text-xs text-ink-soft hidden sm:block">— suggest a feature or report an issue</span>
+          <span className="text-xs text-ink-soft hidden sm:block">· suggest a feature or report an issue</span>
         </div>
         <span className="text-ink-soft text-sm">{open ? '▲' : '▼'}</span>
       </button>
@@ -68,7 +68,7 @@ export default function FeedbackWidget() {
                 className="w-full border border-line rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-ink-soft resize-none"
               />
               {status === 'error' && (
-                <p className="text-xs text-rust">Something went wrong — try again.</p>
+                <p className="text-xs text-rust">Something went wrong - try again.</p>
               )}
               <button
                 onClick={submit}

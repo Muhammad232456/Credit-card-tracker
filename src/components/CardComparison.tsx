@@ -1,4 +1,4 @@
-import { useState } from 'react';
+﻿import { useState } from 'react';
 import { CARD_TEMPLATES, getApplyUrl } from '../data/cards';
 import { POINTS_PROGRAMS } from '../data/programs';
 import { SPEND_CATS, bestRateForCat, formatRate } from '../utils';
@@ -169,7 +169,7 @@ export default function CardComparison({ onBack }: Props) {
                             {formatRate(rate, cpd)}
                           </p>
                         ) : (
-                          <p className="text-xs text-ink-soft">—</p>
+                          <p className="text-xs text-ink-soft">-</p>
                         )}
                       </div>
                     );
@@ -220,7 +220,7 @@ export default function CardComparison({ onBack }: Props) {
                   onClick={() => trackApplyClick(t.id, t.name, t.issuer, 'comparison')}
                   className="bg-brass text-ink text-xs text-center py-2.5 rounded-xl font-semibold hover:opacity-90 transition-opacity block"
                 >
-                  Apply — {t.issuer} →
+                  Apply - {t.issuer} →
                 </a>
               ) : (
                 <div key={t.id} className="bg-line text-ink-soft text-xs text-center py-2.5 rounded-xl">

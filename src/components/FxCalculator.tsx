@@ -1,4 +1,4 @@
-import { useState } from 'react';
+﻿import { useState } from 'react';
 import { CARD_TEMPLATES, getApplyUrl } from '../data/cards';
 import type { UserData } from '../types';
 import { trackApplyClick } from '../analytics';
@@ -57,7 +57,7 @@ export default function FxCalculator({ data }: Props) {
         <div className="flex items-center gap-2">
           <FxIcon className="w-4 h-4 text-brass" />
           <span className="text-sm font-semibold text-ink">FX Trip Calculator</span>
-          <span className="text-xs text-ink-soft hidden sm:block">— estimate foreign transaction fee savings</span>
+          <span className="text-xs text-ink-soft hidden sm:block">· estimate foreign transaction fee savings</span>
         </div>
         <span className="text-ink-soft text-sm">{open ? '▲' : '▼'}</span>
       </button>
@@ -92,7 +92,7 @@ export default function FxCalculator({ data }: Props) {
                 className="w-full mt-1.5 border border-line rounded-lg px-3 py-2.5 text-sm bg-surface focus:outline-none focus:ring-2 focus:ring-ink-soft"
               >
                 {CURRENCIES.map(c => (
-                  <option key={c.code} value={c.code}>{c.code} — {c.name}</option>
+                  <option key={c.code} value={c.code}>{c.code} - {c.name}</option>
                 ))}
               </select>
             </div>
@@ -112,7 +112,7 @@ export default function FxCalculator({ data }: Props) {
                   </p>
                   <p className="text-xs text-ink-soft mt-0.5">
                     {hasSavings
-                      ? `Use your ${heldNoFxCards[0].name} — no foreign transaction fee`
+                      ? `Use your ${heldNoFxCards[0].name} - no foreign transaction fee`
                       : 'None of your current cards waive the 2.5% FX fee'}
                   </p>
                   {hasSavings && heldNoFxCards.length > 1 && (

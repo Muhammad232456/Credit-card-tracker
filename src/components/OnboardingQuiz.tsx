@@ -1,4 +1,4 @@
-import { useState } from 'react';
+﻿import { useState } from 'react';
 import { getApplyUrl } from '../data/cards';
 import { trackApplyClick } from '../analytics';
 import { WalletMark, CheckIcon, DollarCircleIcon, PlaneIcon, OptimizeIcon } from './Icons';
@@ -11,44 +11,44 @@ interface Rec { id: string; name: string; issuer: string; why: string; fee: numb
 const RECS: Record<Goal, Record<SpendRange, Rec[]>> = {
   cashback: {
     low: [
-      { id: 'tangerine-money-back', name: 'Tangerine Money-Back', issuer: 'Tangerine', why: '2% on 3 categories you choose — no annual fee, straightforward cash back.', fee: 0 },
+      { id: 'tangerine-money-back', name: 'Tangerine Money-Back', issuer: 'Tangerine', why: '2% on 3 categories you choose - no annual fee, straightforward cash back.', fee: 0 },
       { id: 'neo-mastercard', name: 'Neo Mastercard', issuer: 'Neo', why: 'Up to 5% back at Neo partner merchants, no annual fee.', fee: 0 },
     ],
     medium: [
-      { id: 'bmo-cashback-world-elite', name: 'BMO CashBack World Elite', issuer: 'BMO', why: '5% on groceries, 4% transit, 3% gas — highest cash back rates in Canada.', fee: 120 },
-      { id: 'tangerine-money-back', name: 'Tangerine Money-Back', issuer: 'Tangerine', why: '2% on 3 categories — great no-fee companion card.', fee: 0 },
+      { id: 'bmo-cashback-world-elite', name: 'BMO CashBack World Elite', issuer: 'BMO', why: '5% on groceries, 4% transit, 3% gas - highest cash back rates in Canada.', fee: 120 },
+      { id: 'tangerine-money-back', name: 'Tangerine Money-Back', issuer: 'Tangerine', why: '2% on 3 categories - great no-fee companion card.', fee: 0 },
     ],
     high: [
-      { id: 'bmo-cashback-world-elite', name: 'BMO CashBack World Elite', issuer: 'BMO', why: '5% groceries, 4% transit, 3% gas — pays for itself quickly at higher spend.', fee: 120 },
-      { id: 'scotia-momentum-infinite', name: 'Scotia Momentum Infinite', issuer: 'Scotiabank', why: '4% groceries and transit, 2% gas — strong all-around cash back card.', fee: 120 },
+      { id: 'bmo-cashback-world-elite', name: 'BMO CashBack World Elite', issuer: 'BMO', why: '5% groceries, 4% transit, 3% gas - pays for itself quickly at higher spend.', fee: 120 },
+      { id: 'scotia-momentum-infinite', name: 'Scotia Momentum Infinite', issuer: 'Scotiabank', why: '4% groceries and transit, 2% gas - strong all-around cash back card.', fee: 120 },
     ],
   },
   travel: {
     low: [
-      { id: 'amex-cobalt', name: 'Amex Cobalt', issuer: 'Amex', why: '5× MR on dining and groceries — the best points earn rate in Canada per dollar.', fee: 155.88 },
-      { id: 'cibc-aeroplan-visa', name: 'CIBC Aeroplan Visa', issuer: 'CIBC', why: 'No annual fee entry into Aeroplan — start earning Air Canada miles right away.', fee: 0 },
+      { id: 'amex-cobalt', name: 'Amex Cobalt', issuer: 'Amex', why: '5× MR on dining and groceries - the best points earn rate in Canada per dollar.', fee: 155.88 },
+      { id: 'cibc-aeroplan-visa', name: 'CIBC Aeroplan Visa', issuer: 'CIBC', why: 'No annual fee entry into Aeroplan - start earning Air Canada miles right away.', fee: 0 },
     ],
     medium: [
-      { id: 'amex-cobalt', name: 'Amex Cobalt', issuer: 'Amex', why: '5× MR on dining and groceries — earns the most flexible travel points in Canada.', fee: 155.88 },
+      { id: 'amex-cobalt', name: 'Amex Cobalt', issuer: 'Amex', why: '5× MR on dining and groceries - earns the most flexible travel points in Canada.', fee: 155.88 },
       { id: 'td-aeroplan-infinite', name: 'TD Aeroplan Visa Infinite', issuer: 'TD', why: 'Strong Aeroplan earn + Air Canada perks like a free checked bag.', fee: 139 },
     ],
     high: [
-      { id: 'amex-cobalt', name: 'Amex Cobalt', issuer: 'Amex', why: '5× MR on dining and groceries — the anchor of any serious travel points setup.', fee: 155.88 },
+      { id: 'amex-cobalt', name: 'Amex Cobalt', issuer: 'Amex', why: '5× MR on dining and groceries - the anchor of any serious travel points setup.', fee: 155.88 },
       { id: 'td-aeroplan-infinite-privilege', name: 'TD Aeroplan Infinite Privilege', issuer: 'TD', why: 'Premium Aeroplan card with Maple Leaf Club lounge access and 3× on Air Canada.', fee: 599 },
     ],
   },
   both: {
     low: [
-      { id: 'amex-cobalt', name: 'Amex Cobalt', issuer: 'Amex', why: '5× MR on dining and groceries — points that transfer to airlines or redeem like cash.', fee: 155.88 },
-      { id: 'rbc-cashback-mastercard', name: 'RBC Cash Back Mastercard', issuer: 'RBC', why: 'No-fee cash back on groceries — solid backup for when Amex isn\'t accepted.', fee: 0 },
+      { id: 'amex-cobalt', name: 'Amex Cobalt', issuer: 'Amex', why: '5× MR on dining and groceries - points that transfer to airlines or redeem like cash.', fee: 155.88 },
+      { id: 'rbc-cashback-mastercard', name: 'RBC Cash Back Mastercard', issuer: 'RBC', why: 'No-fee cash back on groceries - solid backup for when Amex isn\'t accepted.', fee: 0 },
     ],
     medium: [
-      { id: 'amex-cobalt', name: 'Amex Cobalt', issuer: 'Amex', why: '5× MR on dining and groceries — most flexible earn card in Canada.', fee: 155.88 },
-      { id: 'bmo-cashback-world-elite', name: 'BMO CashBack World Elite', issuer: 'BMO', why: '5% cash back on groceries — pairs with Cobalt to cover non-dining spend.', fee: 120 },
+      { id: 'amex-cobalt', name: 'Amex Cobalt', issuer: 'Amex', why: '5× MR on dining and groceries - most flexible earn card in Canada.', fee: 155.88 },
+      { id: 'bmo-cashback-world-elite', name: 'BMO CashBack World Elite', issuer: 'BMO', why: '5% cash back on groceries - pairs with Cobalt to cover non-dining spend.', fee: 120 },
     ],
     high: [
-      { id: 'amex-cobalt', name: 'Amex Cobalt', issuer: 'Amex', why: '5× MR on dining and groceries — the best earn-rate card in Canada, period.', fee: 155.88 },
-      { id: 'scotia-gold-amex', name: 'Scotiabank Gold Amex', issuer: 'Scotiabank', why: '6× Scene+ on dining and groceries, no FX fee — excellent all-around card.', fee: 120 },
+      { id: 'amex-cobalt', name: 'Amex Cobalt', issuer: 'Amex', why: '5× MR on dining and groceries - the best earn-rate card in Canada, period.', fee: 155.88 },
+      { id: 'scotia-gold-amex', name: 'Scotiabank Gold Amex', issuer: 'Scotiabank', why: '6× Scene+ on dining and groceries, no FX fee - excellent all-around card.', fee: 120 },
     ],
   },
 };
@@ -117,7 +117,7 @@ export default function OnboardingQuiz({ onComplete, onSkip }: Props) {
         <div className="text-center">
           <DollarCircleIcon className="w-10 h-10 mx-auto mb-3 text-brass" />
           <h2 className="text-xl font-bold text-ink">What's your total monthly card spend?</h2>
-          <p className="text-ink-soft text-sm mt-1">Across all purchases — groceries, dining, travel, etc.</p>
+          <p className="text-ink-soft text-sm mt-1">Across all purchases - groceries, dining, travel, etc.</p>
         </div>
         <div className="space-y-3">
           {([
@@ -153,9 +153,9 @@ export default function OnboardingQuiz({ onComplete, onSkip }: Props) {
       </div>
       <div className="space-y-3">
         {([
-          { id: 'cashback', icon: DollarCircleIcon, label: 'Earn Cash Back',       sub: 'Get money back on everyday purchases — simple and straightforward' },
+          { id: 'cashback', icon: DollarCircleIcon, label: 'Earn Cash Back',       sub: 'Get money back on everyday purchases - simple and straightforward' },
           { id: 'travel',   icon: PlaneIcon, label: 'Earn Travel Points',   sub: 'Collect points and miles to pay for flights and hotels' },
-          { id: 'both',     icon: OptimizeIcon, label: 'Maximize Everything',  sub: 'Best of both worlds — mix of travel points and cash back' },
+          { id: 'both',     icon: OptimizeIcon, label: 'Maximize Everything',  sub: 'Best of both worlds - mix of travel points and cash back' },
         ] as { id: Goal; icon: typeof DollarCircleIcon; label: string; sub: string }[]).map(opt => (
           <button
             key={opt.id}
@@ -173,7 +173,7 @@ export default function OnboardingQuiz({ onComplete, onSkip }: Props) {
         ))}
       </div>
       <button onClick={onSkip} className="w-full text-center text-sm text-ink-soft hover:text-ink-soft py-2">
-        Skip — I'll set up manually
+        Skip - I'll set up manually
       </button>
     </div>
   );

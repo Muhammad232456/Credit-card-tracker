@@ -1,12 +1,12 @@
-export const GLOSSARY: Record<string, string> = {
-  'CPP': 'Cents Per Point — how much one loyalty point is worth in Canadian cents. Higher is better. E.g. 1.5¢/pt means 10,000 pts ≈ $150.',
+﻿export const GLOSSARY: Record<string, string> = {
+  'CPP': 'Cents Per Point - how much one loyalty point is worth in Canadian cents. Higher is better. E.g. 1.5¢/pt means 10,000 pts ≈ $150.',
   'Annual Fee': 'The yearly cost to hold the card. Often offset by travel credits, lounge passes, and points earn.',
   'Welcome Bonus': 'Extra points or cash earned by hitting a minimum spend in your first few months. Usually the most valuable perk of a new card.',
-  'Aeroplan': "Air Canada's loyalty program. Points can be redeemed for flights, upgrades, hotel stays, and more — often best value on Star Alliance partners.",
+  'Aeroplan': "Air Canada's loyalty program. Points can be redeemed for flights, upgrades, hotel stays, and more - often best value on Star Alliance partners.",
   'Scene+': "Scotiabank's loyalty program. 1 pt = 1¢ redeemed at Sobeys, Cineplex, or through Scene+ Travel (Expedia).",
-  'Amex MR': "American Express Membership Rewards — Canada's most flexible points currency. Transfers 1:1 to Aeroplan, Avios, and several other programs.",
+  'Amex MR': "American Express Membership Rewards - Canada's most flexible points currency. Transfers 1:1 to Aeroplan, Avios, and several other programs.",
   'Avios': "British Airways' loyalty currency, usable across the Oneworld alliance. Great for short-haul Air Canada flights redeemed via the Avios chart.",
-  'FX Fee': "Foreign transaction fee — typically 2.5% added to purchases made in a non-CAD currency. Cards with 'No FX Fee' waive this charge entirely.",
+  'FX Fee': "Foreign transaction fee - typically 2.5% added to purchases made in a non-CAD currency. Cards with 'No FX Fee' waive this charge entirely.",
   'Benefit Recovery': "How much of the annual fee you've offset by using the card's credits, lounge passes, and other perks.",
   'Net Value': "Annual earn estimate + benefits recovered minus the annual fee. A positive number means the card is paying for itself.",
   'Transfer Partner': "Airlines or hotels you can move points to, often at 1:1 ratios. Transferring to a partner is usually how you unlock the best redemption value.",

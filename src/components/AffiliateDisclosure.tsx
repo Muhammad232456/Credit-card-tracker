@@ -1,4 +1,4 @@
-interface Props {
+﻿interface Props {
   onBack?: () => void;
 }
 
@@ -26,7 +26,7 @@ export default function AffiliateDisclosure({ onBack }: Props) {
           <h2 className="font-semibold text-ink text-base mb-2">How Affiliate Links Work</h2>
           <p>
             Some links on this site are affiliate links. If you click one and are approved for a product,
-            we may receive a referral fee from the financial institution or affiliate network — at
+            we may receive a referral fee from the financial institution or affiliate network - at
             <strong> no extra cost to you</strong>. You pay the same rate whether you use our link or go
             directly to the provider.
           </p>

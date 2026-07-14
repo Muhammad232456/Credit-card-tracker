@@ -1,4 +1,4 @@
-import { useState } from 'react';
+﻿import { useState } from 'react';
 import { CARD_TEMPLATES, getCardById, getApplyUrl } from '../data/cards';
 import { POINTS_PROGRAMS } from '../data/programs';
 import type { UserData, MonthlySpendProfile } from '../types';
@@ -266,7 +266,7 @@ export default function SpendOptimizer({ data, update, onNavigate }: Props) {
                       </div>
                       <div className="text-right">
                         <span className="font-mono font-bold text-forest text-sm">
-                          ${r.annualVal > 0 ? r.annualVal.toFixed(0) : '—'}
+                          ${r.annualVal > 0 ? r.annualVal.toFixed(0) : '-'}
                         </span>
                         <span className="text-xs text-ink-soft">/yr</span>
                       </div>
@@ -354,7 +354,7 @@ export default function SpendOptimizer({ data, update, onNavigate }: Props) {
               <div className="px-4 py-3 bg-amber-bg border-b border-amber">
                 <h3 className="font-semibold text-ink text-sm">Cards Worth Getting</h3>
                 <p className="text-xs text-ink-soft mt-0.5">
-                  Based on your spend — incremental <GlossaryTerm term="Earn Rate">earn</GlossaryTerm> above your current best card per category
+                  Based on your spend - incremental <GlossaryTerm term="Earn Rate">earn</GlossaryTerm> above your current best card per category
                 </p>
               </div>
               <div className="divide-y divide-line">
@@ -438,7 +438,7 @@ export default function SpendOptimizer({ data, update, onNavigate }: Props) {
 
       <div className="bg-amber-bg border border-amber rounded-xl p-3 text-xs text-amber space-y-1">
         <p className="font-semibold flex items-center gap-1.5"><AlertIcon className="w-3.5 h-3.5" /> Estimates may not reflect real-world earning</p>
-        <p>Spend categories assume your card is accepted at every merchant. In practice, some stores restrict card networks — for example, Costco only accepts Mastercard, and some merchants don't accept Amex. Your actual earn may be lower if part of your spend is at merchants that don't accept your card.</p>
+        <p>Spend categories assume your card is accepted at every merchant. In practice, some stores restrict card networks - for example, Costco only accepts Mastercard, and some merchants don't accept Amex. Your actual earn may be lower if part of your spend is at merchants that don't accept your card.</p>
       </div>
       <p className="text-xs text-ink-soft text-center pb-2">
         Points values use default <GlossaryTerm term="CPP">CPP</GlossaryTerm> benchmarks. Set your personal CPP in the Points tab to personalize results.

@@ -1,4 +1,4 @@
-import { getCardById } from '../data/cards';
+﻿import { getCardById } from '../data/cards';
 import { POINTS_PROGRAMS } from '../data/programs';
 import type { UserData, MonthlySpendProfile } from '../types';
 import { effectiveBenefitValue, nextCalendarReset, nextCardmemberReset, SPEND_CATS, bestRateForCat } from '../utils';
@@ -179,10 +179,10 @@ export default function Dashboard({ data, onNavigate, onStartQuiz }: Props) {
           <WalletMark className="w-12 h-12 mx-auto mb-4 text-brass" />
           <h1 className="text-2xl font-bold text-ink">Canadian Credit Card Tracker</h1>
           <p className="text-ink-soft mt-2 max-w-md mx-auto text-sm">
-            Track your points balances, card benefits, renewal dates, and annual fee recovery — all in your browser.
+            Track your points balances, card benefits, renewal dates, and annual fee recovery - all in your browser.
           </p>
           <p className="text-xs text-ink-soft mt-2">
-            No account needed — your data saves automatically on this device, completely free.
+            No account needed - your data saves automatically on this device, completely free.
           </p>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
@@ -247,7 +247,7 @@ export default function Dashboard({ data, onNavigate, onStartQuiz }: Props) {
     return b.val - a.val;
   });
 
-  // Status perks — hotel status, elite status, etc. (shown beside Lounge)
+  // Status perks - hotel status, elite status, etc. (shown beside Lounge)
   const statusPerks = activeCards.flatMap(uc => {
     const t = getCardById(uc.cardId);
     if (!t) return [];
@@ -307,7 +307,7 @@ export default function Dashboard({ data, onNavigate, onStartQuiz }: Props) {
                 <p className="text-ink-soft text-xs">across {activeCards.filter(c => c.creditLimit).length} cards</p>
               </>
             ) : (
-              <p className="font-mono text-ink-soft text-sm mt-1">—</p>
+              <p className="font-mono text-ink-soft text-sm mt-1">-</p>
             )}
           </div>
           {hasSpendProfile && (
@@ -325,7 +325,7 @@ export default function Dashboard({ data, onNavigate, onStartQuiz }: Props) {
       {/* Bento grid */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
 
-        {/* Use Before Reset — amber alert tile, full width */}
+        {/* Use Before Reset - amber alert tile, full width */}
         {upcomingResets.length > 0 && (
           <div className="lg:col-span-2 bg-amber-bg border border-amber/30 rounded-2xl p-5">
             <h3 className="font-semibold text-ink mb-4 flex items-center gap-2">
@@ -354,7 +354,7 @@ export default function Dashboard({ data, onNavigate, onStartQuiz }: Props) {
           </div>
         )}
 
-        {/* Welcome Bonus Progress — brass-tinted, full width */}
+        {/* Welcome Bonus Progress - brass-tinted, full width */}
         {welcomeBonusCards.length > 0 && (
           <div className="lg:col-span-2 bg-brass-soft/25 border border-brass/20 rounded-2xl p-5">
             <h3 className="font-semibold text-ink mb-4 flex items-center gap-2">
@@ -406,7 +406,7 @@ export default function Dashboard({ data, onNavigate, onStartQuiz }: Props) {
           </div>
         )}
 
-        {/* Lounge Access — half width, Status sits beside it */}
+        {/* Lounge Access - half width, Status sits beside it */}
         {loungeEntries.length > 0 ? (
           <div className="bg-forest-bg border border-forest/20 rounded-2xl p-5">
             <h3 className="font-semibold text-ink mb-4 flex items-center gap-2">
@@ -459,7 +459,7 @@ export default function Dashboard({ data, onNavigate, onStartQuiz }: Props) {
           </div>
         )}
 
-        {/* Status — beside Lounge */}
+        {/* Status - beside Lounge */}
         {statusPerks.length > 0 ? (
           <div className="bg-brass-soft/20 border border-brass/20 rounded-2xl p-5">
             <h3 className="font-semibold text-ink mb-4 flex items-center gap-2">
@@ -493,7 +493,7 @@ export default function Dashboard({ data, onNavigate, onStartQuiz }: Props) {
           </div>
         )}
 
-        {/* Perks — dollar credits + status perks across all cards */}
+        {/* Perks - dollar credits + status perks across all cards */}
         {cardPerks.length > 0 && (
           <div className="lg:col-span-2 bg-surface border border-line rounded-2xl p-5">
             <div className="flex items-center justify-between mb-4">
@@ -536,7 +536,7 @@ export default function Dashboard({ data, onNavigate, onStartQuiz }: Props) {
           </div>
         )}
 
-        {/* Points Summary — brass tint */}
+        {/* Points Summary - brass tint */}
         <div className="bg-brass-soft/20 border border-brass/20 rounded-2xl p-5">
           <h3 className="font-semibold text-ink mb-1 flex items-center gap-2">
             <PointsIcon className="w-4 h-4 text-brass" />
@@ -604,7 +604,7 @@ export default function Dashboard({ data, onNavigate, onStartQuiz }: Props) {
           </div>
         )}
 
-        {/* Fee Recovery — full width, ring progress per card */}
+        {/* Fee Recovery - full width, ring progress per card */}
         <div className="lg:col-span-2 bg-surface border border-line rounded-2xl p-5">
           <div className="flex items-center justify-between mb-4">
             <h3 className="font-semibold text-ink">Fee Recovery by Card</h3>
@@ -648,7 +648,7 @@ export default function Dashboard({ data, onNavigate, onStartQuiz }: Props) {
         </div>
       </div>
 
-      {/* Expiry warnings — full width alert */}
+      {/* Expiry warnings - full width alert */}
       {data.cards.some(uc => { const t = getCardById(uc.cardId); return t?.benefits.some(b => b.expiryWarning); }) && (
         <div className="bg-rust-bg border border-rust/30 rounded-2xl p-4">
           <p className="font-semibold text-rust text-sm flex items-center gap-1.5 mb-1">

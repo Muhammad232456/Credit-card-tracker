@@ -1,4 +1,4 @@
-import { getCardById } from '../data/cards';
+﻿import { getCardById } from '../data/cards';
 import type { UserData } from '../types';
 
 interface Props {
@@ -67,7 +67,7 @@ export default function RenewalTracker({ data, onSelectCard }: Props) {
       </div>
       {noRenewalDate.length > 0 && (
         <p className="text-xs text-ink-soft">
-          {noRenewalDate.length} card{noRenewalDate.length !== 1 ? 's' : ''} missing renewal date — tap to set.
+          {noRenewalDate.length} card{noRenewalDate.length !== 1 ? 's' : ''} missing renewal date - tap to set.
         </p>
       )}
     </div>

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+﻿import { useState } from 'react';
 import { useStorage } from './hooks/useStorage';
 import { useDevice } from './hooks/useDevice';
 import Dashboard from './components/Dashboard';
@@ -96,7 +96,7 @@ export default function App() {
         </nav>
       </header>
 
-      {/* Quiz modal — opt-in, never auto-shown */}
+      {/* Quiz modal - opt-in, never auto-shown */}
       {showQuiz && (
         <div className="fixed inset-0 z-50 bg-black/50 flex items-center justify-center p-4">
           <div className="bg-surface rounded-2xl w-full max-w-lg shadow-2xl">
