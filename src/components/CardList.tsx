@@ -5,7 +5,7 @@ import { effectiveBenefitValue, cardAge } from '../utils';
 import AddCard from './AddCard';
 import CardDetail from './CardDetail';
 import { trackCardAdded, trackCardRemoved, trackCardDetailViewed, trackAddCardFlowStarted, updatePersonProperties } from '../analytics';
-import { CardsIcon, CheckIcon, ClockIcon, AlertIcon } from './Icons';
+import { CheckIcon, ClockIcon, AlertIcon } from './Icons';
 
 interface Props {
   data: UserData;

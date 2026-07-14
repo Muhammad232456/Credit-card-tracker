@@ -107,7 +107,7 @@ export default function App() {
 
       <main className="flex-1 w-full px-4 sm:px-8 py-6 pb-28 sm:pb-6" style={{ paddingBottom: 'calc(7rem + env(safe-area-inset-bottom))' }}>
         {activeTab === 'dashboard' && (
-          <Dashboard data={data} onNavigate={navigate} onStartQuiz={() => setShowQuiz(true)} />
+          <Dashboard data={data} onNavigate={navigate} />
         )}
         {activeTab === 'cards' && (
           <CardList data={data} update={update} onCompare={() => setActiveTab('compare')} onStartQuiz={() => setShowQuiz(true)} isTablet={device.isTablet} />

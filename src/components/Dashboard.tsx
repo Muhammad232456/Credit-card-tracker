@@ -9,7 +9,6 @@ import { WalletMark, CardsIcon, PointsIcon, OptimizeIcon, LoungeIcon, AlertIcon,
 interface Props {
   data: UserData;
   onNavigate: (tab: string, cardId?: string) => void;
-  onStartQuiz?: () => void;
 }
 
 const ISSUER_FACE: Record<string, string> = {
@@ -79,7 +78,7 @@ function calcNextRenewal(openedDate: string, feeFrequency: 'monthly' | 'annual' 
   return next.toISOString().split('T')[0];
 }
 
-export default function Dashboard({ data, onNavigate, onStartQuiz }: Props) {
+export default function Dashboard({ data, onNavigate }: Props) {
   const activeCards = data.cards.filter(c => (c.status ?? 'active') === 'active');
   const settings = data.settings;
 
