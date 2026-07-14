@@ -5,7 +5,7 @@ import { effectiveBenefitValue, cardAge } from '../utils';
 import AddCard from './AddCard';
 import CardDetail from './CardDetail';
 import { trackCardAdded, trackCardRemoved, trackCardDetailViewed, trackAddCardFlowStarted, updatePersonProperties } from '../analytics';
-import { CheckIcon, ClockIcon, AlertIcon } from './Icons';
+import { CardsIcon, CheckIcon, ClockIcon, AlertIcon, GiftIcon, CalendarIcon } from './Icons';
 
 interface Props {
   data: UserData;
@@ -253,23 +253,23 @@ export default function CardList({ data, update, onCompare, onStartQuiz, isTable
     return (
       <div className="space-y-8 py-8">
         <div className="text-center">
-          <div className="text-5xl mb-4">💳</div>
+          <CardsIcon className="w-12 h-12 mx-auto mb-4 text-brass" />
           <p className="text-xl font-bold text-ink">Your cards, all in one place</p>
           <p className="text-sm text-ink-soft mt-2 max-w-sm mx-auto">Add your Canadian credit cards to track benefits, renewal dates, and annual fee recovery.</p>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
           <div className="bg-surface border border-line rounded-xl p-4 text-center">
-            <div className="text-2xl mb-2">🎁</div>
+            <GiftIcon className="w-7 h-7 mx-auto mb-2 text-brass" />
             <p className="font-semibold text-ink text-sm">Track Benefits</p>
             <p className="text-xs text-ink-soft mt-1">Know exactly which perks you've used and what's left</p>
           </div>
           <div className="bg-surface border border-line rounded-xl p-4 text-center">
-            <div className="text-2xl mb-2">📅</div>
+            <CalendarIcon className="w-7 h-7 mx-auto mb-2 text-brass" />
             <p className="font-semibold text-ink text-sm">Renewal Alerts</p>
             <p className="text-xs text-ink-soft mt-1">Never miss a renewal or forget to use your credits</p>
           </div>
           <div className="bg-surface border border-line rounded-xl p-4 text-center">
-            <div className="text-2xl mb-2">📊</div>
+            <CardsIcon className="w-7 h-7 mx-auto mb-2 text-brass" />
             <p className="font-semibold text-ink text-sm">Compare Cards</p>
             <p className="text-xs text-ink-soft mt-1">See how any Canadian credit card stacks up side by side</p>
           </div>
