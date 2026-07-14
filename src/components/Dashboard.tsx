@@ -186,21 +186,21 @@ export default function Dashboard({ data, onNavigate, onStartQuiz }: Props) {
           </p>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-          <div className="bg-surface border border-line rounded-xl p-5 text-center">
+          <button onClick={() => onNavigate('cards')} className="bg-surface border border-line rounded-xl p-5 text-center hover:border-brass hover:bg-brass-soft/10 transition-colors group">
             <CardsIcon className="w-7 h-7 mx-auto mb-2 text-brass" />
-            <p className="font-semibold text-ink">Add Cards</p>
+            <p className="font-semibold text-ink group-hover:text-brass transition-colors">Add Cards →</p>
             <p className="text-xs text-ink-soft mt-1">Track Canadian credit cards and their benefits</p>
-          </div>
-          <div className="bg-surface border border-line rounded-xl p-5 text-center">
+          </button>
+          <button onClick={() => onNavigate('points')} className="bg-surface border border-line rounded-xl p-5 text-center hover:border-brass hover:bg-brass-soft/10 transition-colors group">
             <PointsIcon className="w-7 h-7 mx-auto mb-2 text-brass" />
-            <p className="font-semibold text-ink">Track Points</p>
+            <p className="font-semibold text-ink group-hover:text-brass transition-colors">Track Points →</p>
             <p className="text-xs text-ink-soft mt-1">Monitor loyalty programs with CAD valuations</p>
-          </div>
-          <div className="bg-surface border border-line rounded-xl p-5 text-center">
+          </button>
+          <button onClick={() => onNavigate('optimize')} className="bg-surface border border-line rounded-xl p-5 text-center hover:border-brass hover:bg-brass-soft/10 transition-colors group">
             <OptimizeIcon className="w-7 h-7 mx-auto mb-2 text-brass" />
-            <p className="font-semibold text-ink">Optimize Spend</p>
+            <p className="font-semibold text-ink group-hover:text-brass transition-colors">Optimize Spend →</p>
             <p className="text-xs text-ink-soft mt-1">Find the best card for each spend category</p>
-          </div>
+          </button>
         </div>
         <div className="flex flex-col sm:flex-row gap-3 justify-center">
           <button onClick={() => onNavigate('cards')} className="bg-brass text-ink px-6 py-3 rounded-xl font-medium hover:opacity-90 transition-opacity">
