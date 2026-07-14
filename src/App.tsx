@@ -20,7 +20,7 @@ import { WalletMark, DashboardIcon, CardsIcon, PointsIcon, OptimizeIcon, RedeemI
 type Tab = 'dashboard' | 'cards' | 'points' | 'optimize' | 'redeem' | 'transfers' | 'settings' | 'compare' | 'privacy' | 'affiliate';
 
 const TABS: { id: Tab; label: string; Icon: typeof DashboardIcon }[] = [
-  { id: 'dashboard', label: 'Dashboard', Icon: DashboardIcon },
+  { id: 'dashboard', label: 'Overview', Icon: DashboardIcon },
   { id: 'cards',     label: 'Cards',     Icon: CardsIcon },
   { id: 'points',    label: 'Points',    Icon: PointsIcon },
   { id: 'optimize',  label: 'Optimize',  Icon: OptimizeIcon },
