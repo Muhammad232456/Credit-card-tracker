@@ -210,17 +210,6 @@ export default function Dashboard({ data, onNavigate, onStartQuiz }: Props) {
             Track Points First →
           </button>
         </div>
-        {onStartQuiz && (
-          <div className="text-center">
-            <p className="text-xs text-ink-soft mb-2">Not sure which cards to get?</p>
-            <button
-              onClick={onStartQuiz}
-              className="text-sm text-brass font-medium underline underline-offset-2"
-            >
-              Get personalized card recommendations →
-            </button>
-          </div>
-        )}
       </div>
     );
   }

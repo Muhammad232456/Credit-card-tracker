@@ -110,7 +110,7 @@ export default function App() {
           <Dashboard data={data} onNavigate={navigate} onStartQuiz={() => setShowQuiz(true)} />
         )}
         {activeTab === 'cards' && (
-          <CardList data={data} update={update} onCompare={() => setActiveTab('compare')} isTablet={device.isTablet} />
+          <CardList data={data} update={update} onCompare={() => setActiveTab('compare')} onStartQuiz={() => setShowQuiz(true)} isTablet={device.isTablet} />
         )}
         {activeTab === 'compare' && (
           <CardComparison onBack={() => setActiveTab('cards')} />
