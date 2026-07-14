@@ -179,10 +179,10 @@ export default function Dashboard({ data, onNavigate, onStartQuiz }: Props) {
           <WalletMark className="w-12 h-12 mx-auto mb-4 text-brass" />
           <h1 className="text-2xl font-bold text-ink">Canadian Credit Card Tracker</h1>
           <p className="text-ink-soft mt-2 max-w-md mx-auto text-sm">
-            Track your points balances, card benefits, renewal dates, and annual fee recovery - all in your browser.
+            Track your points balances, card benefits, renewal dates, and annual fee recovery, all in your browser.
           </p>
           <p className="text-xs text-ink-soft mt-2">
-            No account needed - your data saves automatically on this device, completely free.
+            No account needed. Your data saves automatically on this device, completely free.
           </p>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">

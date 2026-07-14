@@ -86,7 +86,7 @@ export const TRANSFER_PARTNERS: TransferPartner[] = [
         ratio: [4, 3],
         minimumTransfer: 1000,
         transferSpeed: "Instant–24h",
-        notes: "1,000 MR = 750 SkyMiles. Lower value - useful for domestic US or last-minute Delta flights",
+        notes: "1,000 MR = 750 SkyMiles. Lower value, useful for domestic US or last-minute Delta flights",
       },
     ],
   },

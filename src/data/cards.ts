@@ -44,7 +44,7 @@ export const CARD_TEMPLATES: CardTemplate[] = [
       { type: "Extended Warranty", note: "Up to 1 additional year" },
     ],
     currentOffer: {
-      description: "Earn up to 15,000 MR points - 1,250 pts/month when you spend $750/month for 12 months",
+      description: "Earn up to 15,000 MR points: 1,250 pts/month when you spend $750/month for 12 months",
       points: 15000,
       rating: 'standard',
     },
@@ -104,7 +104,7 @@ export const CARD_TEMPLATES: CardTemplate[] = [
       { type: "Extended Warranty", note: "Up to 1 additional year" },
     ],
     currentOffer: {
-      description: "Earn up to 60,000 MR points - 5,000 points per monthly billing period when you spend $1,000/month for 12 months",
+      description: "Earn up to 60,000 MR points: 5,000 points per monthly billing period when you spend $1,000/month for 12 months",
       points: 60000,
       rating: 'standard',
     },
@@ -149,7 +149,7 @@ export const CARD_TEMPLATES: CardTemplate[] = [
         resetDate: "calendar-year",
         category: "lounge",
         note: "Unlimited through 2026. Starting Jan 1 2027: caps at 6 visits/year unless $20K annual spend met.",
-        expiryWarning: "Starting Jan 1, 2027 - caps at 6 visits/year unless $20K annual spend met. Supplementary Platinum: 2 visits. Supplementary Gold: loses access.",
+        expiryWarning: "Starting Jan 1, 2027: caps at 6 visits/year unless $20K annual spend met. Supplementary Platinum: 2 visits. Supplementary Gold: loses access.",
       },
       {
         id: "amex-plat-centurion",
@@ -160,7 +160,7 @@ export const CARD_TEMPLATES: CardTemplate[] = [
         resetDate: "calendar-year",
         category: "lounge",
         note: "Unlimited through 2026",
-        expiryWarning: "Starting Jan 1, 2027 - caps at 6 visits/year unless $20K annual spend met.",
+        expiryWarning: "Starting Jan 1, 2027: caps at 6 visits/year unless $20K annual spend met.",
       },
       {
         id: "amex-plat-nexus",
@@ -229,7 +229,7 @@ export const CARD_TEMPLATES: CardTemplate[] = [
       { type: "Extended Warranty", note: "Up to 1 additional year" },
     ],
     currentOffer: {
-      description: "Earn up to 170,000 MR points - 90,000 on $10,000 spend in 3 months + 40,000 on $45,000 spend in 12 months + 40,000 on one purchase at months 15-17",
+      description: "Earn up to 170,000 MR points: 90,000 on $10,000 spend in 3 months + 40,000 on $45,000 spend in 12 months + 40,000 on one purchase at months 15-17",
       points: 170000,
       expiryDate: "2026-07-28",
       rating: 'all-time-high',
@@ -289,7 +289,7 @@ export const CARD_TEMPLATES: CardTemplate[] = [
       { type: "Extended Warranty", note: "Up to 1 additional year" },
     ],
     currentOffer: {
-      description: "Earn up to 45,000 Aeroplan points - 35,000 on $7,500 spend in 6 months + 10,000 bonus in month 13",
+      description: "Earn up to 45,000 Aeroplan points: 35,000 on $7,500 spend in 6 months + 10,000 bonus in month 13",
       points: 45000,
       rating: 'elevated',
     },
@@ -380,7 +380,7 @@ export const CARD_TEMPLATES: CardTemplate[] = [
       { type: "Extended Warranty", note: "Up to 1 additional year" },
     ],
     currentOffer: {
-      description: "Earn up to 150,000 Aeroplan points - 70,000 on $7,500 spend in 3 months + 40,000 on $45,000 spend in 12 months + 40,000 on one purchase at months 15-17",
+      description: "Earn up to 150,000 Aeroplan points: 70,000 on $7,500 spend in 3 months + 40,000 on $45,000 spend in 12 months + 40,000 on one purchase at months 15-17",
       points: 150000,
       expiryDate: "2026-07-28",
       rating: 'all-time-high',
@@ -432,7 +432,7 @@ export const CARD_TEMPLATES: CardTemplate[] = [
       { type: "Hotel Burglary Insurance", maxCoverage: "$500" },
     ],
     currentOffer: {
-      description: "Earn up to 70,000 Marriott Bonvoy points - 60,000 on $3,000 spend in 3 months + 10,000 bonus in month 13",
+      description: "Earn up to 70,000 Marriott Bonvoy points: 60,000 on $3,000 spend in 3 months + 10,000 bonus in month 13",
       points: 70000,
       rating: 'elevated',
     },
@@ -483,7 +483,7 @@ export const CARD_TEMPLATES: CardTemplate[] = [
       { type: "Hotel Burglary Insurance", maxCoverage: "$500" },
     ],
     currentOffer: {
-      description: "Earn up to 80,000 Marriott Bonvoy points - 70,000 on $5,000 spend in 3 months + 10,000 bonus points in month 13",
+      description: "Earn up to 80,000 Marriott Bonvoy points: 70,000 on $5,000 spend in 3 months + 10,000 bonus points in month 13",
       points: 80000,
       rating: 'elevated',
     },
@@ -541,7 +541,7 @@ export const CARD_TEMPLATES: CardTemplate[] = [
       { type: "Extended Warranty", note: "Up to 1 additional year" },
     ],
     currentOffer: {
-      description: "Earn up to 40,000 Aeroplan points - 10,000 on first purchase + 15,000 on $3,000 spend in 90 days + 15,000 anniversary bonus on $12,000 spend in 12 months + first year free",
+      description: "Earn up to 40,000 Aeroplan points: 10,000 on first purchase + 15,000 on $3,000 spend in 90 days + 15,000 anniversary bonus on $12,000 spend in 12 months + first year free",
       points: 40000,
       rating: 'elevated',
     },
@@ -618,7 +618,7 @@ export const CARD_TEMPLATES: CardTemplate[] = [
       { type: "Extended Warranty", note: "Up to 2 additional years" },
     ],
     currentOffer: {
-      description: "Earn up to 85,000 Aeroplan points - 20,000 on first purchase + 35,000 on $12,000 spend in 180 days + 30,000 on $24,000 spend in 12 months",
+      description: "Earn up to 85,000 Aeroplan points: 20,000 on first purchase + 35,000 on $12,000 spend in 180 days + 30,000 on $24,000 spend in 12 months",
       points: 85000,
       rating: 'elevated',
     },
@@ -677,7 +677,7 @@ export const CARD_TEMPLATES: CardTemplate[] = [
       { type: "Extended Warranty", note: "Up to 1 additional year" },
     ],
     currentOffer: {
-      description: "Earn up to 50,000 Aeroplan points - 10,000 on first purchase + 20,000 on $6,000 spend in 6 months + 20,000 anniversary bonus",
+      description: "Earn up to 50,000 Aeroplan points: 10,000 on first purchase + 20,000 on $6,000 spend in 6 months + 20,000 anniversary bonus",
       points: 50000,
       rating: 'elevated',
     },
@@ -741,7 +741,7 @@ export const CARD_TEMPLATES: CardTemplate[] = [
       { type: "Extended Warranty", note: "Up to 2 additional years" },
     ],
     currentOffer: {
-      description: "Earn up to 100,000 Aeroplan points - 10,000 on $1,000 spend in 2 months + 40,000 on $5,000 spend in 4 months + 50,000 anniversary bonus on $25,000 spend in 12 months",
+      description: "Earn up to 100,000 Aeroplan points: 10,000 on $1,000 spend in 2 months + 40,000 on $5,000 spend in 4 months + 50,000 anniversary bonus on $25,000 spend in 12 months",
       points: 100000,
       rating: 'all-time-high',
     },
@@ -798,7 +798,7 @@ export const CARD_TEMPLATES: CardTemplate[] = [
       { type: "Extended Warranty", note: "Up to 1 additional year" },
     ],
     currentOffer: {
-      description: "Earn up to 70,000 Avion points - 35,000 on approval + 20,000 on $5,000 spend in 6 months + 15,000 at one-year anniversary",
+      description: "Earn up to 70,000 Avion points: 35,000 on approval + 20,000 on $5,000 spend in 6 months + 15,000 at one-year anniversary",
       points: 70000,
       expiryDate: "2026-07-15",
       rating: 'all-time-high',
@@ -863,7 +863,7 @@ export const CARD_TEMPLATES: CardTemplate[] = [
       { type: "Extended Warranty", note: "Up to 2 additional years" },
     ],
     currentOffer: {
-      description: "Earn up to 100,000 Avion points - 35,000 on approval + 20,000 on $5,000 spend in 6 months + 45,000 at one-year anniversary",
+      description: "Earn up to 100,000 Avion points: 35,000 on approval + 20,000 on $5,000 spend in 6 months + 45,000 at one-year anniversary",
       points: 100000,
       expiryDate: "2026-07-15",
       rating: 'all-time-high',
@@ -932,7 +932,7 @@ export const CARD_TEMPLATES: CardTemplate[] = [
       { type: "Extended Warranty", note: "Up to 1 additional year" },
     ],
     currentOffer: {
-      description: "Earn up to 50,000 Scene+ points - 40,000 on $2,000 spend in 3 months + 10,000 on $10,000 spend in 6 months",
+      description: "Earn up to 50,000 Scene+ points: 40,000 on $2,000 spend in 3 months + 10,000 on $10,000 spend in 6 months",
       points: 50000,
       expiryDate: "2026-08-03",
       rating: 'elevated',
@@ -998,7 +998,7 @@ export const CARD_TEMPLATES: CardTemplate[] = [
       { type: "Extended Warranty", note: "Up to 2 additional years" },
     ],
     currentOffer: {
-      description: "Earn up to 80,000 Scene+ points - 30,000 on $1,000 spend in first 3 months + 30,000 on $12,500 spend in 6 months + 20,000 on card anniversary, expires November 1, 2026",
+      description: "Earn up to 80,000 Scene+ points: 30,000 on $1,000 spend in first 3 months + 30,000 on $12,500 spend in 6 months + 20,000 on card anniversary, expires November 1, 2026",
       points: 80000,
       expiryDate: "2026-11-01",
       rating: 'elevated',
@@ -1026,7 +1026,7 @@ export const CARD_TEMPLATES: CardTemplate[] = [
         frequency: "annual",
         resetDate: "cardmember-year",
         category: "lounge",
-        note: "Lounge visits cost US$32 each - NOT complimentary. Membership only.",
+        note: "Lounge visits cost US$32 each: NOT complimentary. Membership only.",
       },
     ],
     earningRates: [
@@ -1045,7 +1045,7 @@ export const CARD_TEMPLATES: CardTemplate[] = [
       { type: "Extended Warranty", note: "Up to 2 additional years" },
     ],
     currentOffer: {
-      description: "Earn up to 70,000 BMO Rewards points - 50,000 on $5,000 spend in 3 months + 20,000 on $25,000 annual spend, first year annual fee waived",
+      description: "Earn up to 70,000 BMO Rewards points: 50,000 on $5,000 spend in 3 months + 20,000 on $25,000 annual spend, first year annual fee waived",
       points: 70000,
       rating: 'elevated',
     },
@@ -1171,7 +1171,7 @@ export const CARD_TEMPLATES: CardTemplate[] = [
     ],
   },
 
-  // ─── HSBC (discontinued - kept for existing cardholders) ─────────────────
+  // ─── HSBC (discontinued: kept for existing cardholders) ─────────────────
   {
     id: "hsbc-world-elite",
     name: "HSBC World Elite Mastercard",
@@ -1261,7 +1261,7 @@ export const CARD_TEMPLATES: CardTemplate[] = [
       { type: "Extended Warranty", note: "Up to 1 additional year" },
     ],
     currentOffer: {
-      description: "Earn up to $250 in bonus value - 10% cash back on first $2,000 in 3 months (up to $200) + $50 statement credit in month 13",
+      description: "Earn up to $250 in bonus value: 10% cash back on first $2,000 in 3 months (up to $200) + $50 statement credit in month 13",
       points: 250,
       rating: 'elevated',
     },
@@ -1304,7 +1304,7 @@ export const CARD_TEMPLATES: CardTemplate[] = [
       { type: "Extended Warranty", note: "Up to 1 additional year" },
     ],
     currentOffer: {
-      description: "Earn up to 60,000 Membership Rewards points - limited-time elevated offer, expires July 28, 2026",
+      description: "Earn up to 60,000 Membership Rewards points: limited-time elevated offer, expires July 28, 2026",
       points: 60000,
       expiryDate: "2026-07-28",
       rating: 'elevated',
@@ -1348,7 +1348,7 @@ export const CARD_TEMPLATES: CardTemplate[] = [
         maxUses: 6,
         resetDate: "calendar-year",
         category: "lounge",
-        expiryWarning: "Starting Jan 1, 2027 - caps at 6 visits/year unless $20K annual spend met.",
+        expiryWarning: "Starting Jan 1, 2027: caps at 6 visits/year unless $20K annual spend met.",
       },
       {
         id: "amex-biz-plat-nexus",
@@ -1379,7 +1379,7 @@ export const CARD_TEMPLATES: CardTemplate[] = [
       { type: "Extended Warranty", note: "Up to 1 additional year" },
     ],
     currentOffer: {
-      description: "Earn up to 150,000 Membership Rewards points - 100,000 on $15,000 spend in 3 months + 50,000 on one purchase at months 15-17",
+      description: "Earn up to 150,000 Membership Rewards points: 100,000 on $15,000 spend in 3 months + 50,000 on one purchase at months 15-17",
       points: 150000,
       rating: 'elevated',
     },
@@ -1442,7 +1442,7 @@ export const CARD_TEMPLATES: CardTemplate[] = [
       { type: "Extended Warranty", note: "Up to 12 additional months" },
     ],
     currentOffer: {
-      description: "Earn up to 20,000 Aeroplan points - 10,000 on first purchase + 10,000 on $1,500 spend in 90 days",
+      description: "Earn up to 20,000 Aeroplan points: 10,000 on first purchase + 10,000 on $1,500 spend in 90 days",
       points: 20000,
       rating: 'standard',
     },
@@ -1475,7 +1475,7 @@ export const CARD_TEMPLATES: CardTemplate[] = [
       { type: "Extended Warranty" },
     ],
     currentOffer: {
-      description: "Earn up to 50,000 TD Rewards points - 15,000 on first purchase + 35,000 on $3,000 spend in 180 days",
+      description: "Earn up to 50,000 TD Rewards points: 15,000 on first purchase + 35,000 on $3,000 spend in 180 days",
       points: 50000,
       rating: 'elevated',
     },
@@ -1530,7 +1530,7 @@ export const CARD_TEMPLATES: CardTemplate[] = [
       { type: "Extended Warranty", note: "Up to 1 additional year" },
     ],
     currentOffer: {
-      description: "Earn up to 146,000 TD Rewards points - 20,000 on first purchase + 126,000 on $7,500 spend in 180 days + first year free",
+      description: "Earn up to 146,000 TD Rewards points: 20,000 on first purchase + 126,000 on $7,500 spend in 180 days + first year free",
       points: 146000,
       rating: 'all-time-high',
     },
@@ -1592,7 +1592,7 @@ export const CARD_TEMPLATES: CardTemplate[] = [
       { type: "Extended Warranty" },
     ],
     currentOffer: {
-      description: "Earn up to 10,000 Aeroplan points - 10,000 on your first purchase",
+      description: "Earn up to 10,000 Aeroplan points: 10,000 on your first purchase",
       points: 10000,
       rating: 'standard',
     },
@@ -1764,7 +1764,7 @@ export const CARD_TEMPLATES: CardTemplate[] = [
       { type: "Extended Warranty", note: "Up to 2 additional years" },
     ],
     currentOffer: {
-      description: "Earn up to 50,000 Aventura points - on qualifying spend in the first 4 months",
+      description: "Earn up to 50,000 Aventura points: on qualifying spend in the first 4 months",
       points: 50000,
       rating: 'elevated',
     },
@@ -1796,7 +1796,7 @@ export const CARD_TEMPLATES: CardTemplate[] = [
       { type: "Extended Warranty", note: "Up to 1 additional year" },
     ],
     currentOffer: {
-      description: "Earn up to 70,000 Avion Rewards points - limited-time offer, expires July 15, 2026",
+      description: "Earn up to 70,000 Avion Rewards points: limited-time offer, expires July 15, 2026",
       points: 70000,
       expiryDate: "2026-07-15",
       rating: 'all-time-high',
@@ -1878,7 +1878,7 @@ export const CARD_TEMPLATES: CardTemplate[] = [
       { type: "Extended Warranty", note: "Up to 1 additional year (max 5)" },
     ],
     currentOffer: {
-      description: "Earn up to 14,000 Avion Rewards points on qualifying purchases - offer expires November 4, 2026",
+      description: "Earn up to 14,000 Avion Rewards points on qualifying purchases: offer expires November 4, 2026",
       points: 14000,
       expiryDate: "2026-11-04",
       rating: 'elevated',
@@ -1916,7 +1916,7 @@ export const CARD_TEMPLATES: CardTemplate[] = [
       { type: "Extended Warranty", note: "Up to 1 additional year" },
     ],
     currentOffer: {
-      description: "Earn up to 28,000 Avion Rewards points on qualifying purchases - offer expires November 4, 2026",
+      description: "Earn up to 28,000 Avion Rewards points on qualifying purchases: offer expires November 4, 2026",
       points: 28000,
       expiryDate: "2026-11-04",
       rating: 'elevated',
@@ -2027,7 +2027,7 @@ export const CARD_TEMPLATES: CardTemplate[] = [
       { type: "Extended Warranty", note: "Up to 1 additional year" },
     ],
     currentOffer: {
-      description: "Earn up to 60,000 WestJet dollars - 30,000 on first purchase + 30,000 on $5,000 spend in 3 months",
+      description: "Earn up to 60,000 WestJet dollars: 30,000 on first purchase + 30,000 on $5,000 spend in 3 months",
       points: 60000,
       expiryDate: "2026-11-03",
       rating: 'elevated',
@@ -2062,7 +2062,7 @@ export const CARD_TEMPLATES: CardTemplate[] = [
       { type: "Extended Warranty", note: "Up to 1 additional year" },
     ],
     currentOffer: {
-      description: "Earn up to 60,000 Avios - 30,000 on approval + 30,000 on $3,000 spend in 3 months, offer expires August 4, 2026",
+      description: "Earn up to 60,000 Avios: 30,000 on approval + 30,000 on $3,000 spend in 3 months, offer expires August 4, 2026",
       points: 60000,
       expiryDate: "2026-08-04",
       rating: 'elevated',
@@ -2128,7 +2128,7 @@ export const CARD_TEMPLATES: CardTemplate[] = [
       { type: "Extended Warranty", note: "Up to 1 additional year" },
     ],
     currentOffer: {
-      description: "Earn up to 50,000 Scene+ points - 30,000 on $2,000 spend in 3 months + 20,000 on $7,500 spend in 12 months",
+      description: "Earn up to 50,000 Scene+ points: 30,000 on $2,000 spend in 3 months + 20,000 on $7,500 spend in 12 months",
       points: 50000,
       expiryDate: "2026-11-01",
       rating: 'elevated',
@@ -2249,7 +2249,7 @@ export const CARD_TEMPLATES: CardTemplate[] = [
     ],
     firstYearFeeWaived: true,
     currentOffer: {
-      description: "Earn up to 115,000 BMO Rewards points - 60,000 on $5,000 spend in first 110 days + 40,000 on $4,000 spend in next 110 days + 15,000 additional, first year fee waived, expires October 31, 2026",
+      description: "Earn up to 115,000 BMO Rewards points: 60,000 on $5,000 spend in first 110 days + 40,000 on $4,000 spend in next 110 days + 15,000 additional, first year fee waived, expires October 31, 2026",
       points: 115000,
       expiryDate: "2026-10-31",
       rating: 'elevated',
@@ -2336,7 +2336,7 @@ export const CARD_TEMPLATES: CardTemplate[] = [
       { type: "Extended Warranty", note: "Up to 1 additional year" },
     ],
     currentOffer: {
-      description: "Earn up to $480 cash back in the first 12 months - up to $40 cash back per month on $2,000+ monthly spend",
+      description: "Earn up to $480 cash back in the first 12 months: up to $40 cash back per month on $2,000+ monthly spend",
       points: 480,
       rating: 'elevated',
     },
@@ -2467,7 +2467,7 @@ export const CARD_TEMPLATES: CardTemplate[] = [
       { type: "Extended Warranty", note: "Up to 2 additional years" },
     ],
     currentOffer: {
-      description: "Earn up to 30,000 MBNA Rewards points - 20,000 on $2,000 spend in 90 days + 10,000 bonus with paperless statement enrollment",
+      description: "Earn up to 30,000 MBNA Rewards points: 20,000 on $2,000 spend in 90 days + 10,000 bonus with paperless statement enrollment",
       points: 30000,
       rating: 'standard',
     },
@@ -2841,7 +2841,7 @@ export const CARD_TEMPLATES: CardTemplate[] = [
       { category: "Everything Else", multiplier: 0.01, unit: "percent", note: "1% cash back" },
     ],
     currentOffer: {
-      description: "Earn 10,000 bonus points in your first year - limited-time offer valid June 1–August 31, 2026",
+      description: "Earn 10,000 bonus points in your first year: limited-time offer valid June 1–August 31, 2026",
       points: 10000,
       expiryDate: "2026-08-31",
       rating: 'elevated',
@@ -2892,7 +2892,7 @@ export const CARD_TEMPLATES: CardTemplate[] = [
     network: "Mastercard",
     annualFee: 0,
     discontinued: true,
-    annualFeeNote: "Discontinued March 2022 - Costco co-brand moved exclusively to CIBC (CIBC Costco Mastercard)",
+    annualFeeNote: "Discontinued March 2022: Costco co-brand moved exclusively to CIBC (CIBC Costco Mastercard)",
     lastVerified: "2026-07-11",
     benefits: [],
     earningRates: [
@@ -2908,7 +2908,7 @@ export const CARD_TEMPLATES: CardTemplate[] = [
     network: "Mastercard",
     annualFee: 120,
     discontinued: true,
-    annualFeeNote: "No longer open to new applicants - renewed for legacy cardholders only",
+    annualFeeNote: "No longer open to new applicants: renewed for legacy cardholders only",
     lastVerified: "2026-07-11",
     benefits: [
       {
@@ -3038,7 +3038,7 @@ export function getCardById(id: string): CardTemplate | undefined {
 
 /** Minimum personal income (CAD) required to be eligible for each card */
 export const CARD_INCOME_REQS: Record<string, number> = {
-  // $150k+ personal - Infinite Privilege / flagship premium
+  // $150k+ personal: Infinite Privilege / flagship premium
   "amex-platinum":                      150000,
   "amex-aeroplan-reserve":              150000,
   "td-aeroplan-infinite-privilege":     150000,
@@ -3047,7 +3047,7 @@ export const CARD_INCOME_REQS: Record<string, number> = {
   "rbc-avion-infinite-privilege":       200000,
   "bmo-eclipse-vip":                    150000,
   "scotia-passport-infinite-privilege": 150000,
-  // $80k personal - World Elite Mastercard / comparable
+  // $80k personal: World Elite Mastercard / comparable
   "nbc-world-elite":                    80000,
   "bmo-viporter":                       80000,
   "bmo-ascend-world-elite":             80000,
@@ -3062,7 +3062,7 @@ export const CARD_INCOME_REQS: Record<string, number> = {
   "desjardins-odyssey-world-elite":     80000,
   "capital-one-aspire-world-elite":     80000,
   "atb-world-elite":                    80000,
-  // $60k personal - Visa Infinite / Mastercard World / comparable
+  // $60k personal: Visa Infinite / Mastercard World / comparable
   "td-aeroplan-infinite":               60000,
   "td-first-class":                     60000,
   "td-cashback-infinite":               60000,
@@ -3080,7 +3080,7 @@ export const CARD_INCOME_REQS: Record<string, number> = {
 };
 
 /**
- * Direct application URLs - replace with affiliate tracking links to monetize.
+ * Direct application URLs: replace with affiliate tracking links to monetize.
  * Affiliate programs: Amex CA, Ratehub, GreedyRates, bank direct programs.
  */
 export const CARD_APPLY_URLS: Record<string, string> = {

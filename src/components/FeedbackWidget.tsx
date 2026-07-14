@@ -68,7 +68,7 @@ export default function FeedbackWidget() {
                 className="w-full border border-line rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-ink-soft resize-none"
               />
               {status === 'error' && (
-                <p className="text-xs text-rust">Something went wrong - try again.</p>
+                <p className="text-xs text-rust">Something went wrong. Try again.</p>
               )}
               <button
                 onClick={submit}

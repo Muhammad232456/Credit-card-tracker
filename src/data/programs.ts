@@ -38,13 +38,13 @@ export const POINTS_PROGRAMS: PointsProgram[] = [
     sweetSpots: "Best for Star Alliance partner awards (ANA, Singapore, Lufthansa). Saver awards on United itself also offer solid value." },
 
   { id: "southwest-rr",       name: "Southwest Rapid Rewards",          type: "airline",      alliance: null,       defaultCpp: 1.5, excellentCpp: 1.8, isTransferable: false,
-    sweetSpots: "Fixed value tied to cash fares - no sweet spots, no blackouts. Best used on high-demand routes where cash prices spike." },
+    sweetSpots: "Fixed value tied to cash fares, no sweet spots, no blackouts. Best used on high-demand routes where cash prices spike." },
 
   { id: "turkish-miles",      name: "Turkish Airlines Miles&Smiles",    type: "airline",      alliance: "star",     defaultCpp: 1.5, excellentCpp: 2.5, isTransferable: false,
     sweetSpots: "Incredible sweet spots for Star Alliance business class (United Polaris, ANA, Lufthansa) at low zone-based pricing. One of the best programs globally." },
 
   { id: "singapore-krisflyer",name: "Singapore KrisFlyer",              type: "airline",      alliance: "star",     defaultCpp: 1.8, excellentCpp: 2.8, isTransferable: false,
-    sweetSpots: "Top-tier for Singapore Suites & Business class. Star Alliance partner sweet spots also available. Points expire - stay active." },
+    sweetSpots: "Top-tier for Singapore Suites & Business class. Star Alliance partner sweet spots also available. Points expire, so stay active." },
 
   { id: "emirates-skywards",  name: "Emirates Skywards",                type: "airline",      alliance: null,       defaultCpp: 1.2, excellentCpp: 1.8, isTransferable: false,
     sweetSpots: "Best on Emirates Business and First class (A380 bar, ice system). Economy redemptions typically offer poor value." },
@@ -60,7 +60,7 @@ export const POINTS_PROGRAMS: PointsProgram[] = [
     sweetSpots: "Best kept secret: transatlantic business class to Madrid from 34k Avios one-way. Distance-based pricing rewards long-haul redemptions." },
 
   { id: "virgin-atlantic",    name: "Virgin Atlantic Flying Club",      type: "airline",      alliance: "skyteam",  defaultCpp: 1.8, excellentCpp: 2.5, isTransferable: false,
-    sweetSpots: "Outstanding for ANA First/Business class to Japan and Delta One Suites - often 50%+ fewer miles than other programs." },
+    sweetSpots: "Outstanding for ANA First/Business class to Japan and Delta One Suites, often 50%+ fewer miles than other programs." },
 
   { id: "jal-miles",          name: "Japan Airlines Mileage Bank",      type: "airline",      alliance: "oneworld", defaultCpp: 1.5, excellentCpp: 2.5, isTransferable: false,
     sweetSpots: "Best for JAL First and Business class to Japan/Asia. oneworld partner awards (AA, BA, Finnair) also bookable at good rates." },
@@ -85,7 +85,7 @@ export const POINTS_PROGRAMS: PointsProgram[] = [
     sweetSpots: "Simple fixed-rate redemptions (7.5k–30k pts/night). Best for road trips at mid-tier properties where cash rates are high." },
 
   { id: "choice-privileges",  name: "Choice Privileges",                type: "hotel",                              defaultCpp: 0.6, excellentCpp: 1.0, isTransferable: false,
-    sweetSpots: "Best redeemed at Preferred Hotels & Resorts - luxury properties bookable for 35k–60k pts where cash rates run $400–800+/night." },
+    sweetSpots: "Best redeemed at Preferred Hotels & Resorts, luxury properties bookable for 35k–60k pts where cash rates run $400–800+/night." },
 
   { id: "best-western",       name: "Best Western Rewards",             type: "hotel",                              defaultCpp: 0.6, excellentCpp: 1.0, isTransferable: false,
     sweetSpots: "Best at BW Premier Collection and BW Signature Collection properties. Consistent, no-blackout redemptions for budget-to-mid-range travel." },
@@ -100,7 +100,7 @@ export const POINTS_PROGRAMS: PointsProgram[] = [
 
   { id: "rbc-avion",          name: "RBC Avion Rewards",                type: "transferable",                       defaultCpp: 1.0,                    isTransferable: true,
     note: "4 airline partners (Elite tier only)",
-    sweetSpots: "Transfer at 1:1 to British Airways Avios or Cathay Asia Miles for best value. Overlaps with Amex MR on these two - save your MR for exclusive partners like Aeroplan." },
+    sweetSpots: "Transfer at 1:1 to British Airways Avios or Cathay Asia Miles for best value. Overlaps with Amex MR on these two. Save your MR for exclusive partners like Aeroplan." },
 
   { id: "cibc-aventura",     name: "CIBC Aventura Rewards",            type: "bank",                               defaultCpp: 1.0,                    isTransferable: false, note: "Redeem via CIBC Rewards Centre for travel (1¢/pt)" },
 

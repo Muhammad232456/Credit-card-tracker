@@ -26,7 +26,7 @@ export default function PrivacyPolicy({ onBack }: Props) {
         <section>
           <h2 className="font-semibold text-ink text-base mb-2">Your Card Data</h2>
           <p>
-            All credit card data you enter - cards, balances, spending, points, and settings - is stored
+            All credit card data you enter (cards, balances, spending, points, and settings) is stored
             exclusively in your browser's <strong>local storage</strong>. This data never leaves your device
             and is never transmitted to our servers. We have no access to it.
           </p>

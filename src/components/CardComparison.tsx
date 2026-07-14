@@ -220,7 +220,7 @@ export default function CardComparison({ onBack }: Props) {
                   onClick={() => trackApplyClick(t.id, t.name, t.issuer, 'comparison')}
                   className="bg-brass text-ink text-xs text-center py-2.5 rounded-xl font-semibold hover:opacity-90 transition-opacity block"
                 >
-                  Apply - {t.issuer} →
+                  Apply to {t.issuer} →
                 </a>
               ) : (
                 <div key={t.id} className="bg-line text-ink-soft text-xs text-center py-2.5 rounded-xl">

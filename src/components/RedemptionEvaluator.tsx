@@ -73,9 +73,9 @@ export default function RedemptionEvaluator({ onBack, initialProgramId }: Props)
     : null;
 
   const ratingDescriptions: Record<Rating, string> = {
-    excellent: `Use your points - outstanding value, one of the best uses of these points.`,
-    good: `Use your points - solid value above benchmark.`,
-    poor: `Pay cash instead - save your points for a better redemption.`,
+    excellent: `Use your points: outstanding value, one of the best uses of these points.`,
+    good: `Use your points, solid value above benchmark.`,
+    poor: `Pay cash instead. Save your points for a better redemption.`,
   };
 
   const trackedRef = useRef<string | null>(null);
@@ -106,7 +106,7 @@ export default function RedemptionEvaluator({ onBack, initialProgramId }: Props)
       <div className="bg-surface border border-brass/40 rounded-2xl p-6 text-ink mb-4">
         <h2 className="text-lg font-semibold">Redemption Evaluator</h2>
         <p className="text-ink-soft text-sm mt-1">
-          Compare using points vs paying cash - taxes included.
+          Compare using points vs paying cash, taxes included.
         </p>
       </div>
 
@@ -238,7 +238,7 @@ export default function RedemptionEvaluator({ onBack, initialProgramId }: Props)
             {/* Option A: Pay cash */}
             <div className="flex items-center justify-between px-4 py-3">
               <div>
-                <p className="text-sm font-semibold text-ink">Option A - Pay cash</p>
+                <p className="text-sm font-semibold text-ink">Option A: Pay cash</p>
                 <p className="text-xs text-ink-soft mt-0.5">No points used, full price</p>
               </div>
               <p className="font-mono font-bold text-lg text-ink">${cash.toFixed(2)}</p>
@@ -246,7 +246,7 @@ export default function RedemptionEvaluator({ onBack, initialProgramId }: Props)
             {/* Option B: Use points */}
             <div className="flex items-center justify-between px-4 py-3">
               <div>
-                <p className="text-sm font-semibold text-ink">Option B - Use points</p>
+                <p className="text-sm font-semibold text-ink">Option B: Use points</p>
                 <p className="text-xs text-ink-soft mt-0.5">
                   {pts.toLocaleString()} pts
                   {hasTaxes ? ` + $${taxAmt.toFixed(2)} taxes/fees` : ' (no taxes entered)'}
@@ -305,21 +305,21 @@ export default function RedemptionEvaluator({ onBack, initialProgramId }: Props)
             <span className="w-2.5 h-2.5 rounded-full bg-forest shrink-0 mt-1.5" />
             <div>
               <span className="font-semibold text-forest">EXCELLENT</span>
-              <span className="text-ink-soft"> - ≥ excellent threshold · Outstanding value, book it!</span>
+              <span className="text-ink-soft">: ≥ excellent threshold · Outstanding value, book it!</span>
             </div>
           </div>
           <div className="flex items-start gap-3">
             <span className="w-2.5 h-2.5 rounded-full bg-amber shrink-0 mt-1.5" />
             <div>
               <span className="font-semibold text-amber">GOOD</span>
-              <span className="text-ink-soft"> - Above benchmark CPP · Solid redemption, go for it</span>
+              <span className="text-ink-soft">: above benchmark CPP · Solid redemption, go for it</span>
             </div>
           </div>
           <div className="flex items-start gap-3">
             <span className="w-2.5 h-2.5 rounded-full bg-rust shrink-0 mt-1.5" />
             <div>
               <span className="font-semibold text-rust">POOR</span>
-              <span className="text-ink-soft"> - At or below benchmark · Consider paying cash instead</span>
+              <span className="text-ink-soft">: at or below benchmark · Consider paying cash instead</span>
             </div>
           </div>
         </div>

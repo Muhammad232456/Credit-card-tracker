@@ -92,7 +92,7 @@ export default function FxCalculator({ data }: Props) {
                 className="w-full mt-1.5 border border-line rounded-lg px-3 py-2.5 text-sm bg-surface focus:outline-none focus:ring-2 focus:ring-ink-soft"
               >
                 {CURRENCIES.map(c => (
-                  <option key={c.code} value={c.code}>{c.code} - {c.name}</option>
+                  <option key={c.code} value={c.code}>{c.code}: {c.name}</option>
                 ))}
               </select>
             </div>
@@ -112,7 +112,7 @@ export default function FxCalculator({ data }: Props) {
                   </p>
                   <p className="text-xs text-ink-soft mt-0.5">
                     {hasSavings
-                      ? `Use your ${heldNoFxCards[0].name} - no foreign transaction fee`
+                      ? `Use your ${heldNoFxCards[0].name}, no foreign transaction fee`
                       : 'None of your current cards waive the 2.5% FX fee'}
                   </p>
                   {hasSavings && heldNoFxCards.length > 1 && (
