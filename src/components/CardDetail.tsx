@@ -830,9 +830,9 @@ export default function CardDetail({
         {template.benefits.map(benefit => {
           const used = userCard.benefitUsage[benefit.id] ?? 0;
           const planned = (userCard.benefitPlanned ?? {})[benefit.id] ?? 0;
-          const maxUses = benefit.frequency === 'annual' ? 1
+          const maxUses: number | null = benefit.frequency === 'annual' ? 1
             : benefit.frequency === 'monthly' ? (benefit.maxUses ?? 12)
-            : (benefit.maxUses ?? 1);
+            : (benefit.maxUses ?? null);
           const effectiveVal = effectiveBenefitValue(benefit, settings);
           const earnedValue = benefit.frequency === 'annual'
             ? (used > 0 ? effectiveVal : 0)
@@ -904,18 +904,20 @@ export default function CardDetail({
                             disabled={used <= 0}
                             className="w-7 h-7 rounded-full border border-line text-ink-soft hover:bg-line disabled:opacity-30 font-bold text-base leading-none"
                           >−</button>
-                          <span className="font-mono font-bold text-base w-12 text-center">{used}/{maxUses}</span>
+                          <span className="font-mono font-bold text-base w-12 text-center">{maxUses !== null ? `${used}/${maxUses}` : used}</span>
                           <button
-                            onClick={() => { const c = Math.min(maxUses, used + 1); onUpdateUsage(benefit.id, c); trackBenefitMarked(template.id, benefit.id, benefit.name, c); }}
-                            disabled={used >= maxUses}
+                            onClick={() => { const c = maxUses !== null ? Math.min(maxUses, used + 1) : used + 1; onUpdateUsage(benefit.id, c); trackBenefitMarked(template.id, benefit.id, benefit.name, c); }}
+                            disabled={maxUses !== null && used >= maxUses}
                             className="w-7 h-7 rounded-full border border-line text-ink-soft hover:bg-line disabled:opacity-30 font-bold text-base leading-none"
                           >+</button>
-                          <div className="flex-1 bg-line rounded-full h-1.5">
-                            <div
-                              className={`h-1.5 rounded-full transition-all ${used >= maxUses ? 'bg-forest' : 'bg-brass'}`}
-                              style={{ width: `${(used / maxUses) * 100}%` }}
-                            />
-                          </div>
+                          {maxUses !== null && (
+                            <div className="flex-1 bg-line rounded-full h-1.5">
+                              <div
+                                className={`h-1.5 rounded-full transition-all ${used >= maxUses ? 'bg-forest' : 'bg-brass'}`}
+                                style={{ width: `${(used / maxUses) * 100}%` }}
+                              />
+                            </div>
+                          )}
                         </div>
                         <div className="flex items-center gap-3">
                           <span className="text-xs text-amber w-14 shrink-0">Planned</span>
@@ -924,10 +926,10 @@ export default function CardDetail({
                             disabled={planned <= 0}
                             className="w-7 h-7 rounded-full border border-amber text-amber hover:bg-amber-bg disabled:opacity-30 font-bold text-base leading-none"
                           >−</button>
-                          <span className="font-mono font-bold text-base w-12 text-center text-amber">{planned}/{maxUses - used}</span>
+                          <span className="font-mono font-bold text-base w-12 text-center text-amber">{maxUses !== null ? `${planned}/${maxUses - used}` : planned}</span>
                           <button
-                            onClick={() => { const c = Math.min(maxUses - used, planned + 1); onUpdatePlanned(benefit.id, c); }}
-                            disabled={planned + used >= maxUses}
+                            onClick={() => { const c = maxUses !== null ? Math.min(maxUses - used, planned + 1) : planned + 1; onUpdatePlanned(benefit.id, c); }}
+                            disabled={maxUses !== null && planned + used >= maxUses}
                             className="w-7 h-7 rounded-full border border-amber text-amber hover:bg-amber-bg disabled:opacity-30 font-bold text-base leading-none"
                           >+</button>
                           {plannedValue > 0 && (

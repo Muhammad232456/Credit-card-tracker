@@ -303,7 +303,6 @@ export const CARD_TEMPLATES: CardTemplate[] = [
         name: "First Checked Bag Free (Air Canada)",
         value: 30,
         frequency: "per-use",
-        maxUses: 20,
         resetDate: "calendar-year",
         category: "bag",
         note: "Cardholder + up to 8 companions on same reservation; no annual cap",
