@@ -72,6 +72,16 @@ export const CARD_TEMPLATES: CardTemplate[] = [
         note: "Book through Amex Travel",
       },
       {
+        id: "amex-gold-instacart",
+        name: "Instacart Monthly Credit",
+        value: 10,
+        frequency: "monthly",
+        maxUses: 12,
+        resetDate: "calendar-year",
+        category: "delivery",
+        note: "Requires $10+ purchase on Instacart.ca. Valid through Dec 31, 2027. Requires enrollment via Amex Offers.",
+      },
+      {
         id: "amex-gold-lounge",
         name: "Priority Pass Lounge Visits",
         value: 32,
