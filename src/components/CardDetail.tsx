@@ -859,19 +859,19 @@ export default function CardDetail({
                       {effectiveVal > 0 && (
                         <p className="text-xs text-ink-soft">${effectiveVal}/use · {benefit.frequency}</p>
                       )}
-                      {earnedValue > 0 && (
+                      {effectiveVal > 0 && earnedValue > 0 && (
                         <p className="font-mono text-sm font-bold text-forest">${earnedValue.toFixed(0)} redeemed</p>
                       )}
-                      {plannedValue > 0 && earnedValue === 0 && (
+                      {effectiveVal > 0 && plannedValue > 0 && earnedValue === 0 && (
                         <p className="font-mono text-sm font-bold text-amber">${plannedValue.toFixed(0)} planned</p>
                       )}
-                      {earnedValue === 0 && plannedValue === 0 && (
+                      {effectiveVal > 0 && earnedValue === 0 && plannedValue === 0 && (
                         <p className="font-mono text-sm text-ink-soft">$0</p>
                       )}
                     </div>
                   </div>
 
-                  <div className="mt-3">
+                  {effectiveVal > 0 && <div className="mt-3">
                     {benefit.frequency === 'annual' ? (
                       <div className="flex gap-1.5">
                         {[
@@ -936,7 +936,7 @@ export default function CardDetail({
                         </div>
                       </div>
                     )}
-                  </div>
+                  </div>}
                 </div>
               </div>
             </div>
