@@ -219,6 +219,33 @@ export const CARD_TEMPLATES: CardTemplate[] = [
         resetDate: "cardmember-year",
         category: "status",
       },
+      {
+        id: "amex-plat-pearson-security",
+        name: "YYZ Priority Security Lane",
+        value: 0,
+        frequency: "per-use",
+        resetDate: "calendar-year",
+        category: "other",
+        note: "QR code via yyz.americanexpress.com; Terminals 1 & 3",
+      },
+      {
+        id: "amex-plat-pearson-valet",
+        name: "YYZ Complimentary Valet (Terminal 1)",
+        value: 70,
+        frequency: "per-use",
+        resetDate: "calendar-year",
+        category: "other",
+        note: "Present Platinum Card at pickup; Pearson waives the valet fee",
+      },
+      {
+        id: "amex-plat-pearson-parking",
+        name: "YYZ Parking Discount (15%)",
+        value: 0,
+        frequency: "per-use",
+        resetDate: "calendar-year",
+        category: "other",
+        note: "15% off Express Park (T1) and Daily Park (T1 & T3), as statement credit",
+      },
     ],
     supplementaryCardOptions: [
       {
@@ -275,10 +302,9 @@ export const CARD_TEMPLATES: CardTemplate[] = [
         name: "First Checked Bag Free (Air Canada)",
         value: 30,
         frequency: "per-use",
-        maxUses: 12,
         resetDate: "calendar-year",
         category: "bag",
-        note: "Cardholder only",
+        note: "Cardholder + up to 8 companions on same reservation; no annual cap",
       },
       {
         id: "amex-aero-buddy",
@@ -287,11 +313,11 @@ export const CARD_TEMPLATES: CardTemplate[] = [
         frequency: "annual",
         resetDate: "cardmember-year",
         category: "companion",
-        note: "On qualifying spend",
+        note: "Earned at $25,000 annual spend; companion economy ticket at $99–$599 CAD base fare plus taxes",
       },
     ],
     supplementaryCardOptions: [
-      { name: "Supplementary Aeroplan Card", fee: 0, perks: ["Same earn rates", "Free checked bag on Air Canada"] },
+      { name: "Supplementary Aeroplan Card", fee: 50, perks: ["Same earn rates", "Free checked bag on Air Canada"] },
     ],
     earningRates: [
       { category: "Air Canada Purchases", multiplier: 2, unit: "points", programId: "aeroplan" },
@@ -299,7 +325,6 @@ export const CARD_TEMPLATES: CardTemplate[] = [
       { category: "Everything Else (incl. groceries)", multiplier: 1, unit: "points", programId: "aeroplan" },
     ],
     insurance: [
-      { type: "Out-of-Province/Country Medical", maxDays: 15, maxCoverage: "$5,000,000", ageLimit: 64, note: "No trip cancellation/interruption insurance on this card" },
       { type: "Car Rental Theft & Damage" },
       { type: "Flight Delay", maxCoverage: "$500" },
       { type: "Baggage Delay", maxCoverage: "$500" },
