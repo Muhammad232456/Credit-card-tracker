@@ -33,7 +33,8 @@ export const CARD_TEMPLATES: CardTemplate[] = [
       { category: "Everything Else (incl. travel)", multiplier: 1, unit: "points", programId: "amex-mr" },
     ],
     insurance: [
-      { type: "Flight Delay", maxCoverage: "$500", note: "After 4-hour delay. NOTE: Cobalt has no emergency medical or trip cancellation insurance." },
+      { type: "Out-of-Province/Country Medical", maxDays: 15, maxCoverage: "$5,000,000", ageLimit: 64 },
+      { type: "Flight Delay", maxCoverage: "$500", note: "After 4-hour delay" },
       { type: "Baggage Delay", maxCoverage: "$500" },
       { type: "Baggage Loss", maxCoverage: "$500/trip" },
       { type: "Hotel Burglary", maxCoverage: "$500" },
@@ -70,6 +71,16 @@ export const CARD_TEMPLATES: CardTemplate[] = [
         resetDate: "cardmember-year",
         category: "travel-credit",
         note: "Book through Amex Travel",
+      },
+      {
+        id: "amex-gold-nexus",
+        name: "NEXUS Credit",
+        value: 50,
+        frequency: "per-use",
+        maxUses: 1,
+        resetDate: "cardmember-year",
+        category: "nexus",
+        note: "$50 CAD statement credit when NEXUS application or renewal fee is charged to the card. NEXUS renews every 5 years.",
       },
       {
         id: "amex-gold-instacart",
